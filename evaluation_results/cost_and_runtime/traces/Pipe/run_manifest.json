@@ -1,0 +1,120 @@
+{
+  "started_utc": "2026-08-22T20:23:36.892572+00:00",
+  "model": "gpt-5.2",
+  "cases": [
+    "Pipe"
+  ],
+  "script": "<AUTOSAM_ROOT>\\evaluation\\autosam_four_case_cost_runtime.py",
+  "script_sha256": "6718c5b58258b1ae322da91be953591b4c8a33f394176449a73ed046cb9f994f",
+  "case_summaries": [
+    {
+      "case": "Pipe",
+      "model_requested": "gpt-5.2",
+      "timestamp_utc": "2026-08-22T20:26:11.574450+00:00",
+      "source_manifest": [
+        {
+          "name": "Pipe_regression_test.csv",
+          "source": "<AUTOSAM_ROOT>\\pipe_reg_test\\Pipe_regression_test.csv",
+          "sha256": "1717416dec604cb31d61fe2da27d586ccd7487c08d42862165944cb943dc0180",
+          "bytes": 2364
+        }
+      ],
+      "model_initialization_seconds": 0.8565034000203013,
+      "stage_1_seconds": 82.4279067000025,
+      "stage_2_seconds": 71.38840349999373,
+      "end_to_end_seconds_excluding_initialization": 153.81631019999622,
+      "end_to_end_seconds_including_initialization": 154.67281360001653,
+      "stage_1_tools": [
+        "PythonREPLTool",
+        "PythonREPLTool",
+        "PythonREPLTool",
+        "CSVandEXCELFileReaderTool",
+        "PythonREPLTool",
+        "PythonREPLTool"
+      ],
+      "stage_2_tools": [
+        "TextFileReaderTool",
+        "IntermediateFileToInputFileTool",
+        "TextFileReaderTool",
+        "PythonREPLTool",
+        "TextFileReaderTool",
+        "IntermediateFileToInputFileTool",
+        "PythonREPLTool",
+        "PythonREPLTool",
+        "TextFileReaderTool",
+        "IntermediateFileToInputFileTool",
+        "PythonREPLTool",
+        "SAMInputFileValidatorTool",
+        "SAMInputFileValidatorTool",
+        "PythonREPLTool",
+        "SAMInputFileValidatorTool"
+      ],
+      "validator_calls": 3,
+      "intermediate_file": {
+        "path": "<AUTOSAM_ROOT>\\case_generation_cost_runs\\20260822T202329Z_gpt-52\\Pipe\\workdir\\intermediate_pipe.yaml",
+        "sha256": "4ef0715e6a0938f43a33e56ac501bc96f91acc3deb82bbb25b2ba02f81a7c6ee",
+        "bytes": 14021
+      },
+      "input_file": {
+        "path": "<AUTOSAM_ROOT>\\case_generation_cost_runs\\20260822T202329Z_gpt-52\\Pipe\\workdir\\sam_model_generated.i",
+        "sha256": "803d57c3aaae52b3d703a70ada2075a44d92d231a471c62e34343e263f610495",
+        "bytes": 5668
+      },
+      "stage_1_usage": {
+        "elapsed_seconds": 82.4279067000025,
+        "legacy_callback": {
+          "prompt_tokens": 528094,
+          "completion_tokens": 8045,
+          "total_tokens": 536139,
+          "successful_requests": 7,
+          "total_cost_usd_library_estimate": 0.0
+        },
+        "usage_metadata_by_model": {
+          "gpt-5.2-2025-12-11": {
+            "output_tokens": 8045,
+            "input_tokens": 528094,
+            "total_tokens": 536139,
+            "output_token_details": {
+              "reasoning": 0,
+              "audio": 0
+            },
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 438784
+            }
+          }
+        },
+        "direct_api_calls": [],
+        "timestamp_utc": "2026-08-22T20:25:00.180997+00:00"
+      },
+      "stage_2_usage": {
+        "elapsed_seconds": 71.38840349999373,
+        "legacy_callback": {
+          "prompt_tokens": 1103420,
+          "completion_tokens": 5628,
+          "total_tokens": 1109048,
+          "successful_requests": 13,
+          "total_cost_usd_library_estimate": 0.0
+        },
+        "usage_metadata_by_model": {
+          "gpt-5.2-2025-12-11": {
+            "output_tokens": 5628,
+            "input_tokens": 1103420,
+            "total_tokens": 1109048,
+            "output_token_details": {
+              "reasoning": 0,
+              "audio": 0
+            },
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 914944
+            }
+          }
+        },
+        "direct_api_calls": [],
+        "timestamp_utc": "2026-08-22T20:26:11.571919+00:00"
+      }
+    }
+  ],
+  "completed_utc": "2026-08-22T20:26:11.576260+00:00"
+}

@@ -1,0 +1,43 @@
+{
+  "condition": "no_validator",
+  "case": "MSRE",
+  "run": 1,
+  "resolved_model": "gpt-5.2-2025-12-11",
+  "latency_seconds": 0.0,
+  "required_block_fraction": 1.0,
+  "required_blocks_present": [
+    "components",
+    "eos",
+    "executioner",
+    "functions",
+    "globalparams",
+    "materialproperties",
+    "outputs",
+    "postprocessors",
+    "preconditioning"
+  ],
+  "required_blocks_missing": [],
+  "component_recall": 0.9583333333333334,
+  "missing_components": [
+    "j_pipe4_to_pipe5"
+  ],
+  "parameter_precision": 1.0,
+  "parameter_recall": 0.9794520547945206,
+  "parameter_f1": 0.9896193771626297,
+  "parameter_tp": 143,
+  "parameter_fp": 0,
+  "parameter_fn": 3,
+  "parameter_mismatches": [],
+  "topology_recall": 0.9090909090909091,
+  "topology_precision": 1.0,
+  "missing_topology_edges": [
+    [
+      "pipe4(out)",
+      "pipe5(in)"
+    ]
+  ],
+  "extra_topology_edges": [],
+  "explicit_missing_markers": 0,
+  "assumption_markers": 39,
+  "characters": 11212
+}

@@ -1,0 +1,88 @@
+{
+  "correction_count": 6,
+  "authoritative_sources": {
+    "primary": "ABTR_case_pdf/intermediate_ABTR.yaml",
+    "confirmation": "ABTR_case_pdf/ABTR_5channel_min_working.i",
+    "interpretation": "A component position is its start coordinate. The orientation vector (0, 0, -1) and length define its end. Branch2 connects Pipe2(out) to CH1-CH5(in); Branch1 connects CH1-CH5(out) to Pipe1(in). Dashed branch-link indicators are connectivity, not physical components. Circular dots are boundary conditions."
+  },
+  "corrections": [
+    {
+      "fact_id": "abtr_v03",
+      "original_label": "CH1 start",
+      "original_value": [
+        -1.0,
+        0.0
+      ],
+      "source_aligned_label": "CH1 start",
+      "source_aligned_value": [
+        -1.0,
+        0.8
+      ]
+    },
+    {
+      "fact_id": "abtr_v04",
+      "original_label": "CH2 start",
+      "original_value": [
+        -0.5,
+        0.0
+      ],
+      "source_aligned_label": "CH2 start",
+      "source_aligned_value": [
+        -0.5,
+        0.8
+      ]
+    },
+    {
+      "fact_id": "abtr_v05",
+      "original_label": "CH3 start",
+      "original_value": [
+        0.0,
+        0.0
+      ],
+      "source_aligned_label": "CH3 start",
+      "source_aligned_value": [
+        0.0,
+        0.8
+      ]
+    },
+    {
+      "fact_id": "abtr_v06",
+      "original_label": "CH4 start",
+      "original_value": [
+        0.5,
+        0.0
+      ],
+      "source_aligned_label": "CH4 start",
+      "source_aligned_value": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "fact_id": "abtr_v07",
+      "original_label": "CH5 start",
+      "original_value": [
+        1.0,
+        0.0
+      ],
+      "source_aligned_label": "CH5 start",
+      "source_aligned_value": [
+        1.0,
+        0.8
+      ]
+    },
+    {
+      "fact_id": "abtr_v08",
+      "original_label": "Pipe2 start",
+      "original_value": [
+        0.0,
+        0.8
+      ],
+      "source_aligned_label": "Pipe2 end",
+      "source_aligned_value": [
+        0.0,
+        0.8
+      ]
+    }
+  ]
+}

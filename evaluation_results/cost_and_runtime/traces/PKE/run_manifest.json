@@ -1,0 +1,116 @@
+{
+  "started_utc": "2026-08-22T20:29:22.358686+00:00",
+  "model": "gpt-5.2",
+  "cases": [
+    "PKE",
+    "ABTR",
+    "MSRE"
+  ],
+  "script": "<AUTOSAM_ROOT>\\evaluation\\autosam_four_case_cost_runtime.py",
+  "script_sha256": "6718c5b58258b1ae322da91be953591b4c8a33f394176449a73ed046cb9f994f",
+  "case_summaries": [
+    {
+      "case": "PKE",
+      "model_requested": "gpt-5.2",
+      "timestamp_utc": "2026-08-22T20:32:02.189163+00:00",
+      "source_manifest": [
+        {
+          "name": "pke.xlsx",
+          "source": "<AUTOSAM_ROOT>\\pke_reg_test\\pke.xlsx",
+          "sha256": "3310e36e8569fcf5ed8a56a64ba42d73e395ad60c6057899b53429e9e9f3dd48",
+          "bytes": 11013
+        }
+      ],
+      "model_initialization_seconds": 0.8838119999854825,
+      "stage_1_seconds": 93.53988350002328,
+      "stage_2_seconds": 65.39699340000516,
+      "end_to_end_seconds_excluding_initialization": 158.93687690002844,
+      "end_to_end_seconds_including_initialization": 159.82068890001392,
+      "stage_1_tools": [
+        "PythonREPLTool",
+        "PythonREPLTool",
+        "PythonREPLTool",
+        "CSVandEXCELFileReaderTool",
+        "PythonREPLTool",
+        "PythonREPLTool",
+        "PythonREPLTool",
+        "PythonREPLTool",
+        "PythonREPLTool"
+      ],
+      "stage_2_tools": [
+        "TextFileReaderTool",
+        "IntermediateFileToInputFileTool",
+        "PythonREPLTool",
+        "SAMInputFileValidatorTool",
+        "SAMInputFileValidatorTool",
+        "PythonREPLTool",
+        "SAMInputFileValidatorTool"
+      ],
+      "validator_calls": 3,
+      "intermediate_file": {
+        "path": "<AUTOSAM_ROOT>\\case_generation_cost_runs\\20260822T202915Z_gpt-52\\PKE\\workdir\\intermediate_pke.yaml",
+        "sha256": "a0a0ce3d9ed8db619b714a2593eafcd220c15d8f436f6a4b8ea3f6173d712ff8",
+        "bytes": 15438
+      },
+      "input_file": {
+        "path": "<AUTOSAM_ROOT>\\case_generation_cost_runs\\20260822T202915Z_gpt-52\\PKE\\workdir\\sam_model_generated.i",
+        "sha256": "9a916c246c703ae515da20d307d6e080a70d14988989f1c816f4f93c8aadd62d",
+        "bytes": 4307
+      },
+      "stage_1_usage": {
+        "elapsed_seconds": 93.53988350002328,
+        "legacy_callback": {
+          "prompt_tokens": 761736,
+          "completion_tokens": 9165,
+          "total_tokens": 770901,
+          "successful_requests": 10,
+          "total_cost_usd_library_estimate": 0.0
+        },
+        "usage_metadata_by_model": {
+          "gpt-5.2-2025-12-11": {
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 745728
+            },
+            "input_tokens": 761736,
+            "output_tokens": 9165,
+            "output_token_details": {
+              "reasoning": 0,
+              "audio": 0
+            },
+            "total_tokens": 770901
+          }
+        },
+        "direct_api_calls": [],
+        "timestamp_utc": "2026-08-22T20:30:56.786790+00:00"
+      },
+      "stage_2_usage": {
+        "elapsed_seconds": 65.39699340000516,
+        "legacy_callback": {
+          "prompt_tokens": 635134,
+          "completion_tokens": 6172,
+          "total_tokens": 641306,
+          "successful_requests": 7,
+          "total_cost_usd_library_estimate": 0.0
+        },
+        "usage_metadata_by_model": {
+          "gpt-5.2-2025-12-11": {
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 541568
+            },
+            "input_tokens": 635134,
+            "output_tokens": 6172,
+            "output_token_details": {
+              "reasoning": 0,
+              "audio": 0
+            },
+            "total_tokens": 641306
+          }
+        },
+        "direct_api_calls": [],
+        "timestamp_utc": "2026-08-22T20:32:02.187238+00:00"
+      }
+    }
+  ]
+}

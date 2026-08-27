@@ -1,0 +1,467 @@
+case:
+  name: MSRE
+  working_directory: <LOCAL_PATH>
+layout:
+  coordinate_system:
+    plane: XY
+    all_z: 0.0
+    note: Positions/orientations derived from MSRE_system_layout.png
+  key_points:
+    A:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    B:
+      x: -0.7366
+      y: 0.0
+      z: 0.0
+    C:
+      x: 0.0
+      y: 1.7272
+      z: 0.0
+    D:
+      x: 0.0
+      y: 2.1618
+      z: 0.0
+    E:
+      x: 1.8288
+      y: 2.1618
+      z: 0.0
+    F:
+      x: 1.8288
+      y: 2.9746
+      z: 0.0
+    G:
+      x: 0.762
+      y: 2.9746
+      z: 0.0
+    H:
+      x: -1.7678
+      y: 2.9746
+      z: 0.0
+    I:
+      x: -2.2678
+      y: 2.9746
+      z: 0.0
+    J:
+      x: -1.7678
+      y: 1.7272
+      z: 0.0
+    K:
+      x: -0.7366
+      y: 1.7272
+      z: 0.0
+  boundary_condition_markers_black_circle:
+    ref_p:
+      x: -2.2678
+      y: 2.9746
+      z: 0.0
+      defined_by: black_circle
+    HX_secondary_in:
+      x: -1.7678
+      y: 2.9746
+      z: 0.0
+      defined_by: black_circle
+    HX_secondary_out:
+      x: 0.762
+      y: 2.9746
+      z: 0.0
+      defined_by: black_circle
+  components:
+  - name: inlet_plenum
+    start:
+      x: -0.7366
+      y: 0.0
+      z: 0.0
+    end:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    orientation:
+      x: 1.0
+      y: 0.0
+      z: 0.0
+    length: 0.7366
+    length_units: m
+  - name: core
+    start:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    end:
+      x: 0.0
+      y: 1.7272
+      z: 0.0
+    orientation:
+      x: 0.0
+      y: 1.0
+      z: 0.0
+    length: 1.7272
+    length_units: m
+  - name: upper_plenum
+    start:
+      x: 0.0
+      y: 1.7272
+      z: 0.0
+    end:
+      x: 0.0
+      y: 2.1618
+      z: 0.0
+    orientation:
+      x: 0.0
+      y: 1.0
+      z: 0.0
+    length: 0.4345999999999999
+    length_units: m
+  - name: pipe1
+    start:
+      x: 0.0
+      y: 2.1618
+      z: 0.0
+    end:
+      x: 1.8288
+      y: 2.1618
+      z: 0.0
+    orientation:
+      x: 1.0
+      y: 0.0
+      z: 0.0
+    length: 1.8288
+    length_units: m
+  - name: pipe2
+    start:
+      x: 1.8288
+      y: 2.1618
+      z: 0.0
+    end:
+      x: 1.8288
+      y: 2.9746
+      z: 0.0
+    orientation:
+      x: 0.0
+      y: 1.0
+      z: 0.0
+    length: 0.8128000000000002
+    length_units: m
+  - name: pipe3
+    start:
+      x: 1.8288
+      y: 2.9746
+      z: 0.0
+    end:
+      x: 0.762
+      y: 2.9746
+      z: 0.0
+    orientation:
+      x: -1.0
+      y: 0.0
+      z: 0.0
+    length: 1.0668
+    length_units: m
+  - name: HX
+    start:
+      x: 0.762
+      y: 2.9746
+      z: 0.0
+    end:
+      x: -1.7678
+      y: 2.9746
+      z: 0.0
+    orientation:
+      x: -1.0
+      y: 0.0
+      z: 0.0
+    length: 2.5298
+    length_units: m
+  - name: pipe_ref
+    start:
+      x: -1.7678
+      y: 2.9746
+      z: 0.0
+    end:
+      x: -2.2678
+      y: 2.9746
+      z: 0.0
+    orientation:
+      x: -1.0
+      y: 0.0
+      z: 0.0
+    length: 0.4999999999999998
+    length_units: m
+  - name: pipe4
+    start:
+      x: -1.7678
+      y: 2.9746
+      z: 0.0
+    end:
+      x: -1.7678
+      y: 1.7272
+      z: 0.0
+    orientation:
+      x: 0.0
+      y: -1.0
+      z: 0.0
+    length: 1.2474
+    length_units: m
+  - name: pipe5
+    start:
+      x: -1.7678
+      y: 1.7272
+      z: 0.0
+    end:
+      x: -0.7366
+      y: 1.7272
+      z: 0.0
+    orientation:
+      x: 1.0
+      y: 0.0
+      z: 0.0
+    length: 1.0312000000000001
+    length_units: m
+  - name: downcomer
+    start:
+      x: -0.7366
+      y: 1.7272
+      z: 0.0
+    end:
+      x: -0.7366
+      y: 0.0
+      z: 0.0
+    orientation:
+      x: 0.0
+      y: -1.0
+      z: 0.0
+    length: 1.7272
+    length_units: m
+  topology:
+    flow_path:
+    - inlet_plenum
+    - core
+    - upper_plenum
+    - pipe1
+    - pipe2
+    - pump
+    - pipe3
+    - HX
+    - pipe4
+    - pipe5
+    - downcomer
+    notes:
+    - pump is non-geometric in SAM (no position/orientation/length), only connectivity
+    - tee at H connects HX, pipe4, and pipe_ref (requires PBBranch)
+specifications_xlsx:
+  file: MSRE_specifications.xlsx
+  components:
+    deowncomer:
+      A: 0.1589
+      Dh: 0.0508
+    inlet plenum:
+      A: 0.3932
+      Dh: 0.6997
+    core:
+      A: 0.3512
+      Dh: 0.6687
+    upper plenum:
+      A: 0.3932
+      Dh: 0.6997
+    pipe1:
+      A: 0.01267
+      Dh: 0.127
+    pipe2:
+      A: 0.01267
+      Dh: 0.127
+    pipe3:
+      A: 0.01267
+      Dh: 0.127
+    HX primary side:
+      A: 0.10183
+      Dh: 0.020945
+    HX secondary side:
+      A: 0.027885
+      Dh: 0.010566
+    pipe_ref:
+      A: 0.01267
+      Dh: 0.127
+    pipe4:
+      A: 0.01267
+      Dh: 0.127
+    pipe5:
+      A: 0.01267
+      Dh: 0.127
+  branches:
+  - name: downcomer_to_inlet_plenum
+    description: downcomer to inlet plenum
+    Area: 0.1155
+  - name: inlet_plenum_to_core
+    description: inlet plenum to core
+    Area: 0.1155
+  - name: core_to_upper_plenum
+    description: core to upper plenum
+    Area: 0.1155
+  - name: upper_plenum_to_pipe1
+    description: upper plenum to pipe1
+    Area: 0.1155
+  - name: pipe1_to_pipe2
+    description: pipe1 to pipe2
+    Area: 0.01292
+  - name: pipe2_to_pipe3
+    description: pipe2 to pipe3
+    Area: 0.01292 (pump)
+  - name: pipe3_to_HX_primary
+    description: pipe3 to HX primary
+    Area: 0.01267
+  - name: HX_primary_to_pipe_ref_and_pipe4
+    description: HX primary to pipe_ref and pipe4
+    Area: 0.01267
+  - name: pipe4_to_pipe5
+    description: pipe4 to pipe5
+    Area: 0.01267
+  - name: pipe5_to_downcomer
+    description: pipe5 to downcomer
+    Area: 0.01267
+  pump:
+    K: 0.15 0.1
+    initial_P: 110000
+    initial_P_units: Pa
+    Head: 43909.58
+    Head_units: Pa
+    source: MSRE_specifications.xlsx
+  hx_wall:
+    HT_surface_area_density: 1000
+    HT_surface_area_density_units: 1/m
+    wall_geometry_type: Cylinder
+    wall_thickness: 0.0010668
+    wall_thickness_units: m
+    radius_i: 0.0052832
+    radius_i_units: m
+    source: MSRE_specifications.xlsx
+pdf_extracted:
+  fluids:
+    fuel_salt:
+      density:
+        correlation: 2553.3 - 0.562*T
+        units: kg/m^3
+        T_range_K:
+        - 750
+        - 1200
+        citation: Table 1
+      viscosity:
+        correlation: 8.4e-5 * exp(2390/T)
+        units: Pa*s
+        T_range_K:
+        - 750
+        - 1200
+        citation: Table 1
+      thermal_conductivity:
+        value: 1.0
+        units: W/(m*K)
+        citation: Table 1
+      specific_heat:
+        value: 2009.66
+        units: J/(kg*K)
+        citation: Table 1
+    coolant_salt_hx:
+      description: LiF-BeF2 0.66-0.34
+      density:
+        correlation: 2146.3 - 0.488*T
+        units: kg/m^3
+        citation: Table 2
+      viscosity:
+        correlation: 1.16e-4 * exp(3755/T)
+        units: Pa*s
+        citation: Table 2
+      thermal_conductivity:
+        value: 1.1
+        units: W/(m*K)
+        citation: Table 2
+      specific_heat:
+        value: 2390.0
+        units: J/(kg*K)
+        citation: Table 2
+  solids:
+    hx_wall_alloy:
+      material: Hastelloy N
+      density:
+        value: 8860
+        units: kg/m^3
+        citation: Table 3
+      thermal_conductivity:
+        value: 23.6
+        units: W/(m*K)
+        citation: Table 3
+      specific_heat:
+        value: 578
+        units: J/(kg*K)
+        citation: Table 3
+  initial_conditions:
+    global:
+      pressure:
+        value: 100000.0
+        units: Pa
+      velocity:
+        value: 0.001
+        units: m/s
+      temperature:
+        value: 908.15
+        units: K
+      gravity:
+        value:
+        - 0
+        - -9.8
+        - 0
+        units: m/s^2
+    pump:
+      internal_pressure:
+        value: 110000.0
+        units: Pa
+    secondary_side_initial_tube_temperature:
+      components:
+      - hx_tube1
+      - hx_tube2
+      - hx_tube3
+      temperature:
+        value: 824.8167
+        units: K
+  boundary_conditions:
+    secondary_loop_inlet:
+      name: hx_s_in
+      velocity:
+        value: 1.6
+        units: m/s
+      temperature:
+        value: 824.8167
+        units: K
+    secondary_loop_outlet:
+      name: hx_s_out
+      pressure:
+        value: 100000.0
+        units: Pa
+      temperature:
+        value: 866.4833
+        units: K
+    primary_loop_reference:
+      name: pipe_ref
+      pressure:
+        value: 123335.1
+        units: Pa
+      temperature:
+        value: 908.15
+        units: K
+sam_mapping_hints:
+  recommended_component_types:
+    inlet_plenum: PBOneDFluidComponent or PBVolumeBranch (not enough info here to
+      choose)
+    core: PBOneDFluidComponent (or PBCoreChannel if power/HS details exist elsewhere)
+    upper_plenum: PBOneDFluidComponent
+    pipe1: PBOneDFluidComponent
+    pipe2: PBOneDFluidComponent
+    pump: PBPump
+    pipe3: PBOneDFluidComponent
+    HX: PBHeatExchanger
+    pipe_ref: PBOneDFluidComponent (stub) + ReferenceBoundary
+    pipe4: PBOneDFluidComponent
+    pipe5: PBOneDFluidComponent
+    downcomer: PBOneDFluidComponent
+  junctions:
+    two_way: PBSingleJunction
+    tee: PBBranch

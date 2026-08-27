@@ -1,0 +1,381 @@
+```ini
+# MSRE SAM test case (AUTO-GENERATED from intermediate_msre.yaml)
+# One-line description: Primary salt loop with pump and IHX primary side; secondary side EOS placeholders.
+# Quantities monitored: key inlet/outlet temperatures and mass flow at core.
+#
+# IMPORTANT NOTES / UNRESOLVED VALUES (must be reviewed):
+# - Many axial lengths and discretizations (n_elems) were NOT provided in the intermediate representation.
+#   Analyst-approved assumption: use length=1.0 m and n_elems=10 for all 1-D pipes unless explicitly specified.
+# - No explicit inlet/outlet boundary conditions were provided. Because the primary loop is closed, we anchor reference
+#   pressure with ReferenceBoundary and drive flow with a pump head. This avoids unattached ends.
+# - Coolant (secondary) salt EOS properties were not provided. A placeholder EOS is included ONLY to keep the input
+#   syntactically complete; MUST BE REPLACED with reviewed correlations/data.
+# - Fuel salt EOS is implemented as PTFunctionsEOS using extracted correlations.
+# - Solid material properties for Hastelloy-N and graphite were not provided; placeholders are inserted and flagged.
+# - Core power / heat deposition model (10 MWth in YAML) was NOT mapped because no SAM power coupling details were provided.
+#
+# Units: SI
+
+[GlobalParams]
+  gravity = '0 0 -9.8'
+  global_init_P = 1.1e5         # ASSUMPTION (not provided)
+  global_init_T = 900.0         # ASSUMPTION (not provided)
+  global_init_V = 0.1           # ASSUMPTION (not provided)
+  scaling_factor_var = '1 1e-3 1e-6'
+  Tsolid_sf = 1e-3
+  p_order = 1
+[]
+
+[Functions]
+  # Fuel salt property correlations extracted from MSRE_case.pdf narrative
+  [fuel_rho_fn]
+    type = ParsedFunction
+    expression = 2553.3 - 0.562*t   # t := Temperature [K]
+  []
+  [fuel_mu_fn]
+    type = ParsedFunction
+    expression = 8.4e-5*exp(2390/t) # t := Temperature [K]
+  []
+[]
+
+[EOS]
+  [fuel_salt_eos]
+    type = PTFunctionsEOS
+    rho = fuel_rho_fn
+    cp  = 2009.66      # J/kg-K (extracted)
+    mu  = fuel_mu_fn
+    k   = 1.0          # W/m-K (extracted)
+    # Enthalpy is not provided; SAM can compute internally over a temperature range.
+    T_min = 750.0      # extracted valid range
+    T_max = 1200.0     # extracted valid range
+    h_0   = 0.0
+  []
+
+  # Coolant salt EOS is MISSING from intermediate representation.
+  # Placeholder values; MUST BE REPLACED.
+  [coolant_salt_eos]
+    type = PTFunctionsEOS
+    rho = 2000.0       # ASSUMPTION / PLACEHOLDER
+    cp  = 2000.0       # ASSUMPTION / PLACEHOLDER
+    mu  = 0.01         # ASSUMPTION / PLACEHOLDER
+    k   = 1.0          # ASSUMPTION / PLACEHOLDER
+    T_min = 750.0
+    T_max = 1200.0
+    h_0   = 0.0
+  []
+[]
+
+[MaterialProperties]
+  # Hastelloy-N properties were not extracted.
+  [hastelloy_n]
+    type = SolidMaterialProps
+    k = 16.0      # PLACEHOLDER
+    Cp = 500.0    # PLACEHOLDER
+    rho = 9000.0  # PLACEHOLDER
+  []
+
+  # Graphite properties were not extracted.
+  [graphite]
+    type = SolidMaterialProps
+    k = 30.0      # PLACEHOLDER
+    Cp = 700.0    # PLACEHOLDER
+    rho = 1800.0  # PLACEHOLDER
+  []
+[]
+
+[Components]
+  # -----------------
+  # Primary loop pipes
+  # -----------------
+  [downcomer]
+    type = PBOneDFluidComponent
+    eos = fuel_salt_eos
+    position = '0 -0.7 0.0'
+    orientation = '0 1 0'
+    A = 0.1589
+    Dh = 0.0508
+    length = 1.0      # ASSUMPTION (length missing)
+    n_elems = 10      # ASSUMPTION (n_elems missing)
+  []
+
+  [inlet_plenum]
+    type = PBOneDFluidComponent
+    eos = fuel_salt_eos
+    position = '0 -0.7366 0.0'
+    orientation = '0 1 0'
+    A = 0.3932
+    Dh = 0.6997
+    length = 1.0      # ASSUMPTION
+    n_elems = 10      # ASSUMPTION
+  []
+
+  [core]
+    type = PBOneDFluidComponent
+    eos = fuel_salt_eos
+    position = '0 0.0 0.0'
+    orientation = '0 1 0'
+    A = 0.3512
+    Dh = 0.6687
+    length = 1.0      # ASSUMPTION
+    n_elems = 10      # ASSUMPTION
+    # NOTE: core heat deposition / power coupling NOT provided; no heat_source applied.
+  []
+
+  [upper_plenum]
+    type = PBOneDFluidComponent
+    eos = fuel_salt_eos
+    position = '0 1.7272 0.0'
+    orientation = '0 1 0'
+    A = 0.3932
+    Dh = 0.6997
+    length = 1.0      # ASSUMPTION
+    n_elems = 10      # ASSUMPTION
+  []
+
+  [pipe1]
+    type = PBOneDFluidComponent
+    eos = fuel_salt_eos
+    position = '0 2.1618 0.0'
+    orientation = '0 1 0'
+    A = 0.01267
+    Dh = 0.127
+    length = 1.0      # ASSUMPTION
+    n_elems = 10      # ASSUMPTION
+  []
+
+  [pipe2]
+    type = PBOneDFluidComponent
+    eos = fuel_salt_eos
+    position = '0 1.8288 0.0'
+    orientation = '0 1 0'
+    A = 0.01267
+    Dh = 0.127
+    length = 1.0      # ASSUMPTION
+    n_elems = 10      # ASSUMPTION
+  []
+
+  [pipe3]
+    type = PBOneDFluidComponent
+    eos = fuel_salt_eos
+    position = '0 0.762 0.0'
+    orientation = '0 1 0'
+    A = 0.01267
+    Dh = 0.127
+    length = 1.0      # ASSUMPTION
+    n_elems = 10      # ASSUMPTION
+  []
+
+  # -----------------
+  # Intermediate Heat Exchanger (IHX)
+  # -----------------
+  [HX]
+    type = PBHeatExchanger
+    eos = fuel_salt_eos
+    eos_secondary = coolant_salt_eos
+
+    position = '0 1.0 0.0'
+    orientation = '0 1 0'
+
+    A = 0.10183
+    Dh = 0.020945
+
+    A_secondary = 0.027885
+    Dh_secondary = 0.010566
+
+    length = 2.5            # from PDF extraction
+    n_elems = 10            # ASSUMPTION (missing)
+
+    HT_surface_area_density = 1000            # from YAML
+    HT_surface_area_density_secondary = 1000  # ASSUMPTION (set equal)
+
+    # Wall definition
+    hs_type = cylinder
+    radius_i = 0.0052832
+    wall_thickness = 0.0010668
+    dim_wall = 1
+    n_wall_elems = 1         # ASSUMPTION (missing)
+    material_wall = hastelloy_n
+    Twall_init = 900.0       # ASSUMPTION
+
+    # Secondary initial velocity direction not specified; set counter-current
+    initial_V_secondary = -0.1   # ASSUMPTION
+  []
+
+  [pipe4]
+    type = PBOneDFluidComponent
+    eos = fuel_salt_eos
+    position = '0 -1.7678 0.0'
+    orientation = '0 1 0'
+    A = 0.01267
+    Dh = 0.127
+    length = 1.0
+    n_elems = 10
+  []
+
+  [pipe5]
+    type = PBOneDFluidComponent
+    eos = fuel_salt_eos
+    position = '0 -1.7678 0.0'
+    orientation = '0 1 0'
+    A = 0.01267
+    Dh = 0.127
+    length = 1.0
+    n_elems = 10
+  []
+
+  # -----------------
+  # Junctions / branches per intermediate representation
+  # -----------------
+  [J1_downcomer_to_inlet_plenum]
+    type = PBSingleJunction
+    eos = fuel_salt_eos
+    Area = 0.1155
+    inputs = 'downcomer(out)'
+    outputs = 'inlet_plenum(in)'
+  []
+
+  [J2_inlet_plenum_to_core]
+    type = PBSingleJunction
+    eos = fuel_salt_eos
+    Area = 0.1155
+    inputs = 'inlet_plenum(out)'
+    outputs = 'core(in)'
+  []
+
+  [J3_core_to_upper_plenum]
+    type = PBSingleJunction
+    eos = fuel_salt_eos
+    Area = 0.1155
+    inputs = 'core(out)'
+    outputs = 'upper_plenum(in)'
+  []
+
+  [J4_upper_plenum_to_pipe1]
+    type = PBSingleJunction
+    eos = fuel_salt_eos
+    Area = 0.1155
+    inputs = 'upper_plenum(out)'
+    outputs = 'pipe1(in)'
+  []
+
+  [J5_pipe1_to_pipe2]
+    type = PBSingleJunction
+    eos = fuel_salt_eos
+    Area = 0.01292
+    inputs = 'pipe1(out)'
+    outputs = 'pipe2(in)'
+  []
+
+  [pump]
+    type = PBPump
+    eos = fuel_salt_eos
+    Area = 0.01292
+    inputs = 'pipe2(out)'
+    outputs = 'pipe3(in)'
+    K = '0.15 0.1'
+    initial_P = 110000
+    Head = 43909.58
+    pump_heating = 0
+  []
+
+  [J7_pipe3_to_HX_primary]
+    type = PBSingleJunction
+    eos = fuel_salt_eos
+    Area = 0.01267
+    inputs = 'pipe3(out)'
+    outputs = 'HX(primary_in)'
+  []
+
+  [B1_HX_primary_split_to_pipe_ref_and_pipe4]
+    type = PBBranch
+    eos = fuel_salt_eos
+    Area = 0.01267
+    inputs = 'HX(primary_out)'
+    outputs = 'pipe4(in)'
+    # K is missing; placeholder (2 connections: 1 input + 1 output)
+    K = '0.0 0.0'  # PLACEHOLDER
+  []
+
+  [J8_pipe4_to_pipe5]
+    type = PBSingleJunction
+    eos = fuel_salt_eos
+    Area = 0.01267
+    inputs = 'pipe4(out)'
+    outputs = 'pipe5(in)'
+  []
+
+  [J9_pipe5_to_downcomer]
+    type = PBSingleJunction
+    eos = fuel_salt_eos
+    Area = 0.01267
+    inputs = 'pipe5(out)'
+    outputs = 'downcomer(in)'
+  []
+
+  # Reference pressure anchor (required for closed loop)
+  [p_ref]
+    type = ReferenceBoundary
+    input = 'core(in)'
+    variable = pressure
+    value = 1.1e5   # ASSUMPTION
+  []
+[]
+
+[Postprocessors]
+  [T_core_in]
+    type = ComponentBoundaryVariableValue
+    input = core(in)
+    variable = temperature
+  []
+  [T_core_out]
+    type = ComponentBoundaryVariableValue
+    input = core(out)
+    variable = temperature
+  []
+  [T_HX_p_in]
+    type = ComponentBoundaryVariableValue
+    input = HX(primary_in)
+    variable = temperature
+  []
+  [T_HX_p_out]
+    type = ComponentBoundaryVariableValue
+    input = HX(primary_out)
+    variable = temperature
+  []
+  [mflow_core]
+    type = ComponentBoundaryFlow
+    input = core(in)
+  []
+[]
+
+[Preconditioning]
+  [SMP_PJFNK]
+    type = SMP
+    full = true
+    solve_type = 'PJFNK'
+    petsc_options_iname = '-pc_type'
+    petsc_options_value = 'lu'
+  []
+[]
+
+[Executioner]
+  # ASSUMPTION: steady-state solve to initialize the loop.
+  type = Steady
+  nl_rel_tol = 1e-7
+  nl_abs_tol = 1e-6
+  nl_max_its = 20
+  l_tol = 1e-5
+  l_max_its = 100
+[]
+
+[Outputs]
+  perf_graph = true
+  csv = true
+  [console]
+    type = Console
+    execute_scalars_on = 'none'
+  []
+[]
+```
+
+**Validation result (SAMInputFileValidatorTool):** all required top-level blocks were found, and the file is structurally well-formed after correction (removed unconnected `pipe_ref` and fixed `ParsedFunction` independent variable usage). The validator did not report any remaining missing required sections; it still notes inferred connectivity heuristics, but no additional structural errors were returned on the second pass.

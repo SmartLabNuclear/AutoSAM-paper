@@ -1,0 +1,129 @@
+{"timestamp": "2026-08-14T19:02:40.206611Z", "event": "evaluation_started", "run_id": "20260814T190240Z_msre_input_k10"}
+{"timestamp": "2026-08-14T19:02:40.836140Z", "event": "retrieval_started", "questions": 15, "top_k": 10}
+{"timestamp": "2026-08-14T19:02:45.291398Z", "event": "retrieval_completed", "questions": 15, "top_k": 10}
+{"timestamp": "2026-08-14T19:02:45.467178Z", "event": "run_started", "run": 1}
+{"timestamp": "2026-08-14T19:02:45.468447Z", "event": "question_started", "run": 1, "case": "MSRE_INPUT_K10", "item_id": "msre_param_01"}
+{"timestamp": "2026-08-14T19:02:45.468996Z", "event": "question_started", "run": 1, "case": "MSRE_INPUT_K10", "item_id": "msre_param_02"}
+{"timestamp": "2026-08-14T19:02:45.469565Z", "event": "question_started", "run": 1, "case": "MSRE_INPUT_K10", "item_id": "msre_param_03"}
+{"timestamp": "2026-08-14T19:02:45.470046Z", "event": "question_started", "run": 1, "case": "MSRE_INPUT_K10", "item_id": "msre_param_04"}
+{"timestamp": "2026-08-14T19:02:45.473394Z", "event": "question_started", "run": 1, "case": "MSRE_INPUT_K10", "item_id": "msre_param_05"}
+{"timestamp": "2026-08-14T19:02:49.725817Z", "event": "question_completed", "run": 1, "case": "MSRE_INPUT_K10", "item_id": "msre_param_03", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:02:49.726256Z", "event": "question_started", "run": 1, "case": "MSRE_INPUT_K10", "item_id": "msre_param_06"}
+{"timestamp": "2026-08-14T19:02:50.060258Z", "event": "question_completed", "run": 1, "case": "MSRE_INPUT_K10", "item_id": "msre_param_02", "failure_class": "generation", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:02:50.060551Z", "event": "question_started", "run": 1, "case": "MSRE_INPUT_K10", "item_id": "msre_param_07"}
+{"timestamp": "2026-08-14T19:02:50.960958Z", "event": "question_completed", "run": 1, "case": "MSRE_INPUT_K10", "item_id": "msre_param_05", "failure_class": "generation", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:02:50.961287Z", "event": "question_started", "run": 1, "case": "MSRE_INPUT_K10", "item_id": "msre_param_08"}
+{"timestamp": "2026-08-14T19:02:52.895246Z", "event": "question_completed", "run": 1, "case": "MSRE_INPUT_K10", "item_id": "msre_param_07", "failure_class": "generation", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:02:52.895527Z", "event": "question_started", "run": 1, "case": "MSRE_INPUT_K10", "item_id": "msre_param_09"}
+{"timestamp": "2026-08-14T19:02:53.447165Z", "event": "question_completed", "run": 1, "case": "MSRE_INPUT_K10", "item_id": "msre_param_04", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:02:53.510072Z", "event": "question_started", "run": 1, "case": "MSRE_INPUT_K10", "item_id": "msre_param_10"}
+{"timestamp": "2026-08-14T19:02:53.510224Z", "event": "question_completed", "run": 1, "case": "MSRE_INPUT_K10", "item_id": "msre_param_08", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:02:53.520214Z", "event": "question_started", "run": 1, "case": "MSRE_INPUT_K10", "item_id": "msre_param_11"}
+{"timestamp": "2026-08-14T19:02:53.521657Z", "event": "question_completed", "run": 1, "case": "MSRE_INPUT_K10", "item_id": "msre_param_01", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:02:53.522296Z", "event": "question_started", "run": 1, "case": "MSRE_INPUT_K10", "item_id": "msre_param_12"}
+{"timestamp": "2026-08-14T19:02:53.911080Z", "event": "question_completed", "run": 1, "case": "MSRE_INPUT_K10", "item_id": "msre_param_06", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:02:53.911383Z", "event": "question_started", "run": 1, "case": "MSRE_INPUT_K10", "item_id": "msre_param_13"}
+{"timestamp": "2026-08-14T19:02:55.399919Z", "event": "question_completed", "run": 1, "case": "MSRE_INPUT_K10", "item_id": "msre_param_13", "failure_class": "generation", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:02:55.400211Z", "event": "question_started", "run": 1, "case": "MSRE_INPUT_K10", "item_id": "msre_param_14"}
+{"timestamp": "2026-08-14T19:02:56.094914Z", "event": "question_completed", "run": 1, "case": "MSRE_INPUT_K10", "item_id": "msre_param_12", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:02:56.095194Z", "event": "question_started", "run": 1, "case": "MSRE_INPUT_K10", "item_id": "msre_param_15"}
+{"timestamp": "2026-08-14T19:02:56.378070Z", "event": "question_completed", "run": 1, "case": "MSRE_INPUT_K10", "item_id": "msre_param_11", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:02:57.179839Z", "event": "question_completed", "run": 1, "case": "MSRE_INPUT_K10", "item_id": "msre_param_10", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:02:57.632757Z", "event": "question_completed", "run": 1, "case": "MSRE_INPUT_K10", "item_id": "msre_param_09", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:02:57.672041Z", "event": "question_completed", "run": 1, "case": "MSRE_INPUT_K10", "item_id": "msre_param_14", "failure_class": "generation", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:02:57.943133Z", "event": "question_completed", "run": 1, "case": "MSRE_INPUT_K10", "item_id": "msre_param_15", "failure_class": "retrieval_and_generation", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:02:57.944105Z", "event": "run_completed", "run": 1, "responses": 15}
+{"timestamp": "2026-08-14T19:02:57.944464Z", "event": "run_started", "run": 2}
+{"timestamp": "2026-08-14T19:02:57.945331Z", "event": "question_started", "run": 2, "case": "MSRE_INPUT_K10", "item_id": "msre_param_01"}
+{"timestamp": "2026-08-14T19:02:57.945524Z", "event": "question_started", "run": 2, "case": "MSRE_INPUT_K10", "item_id": "msre_param_02"}
+{"timestamp": "2026-08-14T19:02:57.945749Z", "event": "question_started", "run": 2, "case": "MSRE_INPUT_K10", "item_id": "msre_param_03"}
+{"timestamp": "2026-08-14T19:02:57.945989Z", "event": "question_started", "run": 2, "case": "MSRE_INPUT_K10", "item_id": "msre_param_04"}
+{"timestamp": "2026-08-14T19:02:57.947158Z", "event": "question_started", "run": 2, "case": "MSRE_INPUT_K10", "item_id": "msre_param_05"}
+{"timestamp": "2026-08-14T19:03:01.809599Z", "event": "question_completed", "run": 2, "case": "MSRE_INPUT_K10", "item_id": "msre_param_02", "failure_class": "generation", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:03:01.810175Z", "event": "question_started", "run": 2, "case": "MSRE_INPUT_K10", "item_id": "msre_param_06"}
+{"timestamp": "2026-08-14T19:03:02.132608Z", "event": "question_completed", "run": 2, "case": "MSRE_INPUT_K10", "item_id": "msre_param_05", "failure_class": "generation", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:03:02.132909Z", "event": "question_started", "run": 2, "case": "MSRE_INPUT_K10", "item_id": "msre_param_07"}
+{"timestamp": "2026-08-14T19:03:03.436715Z", "event": "question_completed", "run": 2, "case": "MSRE_INPUT_K10", "item_id": "msre_param_03", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:03:03.437029Z", "event": "question_started", "run": 2, "case": "MSRE_INPUT_K10", "item_id": "msre_param_08"}
+{"timestamp": "2026-08-14T19:03:04.483156Z", "event": "question_completed", "run": 2, "case": "MSRE_INPUT_K10", "item_id": "msre_param_04", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:03:04.483440Z", "event": "question_started", "run": 2, "case": "MSRE_INPUT_K10", "item_id": "msre_param_09"}
+{"timestamp": "2026-08-14T19:03:04.859860Z", "event": "question_completed", "run": 2, "case": "MSRE_INPUT_K10", "item_id": "msre_param_07", "failure_class": "generation", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:03:04.860161Z", "event": "question_started", "run": 2, "case": "MSRE_INPUT_K10", "item_id": "msre_param_10"}
+{"timestamp": "2026-08-14T19:03:05.652174Z", "event": "question_completed", "run": 2, "case": "MSRE_INPUT_K10", "item_id": "msre_param_06", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:03:05.652495Z", "event": "question_started", "run": 2, "case": "MSRE_INPUT_K10", "item_id": "msre_param_11"}
+{"timestamp": "2026-08-14T19:03:06.091125Z", "event": "question_completed", "run": 2, "case": "MSRE_INPUT_K10", "item_id": "msre_param_08", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:03:06.091416Z", "event": "question_started", "run": 2, "case": "MSRE_INPUT_K10", "item_id": "msre_param_12"}
+{"timestamp": "2026-08-14T19:03:06.591628Z", "event": "question_completed", "run": 2, "case": "MSRE_INPUT_K10", "item_id": "msre_param_01", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:03:06.591929Z", "event": "question_started", "run": 2, "case": "MSRE_INPUT_K10", "item_id": "msre_param_13"}
+{"timestamp": "2026-08-14T19:03:08.408583Z", "event": "question_completed", "run": 2, "case": "MSRE_INPUT_K10", "item_id": "msre_param_10", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:03:08.408896Z", "event": "question_started", "run": 2, "case": "MSRE_INPUT_K10", "item_id": "msre_param_14"}
+{"timestamp": "2026-08-14T19:03:09.131902Z", "event": "question_completed", "run": 2, "case": "MSRE_INPUT_K10", "item_id": "msre_param_11", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:03:09.132171Z", "event": "question_started", "run": 2, "case": "MSRE_INPUT_K10", "item_id": "msre_param_15"}
+{"timestamp": "2026-08-14T19:03:09.392347Z", "event": "question_completed", "run": 2, "case": "MSRE_INPUT_K10", "item_id": "msre_param_09", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:03:09.392872Z", "event": "question_completed", "run": 2, "case": "MSRE_INPUT_K10", "item_id": "msre_param_12", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:03:11.290031Z", "event": "question_completed", "run": 2, "case": "MSRE_INPUT_K10", "item_id": "msre_param_15", "failure_class": "retrieval_and_generation", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:03:11.800832Z", "event": "question_completed", "run": 2, "case": "MSRE_INPUT_K10", "item_id": "msre_param_14", "failure_class": "generation", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:03:16.260624Z", "event": "question_completed", "run": 2, "case": "MSRE_INPUT_K10", "item_id": "msre_param_13", "failure_class": "generation", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:03:16.261174Z", "event": "run_completed", "run": 2, "responses": 15}
+{"timestamp": "2026-08-14T19:03:16.261602Z", "event": "run_started", "run": 3}
+{"timestamp": "2026-08-14T19:03:16.262188Z", "event": "question_started", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_01"}
+{"timestamp": "2026-08-14T19:03:16.262934Z", "event": "question_started", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_04"}
+{"timestamp": "2026-08-14T19:03:16.262734Z", "event": "question_started", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_03"}
+{"timestamp": "2026-08-14T19:03:16.262414Z", "event": "question_started", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_02"}
+{"timestamp": "2026-08-14T19:03:16.264080Z", "event": "question_started", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_05"}
+{"timestamp": "2026-08-14T19:03:20.056658Z", "event": "question_completed", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_03", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:03:20.056934Z", "event": "question_started", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_06"}
+{"timestamp": "2026-08-14T19:03:20.836275Z", "event": "question_completed", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_02", "failure_class": "generation", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:03:20.836838Z", "event": "question_started", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_07"}
+{"timestamp": "2026-08-14T19:06:15.325443Z", "event": "evaluation_resumed", "existing_raw_logs": 32, "missing_run_3_items": ["msre_param_01", "msre_param_04", "msre_param_05", "msre_param_06", "msre_param_07", "msre_param_08", "msre_param_09", "msre_param_10", "msre_param_11", "msre_param_12", "msre_param_13", "msre_param_14", "msre_param_15"], "retrieval_context_source": "raw/run_01"}
+{"timestamp": "2026-08-14T19:06:15.504197Z", "event": "question_started", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_01"}
+{"timestamp": "2026-08-14T19:06:15.505666Z", "event": "question_started", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_05"}
+{"timestamp": "2026-08-14T19:06:15.507233Z", "event": "question_started", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_07"}
+{"timestamp": "2026-08-14T19:06:15.504888Z", "event": "question_started", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_04"}
+{"timestamp": "2026-08-14T19:06:15.506198Z", "event": "question_started", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_06"}
+{"timestamp": "2026-08-14T19:06:19.261325Z", "event": "question_completed", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_07", "failure_class": "generation", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:06:19.261684Z", "event": "question_started", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_08"}
+{"timestamp": "2026-08-14T19:06:20.171953Z", "event": "question_completed", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_06", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:06:20.172282Z", "event": "question_started", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_09"}
+{"timestamp": "2026-08-14T19:06:20.723067Z", "event": "question_completed", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_05", "failure_class": "generation", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:06:20.723349Z", "event": "question_started", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_10"}
+{"timestamp": "2026-08-14T19:07:15.767967Z", "event": "evaluation_resumed", "existing_raw_logs": 35, "missing_run_3_items": ["msre_param_01"], "retrieval_context_source": "raw/run_01"}
+{"timestamp": "2026-08-14T19:07:15.932500Z", "event": "question_started", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_01"}
+{"timestamp": "2026-08-14T19:07:23.220281Z", "event": "question_completed", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_01", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:07:23.223450Z", "event": "evaluation_resume_partial", "raw_logs_now_complete": 36, "remaining_run_3_items": ["msre_param_04", "msre_param_08", "msre_param_09", "msre_param_10", "msre_param_11", "msre_param_12", "msre_param_13", "msre_param_14", "msre_param_15"]}
+{"timestamp": "2026-08-14T19:13:53.254873Z", "event": "evaluation_resumed", "existing_raw_logs": 36, "missing_run_3_items": ["msre_param_04"], "retrieval_context_source": "raw/run_01"}
+{"timestamp": "2026-08-14T19:13:53.591881Z", "event": "question_started", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_04"}
+{"timestamp": "2026-08-14T19:14:02.141153Z", "event": "question_completed", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_04", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:14:02.144233Z", "event": "evaluation_resume_partial", "raw_logs_now_complete": 37, "remaining_run_3_items": ["msre_param_08", "msre_param_09", "msre_param_10", "msre_param_11", "msre_param_12", "msre_param_13", "msre_param_14", "msre_param_15"]}
+{"timestamp": "2026-08-14T19:14:16.170356Z", "event": "evaluation_resumed", "existing_raw_logs": 37, "missing_run_3_items": ["msre_param_08"], "retrieval_context_source": "raw/run_01"}
+{"timestamp": "2026-08-14T19:14:16.530639Z", "event": "question_started", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_08"}
+{"timestamp": "2026-08-14T19:14:20.259243Z", "event": "question_completed", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_08", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:14:20.262124Z", "event": "evaluation_resume_partial", "raw_logs_now_complete": 38, "remaining_run_3_items": ["msre_param_09", "msre_param_10", "msre_param_11", "msre_param_12", "msre_param_13", "msre_param_14", "msre_param_15"]}
+{"timestamp": "2026-08-14T19:14:30.935123Z", "event": "evaluation_resumed", "existing_raw_logs": 38, "missing_run_3_items": ["msre_param_09"], "retrieval_context_source": "raw/run_01"}
+{"timestamp": "2026-08-14T19:14:31.317822Z", "event": "question_started", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_09"}
+{"timestamp": "2026-08-14T19:14:36.874539Z", "event": "question_completed", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_09", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:14:36.879891Z", "event": "evaluation_resume_partial", "raw_logs_now_complete": 39, "remaining_run_3_items": ["msre_param_10", "msre_param_11", "msre_param_12", "msre_param_13", "msre_param_14", "msre_param_15"]}
+{"timestamp": "2026-08-14T19:14:47.118169Z", "event": "evaluation_resumed", "existing_raw_logs": 39, "missing_run_3_items": ["msre_param_10"], "retrieval_context_source": "raw/run_01"}
+{"timestamp": "2026-08-14T19:14:47.471106Z", "event": "question_started", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_10"}
+{"timestamp": "2026-08-14T19:14:50.622466Z", "event": "question_completed", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_10", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:14:50.625155Z", "event": "evaluation_resume_partial", "raw_logs_now_complete": 40, "remaining_run_3_items": ["msre_param_11", "msre_param_12", "msre_param_13", "msre_param_14", "msre_param_15"]}
+{"timestamp": "2026-08-14T19:14:57.476144Z", "event": "evaluation_resumed", "existing_raw_logs": 40, "missing_run_3_items": ["msre_param_11"], "retrieval_context_source": "raw/run_01"}
+{"timestamp": "2026-08-14T19:14:57.834176Z", "event": "question_started", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_11"}
+{"timestamp": "2026-08-14T19:15:01.563267Z", "event": "question_completed", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_11", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:15:01.569352Z", "event": "evaluation_resume_partial", "raw_logs_now_complete": 41, "remaining_run_3_items": ["msre_param_12", "msre_param_13", "msre_param_14", "msre_param_15"]}
+{"timestamp": "2026-08-14T19:15:10.243845Z", "event": "evaluation_resumed", "existing_raw_logs": 41, "missing_run_3_items": ["msre_param_12"], "retrieval_context_source": "raw/run_01"}
+{"timestamp": "2026-08-14T19:15:10.608956Z", "event": "question_started", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_12"}
+{"timestamp": "2026-08-14T19:15:13.549639Z", "event": "question_completed", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_12", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:15:13.553220Z", "event": "evaluation_resume_partial", "raw_logs_now_complete": 42, "remaining_run_3_items": ["msre_param_13", "msre_param_14", "msre_param_15"]}
+{"timestamp": "2026-08-14T19:15:18.776531Z", "event": "evaluation_resumed", "existing_raw_logs": 42, "missing_run_3_items": ["msre_param_13"], "retrieval_context_source": "raw/run_01"}
+{"timestamp": "2026-08-14T19:15:19.138120Z", "event": "question_started", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_13"}
+{"timestamp": "2026-08-14T19:15:21.593259Z", "event": "question_completed", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_13", "failure_class": "generation", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:15:21.598264Z", "event": "evaluation_resume_partial", "raw_logs_now_complete": 43, "remaining_run_3_items": ["msre_param_14", "msre_param_15"]}
+{"timestamp": "2026-08-14T19:15:27.678895Z", "event": "evaluation_resumed", "existing_raw_logs": 43, "missing_run_3_items": ["msre_param_14"], "retrieval_context_source": "raw/run_01"}
+{"timestamp": "2026-08-14T19:15:28.033689Z", "event": "question_started", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_14"}
+{"timestamp": "2026-08-14T19:15:31.119058Z", "event": "question_completed", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_14", "failure_class": "generation", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:15:31.123566Z", "event": "evaluation_resume_partial", "raw_logs_now_complete": 44, "remaining_run_3_items": ["msre_param_15"]}
+{"timestamp": "2026-08-14T19:15:37.443426Z", "event": "evaluation_resumed", "existing_raw_logs": 44, "missing_run_3_items": ["msre_param_15"], "retrieval_context_source": "raw/run_01"}
+{"timestamp": "2026-08-14T19:15:37.783264Z", "event": "question_started", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_15"}
+{"timestamp": "2026-08-14T19:15:40.024932Z", "event": "question_completed", "run": 3, "case": "MSRE_INPUT_K10", "item_id": "msre_param_15", "failure_class": "retrieval_and_generation", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-14T19:15:40.151705Z", "event": "evaluation_completed_after_resume", "responses": 45, "resumed_calls": 1}

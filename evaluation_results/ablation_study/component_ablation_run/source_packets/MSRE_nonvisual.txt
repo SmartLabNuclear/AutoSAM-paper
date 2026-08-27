@@ -1,0 +1,171 @@
+DOCUMENT- AND SPREADSHEET-DERIVED FACTS
+- pdf_extracted.fluids.fuel_salt.density.correlation: 2553.3 - 0.562*T
+- pdf_extracted.fluids.fuel_salt.density.units: kg/m^3
+- pdf_extracted.fluids.fuel_salt.density.T_range_K[0]: 750
+- pdf_extracted.fluids.fuel_salt.density.T_range_K[1]: 1200
+- pdf_extracted.fluids.fuel_salt.density.citation: Table 1
+- pdf_extracted.fluids.fuel_salt.viscosity.correlation: 8.4e-5 * exp(2390/T)
+- pdf_extracted.fluids.fuel_salt.viscosity.units: Pa*s
+- pdf_extracted.fluids.fuel_salt.viscosity.T_range_K[0]: 750
+- pdf_extracted.fluids.fuel_salt.viscosity.T_range_K[1]: 1200
+- pdf_extracted.fluids.fuel_salt.viscosity.citation: Table 1
+- pdf_extracted.fluids.fuel_salt.thermal_conductivity.value: 1.0
+- pdf_extracted.fluids.fuel_salt.thermal_conductivity.units: W/(m*K)
+- pdf_extracted.fluids.fuel_salt.thermal_conductivity.citation: Table 1
+- pdf_extracted.fluids.fuel_salt.specific_heat.value: 2009.66
+- pdf_extracted.fluids.fuel_salt.specific_heat.units: J/(kg*K)
+- pdf_extracted.fluids.fuel_salt.specific_heat.citation: Table 1
+- pdf_extracted.fluids.coolant_salt_hx.description: LiF-BeF2 0.66-0.34
+- pdf_extracted.fluids.coolant_salt_hx.density.correlation: 2146.3 - 0.488*T
+- pdf_extracted.fluids.coolant_salt_hx.density.units: kg/m^3
+- pdf_extracted.fluids.coolant_salt_hx.density.citation: Table 2
+- pdf_extracted.fluids.coolant_salt_hx.viscosity.correlation: 1.16e-4 * exp(3755/T)
+- pdf_extracted.fluids.coolant_salt_hx.viscosity.units: Pa*s
+- pdf_extracted.fluids.coolant_salt_hx.viscosity.citation: Table 2
+- pdf_extracted.fluids.coolant_salt_hx.thermal_conductivity.value: 1.1
+- pdf_extracted.fluids.coolant_salt_hx.thermal_conductivity.units: W/(m*K)
+- pdf_extracted.fluids.coolant_salt_hx.thermal_conductivity.citation: Table 2
+- pdf_extracted.fluids.coolant_salt_hx.specific_heat.value: 2390.0
+- pdf_extracted.fluids.coolant_salt_hx.specific_heat.units: J/(kg*K)
+- pdf_extracted.fluids.coolant_salt_hx.specific_heat.citation: Table 2
+- pdf_extracted.solids.hx_wall_alloy.material: Hastelloy N
+- pdf_extracted.solids.hx_wall_alloy.density.value: 8860
+- pdf_extracted.solids.hx_wall_alloy.density.units: kg/m^3
+- pdf_extracted.solids.hx_wall_alloy.density.citation: Table 3
+- pdf_extracted.solids.hx_wall_alloy.thermal_conductivity.value: 23.6
+- pdf_extracted.solids.hx_wall_alloy.thermal_conductivity.units: W/(m*K)
+- pdf_extracted.solids.hx_wall_alloy.thermal_conductivity.citation: Table 3
+- pdf_extracted.solids.hx_wall_alloy.specific_heat.value: 578
+- pdf_extracted.solids.hx_wall_alloy.specific_heat.units: J/(kg*K)
+- pdf_extracted.solids.hx_wall_alloy.specific_heat.citation: Table 3
+- pdf_extracted.initial_conditions.global.pressure.value: 100000.0
+- pdf_extracted.initial_conditions.global.pressure.units: Pa
+- pdf_extracted.initial_conditions.global.velocity.value: 0.001
+- pdf_extracted.initial_conditions.global.velocity.units: m/s
+- pdf_extracted.initial_conditions.global.temperature.value: 908.15
+- pdf_extracted.initial_conditions.global.temperature.units: K
+- pdf_extracted.initial_conditions.global.gravity.value[0]: 0
+- pdf_extracted.initial_conditions.global.gravity.value[1]: -9.8
+- pdf_extracted.initial_conditions.global.gravity.value[2]: 0
+- pdf_extracted.initial_conditions.global.gravity.units: m/s^2
+- pdf_extracted.initial_conditions.pump.internal_pressure.value: 110000.0
+- pdf_extracted.initial_conditions.pump.internal_pressure.units: Pa
+- pdf_extracted.initial_conditions.secondary_side_initial_tube_temperature.components[0]: hx_tube1
+- pdf_extracted.initial_conditions.secondary_side_initial_tube_temperature.components[1]: hx_tube2
+- pdf_extracted.initial_conditions.secondary_side_initial_tube_temperature.components[2]: hx_tube3
+- pdf_extracted.initial_conditions.secondary_side_initial_tube_temperature.temperature.value: 824.8167
+- pdf_extracted.initial_conditions.secondary_side_initial_tube_temperature.temperature.units: K
+- pdf_extracted.boundary_conditions.secondary_loop_inlet.name: hx_s_in
+- pdf_extracted.boundary_conditions.secondary_loop_inlet.velocity.value: 1.6
+- pdf_extracted.boundary_conditions.secondary_loop_inlet.velocity.units: m/s
+- pdf_extracted.boundary_conditions.secondary_loop_inlet.temperature.value: 824.8167
+- pdf_extracted.boundary_conditions.secondary_loop_inlet.temperature.units: K
+- pdf_extracted.boundary_conditions.secondary_loop_outlet.name: hx_s_out
+- pdf_extracted.boundary_conditions.secondary_loop_outlet.pressure.value: 100000.0
+- pdf_extracted.boundary_conditions.secondary_loop_outlet.pressure.units: Pa
+- pdf_extracted.boundary_conditions.secondary_loop_outlet.temperature.value: 866.4833
+- pdf_extracted.boundary_conditions.secondary_loop_outlet.temperature.units: K
+- pdf_extracted.boundary_conditions.primary_loop_reference.name: pipe_ref
+- pdf_extracted.boundary_conditions.primary_loop_reference.pressure.value: 123335.1
+- pdf_extracted.boundary_conditions.primary_loop_reference.pressure.units: Pa
+- pdf_extracted.boundary_conditions.primary_loop_reference.temperature.value: 908.15
+- pdf_extracted.boundary_conditions.primary_loop_reference.temperature.units: K
+- spreadsheet_extracted.file: MSRE_specifications.xlsx
+- spreadsheet_extracted.components.deowncomer.A: 0.1589
+- spreadsheet_extracted.components.deowncomer.Dh: 0.0508
+- spreadsheet_extracted.components.inlet plenum.A: 0.3932
+- spreadsheet_extracted.components.inlet plenum.Dh: 0.6997
+- spreadsheet_extracted.components.core.A: 0.3512
+- spreadsheet_extracted.components.core.Dh: 0.6687
+- spreadsheet_extracted.components.upper plenum.A: 0.3932
+- spreadsheet_extracted.components.upper plenum.Dh: 0.6997
+- spreadsheet_extracted.components.pipe1.A: 0.01267
+- spreadsheet_extracted.components.pipe1.Dh: 0.127
+- spreadsheet_extracted.components.pipe2.A: 0.01267
+- spreadsheet_extracted.components.pipe2.Dh: 0.127
+- spreadsheet_extracted.components.pipe3.A: 0.01267
+- spreadsheet_extracted.components.pipe3.Dh: 0.127
+- spreadsheet_extracted.components.HX primary side.A: 0.10183
+- spreadsheet_extracted.components.HX primary side.Dh: 0.020945
+- spreadsheet_extracted.components.HX secondary side.A: 0.027885
+- spreadsheet_extracted.components.HX secondary side.Dh: 0.010566
+- spreadsheet_extracted.components.pipe_ref.A: 0.01267
+- spreadsheet_extracted.components.pipe_ref.Dh: 0.127
+- spreadsheet_extracted.components.pipe4.A: 0.01267
+- spreadsheet_extracted.components.pipe4.Dh: 0.127
+- spreadsheet_extracted.components.pipe5.A: 0.01267
+- spreadsheet_extracted.components.pipe5.Dh: 0.127
+- spreadsheet_extracted.branches[0].name: downcomer_to_inlet_plenum
+- spreadsheet_extracted.branches[0].description: downcomer to inlet plenum
+- spreadsheet_extracted.branches[0].Area: 0.1155
+- spreadsheet_extracted.branches[1].name: inlet_plenum_to_core
+- spreadsheet_extracted.branches[1].description: inlet plenum to core
+- spreadsheet_extracted.branches[1].Area: 0.1155
+- spreadsheet_extracted.branches[2].name: core_to_upper_plenum
+- spreadsheet_extracted.branches[2].description: core to upper plenum
+- spreadsheet_extracted.branches[2].Area: 0.1155
+- spreadsheet_extracted.branches[3].name: upper_plenum_to_pipe1
+- spreadsheet_extracted.branches[3].description: upper plenum to pipe1
+- spreadsheet_extracted.branches[3].Area: 0.1155
+- spreadsheet_extracted.branches[4].name: pipe1_to_pipe2
+- spreadsheet_extracted.branches[4].description: pipe1 to pipe2
+- spreadsheet_extracted.branches[4].Area: 0.01292
+- spreadsheet_extracted.branches[5].name: pipe2_to_pipe3
+- spreadsheet_extracted.branches[5].description: pipe2 to pipe3
+- spreadsheet_extracted.branches[5].Area: 0.01292 (pump)
+- spreadsheet_extracted.branches[6].name: pipe3_to_HX_primary
+- spreadsheet_extracted.branches[6].description: pipe3 to HX primary
+- spreadsheet_extracted.branches[6].Area: 0.01267
+- spreadsheet_extracted.branches[7].name: HX_primary_to_pipe_ref_and_pipe4
+- spreadsheet_extracted.branches[7].description: HX primary to pipe_ref and pipe4
+- spreadsheet_extracted.branches[7].Area: 0.01267
+- spreadsheet_extracted.branches[8].name: pipe4_to_pipe5
+- spreadsheet_extracted.branches[8].description: pipe4 to pipe5
+- spreadsheet_extracted.branches[8].Area: 0.01267
+- spreadsheet_extracted.branches[9].name: pipe5_to_downcomer
+- spreadsheet_extracted.branches[9].description: pipe5 to downcomer
+- spreadsheet_extracted.branches[9].Area: 0.01267
+- spreadsheet_extracted.pump.K: 0.15 0.1
+- spreadsheet_extracted.pump.initial_P: 110000
+- spreadsheet_extracted.pump.initial_P_units: Pa
+- spreadsheet_extracted.pump.Head: 43909.58
+- spreadsheet_extracted.pump.Head_units: Pa
+- spreadsheet_extracted.pump.source: MSRE_specifications.xlsx
+- spreadsheet_extracted.hx_wall.HT_surface_area_density: 1000
+- spreadsheet_extracted.hx_wall.HT_surface_area_density_units: 1/m
+- spreadsheet_extracted.hx_wall.wall_geometry_type: Cylinder
+- spreadsheet_extracted.hx_wall.wall_thickness: 0.0010668
+- spreadsheet_extracted.hx_wall.wall_thickness_units: m
+- spreadsheet_extracted.hx_wall.radius_i: 0.0052832
+- spreadsheet_extracted.hx_wall.radius_i_units: m
+- spreadsheet_extracted.hx_wall.source: MSRE_specifications.xlsx
+- sam_mapping_hints.recommended_component_types.inlet_plenum: PBOneDFluidComponent or PBVolumeBranch (not enough info here to choose)
+- sam_mapping_hints.recommended_component_types.core: PBOneDFluidComponent (or PBCoreChannel if power/HS details exist elsewhere)
+- sam_mapping_hints.recommended_component_types.upper_plenum: PBOneDFluidComponent
+- sam_mapping_hints.recommended_component_types.pipe1: PBOneDFluidComponent
+- sam_mapping_hints.recommended_component_types.pipe2: PBOneDFluidComponent
+- sam_mapping_hints.recommended_component_types.pump: PBPump
+- sam_mapping_hints.recommended_component_types.pipe3: PBOneDFluidComponent
+- sam_mapping_hints.recommended_component_types.HX: PBHeatExchanger
+- sam_mapping_hints.recommended_component_types.pipe_ref: PBOneDFluidComponent (stub) + ReferenceBoundary
+- sam_mapping_hints.recommended_component_types.pipe4: PBOneDFluidComponent
+- sam_mapping_hints.recommended_component_types.pipe5: PBOneDFluidComponent
+- sam_mapping_hints.recommended_component_types.downcomer: PBOneDFluidComponent
+- sam_mapping_hints.junctions.two_way: PBSingleJunction
+- sam_mapping_hints.junctions.tee: PBBranch
+
+SPREADSHEET TABLE
+Sheet Sheet1:
+component,Area (m^2),Dh (m),Branches,Area,pump specification,Unnamed: 6,HX specifications,Unnamed: 8
+deowncomer,0.1589,0.0508,downcomer to inlet plenum,0.1155,K,0.15 0.1,Heat transfer surface area density ,1000
+inlet plenum,0.3932,0.6997,inlet plenum to core,0.1155,Intial P,110000,Type,Cylinder
+core,0.3512,0.6687,core to upper plenum,0.1155,Head,43909.58,Width of heat structure,0.0010668
+upper plenum,0.3932,0.6997,upper plenum to pipe1,0.1155,,,Radius,0.0052832
+pipe1,0.01267,0.127,pipe1 to pipe2,0.01292,,,,
+pipe2,0.01267,0.127,pipe2 to pipe3,0.01292 (pump),,,,
+pipe3,0.01267,0.127,pipe3 to HX primary,0.01267,,,,
+HX primary side,0.10183,0.020945,HX primary to pipe_ref and pipe4,0.01267,,,,
+HX secondary side,0.027885,0.010566,pipe4 to pipe5,0.01267,,,,
+pipe_ref,0.01267,0.127,pipe5 to downcomer,0.01267,,,,
+pipe4,0.01267,0.127,,,,,,
+pipe5,0.01267,0.127,,,,,,

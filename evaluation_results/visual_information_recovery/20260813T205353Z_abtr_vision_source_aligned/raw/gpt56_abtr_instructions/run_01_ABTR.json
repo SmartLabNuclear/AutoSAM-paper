@@ -1,0 +1,539 @@
+{
+  "timestamp": "2026-08-13T20:49:07.899670Z",
+  "run": 1,
+  "case": "ABTR",
+  "configuration": {
+    "vision_model": "gpt-5.6-sol",
+    "vision_endpoint": "responses",
+    "reasoning_effort": "medium",
+    "image_detail": "original",
+    "description_prompt": "Describe this image in detail.\n\nDiagram interpretation instructions:\n- Dashed or dotted lines are not physical geometries. They are SAM branch-link indicators showing that physical components are connected.\n- Circular dots denote boundary conditions.\n- Some component start or end coordinates are printed explicitly, while other start or end coordinates must be inferred from connected endpoints and the plotted geometry.\n- Identify every physical component, boundary condition, connection, and component start and end coordinate. For each inferred coordinate, state that it is inferred and explain which connected endpoint or plotted position establishes it.\n- Compute each physical component length from its start and end coordinates when the length is not printed.\n- Do not assign physical lengths, start points, or end points to the dashed or dotted branch-link indicators.",
+    "structuring_model": "gpt-4o-mini",
+    "structuring_temperature": 0
+  },
+  "image": "ABTR_case_pdf/test.png",
+  "image_sha256": "8dfc9c4118d68fa29293d897b866748ed783d845e49a9abe342011bb995bd0a5",
+  "image_dimensions": {
+    "width": 3141,
+    "height": 2081
+  },
+  "description_prompt": "Describe this image in detail.\n\nDiagram interpretation instructions:\n- Dashed or dotted lines are not physical geometries. They are SAM branch-link indicators showing that physical components are connected.\n- Circular dots denote boundary conditions.\n- Some component start or end coordinates are printed explicitly, while other start or end coordinates must be inferred from connected endpoints and the plotted geometry.\n- Identify every physical component, boundary condition, connection, and component start and end coordinate. For each inferred coordinate, state that it is inferred and explain which connected endpoint or plotted position establishes it.\n- Compute each physical component length from its start and end coordinates when the length is not printed.\n- Do not assign physical lengths, start points, or end points to the dashed or dotted branch-link indicators.",
+  "image_description": "## Overall layout\n\nThe figure is a **Y–Z plane** view. The horizontal axis is **Y**, and the vertical plotted coordinate is **Z**. Coordinates below are therefore written as **(Y, Z)**. The network consists of:\n\n- Two pipes: **Pipe2** upstream and **Pipe1** downstream\n- Five parallel channels: **CH1–CH5**\n- Two SAM branch connections: **Branch 2** at \\(Z=0.8\\) and **Branch 1** at \\(Z=0\\)\n- An **Inlet** boundary condition at \\((0,2.3)\\)\n- An **Outlet** boundary condition at \\((0,-0.6)\\)\n\nThe natural start-to-end direction is taken as flow from the inlet, through Pipe2 and the channels, then through Pipe1 to the outlet.\n\n## Physical components\n\n| Component | Start coordinate | End coordinate | Length |\n|---|---:|---:|---:|\n| **Pipe2** | \\((0,2.3)\\), explicitly printed at the inlet | \\((0,0.8)\\), inferred from its lower endpoint on Branch 2 | \\(2.3-0.8=\\mathbf{1.5}\\) |\n| **CH1** | \\((-1,0.8)\\), inferred from its upper endpoint on Branch 2 and its plotted position at \\(Y=-1\\) | \\((-1,0)\\), inferred from its lower endpoint on Branch 1 | \\(0.8-0=\\mathbf{0.8}\\) |\n| **CH2** | \\((-0.5,0.8)\\), inferred from its upper endpoint on Branch 2 and its midpoint position between \\(Y=-1\\) and \\(Y=0\\) | \\((-0.5,0)\\), inferred from its lower endpoint on Branch 1 | \\(\\mathbf{0.8}\\) |\n| **CH3** | \\((0,0.8)\\), inferred from its upper endpoint on Branch 2, coincident with Pipe2’s lower endpoint | \\((0,0)\\), inferred from its lower endpoint on Branch 1, coincident with Pipe1’s upper endpoint | \\(\\mathbf{0.8}\\) |\n| **CH4** | \\((0.5,0.8)\\), inferred from its upper endpoint on Branch 2 and its midpoint position between \\(Y=0\\) and \\(Y=1\\) | \\((0.5,0)\\), inferred from its lower endpoint on Branch 1 | \\(\\mathbf{0.8}\\) |\n| **CH5** | \\((1,0.8)\\), inferred from its upper endpoint on Branch 2 and the \\(Y=1\\) grid line | \\((1,0)\\), inferred from its lower endpoint on Branch 1 | \\(\\mathbf{0.8}\\) |\n| **Pipe1** | \\((0,0)\\), inferred from its upper endpoint on Branch 1 | \\((0,-0.6)\\), explicitly printed at the outlet | \\(0-(-0.6)=\\mathbf{0.6}\\) |\n\nAll components are straight and vertical in this projection, so their lengths are simply the absolute differences in their \\(Z\\) coordinates.\n\n## Boundary conditions\n\n- **Inlet:** black circular boundary-condition marker at **\\((0,2.3)\\)**. It is attached to the upper/start endpoint of Pipe2.\n- **Outlet:** black circular boundary-condition marker at **\\((0,-0.6)\\)**. It is attached to the lower/end endpoint of Pipe1.\n\n## Connections\n\n### Branch 2\n\nThe dotted horizontal line at **\\(Z=0.8\\)** is a **SAM branch-link indicator**, not a physical pipe or manifold. It connects:\n\n- Pipe2 end: \\((0,0.8)\\)\n- CH1 start: \\((-1,0.8)\\)\n- CH2 start: \\((-0.5,0.8)\\)\n- CH3 start: \\((0,0.8)\\)\n- CH4 start: \\((0.5,0.8)\\)\n- CH5 start: \\((1,0.8)\\)\n\nThus Pipe2 feeds the five parallel channels through Branch 2.\n\n### Branch 1\n\nThe dotted horizontal line at **\\(Z=0\\)** is also only a **SAM branch-link indicator**. It connects:\n\n- CH1 end: \\((-1,0)\\)\n- CH2 end: \\((-0.5,0)\\)\n- CH3 end: \\((0,0)\\)\n- CH4 end: \\((0.5,0)\\)\n- CH5 end: \\((1,0)\\)\n- Pipe1 start: \\((0,0)\\)\n\nThus the five channels discharge into Pipe1 through Branch 1.\n\nNo physical length, start point, or end point is assigned to either dotted branch-link indicator. The overall connection sequence is:\n\n**Inlet → Pipe2 → Branch 2 → CH1–CH5 in parallel → Branch 1 → Pipe1 → Outlet.**",
+  "vision_response_metadata": {
+    "id": "resp_02ea532d3967f115006a7e2da082a0819687c91c19bc627630",
+    "request_id": "req_863b665492e0483890cc3688462d87ad",
+    "created_at": 1786654112.0,
+    "resolved_model": "gpt-5.6-sol",
+    "status": "completed",
+    "incomplete_details": null,
+    "reasoning": {
+      "effort": "medium",
+      "generate_summary": null,
+      "summary": null,
+      "context": "all_turns",
+      "mode": "standard"
+    },
+    "usage": {
+      "input_tokens": 7997,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 7994
+      },
+      "output_tokens": 1597,
+      "output_tokens_details": {
+        "reasoning_tokens": 516
+      },
+      "total_tokens": 9594
+    }
+  },
+  "description_latency_seconds": 25.998830599999565,
+  "geometry_system_prompt": "You are AutoSAM's geometry-reasoning component.\nUse only the supplied image description. Extract every stated or inferable 2-D coordinate and derive the length of every straight component when its endpoints are available. Do not invent coordinates.\n\nReturn one JSON object with this structure:\n{\n  \"plane_axes\": [\"first axis\", \"second axis\"],\n  \"coordinates\": [{\"label\": \"point or endpoint\", \"value\": [number, number], \"basis\": \"explicit or inferred\"}],\n  \"components\": [{\"name\": \"component\", \"start\": [number, number] or null, \"end\": [number, number] or null, \"length\": number or null, \"unit\": \"m\", \"basis\": \"explicit or deduced\"}],\n  \"claims\": [{\"text\": \"atomic geometry claim\", \"supporting_description_excerpt\": \"short supporting excerpt\"}]\n}\n\nUse JSON only. Preserve the component names used in the description.",
+  "geometry_user_prompt": "The diagram uses the axes Y and Z, in that order.\n\nIMAGE DESCRIPTION:\n## Overall layout\n\nThe figure is a **Y–Z plane** view. The horizontal axis is **Y**, and the vertical plotted coordinate is **Z**. Coordinates below are therefore written as **(Y, Z)**. The network consists of:\n\n- Two pipes: **Pipe2** upstream and **Pipe1** downstream\n- Five parallel channels: **CH1–CH5**\n- Two SAM branch connections: **Branch 2** at \\(Z=0.8\\) and **Branch 1** at \\(Z=0\\)\n- An **Inlet** boundary condition at \\((0,2.3)\\)\n- An **Outlet** boundary condition at \\((0,-0.6)\\)\n\nThe natural start-to-end direction is taken as flow from the inlet, through Pipe2 and the channels, then through Pipe1 to the outlet.\n\n## Physical components\n\n| Component | Start coordinate | End coordinate | Length |\n|---|---:|---:|---:|\n| **Pipe2** | \\((0,2.3)\\), explicitly printed at the inlet | \\((0,0.8)\\), inferred from its lower endpoint on Branch 2 | \\(2.3-0.8=\\mathbf{1.5}\\) |\n| **CH1** | \\((-1,0.8)\\), inferred from its upper endpoint on Branch 2 and its plotted position at \\(Y=-1\\) | \\((-1,0)\\), inferred from its lower endpoint on Branch 1 | \\(0.8-0=\\mathbf{0.8}\\) |\n| **CH2** | \\((-0.5,0.8)\\), inferred from its upper endpoint on Branch 2 and its midpoint position between \\(Y=-1\\) and \\(Y=0\\) | \\((-0.5,0)\\), inferred from its lower endpoint on Branch 1 | \\(\\mathbf{0.8}\\) |\n| **CH3** | \\((0,0.8)\\), inferred from its upper endpoint on Branch 2, coincident with Pipe2’s lower endpoint | \\((0,0)\\), inferred from its lower endpoint on Branch 1, coincident with Pipe1’s upper endpoint | \\(\\mathbf{0.8}\\) |\n| **CH4** | \\((0.5,0.8)\\), inferred from its upper endpoint on Branch 2 and its midpoint position between \\(Y=0\\) and \\(Y=1\\) | \\((0.5,0)\\), inferred from its lower endpoint on Branch 1 | \\(\\mathbf{0.8}\\) |\n| **CH5** | \\((1,0.8)\\), inferred from its upper endpoint on Branch 2 and the \\(Y=1\\) grid line | \\((1,0)\\), inferred from its lower endpoint on Branch 1 | \\(\\mathbf{0.8}\\) |\n| **Pipe1** | \\((0,0)\\), inferred from its upper endpoint on Branch 1 | \\((0,-0.6)\\), explicitly printed at the outlet | \\(0-(-0.6)=\\mathbf{0.6}\\) |\n\nAll components are straight and vertical in this projection, so their lengths are simply the absolute differences in their \\(Z\\) coordinates.\n\n## Boundary conditions\n\n- **Inlet:** black circular boundary-condition marker at **\\((0,2.3)\\)**. It is attached to the upper/start endpoint of Pipe2.\n- **Outlet:** black circular boundary-condition marker at **\\((0,-0.6)\\)**. It is attached to the lower/end endpoint of Pipe1.\n\n## Connections\n\n### Branch 2\n\nThe dotted horizontal line at **\\(Z=0.8\\)** is a **SAM branch-link indicator**, not a physical pipe or manifold. It connects:\n\n- Pipe2 end: \\((0,0.8)\\)\n- CH1 start: \\((-1,0.8)\\)\n- CH2 start: \\((-0.5,0.8)\\)\n- CH3 start: \\((0,0.8)\\)\n- CH4 start: \\((0.5,0.8)\\)\n- CH5 start: \\((1,0.8)\\)\n\nThus Pipe2 feeds the five parallel channels through Branch 2.\n\n### Branch 1\n\nThe dotted horizontal line at **\\(Z=0\\)** is also only a **SAM branch-link indicator**. It connects:\n\n- CH1 end: \\((-1,0)\\)\n- CH2 end: \\((-0.5,0)\\)\n- CH3 end: \\((0,0)\\)\n- CH4 end: \\((0.5,0)\\)\n- CH5 end: \\((1,0)\\)\n- Pipe1 start: \\((0,0)\\)\n\nThus the five channels discharge into Pipe1 through Branch 1.\n\nNo physical length, start point, or end point is assigned to either dotted branch-link indicator. The overall connection sequence is:\n\n**Inlet → Pipe2 → Branch 2 → CH1–CH5 in parallel → Branch 1 → Pipe1 → Outlet.**",
+  "structured_response_text": "{\n  \"plane_axes\": [\"Y\", \"Z\"],\n  \"coordinates\": [\n    {\"label\": \"Inlet\", \"value\": [0, 2.3], \"basis\": \"explicit\"},\n    {\"label\": \"Outlet\", \"value\": [0, -0.6], \"basis\": \"explicit\"},\n    {\"label\": \"Branch 2 upper endpoint\", \"value\": [0, 0.8], \"basis\": \"inferred\"},\n    {\"label\": \"Branch 1 lower endpoint\", \"value\": [0, 0], \"basis\": \"inferred\"},\n    {\"label\": \"CH1 start\", \"value\": [-1, 0.8], \"basis\": \"inferred\"},\n    {\"label\": \"CH1 end\", \"value\": [-1, 0], \"basis\": \"inferred\"},\n    {\"label\": \"CH2 start\", \"value\": [-0.5, 0.8], \"basis\": \"inferred\"},\n    {\"label\": \"CH2 end\", \"value\": [-0.5, 0], \"basis\": \"inferred\"},\n    {\"label\": \"CH3 start\", \"value\": [0, 0.8], \"basis\": \"inferred\"},\n    {\"label\": \"CH3 end\", \"value\": [0, 0], \"basis\": \"inferred\"},\n    {\"label\": \"CH4 start\", \"value\": [0.5, 0.8], \"basis\": \"inferred\"},\n    {\"label\": \"CH4 end\", \"value\": [0.5, 0], \"basis\": \"inferred\"},\n    {\"label\": \"CH5 start\", \"value\": [1, 0.8], \"basis\": \"inferred\"},\n    {\"label\": \"CH5 end\", \"value\": [1, 0], \"basis\": \"inferred\"},\n    {\"label\": \"Pipe2 lower endpoint\", \"value\": [0, 0.8], \"basis\": \"inferred\"},\n    {\"label\": \"Pipe1 start\", \"value\": [0, 0], \"basis\": \"inferred\"}\n  ],\n  \"components\": [\n    {\"name\": \"Pipe2\", \"start\": [0, 2.3], \"end\": [0, 0.8], \"length\": 1.5, \"unit\": \"m\", \"basis\": \"explicit\"},\n    {\"name\": \"CH1\", \"start\": [-1, 0.8], \"end\": [-1, 0], \"length\": 0.8, \"unit\": \"m\", \"basis\": \"inferred\"},\n    {\"name\": \"CH2\", \"start\": [-0.5, 0.8], \"end\": [-0.5, 0], \"length\": 0.8, \"unit\": \"m\", \"basis\": \"inferred\"},\n    {\"name\": \"CH3\", \"start\": [0, 0.8], \"end\": [0, 0], \"length\": 0.8, \"unit\": \"m\", \"basis\": \"inferred\"},\n    {\"name\": \"CH4\", \"start\": [0.5, 0.8], \"end\": [0.5, 0], \"length\": 0.8, \"unit\": \"m\", \"basis\": \"inferred\"},\n    {\"name\": \"CH5\", \"start\": [1, 0.8], \"end\": [1, 0], \"length\": 0.8, \"unit\": \"m\", \"basis\": \"inferred\"},\n    {\"name\": \"Pipe1\", \"start\": [0, 0], \"end\": [0, -0.6], \"length\": 0.6, \"unit\": \"m\", \"basis\": \"inferred\"}\n  ],\n  \"claims\": [\n    {\"text\": \"The lengths of the components are derived from the differences in their Z coordinates.\", \"supporting_description_excerpt\": \"All components are straight and vertical in this projection, so their lengths are simply the absolute differences in their Z coordinates.\"}\n  ]\n}",
+  "parsed_geometry": {
+    "plane_axes": [
+      "Y",
+      "Z"
+    ],
+    "coordinates": [
+      {
+        "label": "Inlet",
+        "value": [
+          0,
+          2.3
+        ],
+        "basis": "explicit"
+      },
+      {
+        "label": "Outlet",
+        "value": [
+          0,
+          -0.6
+        ],
+        "basis": "explicit"
+      },
+      {
+        "label": "Branch 2 upper endpoint",
+        "value": [
+          0,
+          0.8
+        ],
+        "basis": "inferred"
+      },
+      {
+        "label": "Branch 1 lower endpoint",
+        "value": [
+          0,
+          0
+        ],
+        "basis": "inferred"
+      },
+      {
+        "label": "CH1 start",
+        "value": [
+          -1,
+          0.8
+        ],
+        "basis": "inferred"
+      },
+      {
+        "label": "CH1 end",
+        "value": [
+          -1,
+          0
+        ],
+        "basis": "inferred"
+      },
+      {
+        "label": "CH2 start",
+        "value": [
+          -0.5,
+          0.8
+        ],
+        "basis": "inferred"
+      },
+      {
+        "label": "CH2 end",
+        "value": [
+          -0.5,
+          0
+        ],
+        "basis": "inferred"
+      },
+      {
+        "label": "CH3 start",
+        "value": [
+          0,
+          0.8
+        ],
+        "basis": "inferred"
+      },
+      {
+        "label": "CH3 end",
+        "value": [
+          0,
+          0
+        ],
+        "basis": "inferred"
+      },
+      {
+        "label": "CH4 start",
+        "value": [
+          0.5,
+          0.8
+        ],
+        "basis": "inferred"
+      },
+      {
+        "label": "CH4 end",
+        "value": [
+          0.5,
+          0
+        ],
+        "basis": "inferred"
+      },
+      {
+        "label": "CH5 start",
+        "value": [
+          1,
+          0.8
+        ],
+        "basis": "inferred"
+      },
+      {
+        "label": "CH5 end",
+        "value": [
+          1,
+          0
+        ],
+        "basis": "inferred"
+      },
+      {
+        "label": "Pipe2 lower endpoint",
+        "value": [
+          0,
+          0.8
+        ],
+        "basis": "inferred"
+      },
+      {
+        "label": "Pipe1 start",
+        "value": [
+          0,
+          0
+        ],
+        "basis": "inferred"
+      }
+    ],
+    "components": [
+      {
+        "name": "Pipe2",
+        "start": [
+          0,
+          2.3
+        ],
+        "end": [
+          0,
+          0.8
+        ],
+        "length": 1.5,
+        "unit": "m",
+        "basis": "explicit"
+      },
+      {
+        "name": "CH1",
+        "start": [
+          -1,
+          0.8
+        ],
+        "end": [
+          -1,
+          0
+        ],
+        "length": 0.8,
+        "unit": "m",
+        "basis": "inferred"
+      },
+      {
+        "name": "CH2",
+        "start": [
+          -0.5,
+          0.8
+        ],
+        "end": [
+          -0.5,
+          0
+        ],
+        "length": 0.8,
+        "unit": "m",
+        "basis": "inferred"
+      },
+      {
+        "name": "CH3",
+        "start": [
+          0,
+          0.8
+        ],
+        "end": [
+          0,
+          0
+        ],
+        "length": 0.8,
+        "unit": "m",
+        "basis": "inferred"
+      },
+      {
+        "name": "CH4",
+        "start": [
+          0.5,
+          0.8
+        ],
+        "end": [
+          0.5,
+          0
+        ],
+        "length": 0.8,
+        "unit": "m",
+        "basis": "inferred"
+      },
+      {
+        "name": "CH5",
+        "start": [
+          1,
+          0.8
+        ],
+        "end": [
+          1,
+          0
+        ],
+        "length": 0.8,
+        "unit": "m",
+        "basis": "inferred"
+      },
+      {
+        "name": "Pipe1",
+        "start": [
+          0,
+          0
+        ],
+        "end": [
+          0,
+          -0.6
+        ],
+        "length": 0.6,
+        "unit": "m",
+        "basis": "inferred"
+      }
+    ],
+    "claims": [
+      {
+        "text": "The lengths of the components are derived from the differences in their Z coordinates.",
+        "supporting_description_excerpt": "All components are straight and vertical in this projection, so their lengths are simply the absolute differences in their Z coordinates."
+      }
+    ]
+  },
+  "parse_warning": null,
+  "structuring_response_metadata": {
+    "id": "chatcmpl-ECWeAbRpKbUlNYLIcNNNdZY2GjYLH",
+    "request_id": "req_392e7d170a2a45b483461f42a5fffa2f",
+    "created": 1786654138,
+    "resolved_model": "gpt-4o-mini-2024-07-18",
+    "system_fingerprint": "fp_c5ea001cd5",
+    "usage": {
+      "completion_tokens": 863,
+      "prompt_tokens": 1293,
+      "total_tokens": 2156,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  },
+  "structuring_latency_seconds": 9.883211899999878,
+  "fact_scores": [
+    {
+      "fact_id": "abtr_v01",
+      "kind": "coordinate",
+      "provenance": "explicit",
+      "expected": [
+        0.0,
+        2.3
+      ],
+      "matched_value": {
+        "label": "Inlet",
+        "value": [
+          0.0,
+          2.3
+        ]
+      },
+      "recovered": true,
+      "vir_item": 1.0
+    },
+    {
+      "fact_id": "abtr_v02",
+      "kind": "coordinate",
+      "provenance": "explicit",
+      "expected": [
+        0.0,
+        -0.6
+      ],
+      "matched_value": {
+        "label": "Outlet",
+        "value": [
+          0.0,
+          -0.6
+        ]
+      },
+      "recovered": true,
+      "vir_item": 1.0
+    },
+    {
+      "fact_id": "abtr_v03",
+      "kind": "coordinate",
+      "provenance": "inferred",
+      "expected": [
+        -1.0,
+        0.0
+      ],
+      "matched_value": null,
+      "recovered": false,
+      "vir_item": 0.0
+    },
+    {
+      "fact_id": "abtr_v04",
+      "kind": "coordinate",
+      "provenance": "inferred",
+      "expected": [
+        -0.5,
+        0.0
+      ],
+      "matched_value": null,
+      "recovered": false,
+      "vir_item": 0.0
+    },
+    {
+      "fact_id": "abtr_v05",
+      "kind": "coordinate",
+      "provenance": "inferred",
+      "expected": [
+        0.0,
+        0.0
+      ],
+      "matched_value": null,
+      "recovered": false,
+      "vir_item": 0.0
+    },
+    {
+      "fact_id": "abtr_v06",
+      "kind": "coordinate",
+      "provenance": "inferred",
+      "expected": [
+        0.5,
+        0.0
+      ],
+      "matched_value": null,
+      "recovered": false,
+      "vir_item": 0.0
+    },
+    {
+      "fact_id": "abtr_v07",
+      "kind": "coordinate",
+      "provenance": "inferred",
+      "expected": [
+        1.0,
+        0.0
+      ],
+      "matched_value": null,
+      "recovered": false,
+      "vir_item": 0.0
+    },
+    {
+      "fact_id": "abtr_v08",
+      "kind": "coordinate",
+      "provenance": "inferred",
+      "expected": [
+        0.0,
+        0.8
+      ],
+      "matched_value": null,
+      "recovered": false,
+      "vir_item": 0.0
+    },
+    {
+      "fact_id": "abtr_v09",
+      "kind": "length",
+      "provenance": "deduced",
+      "expected": 0.6,
+      "matched_value": 0.6,
+      "recovered": true,
+      "vir_item": 1.0
+    },
+    {
+      "fact_id": "abtr_v10",
+      "kind": "length",
+      "provenance": "deduced",
+      "expected": 1.5,
+      "matched_value": 1.5,
+      "recovered": true,
+      "vir_item": 1.0
+    },
+    {
+      "fact_id": "abtr_v11",
+      "kind": "length",
+      "provenance": "deduced",
+      "expected": 0.8,
+      "matched_value": 0.8,
+      "recovered": true,
+      "vir_item": 1.0
+    },
+    {
+      "fact_id": "abtr_v12",
+      "kind": "length",
+      "provenance": "deduced",
+      "expected": 0.8,
+      "matched_value": 0.8,
+      "recovered": true,
+      "vir_item": 1.0
+    },
+    {
+      "fact_id": "abtr_v13",
+      "kind": "length",
+      "provenance": "deduced",
+      "expected": 0.8,
+      "matched_value": 0.8,
+      "recovered": true,
+      "vir_item": 1.0
+    },
+    {
+      "fact_id": "abtr_v14",
+      "kind": "length",
+      "provenance": "deduced",
+      "expected": 0.8,
+      "matched_value": 0.8,
+      "recovered": true,
+      "vir_item": 1.0
+    },
+    {
+      "fact_id": "abtr_v15",
+      "kind": "length",
+      "provenance": "deduced",
+      "expected": 0.8,
+      "matched_value": 0.8,
+      "recovered": true,
+      "vir_item": 1.0
+    }
+  ],
+  "strict_scoring": {
+    "timestamp": "2026-08-13T20:49:07.920334Z",
+    "script": "evaluation/autosam_abtr_vision_evaluation_gpt56_sol_instructions.py",
+    "rule": "Coordinate labels require an exact normalized benchmark alias; substring matching is forbidden.",
+    "alias_map": {
+      "abtr_v01": [
+        "inlet"
+      ],
+      "abtr_v02": [
+        "outlet"
+      ],
+      "abtr_v03": [
+        "CH1",
+        "CH1 start",
+        "channel 1",
+        "channel 1 start"
+      ],
+      "abtr_v04": [
+        "CH2",
+        "CH2 start",
+        "channel 2",
+        "channel 2 start"
+      ],
+      "abtr_v05": [
+        "CH3",
+        "CH3 start",
+        "channel 3",
+        "channel 3 start"
+      ],
+      "abtr_v06": [
+        "CH4",
+        "CH4 start",
+        "channel 4",
+        "channel 4 start"
+      ],
+      "abtr_v07": [
+        "CH5",
+        "CH5 start",
+        "channel 5",
+        "channel 5 start"
+      ],
+      "abtr_v08": [
+        "Pipe2 start",
+        "Pipe2 bottom"
+      ]
+    }
+  }
+}

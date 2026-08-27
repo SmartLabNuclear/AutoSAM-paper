@@ -1,0 +1,38 @@
+{
+  "study_id": "autosam_component_ablation_gpt52",
+  "created_utc": "2026-08-15T21:27:12.650325+00:00",
+  "model_requested": "gpt-5.2",
+  "expected_resolved_model": "gpt-5.2-2025-12-11",
+  "runs": 3,
+  "conditions": [
+    "full_pipeline_existing",
+    "llm_only",
+    "no_image_processing",
+    "no_intermediate_file",
+    "no_validator",
+    "validator_repair"
+  ],
+  "script": "evaluation\\autosam_ablation_gpt52.py",
+  "script_sha256": "d3524b0a21d920b12cd5982aa619dc321fed9afb838f96e578bf0f40139ec257",
+  "config": "evaluation\\autosam_ablation_gpt52_config.json",
+  "config_sha256": "e5d8dc3ac1546f16b94a3793fb6705e089c28b8d6741af915fcdee7ebf3085c9",
+  "api_endpoint": "chat.completions",
+  "temperature": 1,
+  "notes": [
+    "Existing full-pipeline artifacts are not regenerated.",
+    "The validator ablation uses a disclosed deterministic connectivity defect.",
+    "The case-neutral evaluation prompt excludes case examples embedded in the application system prompt to prevent benchmark leakage."
+  ],
+  "inputs": {
+    "ABTR": {
+      "ABTR_case_pdf\\intermediate_ABTR.yaml": "095c9701e8e99503eacb3ac9233e9145fbe4e4ee72ff5d3421b8c05474690247",
+      "ABTR_case_pdf\\model_specifications.xlsx": "f06e5ab147a52bed5a83fc15aac75d2d3e6f54a7bc0631ce95cf91c9dae09868",
+      "ABTR_case_pdf\\ABTR_5channel_min_working.i": "ff9e67b15d7ca5623111e9df897258c9f7b67cb3142993748933397d3de1a87e"
+    },
+    "MSRE": {
+      "msre_pdf_noise\\msre_intermediate.yaml": "04287136cf0ee84376f52ad3a8c27f3fc6b1a227a6f858b9cb9d0de2c9cede87",
+      "msre_pdf_noise\\MSRE_specifications.xlsx": "259d5e30b7cf99616886142ad31112cc3fe7124f25b72c54b2853bf32c10eb7d",
+      "msre_pdf_noise\\sam_model_v1.i": "f4bba516e411fe1393098f8e08f19db0cc4d8a05acb8e654ba7d95b7b8822acd"
+    }
+  }
+}

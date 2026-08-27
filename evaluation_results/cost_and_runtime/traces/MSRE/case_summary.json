@@ -1,0 +1,198 @@
+{
+  "case": "MSRE",
+  "model_requested": "gpt-5.2",
+  "timestamp_utc": "2026-08-22T21:00:08.307906+00:00",
+  "source_manifest": [
+    {
+      "name": "MSRE_case.pdf",
+      "role": "case_source",
+      "source": "<AUTOSAM_ROOT>\\MSRE_PDF_CASE\\MSRE_case.pdf",
+      "sha256": "5ee5a20e1447ce06e32e92e1a49085935426bd256572facc1db3fd303f20bc1e",
+      "bytes": 200338
+    },
+    {
+      "name": "MSRE_specifications.xlsx",
+      "role": "case_source",
+      "source": "<AUTOSAM_ROOT>\\MSRE_PDF_CASE\\MSRE_specifications.xlsx",
+      "sha256": "259d5e30b7cf99616886142ad31112cc3fe7124f25b72c54b2853bf32c10eb7d",
+      "bytes": 10032
+    },
+    {
+      "name": "MSRE_system_layout.png",
+      "role": "case_source",
+      "source": "<AUTOSAM_ROOT>\\MSRE_PDF_CASE\\MSRE_system_layout.png",
+      "sha256": "b65a95888c08676312ecaa03ba1e21878284f1a42a402c5e9446a80fdf4cdca6",
+      "bytes": 805855
+    },
+    {
+      "name": "documents_library.json",
+      "role": "prebuilt_retrieval_cache",
+      "source": "<AUTOSAM_ROOT>\\MSRE_PDF_CASE\\documents_library.json",
+      "sha256": "71727b2a3773c496f05d19f7bd393b826e90ab370b09d46d0070b421eee369b2",
+      "bytes": 17713
+    },
+    {
+      "name": "processed_pdfs.txt",
+      "role": "prebuilt_retrieval_cache",
+      "source": "<AUTOSAM_ROOT>\\MSRE_PDF_CASE\\processed_pdfs.txt",
+      "sha256": "1f1144bec8beabead0a17aeb3553f83e9ab075110426fc0940d199fee427b323",
+      "bytes": 15
+    },
+    {
+      "name": "gpt_vector_store",
+      "role": "prebuilt_retrieval_cache",
+      "source": "<AUTOSAM_ROOT>\\MSRE_PDF_CASE\\gpt_vector_store",
+      "sha256": "6c6101f3974e0b70667babbdaebd03e62a9b4fa4b89159b47439c65cf4f4766a"
+    },
+    {
+      "name": "image_descriptions.json",
+      "role": "prebuilt_retrieval_cache",
+      "source": "<AUTOSAM_ROOT>\\MSRE_PDF_CASE\\image_descriptions.json",
+      "sha256": "0064f2fd369c02d19aa686093ceeb61b6cc5de70e8eec4a14d59112db350bf3a",
+      "bytes": 3457
+    }
+  ],
+  "model_initialization_seconds": 1.2443535999918822,
+  "stage_1_seconds": 182.53195429997868,
+  "stage_2_seconds": 86.21988060002332,
+  "end_to_end_seconds_excluding_initialization": 268.751834900002,
+  "end_to_end_seconds_including_initialization": 269.9961884999939,
+  "stage_1_tools": [
+    "CSVandEXCELFileReaderTool",
+    "ImageAnalysisTool",
+    "PDFProcessorTool",
+    "PDFProcessorTool",
+    "PDFProcessorTool",
+    "PDFProcessorTool",
+    "TextFileReaderTool",
+    "CSVandEXCELFileReaderTool",
+    "PythonREPLTool",
+    "PythonREPLTool"
+  ],
+  "stage_2_tools": [
+    "TextFileReaderTool",
+    "IntermediateFileToInputFileTool",
+    "PythonREPLTool",
+    "SAMInputFileValidatorTool"
+  ],
+  "validator_calls": 1,
+  "intermediate_file": {
+    "path": "<AUTOSAM_ROOT>\\case_generation_cost_runs\\20260822T205533Z_gpt-52\\MSRE\\workdir\\intermediate_msre.yaml",
+    "sha256": "653ff272e7350741bb5305f8e118d457794e609ec4c074c30329cc44a13cf68f",
+    "bytes": 19017
+  },
+  "input_file": {
+    "path": "<AUTOSAM_ROOT>\\case_generation_cost_runs\\20260822T205533Z_gpt-52\\MSRE\\workdir\\sam_model_generated.i",
+    "sha256": "97c0cd631ade7d81d6739e5f9c32109a450f6fb615f1c3439c21cca83cbc8866",
+    "bytes": 9898
+  },
+  "stage_1_usage": {
+    "elapsed_seconds": 182.53195429997868,
+    "legacy_callback": {
+      "prompt_tokens": 543098,
+      "completion_tokens": 14745,
+      "total_tokens": 557843,
+      "successful_requests": 10,
+      "total_cost_usd_library_estimate": 0.0081219
+    },
+    "usage_metadata_by_model": {
+      "gpt-5.2-2025-12-11": {
+        "output_token_details": {
+          "reasoning": 0,
+          "audio": 0
+        },
+        "input_token_details": {
+          "audio": 0,
+          "cache_read": 479616
+        },
+        "total_tokens": 506322,
+        "input_tokens": 492964,
+        "output_tokens": 13358
+      },
+      "gpt-4o-mini-2024-07-18": {
+        "output_token_details": {
+          "reasoning": 0,
+          "audio": 0
+        },
+        "input_token_details": {
+          "audio": 0,
+          "cache_read": 3072
+        },
+        "total_tokens": 51521,
+        "input_tokens": 50134,
+        "output_tokens": 1387
+      }
+    },
+    "direct_api_calls": [
+      {
+        "kind": "direct_chat_or_vision",
+        "model": "gpt-5.2-2025-12-11",
+        "elapsed_seconds": 14.718097699980717,
+        "usage": {
+          "completion_tokens": 915,
+          "prompt_tokens": 2469,
+          "total_tokens": 3384,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 0
+          }
+        },
+        "timestamp_utc": "2026-08-22T20:56:05.223965+00:00"
+      },
+      {
+        "kind": "embedding",
+        "model": "text-embedding-ada-002",
+        "elapsed_seconds": 0.42471709998790175,
+        "usage": {
+          "prompt_tokens": 921,
+          "total_tokens": 921
+        },
+        "timestamp_utc": "2026-08-22T20:56:05.827509+00:00"
+      },
+      {
+        "kind": "embedding",
+        "model": "text-embedding-ada-002",
+        "elapsed_seconds": 0.3043755999824498,
+        "usage": {
+          "prompt_tokens": 26,
+          "total_tokens": 26
+        },
+        "timestamp_utc": "2026-08-22T20:56:06.185996+00:00"
+      }
+    ],
+    "timestamp_utc": "2026-08-22T20:58:42.082348+00:00"
+  },
+  "stage_2_usage": {
+    "elapsed_seconds": 86.21988060002332,
+    "legacy_callback": {
+      "prompt_tokens": 363394,
+      "completion_tokens": 7576,
+      "total_tokens": 370970,
+      "successful_requests": 4,
+      "total_cost_usd_library_estimate": 0.0
+    },
+    "usage_metadata_by_model": {
+      "gpt-5.2-2025-12-11": {
+        "output_token_details": {
+          "reasoning": 0,
+          "audio": 0
+        },
+        "input_token_details": {
+          "audio": 0,
+          "cache_read": 269568
+        },
+        "total_tokens": 370970,
+        "input_tokens": 363394,
+        "output_tokens": 7576
+      }
+    },
+    "direct_api_calls": [],
+    "timestamp_utc": "2026-08-22T21:00:08.305950+00:00"
+  }
+}

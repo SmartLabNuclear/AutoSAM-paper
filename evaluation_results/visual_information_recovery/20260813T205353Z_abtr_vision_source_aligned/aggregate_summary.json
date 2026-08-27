@@ -1,0 +1,53 @@
+[
+  {
+    "configuration": "gpt4o_baseline",
+    "runs": 3,
+    "ViR_mean": 0.15555555555555556,
+    "ViR_sd": 0.03849001794597506,
+    "run_values": [
+      0.2,
+      0.13333333333333333,
+      0.13333333333333333
+    ],
+    "recovered_counts": [
+      3,
+      2,
+      2
+    ],
+    "required_per_run": 15
+  },
+  {
+    "configuration": "gpt56_abtr_instructions",
+    "runs": 3,
+    "ViR_mean": 1.0,
+    "ViR_sd": 0.0,
+    "run_values": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "recovered_counts": [
+      15,
+      15,
+      15
+    ],
+    "required_per_run": 15
+  },
+  {
+    "configuration": "gpt56_generic",
+    "runs": 3,
+    "ViR_mean": 0.3333333333333333,
+    "ViR_sd": 0.06666666666666668,
+    "run_values": [
+      0.26666666666666666,
+      0.3333333333333333,
+      0.4
+    ],
+    "recovered_counts": [
+      4,
+      5,
+      6
+    ],
+    "required_per_run": 15
+  }
+]

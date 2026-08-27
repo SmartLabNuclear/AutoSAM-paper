@@ -1,0 +1,98 @@
+{
+  "condition": "no_intermediate_file",
+  "case": "ABTR",
+  "run": 3,
+  "resolved_model": "gpt-5.2-2025-12-11",
+  "latency_seconds": 33.50226829999883,
+  "required_block_fraction": 0.2222222222222222,
+  "required_blocks_present": [
+    "functions",
+    "globalparams"
+  ],
+  "required_blocks_missing": [
+    "components",
+    "eos",
+    "executioner",
+    "materialproperties",
+    "outputs",
+    "postprocessors",
+    "preconditioning"
+  ],
+  "component_recall": 0.0,
+  "missing_components": [
+    "branch1",
+    "branch2",
+    "ch1",
+    "ch2",
+    "ch3",
+    "ch4",
+    "ch5",
+    "inlet",
+    "outlet",
+    "pipe1",
+    "pipe2",
+    "reactor"
+  ],
+  "parameter_precision": 0.0,
+  "parameter_recall": 0.0,
+  "parameter_f1": 0.0,
+  "parameter_tp": 0,
+  "parameter_fp": 1,
+  "parameter_fn": 118,
+  "parameter_mismatches": [
+    {
+      "path": "globalparams",
+      "key": "gravity",
+      "expected": "0 0 -9.8",
+      "actual": "0 0 0"
+    }
+  ],
+  "topology_recall": 0.0,
+  "topology_precision": 0.0,
+  "missing_topology_edges": [
+    [
+      "ch1(out)",
+      "pipe1(in)"
+    ],
+    [
+      "ch2(out)",
+      "pipe1(in)"
+    ],
+    [
+      "ch3(out)",
+      "pipe1(in)"
+    ],
+    [
+      "ch4(out)",
+      "pipe1(in)"
+    ],
+    [
+      "ch5(out)",
+      "pipe1(in)"
+    ],
+    [
+      "pipe2(out)",
+      "ch1(in)"
+    ],
+    [
+      "pipe2(out)",
+      "ch2(in)"
+    ],
+    [
+      "pipe2(out)",
+      "ch3(in)"
+    ],
+    [
+      "pipe2(out)",
+      "ch4(in)"
+    ],
+    [
+      "pipe2(out)",
+      "ch5(in)"
+    ]
+  ],
+  "extra_topology_edges": [],
+  "explicit_missing_markers": 35,
+  "assumption_markers": 1,
+  "characters": 9069
+}

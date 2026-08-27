@@ -1,0 +1,551 @@
+{
+  "case": {
+    "name": "MSRE_SAM_intermediate_representation",
+    "source_files": [
+      "pdf_extracted.*",
+      "MSRE_specifications.xlsx (Sheet1)"
+    ],
+    "scope_note": "Intermediate representation only. Geometry, coordinates, boundary attachment locations, nodalization (n_elems), and component lengths/volumes are not provided and are not inferred."
+  },
+  "known_parameters": {
+    "global_initial_conditions": {
+      "pressure_Pa": 100000.0,
+      "temperature_K": 908.15,
+      "velocity_m_per_s": 0.001,
+      "gravity_m_per_s2": [0.0, -9.8, 0.0]
+    },
+    "boundary_conditions": {
+      "secondary_loop_inlet": {
+        "name": "hx_s_in",
+        "velocity_m_per_s": 1.6,
+        "temperature_K": 824.8167
+      },
+      "secondary_loop_outlet": {
+        "name": "hx_s_out",
+        "pressure_Pa": 100000.0,
+        "temperature_K": 866.4833
+      },
+      "primary_loop_reference": {
+        "name": "pipe_ref",
+        "pressure_Pa": 123335.1,
+        "temperature_K": 908.15
+      }
+    },
+    "initial_conditions_component_specific": {
+      "pump": {
+        "internal_pressure_Pa": 110000.0
+      },
+      "secondary_side_initial_tube_temperature": {
+        "components": ["hx_tube1", "hx_tube2", "hx_tube3"],
+        "temperature_K": 824.8167
+      }
+    },
+    "fluids": {
+      "fuel_salt": {
+        "density": {
+          "correlation": "2553.3 - 0.562*T",
+          "units": "kg/m^3",
+          "T_range_K": [750.0, 1200.0],
+          "citation": "Table 1"
+        },
+        "viscosity": {
+          "correlation": "8.4e-5 * exp(2390/T)",
+          "units": "Pa*s",
+          "T_range_K": [750.0, 1200.0],
+          "citation": "Table 1"
+        },
+        "thermal_conductivity": {
+          "value": 1.0,
+          "units": "W/(m*K)",
+          "citation": "Table 1"
+        },
+        "specific_heat": {
+          "value": 2009.66,
+          "units": "J/(kg*K)",
+          "citation": "Table 1"
+        }
+      },
+      "coolant_salt_hx": {
+        "description": "LiF-BeF2 0.66-0.34",
+        "density": {
+          "correlation": "2146.3 - 0.488*T",
+          "units": "kg/m^3",
+          "citation": "Table 2"
+        },
+        "viscosity": {
+          "correlation": "1.16e-4 * exp(3755/T)",
+          "units": "Pa*s",
+          "citation": "Table 2"
+        },
+        "thermal_conductivity": {
+          "value": 1.1,
+          "units": "W/(m*K)",
+          "citation": "Table 2"
+        },
+        "specific_heat": {
+          "value": 2390.0,
+          "units": "J/(kg*K)",
+          "citation": "Table 2"
+        }
+      }
+    },
+    "solids": {
+      "hx_wall_alloy": {
+        "material": "Hastelloy N",
+        "density": {
+          "value": 8860.0,
+          "units": "kg/m^3",
+          "citation": "Table 3"
+        },
+        "thermal_conductivity": {
+          "value": 23.6,
+          "units": "W/(m*K)",
+          "citation": "Table 3"
+        },
+        "specific_heat": {
+          "value": 578.0,
+          "units": "J/(kg*K)",
+          "citation": "Table 3"
+        }
+      }
+    },
+    "pump_specification": {
+      "K": "0.15 0.1",
+      "initial_P_Pa": 110000.0,
+      "Head_Pa": 43909.58,
+      "source": "MSRE_specifications.xlsx"
+    },
+    "hx_wall_specification": {
+      "HT_surface_area_density_per_m": 1000.0,
+      "wall_geometry_type": "Cylinder",
+      "wall_thickness_m": 0.0010668,
+      "radius_i_m": 0.0052832,
+      "source": "MSRE_specifications.xlsx"
+    }
+  },
+  "components": [
+    {
+      "name": "deowncomer",
+      "type_hint": "PBOneDFluidComponent",
+      "from_spreadsheet": {
+        "Area_m2": 0.1589,
+        "Dh_m": 0.0508
+      },
+      "ports_expected": ["in", "out"],
+      "fluid_suggestion": "fuel_salt",
+      "notes": "Component name spelled 'deowncomer' per spreadsheet."
+    },
+    {
+      "name": "inlet plenum",
+      "type_hint": "PBOneDFluidComponent or PBVolumeBranch",
+      "from_spreadsheet": {
+        "Area_m2": 0.3932,
+        "Dh_m": 0.6997
+      },
+      "ports_expected": ["in", "out"],
+      "fluid_suggestion": "fuel_salt"
+    },
+    {
+      "name": "core",
+      "type_hint": "PBOneDFluidComponent (or PBCoreChannel if power/HS details exist elsewhere)",
+      "from_spreadsheet": {
+        "Area_m2": 0.3512,
+        "Dh_m": 0.6687
+      },
+      "ports_expected": ["in", "out"],
+      "fluid_suggestion": "fuel_salt"
+    },
+    {
+      "name": "upper plenum",
+      "type_hint": "PBOneDFluidComponent",
+      "from_spreadsheet": {
+        "Area_m2": 0.3932,
+        "Dh_m": 0.6997
+      },
+      "ports_expected": ["in", "out"],
+      "fluid_suggestion": "fuel_salt"
+    },
+    {
+      "name": "pipe1",
+      "type_hint": "PBOneDFluidComponent",
+      "from_spreadsheet": {
+        "Area_m2": 0.01267,
+        "Dh_m": 0.127
+      },
+      "ports_expected": ["in", "out"],
+      "fluid_suggestion": "fuel_salt"
+    },
+    {
+      "name": "pipe2",
+      "type_hint": "PBOneDFluidComponent",
+      "from_spreadsheet": {
+        "Area_m2": 0.01267,
+        "Dh_m": 0.127
+      },
+      "ports_expected": ["in", "out"],
+      "fluid_suggestion": "fuel_salt",
+      "notes": "Spreadsheet branch annotation indicates pump is on 'pipe2_to_pipe3'."
+    },
+    {
+      "name": "pump",
+      "type_hint": "PBPump",
+      "from_spreadsheet": {
+        "K": "0.15 0.1",
+        "Head_Pa": 43909.58,
+        "initial_P_Pa": 110000.0
+      },
+      "ports_expected": ["in", "out"],
+      "fluid_suggestion": "fuel_salt",
+      "initial_condition": {
+        "internal_pressure_Pa": 110000.0
+      },
+      "notes": "Pump placement implied by branch name 'pipe2_to_pipe3' annotated '(pump)'; exact modeling choice (inline component vs loss/junction) not specified."
+    },
+    {
+      "name": "pipe3",
+      "type_hint": "PBOneDFluidComponent",
+      "from_spreadsheet": {
+        "Area_m2": 0.01267,
+        "Dh_m": 0.127
+      },
+      "ports_expected": ["in", "out"],
+      "fluid_suggestion": "fuel_salt"
+    },
+    {
+      "name": "HX primary side",
+      "type_hint": "PBHeatExchanger (primary fluid side)",
+      "from_spreadsheet": {
+        "Area_m2": 0.10183,
+        "Dh_m": 0.020945
+      },
+      "ports_expected": ["pri_in", "pri_out", "sec_in", "sec_out"],
+      "fluid_suggestion_primary": "fuel_salt",
+      "fluid_suggestion_secondary": "coolant_salt_hx",
+      "notes": "Spreadsheet provides both HX primary and HX secondary 'components'; SAM may represent as one PBHeatExchanger with two flow paths, plus heat structure."
+    },
+    {
+      "name": "HX secondary side",
+      "type_hint": "PBHeatExchanger (secondary fluid side) or separate PBOneDFluidComponent coupled to HX wall",
+      "from_spreadsheet": {
+        "Area_m2": 0.027885,
+        "Dh_m": 0.010566
+      },
+      "ports_expected": ["in", "out"],
+      "fluid_suggestion": "coolant_salt_hx"
+    },
+    {
+      "name": "pipe_ref",
+      "type_hint": "PBOneDFluidComponent (stub) + ReferenceBoundary",
+      "from_spreadsheet": {
+        "Area_m2": 0.01267,
+        "Dh_m": 0.127
+      },
+      "ports_expected": ["in", "out"],
+      "fluid_suggestion": "fuel_salt",
+      "boundary_condition": {
+        "reference_pressure_Pa": 123335.1,
+        "reference_temperature_K": 908.15
+      },
+      "notes": "Branch name indicates a split 'HX primary to pipe_ref and pipe4' requiring a tee/branch junction; actual implementation details not provided."
+    },
+    {
+      "name": "pipe4",
+      "type_hint": "PBOneDFluidComponent",
+      "from_spreadsheet": {
+        "Area_m2": 0.01267,
+        "Dh_m": 0.127
+      },
+      "ports_expected": ["in", "out"],
+      "fluid_suggestion": "fuel_salt"
+    },
+    {
+      "name": "pipe5",
+      "type_hint": "PBOneDFluidComponent",
+      "from_spreadsheet": {
+        "Area_m2": 0.01267,
+        "Dh_m": 0.127
+      },
+      "ports_expected": ["in", "out"],
+      "fluid_suggestion": "fuel_salt"
+    },
+    {
+      "name": "hx_wall",
+      "type_hint": "HeatStructure (implied by hx_wall specifications)",
+      "known_properties": {
+        "HT_surface_area_density_per_m": 1000.0,
+        "geometry_type": "Cylinder",
+        "wall_thickness_m": 0.0010668,
+        "radius_i_m": 0.0052832,
+        "solid_material": "hx_wall_alloy (Hastelloy N)"
+      },
+      "ports_expected": ["side_primary", "side_secondary"],
+      "notes": "Heat structure length/axial segmentation not provided; only area density and radii/thickness are given."
+    },
+    {
+      "name": "hx_s_in",
+      "type_hint": "InletBoundary (secondary loop)",
+      "known_bc": {
+        "velocity_m_per_s": 1.6,
+        "temperature_K": 824.8167
+      },
+      "ports_expected": ["out"],
+      "fluid_suggestion": "coolant_salt_hx"
+    },
+    {
+      "name": "hx_s_out",
+      "type_hint": "OutletBoundary (secondary loop)",
+      "known_bc": {
+        "pressure_Pa": 100000.0,
+        "temperature_K": 866.4833
+      },
+      "ports_expected": ["in"],
+      "fluid_suggestion": "coolant_salt_hx"
+    },
+    {
+      "name": "hx_tube1",
+      "type_hint": "HeatStructureSegment (secondary side initial tube temperature target)",
+      "known_initial_temperature_K": 824.8167,
+      "notes": "Mentioned only as a target for initial tube temperature; not otherwise defined."
+    },
+    {
+      "name": "hx_tube2",
+      "type_hint": "HeatStructureSegment (secondary side initial tube temperature target)",
+      "known_initial_temperature_K": 824.8167,
+      "notes": "Mentioned only as a target for initial tube temperature; not otherwise defined."
+    },
+    {
+      "name": "hx_tube3",
+      "type_hint": "HeatStructureSegment (secondary side initial tube temperature target)",
+      "known_initial_temperature_K": 824.8167,
+      "notes": "Mentioned only as a target for initial tube temperature; not otherwise defined."
+    }
+  ],
+  "topology": {
+    "notes": [
+      "Connections are represented only where branch names explicitly imply adjacency. No geometric direction, elevation, or boundary attachment location is inferred.",
+      "Primary loop includes an implied split after 'HX primary side' per branch 'HX_primary_to_pipe_ref_and_pipe4'. This requires a tee/branch junction and clear port mapping not provided."
+    ],
+    "primary_loop_branches": [
+      {
+        "name": "downcomer_to_inlet_plenum",
+        "description": "downcomer to inlet plenum",
+        "Area_m2": 0.1155,
+        "connects": {
+          "from_component": "deowncomer",
+          "to_component": "inlet plenum"
+        },
+        "junction_type_hint": "PBSingleJunction (two-way)"
+      },
+      {
+        "name": "inlet_plenum_to_core",
+        "description": "inlet plenum to core",
+        "Area_m2": 0.1155,
+        "connects": {
+          "from_component": "inlet plenum",
+          "to_component": "core"
+        },
+        "junction_type_hint": "PBSingleJunction (two-way)"
+      },
+      {
+        "name": "core_to_upper_plenum",
+        "description": "core to upper plenum",
+        "Area_m2": 0.1155,
+        "connects": {
+          "from_component": "core",
+          "to_component": "upper plenum"
+        },
+        "junction_type_hint": "PBSingleJunction (two-way)"
+      },
+      {
+        "name": "upper_plenum_to_pipe1",
+        "description": "upper plenum to pipe1",
+        "Area_m2": 0.1155,
+        "connects": {
+          "from_component": "upper plenum",
+          "to_component": "pipe1"
+        },
+        "junction_type_hint": "PBSingleJunction (two-way)"
+      },
+      {
+        "name": "pipe1_to_pipe2",
+        "description": "pipe1 to pipe2",
+        "Area_m2": 0.01292,
+        "connects": {
+          "from_component": "pipe1",
+          "to_component": "pipe2"
+        },
+        "junction_type_hint": "PBSingleJunction (two-way)"
+      },
+      {
+        "name": "pipe2_to_pipe3",
+        "description": "pipe2 to pipe3",
+        "Area_m2": 0.01292,
+        "annotation": "pump",
+        "connects": {
+          "from_component": "pipe2",
+          "to_component": "pipe3"
+        },
+        "inline_component": "pump",
+        "junction_type_hint": "PBSingleJunction (two-way) with inline PBPump (placement unspecified)"
+      },
+      {
+        "name": "pipe3_to_HX_primary",
+        "description": "pipe3 to HX primary",
+        "Area_m2": 0.01267,
+        "connects": {
+          "from_component": "pipe3",
+          "to_component": "HX primary side"
+        },
+        "junction_type_hint": "PBSingleJunction (two-way)"
+      },
+      {
+        "name": "HX_primary_to_pipe_ref_and_pipe4",
+        "description": "HX primary to pipe_ref and pipe4",
+        "Area_m2": 0.01267,
+        "connects": {
+          "from_component": "HX primary side",
+          "to_components": ["pipe_ref", "pipe4"]
+        },
+        "junction_type_hint": "PBBranch (tee)",
+        "status": "NOT_CLOSED",
+        "reason": "No flow split ratios or explicit port mapping provided; unclear whether pipe_ref is a dead-end reference BC or an in-line stub to a reference boundary."
+      },
+      {
+        "name": "pipe4_to_pipe5",
+        "description": "pipe4 to pipe5",
+        "Area_m2": 0.01267,
+        "connects": {
+          "from_component": "pipe4",
+          "to_component": "pipe5"
+        },
+        "junction_type_hint": "PBSingleJunction (two-way)"
+      },
+      {
+        "name": "pipe5_to_downcomer",
+        "description": "pipe5 to downcomer",
+        "Area_m2": 0.01267,
+        "connects": {
+          "from_component": "pipe5",
+          "to_component": "deowncomer"
+        },
+        "junction_type_hint": "PBSingleJunction (two-way)"
+      }
+    ],
+    "secondary_loop_connections": [
+      {
+        "name": "secondary_inlet_to_HX_secondary",
+        "connects": {
+          "from_component": "hx_s_in",
+          "to_component": "HX secondary side"
+        },
+        "status": "MISSING_ATTACHMENT",
+        "reason": "No explicit statement that hx_s_in attaches to HX secondary side inlet; implied by naming only, but attachment is not provided as a fact."
+      },
+      {
+        "name": "HX_secondary_to_secondary_outlet",
+        "connects": {
+          "from_component": "HX secondary side",
+          "to_component": "hx_s_out"
+        },
+        "status": "MISSING_ATTACHMENT",
+        "reason": "No explicit statement that HX secondary side outlet attaches to hx_s_out; implied by naming only, but attachment is not provided as a fact."
+      }
+    ],
+    "thermal_coupling": [
+      {
+        "name": "HX_primary_to_hx_wall",
+        "connects": {
+          "from_component": "HX primary side",
+          "to_component": "hx_wall"
+        },
+        "status": "MISSING_COUPLING_DETAILS",
+        "reason": "No statement of heat-transfer model, coupling surface selection, or axial mapping."
+      },
+      {
+        "name": "HX_secondary_to_hx_wall",
+        "connects": {
+          "from_component": "HX secondary side",
+          "to_component": "hx_wall"
+        },
+        "status": "MISSING_COUPLING_DETAILS",
+        "reason": "No statement of heat-transfer model, coupling surface selection, or axial mapping."
+      }
+    ]
+  },
+  "missing_parameters": [
+    {
+      "component": "ALL fluid components",
+      "parameter": "length / volume / axial discretization (n_elems)",
+      "reason": "No lengths, volumes, or nodalization counts provided; required for PBOneDFluidComponent/PBVolumeBranch setup."
+    },
+    {
+      "component": "ALL junctions/branches",
+      "parameter": "loss coefficients (K) and/or junction form-loss model inputs",
+      "reason": "Only pump K is provided; junction/branch loss data not provided."
+    },
+    {
+      "component": "pump",
+      "parameter": "pump curve definition (head vs flow) and operating control/input signal",
+      "reason": "Only a single Head value and a 'K' entry are provided; SAM pump typically needs curve or explicit formulation and sign convention."
+    },
+    {
+      "component": "HX primary side / HX secondary side / hx_wall",
+      "parameter": "heat exchanger length and number of axial segments; mapping between fluid cells and wall segments",
+      "reason": "Only surface area density and tube radii/thickness are provided; axial discretization and effective area distribution not specified."
+    },
+    {
+      "component": "HX primary side / HX secondary side",
+      "parameter": "heat transfer correlations (primary and secondary side) and roughness",
+      "reason": "No Nusselt/friction/roughness/correlation selections provided."
+    },
+    {
+      "component": "fuel_salt and coolant_salt_hx",
+      "parameter": "equation of state / compressibility model beyond rho(T), and reference pressure dependence",
+      "reason": "Only density correlations vs T are given; SAM typically requires an EOS package choice and potentially cp(T), k(T) forms (constants given) and validity ranges."
+    },
+    {
+      "component": "secondary loop boundaries (hx_s_in, hx_s_out)",
+      "parameter": "explicit attachment points (which component port is connected)",
+      "reason": "Names suggest connection to HX secondary side, but no explicit topology facts state the connections."
+    },
+    {
+      "component": "pipe_ref",
+      "parameter": "definition of ReferenceBoundary implementation and whether pipe_ref is a stub with a boundary at its end or a dedicated boundary component",
+      "reason": "Facts give 'primary_loop_reference.name: pipe_ref' and pressure/temperature, but not how it is applied in the network."
+    },
+    {
+      "component": "primary loop split at HX_primary_to_pipe_ref_and_pipe4",
+      "parameter": "flow split ratio / hydraulic closure for tee",
+      "reason": "A tee is implied; no split ratio or downstream boundary condition on pipe_ref is fully defined."
+    },
+    {
+      "component": "core",
+      "parameter": "power/heat source or coupling to neutronics/heat structures",
+      "reason": "No core power, heat deposition, or heat structure data provided."
+    },
+    {
+      "component": "hx_tube1, hx_tube2, hx_tube3",
+      "parameter": "existence/definition of these heat structures and their relation to hx_wall",
+      "reason": "Only referenced for initial temperature assignment; no geometry, materials, or coupling given."
+    }
+  ],
+  "assumptions": [
+    "No geometry, elevations, or boundary attachment locations are assumed beyond adjacency implied by explicitly listed branch names.",
+    "Component names are preserved exactly as supplied (including spaces and spelling such as 'deowncomer').",
+    "Where a component type is ambiguous (e.g., 'inlet plenum' could be PBOneDFluidComponent or PBVolumeBranch), only the provided hint is recorded and no selection is made.",
+    "The 'pipe2_to_pipe3' branch annotation '(pump)' is treated as an indication that the pump is located between pipe2 and pipe3, but the exact SAM implementation (inline pump component vs junction loss) is not assumed.",
+    "The presence of both 'HX primary side' and 'HX secondary side' spreadsheet rows is recorded as two components, while noting that SAM may combine them into a single PBHeatExchanger; no consolidation is performed here."
+  ],
+  "human_review_questions": [
+    "Provide component lengths (or volumes) and axial discretization (n_elems) for each 1-D component: deowncomer, inlet plenum, core, upper plenum, pipe1-5, pipe_ref, HX primary side, HX secondary side.",
+    "Confirm the intended SAM component types for: inlet plenum (PBOneDFluidComponent vs PBVolumeBranch), core (PBOneDFluidComponent vs PBCoreChannel), HX representation (single PBHeatExchanger vs separate coupled flow paths).",
+    "Define the exact topology at 'HX_primary_to_pipe_ref_and_pipe4': Is pipe_ref a parallel bypass, an instrumentation stub with negligible flow, or a boundary condition location? Provide split ratio or hydraulic resistance to make the tee well-posed.",
+    "Specify how the primary loop reference condition (pipe_ref pressure/temperature) is applied in SAM: boundary component type, attachment port, and whether it fixes pressure only or both pressure and temperature.",
+    "Confirm secondary loop connectivity: does hx_s_in connect to HX secondary side inlet and hx_s_out to HX secondary side outlet? If yes, specify the exact ports.",
+    "Provide heat exchanger thermal coupling details: total effective heat transfer area (or confirm using area density), axial segmentation, and heat transfer correlations for both sides.",
+    "Clarify pump model inputs: pump curve (head vs flow), rotational speed/control logic, sign convention, and whether the provided Head (43909.58 Pa) is at nominal flow or a constant head rise.",
+    "Provide junction/branch loss coefficients for all non-pump junctions and any form-losses associated with plenums, tees, and transitions.",
+    "If the core has heat generation, provide total power, axial distribution, and any heat structure/fuel element modeling needed.",
+    "Explain what hx_tube1/hx_tube2/hx_tube3 represent (separate tube banks/segments?) and provide their definitions and coupling to the HX fluids/wall."
+  ]
+}

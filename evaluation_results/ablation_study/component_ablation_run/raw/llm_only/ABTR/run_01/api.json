@@ -1,0 +1,66 @@
+{
+  "request": {
+    "model": "gpt-5.2",
+    "temperature": 1,
+    "json_mode": false,
+    "system": "You are a helpful general-purpose language model. You have no retrieval system, image-processing tool, validator, or intermediate-file workflow. Complete the user's task using only the detailed prompt.",
+    "user": "Generate a complete SAM `.i` input deck for the ABTR case.\n\nCondition: llm_only.\nUse the facts below exactly and preserve canonical component names. Do not claim to have used tools that are unavailable in this condition. Mark any unavailable required value as `# MISSING: <field>` rather than guessing. Explicitly comment any engineering assumption. Ensure every component port is connected to another component or a boundary condition.\n\nCOMPLETE CASE SPECIFICATION (all values needed by the baseline are supplied):\n- globalparams: global_init_p=1.0e5; global_init_v=2.0; global_init_t=628.15; gravity=0 0 -9.8\n- eos/eos: type=PBSodiumEquationOfState\n- materialproperties/fuel-mat: type=SolidMaterialProps; k=16.0; cp=191.67; rho=1.4583e4\n- materialproperties/gap-mat: type=SolidMaterialProps; k=64.0; cp=1272.0; rho=865.0\n- materialproperties/clad-mat: type=SolidMaterialProps; k=26.0; cp=638.0; rho=7.646e3\n- components/reactor: type=ReactorPower\n- components/pipe2: type=PBOneDFluidComponent; eos=eos; position=0 0 2.3; orientation=0 0 -1; length=1.5; n_elems=4; a=0.44934; dh=2.972e-3; f=0.02\n- components/ch1: type=PBCoreChannel; eos=eos; position=0 -1 0.8; orientation=0 0 -1; length=0.8; n_elems=4; a=4.9237e-3; dh=2.972e-3; f=0.022; ht_surface_area_density=1107.8; n_heatstruct=3; width_of_hs=0.003015 0.000465 0.00052; elem_number_of_hs=2 1 1; material_hs=fuel-mat gap-mat clad-mat; power_fraction=0.02248 0.0 0.0\n- components/ch2: type=PBCoreChannel; eos=eos; position=0 -0.5 0.8; orientation=0 0 -1; length=0.8; n_elems=4; a=0.11323; dh=2.972e-3; f=0.022; ht_surface_area_density=1107.8; n_heatstruct=3; width_of_hs=0.003015 0.000465 0.00052; elem_number_of_hs=2 1 1; material_hs=fuel-mat gap-mat clad-mat; power_fraction=0.41924 0.0 0.0\n- components/ch3: type=PBCoreChannel; eos=eos; position=0 0 0.8; orientation=0 0 -1; length=0.8; n_elems=4; a=0.029539; dh=2.972e-3; f=0.022; ht_surface_area_density=1107.8; n_heatstruct=3; width_of_hs=0.003015 0.000465 0.00052; elem_number_of_hs=2 1 1; material_hs=fuel-mat gap-mat clad-mat; power_fraction=0.09852 0.0 0.0\n- components/ch4: type=PBCoreChannel; eos=eos; position=0 0.5 0.8; orientation=0 0 -1; length=0.8; n_elems=4; a=0.14769; dh=2.972e-3; f=0.022; ht_surface_area_density=1107.8; n_heatstruct=3; width_of_hs=0.003015 0.000465 0.00052; elem_number_of_hs=2 1 1; material_hs=fuel-mat gap-mat clad-mat; power_fraction=0.43116 0.0 0.0\n- components/ch5: type=PBCoreChannel; eos=eos; position=0 1 0.8; orientation=0 0 -1; length=0.8; n_elems=4; a=0.153955129; dh=2.972e-3; f=0.04; ht_surface_area_density=2013.6; n_heatstruct=2; width_of_hs=0.0063234 0.0007026; elem_number_of_hs=2 1; material_hs=fuel-mat clad-mat; power_fraction=0.0286 0.0\n- components/pipe1: type=PBOneDFluidComponent; eos=eos; position=0 0 0; orientation=0 0 -1; length=0.6; n_elems=2; a=0.44934; dh=2.972e-3; f=0.02\n- components/branch2: type=PBBranch; eos=eos; inputs=Pipe2(out); outputs=CH1(in) CH2(in) CH3(in) CH4(in) CH5(in); area=0.44934; k=0 0 0 0 0 0\n- components/branch1: type=PBBranch; eos=eos; inputs=CH1(out) CH2(out) CH3(out) CH4(out) CH5(out); outputs=Pipe1(in); area=0.44934; k=0.1 0.5 1.96 2.16 4.5 3500\n- components/inlet: type=PBTDJ; input=Pipe2(in); eos=eos; v_bc=3.25; t_bc=628.15\n- components/outlet: type=PBTDV; input=Pipe1(out); eos=eos; p_bc=1.0e5; t_bc=628.15\n- executioner: type=Steady\n- executioner/quadrature: type=TRAP\n\nReturn only the complete input deck, without Markdown fences or explanatory text."
+  },
+  "response": {
+    "id": "chatcmpl-EDGCHySir9iFvgReCVYMZctxImch0",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "[GlobalParams]\n  global_init_p = 1.0e5\n  global_init_v = 2.0\n  global_init_t = 628.15\n  gravity = '0 0 -9.8'\n[]\n\n[eos]\n  [eos]\n    type = PBSodiumEquationOfState\n  []\n[]\n\n[MaterialProperties]\n  [fuel-mat]\n    type = SolidMaterialProps\n    k = 16.0\n    cp = 191.67\n    rho = 1.4583e4\n  []\n  [gap-mat]\n    type = SolidMaterialProps\n    k = 64.0\n    cp = 1272.0\n    rho = 865.0\n  []\n  [clad-mat]\n    type = SolidMaterialProps\n    k = 26.0\n    cp = 638.0\n    rho = 7.646e3\n  []\n[]\n\n[Components]\n  [reactor]\n    type = ReactorPower\n    # Engineering assumption: reactor power is distributed to channels via their power_fraction;\n    # this component does not require explicit port connections in this model.\n    # MISSING: reactor power specification (e.g., total_power / power history) if required by this component\n  []\n\n  [pipe2]\n    type = PBOneDFluidComponent\n    eos = eos\n    position = '0 0 2.3'\n    orientation = '0 0 -1'\n    length = 1.5\n    n_elems = 4\n    a = 0.44934\n    dh = 2.972e-3\n    f = 0.02\n  []\n\n  [ch1]\n    type = PBCoreChannel\n    eos = eos\n    position = '0 -1 0.8'\n    orientation = '0 0 -1'\n    length = 0.8\n    n_elems = 4\n    a = 4.9237e-3\n    dh = 2.972e-3\n    f = 0.022\n    ht_surface_area_density = 1107.8\n    n_heatstruct = 3\n    width_of_hs = '0.003015 0.000465 0.00052'\n    elem_number_of_hs = '2 1 1'\n    material_hs = 'fuel-mat gap-mat clad-mat'\n    power_fraction = '0.02248 0.0 0.0'\n  []\n\n  [ch2]\n    type = PBCoreChannel\n    eos = eos\n    position = '0 -0.5 0.8'\n    orientation = '0 0 -1'\n    length = 0.8\n    n_elems = 4\n    a = 0.11323\n    dh = 2.972e-3\n    f = 0.022\n    ht_surface_area_density = 1107.8\n    n_heatstruct = 3\n    width_of_hs = '0.003015 0.000465 0.00052'\n    elem_number_of_hs = '2 1 1'\n    material_hs = 'fuel-mat gap-mat clad-mat'\n    power_fraction = '0.41924 0.0 0.0'\n  []\n\n  [ch3]\n    type = PBCoreChannel\n    eos = eos\n    position = '0 0 0.8'\n    orientation = '0 0 -1'\n    length = 0.8\n    n_elems = 4\n    a = 0.029539\n    dh = 2.972e-3\n    f = 0.022\n    ht_surface_area_density = 1107.8\n    n_heatstruct = 3\n    width_of_hs = '0.003015 0.000465 0.00052'\n    elem_number_of_hs = '2 1 1'\n    material_hs = 'fuel-mat gap-mat clad-mat'\n    power_fraction = '0.09852 0.0 0.0'\n  []\n\n  [ch4]\n    type = PBCoreChannel\n    eos = eos\n    position = '0 0.5 0.8'\n    orientation = '0 0 -1'\n    length = 0.8\n    n_elems = 4\n    a = 0.14769\n    dh = 2.972e-3\n    f = 0.022\n    ht_surface_area_density = 1107.8\n    n_heatstruct = 3\n    width_of_hs = '0.003015 0.000465 0.00052'\n    elem_number_of_hs = '2 1 1'\n    material_hs = 'fuel-mat gap-mat clad-mat'\n    power_fraction = '0.43116 0.0 0.0'\n  []\n\n  [ch5]\n    type = PBCoreChannel\n    eos = eos\n    position = '0 1 0.8'\n    orientation = '0 0 -1'\n    length = 0.8\n    n_elems = 4\n    a = 0.153955129\n    dh = 2.972e-3\n    f = 0.04\n    ht_surface_area_density = 2013.6\n    n_heatstruct = 2\n    width_of_hs = '0.0063234 0.0007026'\n    elem_number_of_hs = '2 1'\n    material_hs = 'fuel-mat clad-mat'\n    power_fraction = '0.0286 0.0'\n  []\n\n  [pipe1]\n    type = PBOneDFluidComponent\n    eos = eos\n    position = '0 0 0'\n    orientation = '0 0 -1'\n    length = 0.6\n    n_elems = 2\n    a = 0.44934\n    dh = 2.972e-3\n    f = 0.02\n  []\n\n  [branch2]\n    type = PBBranch\n    eos = eos\n    inputs = 'Pipe2(out)'\n    outputs = 'CH1(in) CH2(in) CH3(in) CH4(in) CH5(in)'\n    area = 0.44934\n    k = '0 0 0 0 0 0'\n  []\n\n  [branch1]\n    type = PBBranch\n    eos = eos\n    inputs = 'CH1(out) CH2(out) CH3(out) CH4(out) CH5(out)'\n    outputs = 'Pipe1(in)'\n    area = 0.44934\n    k = '0.1 0.5 1.96 2.16 4.5 3500'\n  []\n\n  [inlet]\n    type = PBTDJ\n    input = 'Pipe2(in)'\n    eos = eos\n    v_bc = 3.25\n    t_bc = 628.15\n  []\n\n  [outlet]\n    type = PBTDV\n    input = 'Pipe1(out)'\n    eos = eos\n    p_bc = 1.0e5\n    t_bc = 628.15\n  []\n[]\n\n[Executioner]\n  type = Steady\n\n  [quadrature]\n    type = TRAP\n  []\n[]",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": [],
+          "audio": null,
+          "function_call": null,
+          "tool_calls": null
+        }
+      }
+    ],
+    "created": 1786829233,
+    "model": "gpt-5.2-2025-12-11",
+    "object": "chat.completion",
+    "service_tier": "default",
+    "system_fingerprint": null,
+    "usage": {
+      "completion_tokens": 1597,
+      "prompt_tokens": 1415,
+      "total_tokens": 3012,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1280
+      }
+    }
+  },
+  "resolved_model": "gpt-5.2-2025-12-11",
+  "latency_seconds": 14.828576600004453,
+  "usage": {
+    "completion_tokens": 1597,
+    "prompt_tokens": 1415,
+    "total_tokens": 3012,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": 0
+    },
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cached_tokens": 1280
+    }
+  },
+  "timestamp_utc": "2026-08-15T21:27:27.616276+00:00"
+}

@@ -1,0 +1,213 @@
+## Generated SAM input file: `sam_model_generated.i`
+
+Saved to:  
+`<AUTOSAM_ROOT>\case_generation_cost_runs\20260822T202329Z_gpt-52\Pipe\workdir\sam_model_generated.i`
+
+```ini
+# ============================================================================
+# SAM Input File: Pipe test case (PBPipe)
+# Source-grounded from: intermediate_pipe.yaml -> Pipe_regression_test.csv
+# Purpose: Steady-state forced-flow in a 1 m sodium pipe with a thin wall.
+# Measured/checked outputs: Tin, Tout, average wall temperature, inlet/outlet energy.
+# IMPORTANT UNRESOLVED ITEMS (documented in intermediate):
+#   - No heating magnitude is provided (no qs_wall and no volumetric heat_source).
+#     Therefore this model is an *adiabatic* pipe with no internal heat source.
+#     (This preserves the explicitly stated outer-wall adiabatic BC but cannot
+#      reproduce any 'heated pipe' behavior without additional data.)
+#   - Component placement (position/orientation) not provided; set to a simple
+#     horizontal pipe along +z with default gravity.
+# ============================================================================
+
+[GlobalParams]
+  # From intermediate_pipe.yaml initial_conditions.global
+  global_init_P = 1.0e5          # Pa (0.1 MPa)
+  global_init_V = 1.0            # m/s
+  global_init_T = 628.15         # K
+
+  # Not specified in sources; use common SAM defaults
+  gravity = '0 0 -9.8'           # ASSUMPTION A1
+  scaling_factor_var = '1 1e-3 1e-6'  # ASSUMPTION: typical PB scaling
+  Tsolid_sf = 1e-3               # ASSUMPTION: typical solid temperature scaling
+[]
+
+[EOS]
+  [sodium_linearized]
+    # From intermediate_pipe.yaml fluids[0].equation_of_state
+    type  = PTConstantEOS
+    p_0   = 1.0e5        # Pa (reference pressure)
+    rho_0 = 865.51       # kg/m^3
+    beta  = 2.7524e-4    # 1/K
+    cp    = 1272.0       # J/kg-K
+    h_0   = 7.9898e5     # J/kg
+    T_0   = 628.15       # K
+    mu    = 2.6216e-4    # Pa-s
+    k     = 72.0         # W/m-K
+  []
+[]
+
+[Functions]
+  # No time/space-dependent functions required for this steady-state case.
+[]
+
+[MaterialProperties]
+  [pipe_wall]
+    # From intermediate_pipe.yaml solids[0]
+    type = SolidMaterialProps
+    rho  = 5000.0        # kg/m^3
+    k    = 20.0          # W/m-K
+    Cp   = 300.0         # J/kg-K
+  []
+[]
+
+[Components]
+  [pipe1]
+    # From intermediate_pipe.yaml components[0]
+    type = PBPipe
+    eos  = sodium_linearized
+
+    # Geometry
+    A      = 3.14e-4     # m^2
+    Dh     = 0.02        # m
+    length = 1.0         # m
+    n_elems = 20         # axial elements
+
+    # Placement: not provided in sources
+    position    = '0 0 0'   # ASSUMPTION: simple origin start
+    orientation = '0 0 1'   # ASSUMPTION: along +z
+
+    # Closures (user-specified constants)
+    f  = 0.01            # friction factor
+    Hw = 1.0e4           # W/m^2-K (interpreted as PBPipe Hw)
+
+    # Heated perimeter provided in CSV as "Heated perimeter"
+    Ph = 0.062831853     # m
+
+    # Wall / heat structure
+    hs_type = plate                 # ASSUMPTION: PBPipe default; no cylinder radius_i given
+    dim_wall = 2                    # wall modeled in 2-D per intermediate
+    wall_thickness = 0.001          # m
+    n_wall_elems = '2'              # 2 radial elements (vector expected)
+    material_wall = 'pipe_wall'
+
+    # Wall IC: not explicitly provided; using global_init_T (documented gap)
+    Twall_init = 628.15             # K (ASSUMPTION per missing_parameters)
+
+    # Outer wall boundary condition
+    HS_BC_type = Adiabatic          # explicitly stated in narrative
+
+    # Heating inputs: NOT PROVIDED (kept unset)
+    # qs_wall = (null in sources)
+    # heat_source = (null in sources)
+  []
+
+  [inlet]
+    type = PBTDJ
+    input = 'pipe1(in)'
+    eos   = sodium_linearized
+    v_bc  = 1.0
+    T_bc  = 628.15
+  []
+
+  [outlet]
+    type = PBTDV
+    input = 'pipe1(out)'
+    eos   = sodium_linearized
+    p_bc  = 1.0e5
+    # T_bc not provided; omit
+  []
+[]
+
+[Preconditioning]
+  active = 'SMP_PJFNK'
+  [SMP_PJFNK]
+    type = SMP
+    full = true
+    solve_type = 'PJFNK'
+    petsc_options_iname = '-pc_type'
+    petsc_options_value = 'lu'
+  []
+[]
+
+[Postprocessors]
+  # Requested outputs from intermediate_pipe.yaml
+  [pipe_inlet_temperature]
+    type = ComponentBoundaryVariableValue
+    input = pipe1(in)
+    variable = temperature
+  []
+
+  [pipe_outlet_temperature]
+    type = ComponentBoundaryVariableValue
+    input = pipe1(out)
+    variable = temperature
+  []
+
+  [inlet_energy]
+    type = ComponentFluxRate
+    component_name = pipe1
+    eos = sodium_linearized
+    type = Energy
+    flux_position = Inlet
+  []
+
+  [outlet_energy]
+    type = ComponentFluxRate
+    component_name = pipe1
+    eos = sodium_linearized
+    type = Energy
+    flux_position = Outlet
+  []
+
+  [wall_average_temperature]
+    # Average solid temperature over the PBPipe wall blocks.
+    # Block naming is SAM-generated; for PBPipe it is typically 'pipe1:solid'.
+    # If this name differs in your SAM build, update 'block' accordingly.
+    type = HeatStructureElementAverage
+    variable = T_solid
+    block = 'pipe1:solid'
+    no_warning = true   # ASSUMPTION: suppress multi-block warnings if wall is split
+  []
+[]
+
+[Executioner]
+  # From intermediate_pipe.yaml: steady state
+  type = Steady
+
+  # Solver settings not specified; use common robust defaults
+  nl_rel_tol = 1e-9     # ASSUMPTION
+  nl_abs_tol = 1e-7     # ASSUMPTION
+  nl_max_its = 30       # ASSUMPTION
+  l_tol = 1e-5          # ASSUMPTION
+  l_max_its = 200       # ASSUMPTION
+
+  [Quadrature]
+    type = TRAP
+    order = FIRST
+  []
+[]
+
+[Outputs]
+  perf_graph = true
+  print_linear_residuals = false
+
+  [console]
+    type = Console
+    execute_scalars_on = 'none'
+  []
+
+  [csv]
+    type = CSV
+  []
+
+  [out_displaced]
+    type = Exodus
+    use_displaced = true
+    execute_on = 'initial timestep_end'
+    sequence = false
+  []
+[]
+```
+
+## Validation result (SAMInputFileValidatorTool)
+- All required blocks **found**: `GlobalParams`, `Functions`, `EOS`, `MaterialProperties`, `Components`, `Preconditioning`, `Postprocessors`, `Executioner`, `Outputs`.
+- No validator-reported connectivity/block-structure errors after adding the required empty `[Functions]` block.

@@ -1,0 +1,250 @@
+source:
+  pdf: ABTR_case.pdf
+  notes:
+  - Values below were extracted via PDFProcessorTool calls; some items were not found
+    in extracted text and are left as null/unknown.
+  - Geometry positions/orientations provided by user (from test.png interpretation).
+coordinate_system:
+  plane: YZ
+  x: 0
+  y_positive: right
+  z_positive: up
+  gravity: null
+eos:
+  coolant: sodium
+  sam_eos_type: null
+  parameters: null
+materials:
+  fuel-mat:
+    k_W_mK: 16.0
+    Cp_J_kgK: 191.67
+    rho_kg_m3: 14583.0
+  gap-mat:
+    k_W_mK: 64.0
+    Cp_J_kgK: 1272.0
+    rho_kg_m3: 865.0
+  clad-mat:
+    k_W_mK: null
+    Cp_J_kgK: null
+    rho_kg_m3: null
+  ss-mat:
+    k_W_mK: null
+    Cp_J_kgK: null
+    rho_kg_m3: null
+network:
+  components:
+    Pipe2:
+      type: PBOneDFluidComponent (or PBPipe)
+      position:
+      - 0.0
+      - 0.0
+      - 2.3
+      orientation:
+      - 0.0
+      - 0.0
+      - -1.0
+      length_m: 1.5
+      A_m2: 0.44934
+      Dh_m: 0.002972
+    CH1:
+      type: PBCoreChannel (or PBOneDFluidComponent)
+      position:
+      - 0.0
+      - -1.0
+      - 0.8
+      orientation:
+      - 0.0
+      - 0.0
+      - -1.0
+      length_m: 0.8
+      A_m2: 0.0049237
+      Dh_m: 0.002972
+      heat_structure:
+        n_heatstruct: 3
+        names:
+        - fuel
+        - gap
+        - clad
+        width_of_hs_m:
+        - 0.003015
+        - 0.000465
+        - 0.00052
+        elem_number_of_hs: null
+        material_hs:
+        - fuel-mat
+        - gap-mat
+        - clad-mat
+    CH2:
+      type: PBCoreChannel (or PBOneDFluidComponent)
+      position:
+      - 0.0
+      - -0.5
+      - 0.8
+      orientation:
+      - 0.0
+      - 0.0
+      - -1.0
+      length_m: 0.8
+      A_m2: 0.11323
+      Dh_m: 0.002972
+      heat_structure:
+        n_heatstruct: 3
+        names:
+        - fuel
+        - gap
+        - clad
+        width_of_hs_m:
+        - 0.003015
+        - 0.000465
+        - 0.00052
+        elem_number_of_hs: null
+        material_hs:
+        - fuel-mat
+        - gap-mat
+        - clad-mat
+    CH3:
+      type: PBCoreChannel (or PBOneDFluidComponent)
+      position:
+      - 0.0
+      - 0.0
+      - 0.8
+      orientation:
+      - 0.0
+      - 0.0
+      - -1.0
+      length_m: 0.8
+      A_m2: 0.029539
+      Dh_m: 0.002972
+      heat_structure:
+        n_heatstruct: 3
+        names:
+        - fuel
+        - gap
+        - clad
+        width_of_hs_m:
+        - 0.003015
+        - 0.000465
+        - 0.00052
+        elem_number_of_hs: null
+        material_hs:
+        - fuel-mat
+        - gap-mat
+        - clad-mat
+    CH4:
+      type: PBCoreChannel (or PBOneDFluidComponent)
+      position:
+      - 0.0
+      - 0.5
+      - 0.8
+      orientation:
+      - 0.0
+      - 0.0
+      - -1.0
+      length_m: 0.8
+      A_m2: 0.14769
+      Dh_m: 0.002972
+      heat_structure:
+        n_heatstruct: 3
+        names:
+        - fuel
+        - gap
+        - clad
+        width_of_hs_m:
+        - 0.003015
+        - 0.000465
+        - 0.00052
+        elem_number_of_hs: null
+        material_hs:
+        - fuel-mat
+        - gap-mat
+        - clad-mat
+    CH5:
+      type: PBCoreChannel (or PBOneDFluidComponent)
+      position:
+      - 0.0
+      - 1.0
+      - 0.8
+      orientation:
+      - 0.0
+      - 0.0
+      - -1.0
+      length_m: 0.8
+      A_m2: 0.153955129
+      Dh_m: 0.002972
+      heat_structure:
+        n_heatstruct: 2
+        names:
+        - fuel
+        - clad
+        width_of_hs_m:
+        - 0.0063234
+        - 0.0007026
+        elem_number_of_hs: null
+        material_hs:
+        - fuel-mat
+        - clad-mat
+    Pipe1:
+      type: PBOneDFluidComponent (or PBPipe)
+      position:
+      - 0.0
+      - 0.0
+      - 0.0
+      orientation:
+      - 0.0
+      - 0.0
+      - -1.0
+      length_m: 0.6
+      A_m2: 0.44934
+      Dh_m: 0.002972
+  junctions:
+    Branch2:
+      type: PBBranch
+      connectivity:
+        inputs:
+        - Pipe2(out)
+        outputs:
+        - CH1(in)
+        - CH2(in)
+        - CH3(in)
+        - CH4(in)
+        - CH5(in)
+      Area_m2: null
+      K: null
+    Branch1:
+      type: PBBranch
+      connectivity:
+        inputs:
+        - CH1(out)
+        - CH2(out)
+        - CH3(out)
+        - CH4(out)
+        - CH5(out)
+        outputs:
+        - Pipe1(in)
+      Area_m2: null
+      K: null
+boundary_conditions:
+  inlet:
+    location:
+    - 0.0
+    - 0.0
+    - 2.3
+    target: Pipe2(in)
+    sam_type: PBTDJ
+    velocity_m_s: 3.25
+    temperature_K: 628.15
+    mass_flow_kg_s: null
+  outlet:
+    location:
+    - 0.0
+    - 0.0
+    - -0.6
+    target: Pipe1(out)
+    sam_type: PBTDV
+    pressure_Pa: 100000.0
+    temperature_K: 628.15
+initial_conditions:
+  global_init_P_Pa: 100000.0
+  global_init_V_m_s: 2.0
+  global_init_T_K: 628.15
+  solid_init_T_K: 628.15

@@ -1,0 +1,1300 @@
+Saved intermediate YAML to:
+
+- `<AUTOSAM_ROOT>\case_generation_cost_runs\20260822T203716Z_gpt-52\ABTR\workdir\intermediate_abtr.yaml`
+
+Below is the complete, source-grounded YAML content (also exactly what was saved).
+
+```yaml
+assumptions:
+- Gravity is (0 0 -9.8) m/s^2 unless overridden.
+- Sodium fluid properties are provided by a built-in EOS (PBSodiumEquationOfState).
+- Core channels are vertical with orientation (0 0 1) following ABTR_case.pdf statement
+  that channels are vertically oriented along +z.
+- Branch components are modeled as PBBranch (0-D junction) with negligible volume;
+  ABTR_case.pdf does not specify volume/center other than branch area.
+- Heat structures in core channels are modeled as cylinder-type equivalent for rod
+  bundles; not explicitly stated.
+boundary_conditions:
+  inlet:
+    component_type: PBTDJ or TDJ (text says TDV but specifies velocity+temperature)
+    location: pipe1(in)
+    note: ABTR_case.pdf p.2 calls it TDV but assigns velocity+temperature; in SAM
+      this corresponds to PBTDJ.
+    pressure_bc:
+      source: null
+      units: Pa
+      value: null
+    temperature_bc:
+      source:
+        file: ABTR_case.pdf
+        page: 2
+      units: K
+      value: 628.15
+    velocity_bc:
+      source:
+        file: ABTR_case.pdf
+        page: 2
+      units: m/s
+      value: 3.25
+  outlet:
+    component_type: PBTDV
+    location: pipe2(out)
+    note: If flow exits domain, T_bc may be unused, but it is stated.
+    pressure_bc:
+      source:
+        file: ABTR_case.pdf
+        page: 2
+      units: Pa
+      value: 100000.0
+    temperature_bc:
+      source:
+        file: ABTR_case.pdf
+        page: 2
+      units: K
+      value: 628.15
+case_id: ABTR_SAM_test_case_intermediate
+components:
+  fluid_components:
+    CH1:
+      geometry:
+        A:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+            table: Table 1
+          units: m^2
+          value: 0.0049237
+        Dh:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+            table: Table 1
+          units: m
+          value: 0.002972
+        length:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+            table: Table 1
+          units: m
+          value: 0.8
+        n_elems:
+          source:
+            file: ABTR_case.pdf
+            note: each core channel modeled using 20 axial fluid elements
+            page: 2
+          units: count
+          value: 20
+      heat_structure:
+        elem_number_of_hs:
+          note: Page 3 states reference channels use 5/1/1.
+          source:
+            file: ABTR_case.pdf
+            note: 5,1,1 elements for fuel,gap,clad layers
+            page: 3
+          units: count
+          value:
+          - 5
+          - 1
+          - 1
+        fuel_type:
+          note: Not explicitly stated; assumed rod bundle equivalent.
+          source: null
+          value: cylinder
+        material_hs:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+            table: Table 2
+          value:
+          - fuel-mat
+          - gap-mat
+          - clad-mat
+        n_heatstruct:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+            table: Table 2
+          units: count
+          value: 3
+        width_of_hs:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+            table: Table 2
+          units: m
+          value:
+          - 0.003015
+          - 0.000465
+          - 0.00052
+      power_fraction:
+        source:
+          column: ' power fraction'
+          file: model_specifications.xlsx
+          row: 0
+          sheet: Sheet1
+        units: '-'
+        value: 0.02248
+      role: peak-power inner-core subassembly with fresh fuel
+      thermal_hydraulics:
+        HT_surface_area_density:
+          source:
+            column: heat transfer area density
+            file: model_specifications.xlsx
+            row: 0
+            sheet: Sheet1
+          units: 1/m
+          value: 1107.8
+        Hw:
+          source:
+            column: heat transfer coefficient
+            file: model_specifications.xlsx
+            row: 0
+            sheet: Sheet1
+          units: W/m^2-K
+          value: 161290.0
+        f:
+          source:
+            column: friction factor
+            file: model_specifications.xlsx
+            row: 0
+            sheet: Sheet1
+          units: '-'
+          value: 0.022
+      type: PBCoreChannel
+    CH2:
+      geometry:
+        A:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+            table: Table 1
+          units: m^2
+          value: 0.11323
+        Dh:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+            table: Table 1
+          units: m
+          value: 0.002972
+        length:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+            table: Table 1
+          units: m
+          value: 0.8
+        n_elems:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+          units: count
+          value: 20
+      heat_structure:
+        elem_number_of_hs:
+          source:
+            file: ABTR_case.pdf
+            page: 3
+          units: count
+          value:
+          - 5
+          - 1
+          - 1
+        material_hs:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+            table: Table 2
+          value:
+          - fuel-mat
+          - gap-mat
+          - clad-mat
+        n_heatstruct:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+            table: Table 2
+          units: count
+          value: 3
+        width_of_hs:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+            table: Table 2
+          units: m
+          value:
+          - 0.003015
+          - 0.000465
+          - 0.00052
+      power_fraction:
+        source:
+          column: ' power fraction'
+          file: model_specifications.xlsx
+          row: 1
+          sheet: Sheet1
+        units: '-'
+        value: 0.41924
+      role: average subassembly inner enrichment zone
+      thermal_hydraulics:
+        HT_surface_area_density:
+          source:
+            column: heat transfer area density
+            file: model_specifications.xlsx
+            row: 1
+            sheet: Sheet1
+          units: 1/m
+          value: 1107.8
+        Hw:
+          source:
+            column: heat transfer coefficient
+            file: model_specifications.xlsx
+            row: 1
+            sheet: Sheet1
+          units: W/m^2-K
+          value: 161290.0
+        f:
+          source:
+            column: friction factor
+            file: model_specifications.xlsx
+            row: 1
+            sheet: Sheet1
+          units: '-'
+          value: 0.022
+      type: PBCoreChannel
+    CH3:
+      geometry:
+        A:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+            table: Table 1
+          units: m^2
+          value: 0.029539
+        Dh:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+            table: Table 1
+          units: m
+          value: 0.002972
+        length:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+            table: Table 1
+          units: m
+          value: 0.8
+        n_elems:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+          units: count
+          value: 20
+      heat_structure:
+        elem_number_of_hs:
+          source:
+            file: ABTR_case.pdf
+            page: 3
+          units: count
+          value:
+          - 5
+          - 1
+          - 1
+        material_hs:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+          value:
+          - fuel-mat
+          - gap-mat
+          - clad-mat
+        n_heatstruct:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+          units: count
+          value: 3
+        width_of_hs:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+          units: m
+          value:
+          - 0.003015
+          - 0.000465
+          - 0.00052
+      power_fraction:
+        source:
+          column: ' power fraction'
+          file: model_specifications.xlsx
+          row: 2
+          sheet: Sheet1
+        units: '-'
+        value: 0.09852
+      role: average of mid-core fuel test assemblies
+      thermal_hydraulics:
+        HT_surface_area_density:
+          source:
+            column: heat transfer area density
+            file: model_specifications.xlsx
+            row: 2
+            sheet: Sheet1
+          units: 1/m
+          value: 1107.8
+        Hw:
+          source:
+            column: heat transfer coefficient
+            file: model_specifications.xlsx
+            row: 2
+            sheet: Sheet1
+          units: W/m^2-K
+          value: 161290.0
+        f:
+          source:
+            column: friction factor
+            file: model_specifications.xlsx
+            row: 2
+            sheet: Sheet1
+          units: '-'
+          value: 0.022
+      type: PBCoreChannel
+    CH4:
+      geometry:
+        A:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+            table: Table 1
+          units: m^2
+          value: 0.14769
+        Dh:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+            table: Table 1
+          units: m
+          value: 0.002972
+        length:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+            table: Table 1
+          units: m
+          value: 0.8
+        n_elems:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+          units: count
+          value: 20
+      heat_structure:
+        elem_number_of_hs:
+          source:
+            file: ABTR_case.pdf
+            page: 3
+          units: count
+          value:
+          - 5
+          - 1
+          - 1
+        material_hs:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+          value:
+          - fuel-mat
+          - gap-mat
+          - clad-mat
+        n_heatstruct:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+          units: count
+          value: 3
+        width_of_hs:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+          units: m
+          value:
+          - 0.003015
+          - 0.000465
+          - 0.00052
+      power_fraction:
+        source:
+          column: ' power fraction'
+          file: model_specifications.xlsx
+          row: 3
+          sheet: Sheet1
+        units: '-'
+        value: 0.43116
+      role: average subassembly outer enrichment zone
+      thermal_hydraulics:
+        HT_surface_area_density:
+          source:
+            column: heat transfer area density
+            file: model_specifications.xlsx
+            row: 3
+            sheet: Sheet1
+          units: 1/m
+          value: 1107.8
+        Hw:
+          source:
+            column: heat transfer coefficient
+            file: model_specifications.xlsx
+            row: 3
+            sheet: Sheet1
+          units: W/m^2-K
+          value: 161290.0
+        f:
+          source:
+            column: friction factor
+            file: model_specifications.xlsx
+            row: 3
+            sheet: Sheet1
+          units: '-'
+          value: 0.022
+      type: PBCoreChannel
+    CH5:
+      geometry:
+        A:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+            table: Table 1
+          units: m^2
+          value: 0.153955129
+        Dh:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+            table: Table 1
+          units: m
+          value: 0.002972
+        length:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+            table: Table 1
+          units: m
+          value: 0.8
+        n_elems:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+          units: count
+          value: 20
+      heat_structure:
+        elem_number_of_hs:
+          source:
+            file: ABTR_case.pdf
+            note: 5 and 1 elements for reflector channel
+            page: 3
+          units: count
+          value:
+          - 5
+          - 1
+        material_hs:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+            table: Table 2
+          value:
+          - fuel-mat
+          - clad-mat
+        n_heatstruct:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+            table: Table 2
+          units: count
+          value: 2
+        width_of_hs:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+            table: Table 2
+          units: m
+          value:
+          - 0.0063234
+          - 0.0007026
+      power_fraction:
+        source:
+          column: ' power fraction'
+          file: model_specifications.xlsx
+          row: 4
+          sheet: Sheet1
+        units: '-'
+        value: 0.0286
+      role: non-fuel subassemblies / reflector + material tests equivalent channel
+      thermal_hydraulics:
+        HT_surface_area_density:
+          note: ABTR_case.pdf Table 2 shows 2113.6; spreadsheet has 2013.6. Flag for
+            review.
+          source:
+            column: heat transfer area density
+            file: model_specifications.xlsx
+            row: 4
+            sheet: Sheet1
+          units: 1/m
+          value: 2013.6
+        Hw:
+          source:
+            column: heat transfer coefficient
+            file: model_specifications.xlsx
+            row: 4
+            sheet: Sheet1
+          units: W/m^2-K
+          value: 13619
+        f:
+          source:
+            column: friction factor
+            file: model_specifications.xlsx
+            row: 4
+            sheet: Sheet1
+          units: '-'
+          value: 0.04
+      type: PBCoreChannel
+    pipe1:
+      geometry:
+        A:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+            table: Table 1
+          units: m^2
+          value: 0.44934
+        Dh:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+            table: Table 1
+          units: m
+          value: 0.002972
+        length:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+            table: Table 1
+          units: m
+          value: 0.6
+        n_elems:
+          note: Pipe element count not explicitly stated; 20 applies to channels;
+            pipe n_elems missing.
+          source:
+            file: ABTR_case.pdf
+            note: each core channel modeled using 20 axial fluid elements
+            page: 2
+          units: count
+          value: 20
+      position_orientation:
+        orientation:
+          inferred: true
+          source:
+            file: test.png
+          units: unitless
+          value:
+          - 0
+          - 0
+          - 1
+        position:
+          inferred: true
+          source:
+            file: test.png
+            note: Outlet marker at (Y=0,Z=-0.6) corresponds to bottom of Pipe1; interpreted
+              as pipe1 start/end.
+          units: m
+          value:
+          - 0
+          - 0
+          - -0.6
+      role: inlet plenum / inlet pipe to branch1
+      type: PBOneDFluidComponent
+    pipe2:
+      geometry:
+        A:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+            table: Table 1
+          units: m^2
+          value: 0.44934
+        Dh:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+            table: Table 1
+          units: m
+          value: 0.002972
+        length:
+          source:
+            file: ABTR_case.pdf
+            page: 2
+            table: Table 1
+          units: m
+          value: 1.5
+        n_elems:
+          source: null
+          units: count
+          value: null
+      position_orientation:
+        orientation:
+          inferred: true
+          source:
+            file: test.png
+          units: unitless
+          value:
+          - 0
+          - 0
+          - 1
+        position:
+          inferred: true
+          source:
+            file: test.png
+            note: Inlet marker at (Y=0,Z=2.3) at top of Pipe2; pipe2 runs down to
+              branch2 at Z~0.8
+          units: m
+          value:
+          - 0
+          - 0
+          - 0.8
+      role: outlet plenum / outlet pipe from branch2
+      type: PBOneDFluidComponent
+  non_geometric_components:
+    reactor_power:
+      initial_power:
+        source: null
+        units: W
+        value: null
+      note: Core power magnitude not provided in available sources; only relative
+        power fractions and power shape figure exist.
+      power_history:
+        source: null
+        value: null
+      type: ReactorPower
+coordinate_system:
+  convention:
+    gravity_vector:
+      note: Not explicitly stated in sources; assumed per SAM/AutoSAM default.
+      source: null
+      units: m/s^2
+      value:
+      - 0
+      - 0
+      - -9.8
+    x_axis: out of plane (toward viewer) [assumed SAM default per AutoSAM guidance]
+    y_axis: horizontal in diagram plane (positive right)
+    z_axis: vertical (positive up)
+  layout_view:
+    note: Positions of Pipe1/Pipe2, Branch1/Branch2, CH1-CH5 inferred from this plot.
+    plane: Y-Z
+    source:
+      file: test.png
+      location: full image
+      type: image
+created_utc: '2026-08-22T20:39:48Z'
+equations_of_state:
+  primary_coolant:
+    name: sodium_eos
+    note: Working fluid identified as sodium in ABTR_case.pdf p.1; EOS type not explicitly
+      stated in extracted text; inferred as PBSodiumEquationOfState consistent with
+      SAM sodium loop examples.
+    source: null
+    type: PBSodiumEquationOfState
+execution_settings:
+  dt_initial:
+    source:
+      file: ABTR_case.pdf
+      page: 3
+    units: s
+    value: 0.1
+  dtmin:
+    source:
+      file: ABTR_case.pdf
+      page: 3
+    units: s
+    value: 1.0e-05
+  executioner_type:
+    source:
+      file: ABTR_case.pdf
+      page: 3
+    value: Transient (pseudo-steady)
+  num_steps:
+    source:
+      file: ABTR_case.pdf
+      page: 3
+    units: count
+    value: 5
+  solver_tolerances:
+    l_tol:
+      source: null
+      value: null
+    nl_abs_tol:
+      source: null
+      value: null
+    nl_rel_tol:
+      source: null
+      value: null
+    petsc_options:
+      source: null
+      value: null
+  time_stepper_function:
+    note: Exact piecewise breakpoints beyond those described are not given.
+    points:
+    - dt: 0.01
+      source:
+        file: ABTR_case.pdf
+        page: 3
+      t_range_or_point: 0 to 0.1
+      units: s
+    - dt: 0.1
+      source:
+        file: ABTR_case.pdf
+        page: 3
+      t_point: 0.2
+      units: s
+    - dt: 1.0
+      source:
+        file: ABTR_case.pdf
+        page: 3
+      t_ge: 2.0
+      units: s
+    type: PiecewiseLinear
+extracted_values:
+  spreadsheet_values:
+    inconsistencies:
+    - 'CH5 heat transfer area density: PDF Table 2 shows 2113.6, spreadsheet shows
+      2013.6 (needs confirmation).'
+    note: Spreadsheet columns include branch loss coefficients; may be alternative
+      source to PDF tables.
+    source:
+      file: model_specifications.xlsx
+      sheet: Sheet1
+  tables:
+    Table_1_component_geometry:
+      rows:
+        CH1:
+          A_m2: 0.0049237
+          Dh_m: 0.002972
+          L_m: 0.8
+        CH2:
+          A_m2: 0.11323
+          Dh_m: 0.002972
+          L_m: 0.8
+        CH3:
+          A_m2: 0.029539
+          Dh_m: 0.002972
+          L_m: 0.8
+        CH4:
+          A_m2: 0.14769
+          Dh_m: 0.002972
+          L_m: 0.8
+        CH5:
+          A_m2: 0.153955129
+          Dh_m: 0.002972
+          L_m: 0.8
+        pipe1:
+          A_m2: 0.44934
+          Dh_m: 0.002972
+          L_m: 0.6
+        pipe2:
+          A_m2: 0.44934
+          Dh_m: 0.002972
+          L_m: 1.5
+      source:
+        file: ABTR_case.pdf
+        page: 2
+    Table_2_hs_and_TH_params:
+      rows:
+        CH1:
+          HT_area_density_1_m: 1107.8
+          Hw_W_m2K: 161290.0
+          f: 0.022
+          materials: fuel/gap/clad
+          n_hs: 3
+          power_fraction: 0.02248
+          widths_m: 0.003015/0.000465/0.00052
+        CH2:
+          HT_area_density_1_m: 1107.8
+          Hw_W_m2K: 161290.0
+          f: 0.022
+          materials: fuel/gap/clad
+          n_hs: 3
+          power_fraction: 0.41924
+          widths_m: 0.003015/0.000465/0.00052
+        CH3:
+          HT_area_density_1_m: 1107.8
+          Hw_W_m2K: 161290.0
+          f: 0.022
+          materials: fuel/gap/clad
+          n_hs: 3
+          power_fraction: 0.09852
+          widths_m: 0.003015/0.000465/0.00052
+        CH4:
+          HT_area_density_1_m: 1107.8
+          Hw_W_m2K: 161290.0
+          f: 0.022
+          materials: fuel/gap/clad
+          n_hs: 3
+          power_fraction: 0.43116
+          widths_m: 0.003015/0.000465/0.00052
+        CH5:
+          HT_area_density_1_m: 2113.6
+          Hw_W_m2K: 13619
+          f: 0.04
+          materials: fuel/clad
+          n_hs: 2
+          power_fraction: 0.0286
+          widths_m: 6.32340e-3/7.0260e-4
+      source:
+        file: ABTR_case.pdf
+        page: 2
+geometry_and_discretization:
+  component_placement_inferred:
+    branch1_z:
+      inferred: true
+      source:
+        file: test.png
+      units: m
+      value: 0.0
+    branch2_z:
+      inferred: true
+      source:
+        file: test.png
+      units: m
+      value: 0.8
+    channel_y_positions:
+      CH1:
+        inferred: true
+        source:
+          file: test.png
+        units: m
+        value: -1.0
+      CH2:
+        inferred: true
+        source:
+          file: test.png
+        units: m
+        value: -0.5
+      CH3:
+        inferred: true
+        source:
+          file: test.png
+        units: m
+        value: 0.0
+      CH4:
+        inferred: true
+        source:
+          file: test.png
+        units: m
+        value: 0.5
+      CH5:
+        inferred: true
+        source:
+          file: test.png
+        units: m
+        value: 1.0
+    note: Values read from axis tick labels in plot; treat as approximate placements
+      for visualization only.
+  fluid_axial_discretization:
+    core_channels_n_elems:
+      source:
+        file: ABTR_case.pdf
+        page: 2
+      units: count
+      value: 20
+    pipe1_n_elems:
+      source: null
+      units: count
+      value: null
+    pipe2_n_elems:
+      source: null
+      units: count
+      value: null
+  solid_discretization:
+    reference_channels_elem_number_of_hs:
+      source:
+        file: ABTR_case.pdf
+        page: 3
+      units: count
+      value:
+      - 5
+      - 1
+      - 1
+    reflector_channel_elem_number_of_hs:
+      source:
+        file: ABTR_case.pdf
+        page: 3
+      units: count
+      value:
+      - 5
+      - 1
+human_review_questions:
+- Confirm whether CH5 HT_surface_area_density is 2013.6 (spreadsheet) or 2113.6 (PDF
+  Table 2). Which is correct?
+- Is the inlet boundary implemented as PBTDJ (velocity+temperature) or some other
+  boundary object in the intended SAM model?
+- What is the absolute reactor thermal power (W) corresponding to the listed channel
+  power fractions?
+- Provide a tabulated axial power shape function (x-y points) or confirm uniform power
+  assumption; current sources only include a plot.
+- Confirm discretization for pipe1 and pipe2 (n_elems) and for fluid channels if not
+  20 in the intended input.
+- Confirm whether branch1/branch2 should be PBBranch or PBVolumeBranch (if volume/thermal
+  inertia is needed).
+- Confirm any solver settings (tolerances, PETSc options, preconditioning) for reproducibility.
+inferred_values:
+  bc_component_type_correction:
+    inlet: Should be PBTDJ in SAM (velocity+temperature), despite pdf saying TDV.
+  component_positions:
+    branches: branch1 at z=0; branch2 at z=0.8
+    channels: vertical segments between z=0 and z=0.8 at y=-1,-0.5,0,0.5,1
+    pipe1: Vertical along z; terminates at branch1 at z=0; outlet BC at z=-0.6
+    pipe2: Vertical along z; starts at branch2 at z~0.8; inlet BC at z=2.3
+  eos_type: Assumed PBSodiumEquationOfState due to sodium coolant.
+initial_conditions:
+  global_fluid:
+    pressure:
+      source:
+        file: ABTR_case.pdf
+        page: 2
+      units: Pa
+      value: 100000.0
+    temperature:
+      source:
+        file: ABTR_case.pdf
+        page: 2
+      units: K
+      value: 628.15
+    velocity:
+      source:
+        file: ABTR_case.pdf
+        page: 2
+      units: m/s
+      value: 2.0
+  global_solid:
+    temperature:
+      source:
+        file: ABTR_case.pdf
+        page: 2
+      units: K
+      value: 628.15
+  scaling:
+    Tsolid_sf:
+      source:
+        file: ABTR_case.pdf
+        page: 2
+      units: '-'
+      value: 0.001
+    scaling_factor_var:
+      source:
+        file: ABTR_case.pdf
+        page: 2
+      units: '-'
+      value:
+      - 1
+      - 0.001
+      - 1.0e-06
+junctions_and_connections:
+  branch1:
+    Area:
+      source:
+        file: ABTR_case.pdf
+        page: 2
+      units: m^2
+      value: 0.44934
+    K:
+      note: ABTR_case.pdf p.2 also lists K=0.1,0.5,1.96,2.16,4.5,3500.0.
+      source:
+        column: Branch 1 form losses
+        file: model_specifications.xlsx
+        rows: 0-5
+        sheet: Sheet1
+      units: '-'
+      value:
+      - 0.1
+      - 0.5
+      - 1.96
+      - 2.16
+      - 4.5
+      - 3500.0
+    connections:
+      inputs:
+      - pipe1(out)
+      outputs:
+      - CH1(in)
+      - CH2(in)
+      - CH3(in)
+      - CH4(in)
+      - CH5(in)
+      source:
+        file: ABTR_case.pdf
+        note: pipe1 delivers coolant to branching junction distributing to all five
+          channels
+        page: 2
+    role: distribute flow from pipe1 to CH1-CH5
+    type: PBBranch or PBVolumeBranch
+  branch2:
+    Area:
+      source:
+        file: ABTR_case.pdf
+        page: 2
+      units: m^2
+      value: 0.44934
+    K:
+      note: ABTR_case.pdf p.2 states all set to zero.
+      source:
+        column: Branch 2 form losses
+        file: model_specifications.xlsx
+        rows: 0-5
+        sheet: Sheet1
+      units: '-'
+      value:
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    connections:
+      inputs:
+      - CH1(out)
+      - CH2(out)
+      - CH3(out)
+      - CH4(out)
+      - CH5(out)
+      outputs:
+      - pipe2(in)
+      source:
+        file: ABTR_case.pdf
+        page: 2
+    role: combine flows from CH1-CH5 to pipe2
+    type: PBBranch
+  topology_summary:
+    graph:
+    - from: inlet_BC
+      to: pipe1(in)
+    - from: pipe1(out)
+      to: branch1
+    - from: branch1
+      to: CH1(in)
+    - from: branch1
+      to: CH2(in)
+    - from: branch1
+      to: CH3(in)
+    - from: branch1
+      to: CH4(in)
+    - from: branch1
+      to: CH5(in)
+    - from: CH1(out)
+      to: branch2
+    - from: CH2(out)
+      to: branch2
+    - from: CH3(out)
+      to: branch2
+    - from: CH4(out)
+      to: branch2
+    - from: CH5(out)
+      to: branch2
+    - from: branch2
+      to: pipe2(in)
+    - from: pipe2(out)
+      to: outlet_BC
+    note: Consistent with YZ layout in test.png (pipe1 below branches, pipe2 above
+      branches).
+    source:
+      file: ABTR_case.pdf
+      page: 2
+materials:
+  fluids:
+    sodium:
+      eos_ref: sodium_eos
+      note: Thermophysical properties supplied by EOS; no constants provided.
+      properties: null
+      source:
+        file: ABTR_case.pdf
+        page: 1
+        snippet: primary coolant is sodium
+  solids:
+    clad-mat:
+      Cp:
+        source:
+          file: ABTR_case.pdf
+          page: 2
+        units: J/kg-K
+        value: 638
+      k:
+        source:
+          file: ABTR_case.pdf
+          page: 2
+        units: W/m-K
+        value: 26
+      rho:
+        source:
+          file: ABTR_case.pdf
+          page: 2
+        units: kg/m^3
+        value: 7646.0
+      type: SolidMaterialProps
+    duct-mat:
+      Cp:
+        source:
+          file: ABTR_case.pdf
+          page: 2
+        units: J/kg-K
+        value: 638
+      k:
+        source:
+          file: ABTR_case.pdf
+          page: 2
+        units: W/m-K
+        value: 26
+      note: Duct properties stated as same as clad.
+      rho:
+        source:
+          file: ABTR_case.pdf
+          page: 2
+        units: kg/m^3
+        value: 7646.0
+      type: SolidMaterialProps
+    fuel-mat:
+      Cp:
+        source:
+          file: ABTR_case.pdf
+          page: 1
+        units: J/kg-K
+        value: 191.67
+      k:
+        source:
+          file: ABTR_case.pdf
+          page: 1
+        units: W/m-K
+        value: 16
+      rho:
+        source:
+          file: ABTR_case.pdf
+          page: 1
+        units: kg/m^3
+        value: 14583.0
+      type: SolidMaterialProps
+    gap-mat:
+      Cp:
+        source:
+          file: ABTR_case.pdf
+          page: 1
+        units: J/kg-K
+        value: 1272
+      k:
+        source:
+          file: ABTR_case.pdf
+          page: 1
+        units: W/m-K
+        value: 64
+      rho:
+        source:
+          file: ABTR_case.pdf
+          page: 1
+        units: kg/m^3
+        value: 865
+      type: SolidMaterialProps
+missing_parameters:
+  components:
+    lam_factor: null
+    pipe1_n_elems: null
+    pipe2_n_elems: null
+    roughness: null
+    turb_factor: null
+  executioner:
+    end_time: null
+    nonlinear_linear_tolerances: null
+    preconditioning_settings: null
+    start_time: null
+  global_params:
+    Courant_control: null
+    p_order: null
+    pspg_supg: null
+  reactor_power:
+    axial_power_shape_function_points: null
+    initial_power_W: null
+power_or_heat_sources:
+  axial_power_shape:
+    definition: null
+    note: Numeric x-y points not extracted from figure in current sources; requires
+      digitization or tabulated data.
+    source:
+      figure: Figure 1 (axial power peaking factor vs axial position)
+      file: ABTR_case.pdf
+      page: 1
+  channel_power_fractions:
+    CH1:
+      source:
+        file: model_specifications.xlsx
+        row: 0
+        sheet: Sheet1
+      units: '-'
+      value: 0.02248
+    CH2:
+      source:
+        file: model_specifications.xlsx
+        row: 1
+        sheet: Sheet1
+      units: '-'
+      value: 0.41924
+    CH3:
+      source:
+        file: model_specifications.xlsx
+        row: 2
+        sheet: Sheet1
+      units: '-'
+      value: 0.09852
+    CH4:
+      source:
+        file: model_specifications.xlsx
+        row: 3
+        sheet: Sheet1
+      units: '-'
+      value: 0.43116
+    CH5:
+      source:
+        file: model_specifications.xlsx
+        row: 4
+        sheet: Sheet1
+      units: '-'
+      value: 0.0286
+  reactor_total_power:
+    note: Not provided in ABTR_case.pdf excerpts. Only relative power fractions and
+      a normalized axial power shape figure are referenced.
+    source: null
+    units: W
+    value: null
+source_files:
+  excluded_as_sources:
+  - pattern: '*.i'
+    reason: No SAM input file used as source by user instruction; none present in
+      workdir.
+  - file: processed_pdfs.txt
+    reason: tool bookkeeping
+  - file: processed_images.txt
+    reason: tool bookkeeping
+  - dir: gpt_vector_store/*
+    reason: vector store artifacts
+  - dir: image_vector_store/*
+    reason: vector store artifacts
+  images:
+  - file: test.png
+    role: YZ-plane layout schematic for pipes, branches, and channels (positions inferred
+      visually)
+  pdfs:
+  - file: ABTR_case.pdf
+    role: primary narrative + tables for ABTR SAM test case
+  spreadsheets:
+  - file: model_specifications.xlsx
+    role: tabulated channel parameters (power fractions, f, Hw, HT area density, branch
+      losses)
+  text_json_yaml:
+  - file: documents_library.json
+    role: tool-extracted text from ABTR_case.pdf (used as a source index; not a SAM
+      input)
+working_directory: <AUTOSAM_ROOT>\case_generation_cost_runs\20260822T203716Z_gpt-52\ABTR\workdir
+```

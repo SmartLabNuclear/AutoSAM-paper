@@ -1,0 +1,240 @@
+### Validation result (SAMInputFileValidatorTool)
+- **PASS (structure-level):** All required top-level blocks were found: `GlobalParams, Functions, EOS, MaterialProperties, Components, Preconditioning, Postprocessors, Executioner, Outputs`.
+- **Connectivity check:** This is an **open system** (single `PBCoreChannel` with a `PBTDJ` inlet BC and a `PBTDV` outlet BC). No additional `PBBranch/PBSingleJunction` components are required.
+
+Saved to:
+`<AUTOSAM_ROOT>\case_generation_cost_runs\20260822T202915Z_gpt-52\PKE\workdir\sam_model_generated.i`
+
+---
+
+## `sam_model_generated.i`
+
+```ini
+# SAM input file: PKE (Point Kinetics + Single Core Channel) test case
+# Auto-generated from user-reviewed intermediate_pke.yaml
+# Source: pke.xlsx (Sheet1)
+# Measured quantities (postprocessors): inlet/outlet T, outlet p, total power, PKE reactivity.
+#
+# Explicit unresolved/assumed items (per intermediate YAML):
+# - component spatial placement: assumed position='0 0 0', orientation='0 0 1'
+# - inlet temperature transient function form: assumed piecewise-linear ramp 0->10 s then hold
+# - power axial shape 'Uniform': assumed constant 1.0 on x=[0,0.8]
+# - power_fraction not provided: assumed all power deposited in fuel, none in clad
+# - Executioner linear tolerance not provided: assumed l_tol=1e-5
+# - PTConstantEOS: cv and sigma not provided
+
+[GlobalParams]
+  global_init_P = 1.0e5          # Pa (from 0.1 MPa)
+  global_init_V = 5.0            # m/s
+  global_init_T = 628.15         # K
+
+  # ASSUMPTION: standard scaling factors (not specified in sources)
+  scaling_factor_var = '1 1e-3 1e-6'
+  Tsolid_sf = 1e-3
+
+  gravity = '0 0 -9.8'           # inferred default
+[]
+
+[Functions]
+  [Tin_ramp]
+    type = PiecewiseLinear
+    x = '0.0  10.0  1.0e9'
+    y = '628.15  728.15  728.15'
+  []
+
+  [ppf_uniform]
+    type = PiecewiseLinear
+    axis = x
+    x = '0.0  0.8'
+    y = '1.0  1.0'
+  []
+[]
+
+[EOS]
+  [eos]
+    type = PTConstantEOS
+    p_0 = 1.0e5
+    rho_0 = 865.51
+    beta = 2.7524e-4
+    cp = 1272.0
+    h_0 = 7.9898e5
+    T_0 = 628.15
+    mu = 2.6216e-4
+    k = 72.0
+  []
+[]
+
+[MaterialProperties]
+  [fuel-mat]
+    type = SolidMaterialProps
+    k = 16.0
+    Cp = 191.67
+    rho = 14583.0
+    alpha = 1.76e-5
+    YoungsM = 2.8e10
+  []
+
+  [clad-mat]
+    type = SolidMaterialProps
+    k = 26.0
+    Cp = 638.0
+    rho = 7646.0
+    alpha = 1.4e-5
+    YoungsM = 1.5e11
+  []
+[]
+
+[Components]
+  [pke]
+    type = PointKinetics
+    LAMBDA = 3.46402e-7
+    betai = '2.3929e-4 4.9210e-4'
+    lambda = '1.3345e-2 2.8738'
+
+    feedback_components = 'CH1'
+  []
+
+  [reactor]
+    type = ReactorPower
+    initial_power = 0.0
+    pke = pke
+  []
+
+  [CH1]
+    type = PBCoreChannel
+    eos = eos
+
+    position = '0 0 0'           # ASSUMPTION
+    orientation = '0 0 1'        # ASSUMPTION
+
+    A = 2.0e-5
+    Dh = 3.1830989e-3
+    length = 0.8
+    n_elems = 20
+
+    f = 0.017
+    Hw = 1.6e5
+    HT_surface_area_density = 1256.637
+
+    Ts_init = 628.15             # ASSUMPTION: use global_init_T
+    dim_hs = 1
+
+    name_of_hs = 'fuel clad'
+    n_heatstruct = 2
+    fuel_type = cylinder
+
+    width_of_hs = '0.00348 0.00052'
+    elem_number_of_hs = '5 1'
+    material_hs = 'fuel-mat clad-mat'
+    power_fraction = '1.0 0.0'   # ASSUMPTION
+
+    power_shape_function = ppf_uniform
+
+    fuel_doppler_coef = -1.0e-7
+  []
+
+  [inlet]
+    type = PBTDJ
+    input = 'CH1(in)'
+    eos = eos
+    v_bc = 8.6654
+    T_fn = Tin_ramp
+  []
+
+  [outlet]
+    type = PBTDV
+    input = 'CH1(out)'
+    eos = eos
+    p_bc = 2.0e5
+    T_bc = 728.15
+  []
+[]
+
+[Preconditioning]
+  active = 'SMP_PJFNK'
+  [SMP_PJFNK]
+    type = SMP
+    full = true
+    solve_type = 'PJFNK'
+    petsc_options_iname = '-pc_type'
+    petsc_options_value = 'lu'
+  []
+[]
+
+[Postprocessors]
+  [Tin]
+    type = ComponentBoundaryVariableValue
+    input = CH1(in)
+    variable = temperature
+  []
+
+  [Tout]
+    type = ComponentBoundaryVariableValue
+    input = CH1(out)
+    variable = temperature
+  []
+
+  [pout]
+    type = ComponentBoundaryVariableValue
+    input = CH1(out)
+    variable = pressure
+  []
+
+  # NOTE: component scalar names depend on SAM version; keep for visibility.
+  [P_total]
+    type = ComponentScalarValue
+    component = reactor
+    variable = power
+    idx = 0
+  []
+
+  [rho_reactivity]
+    type = ComponentScalarValue
+    component = pke
+    variable = reactivity
+    idx = 0
+  []
+[]
+
+[Executioner]
+  type = Transient
+
+  dt = 0.5
+  dtmin = 1e-5
+  start_time = 0.0
+  end_time = 20.0
+
+  nl_max_its = 20
+  nl_abs_tol = 1e-6
+  nl_rel_tol = 1e-7
+
+  l_tol = 1e-5                 # ASSUMPTION
+  l_max_its = 100
+
+  [Quadrature]
+    type = TRAP
+    order = FIRST
+  []
+[]
+
+[Outputs]
+  perf_graph = true
+  print_linear_residuals = false
+
+  [console]
+    type = Console
+    execute_scalars_on = 'none'
+  []
+
+  [csv]
+    type = CSV
+  []
+
+  [out_displaced]
+    type = Exodus
+    use_displaced = true
+    execute_on = 'initial timestep_end'
+    sequence = false
+  []
+[]
+```

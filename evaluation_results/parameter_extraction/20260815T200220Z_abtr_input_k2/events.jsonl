@@ -1,0 +1,100 @@
+{"timestamp": "2026-08-15T20:02:20.691773Z", "event": "evaluation_started", "run_id": "20260815T200220Z_abtr_input_k2"}
+{"timestamp": "2026-08-15T20:02:21.314812Z", "event": "retrieval_started", "questions": 15, "top_k": 2}
+{"timestamp": "2026-08-15T20:02:25.373033Z", "event": "retrieval_completed", "questions": 15, "top_k": 2}
+{"timestamp": "2026-08-15T20:02:25.510606Z", "event": "run_started", "run": 1}
+{"timestamp": "2026-08-15T20:02:25.511516Z", "event": "question_started", "run": 1, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_01"}
+{"timestamp": "2026-08-15T20:02:25.511888Z", "event": "question_started", "run": 1, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_02"}
+{"timestamp": "2026-08-15T20:02:25.513675Z", "event": "question_started", "run": 1, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_03"}
+{"timestamp": "2026-08-15T20:02:25.514129Z", "event": "question_started", "run": 1, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_04"}
+{"timestamp": "2026-08-15T20:02:25.514549Z", "event": "question_started", "run": 1, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_05"}
+{"timestamp": "2026-08-15T20:02:28.049028Z", "event": "question_completed", "run": 1, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_03", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:02:28.049395Z", "event": "question_started", "run": 1, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_06"}
+{"timestamp": "2026-08-15T20:02:29.009042Z", "event": "question_completed", "run": 1, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_02", "failure_class": "retrieval_and_generation", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:02:29.009450Z", "event": "question_started", "run": 1, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_07"}
+{"timestamp": "2026-08-15T20:02:29.848679Z", "event": "question_completed", "run": 1, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_01", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:02:29.848911Z", "event": "question_started", "run": 1, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_08"}
+{"timestamp": "2026-08-15T20:02:30.268169Z", "event": "question_completed", "run": 1, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_04", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:02:30.268435Z", "event": "question_started", "run": 1, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_09"}
+{"timestamp": "2026-08-15T20:02:31.462328Z", "event": "question_completed", "run": 1, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_07", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:02:31.462572Z", "event": "question_started", "run": 1, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_10"}
+{"timestamp": "2026-08-15T20:02:31.757247Z", "event": "question_completed", "run": 1, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_05", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:02:31.757470Z", "event": "question_started", "run": 1, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_11"}
+{"timestamp": "2026-08-15T20:02:33.853529Z", "event": "question_completed", "run": 1, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_06", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:02:33.853760Z", "event": "question_started", "run": 1, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_12"}
+{"timestamp": "2026-08-15T20:02:34.752193Z", "event": "question_completed", "run": 1, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_11", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:02:34.752416Z", "event": "question_started", "run": 1, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_13"}
+{"timestamp": "2026-08-15T20:02:35.780163Z", "event": "question_completed", "run": 1, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_09", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:02:35.780397Z", "event": "question_started", "run": 1, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_14"}
+{"timestamp": "2026-08-15T20:02:36.461545Z", "event": "question_completed", "run": 1, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_10", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:02:36.461776Z", "event": "question_started", "run": 1, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_15"}
+{"timestamp": "2026-08-15T20:02:37.347506Z", "event": "question_completed", "run": 1, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_08", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:02:38.182228Z", "event": "question_completed", "run": 1, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_13", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:02:39.128487Z", "event": "question_completed", "run": 1, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_12", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:02:41.256652Z", "event": "question_completed", "run": 1, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_14", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:02:45.580063Z", "event": "question_completed", "run": 1, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_15", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:02:45.580933Z", "event": "run_completed", "run": 1, "responses": 15}
+{"timestamp": "2026-08-15T20:02:45.581322Z", "event": "run_started", "run": 2}
+{"timestamp": "2026-08-15T20:02:45.582055Z", "event": "question_started", "run": 2, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_01"}
+{"timestamp": "2026-08-15T20:02:45.582562Z", "event": "question_started", "run": 2, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_02"}
+{"timestamp": "2026-08-15T20:02:45.584185Z", "event": "question_started", "run": 2, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_03"}
+{"timestamp": "2026-08-15T20:02:45.584952Z", "event": "question_started", "run": 2, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_04"}
+{"timestamp": "2026-08-15T20:02:45.585753Z", "event": "question_started", "run": 2, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_05"}
+{"timestamp": "2026-08-15T20:02:49.572047Z", "event": "question_completed", "run": 2, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_03", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:02:49.572287Z", "event": "question_started", "run": 2, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_06"}
+{"timestamp": "2026-08-15T20:02:50.388653Z", "event": "question_completed", "run": 2, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_02", "failure_class": "retrieval_and_generation", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:02:50.389057Z", "event": "question_started", "run": 2, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_07"}
+{"timestamp": "2026-08-15T20:02:51.226073Z", "event": "question_completed", "run": 2, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_04", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:02:51.226322Z", "event": "question_started", "run": 2, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_08"}
+{"timestamp": "2026-08-15T20:02:51.388644Z", "event": "question_completed", "run": 2, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_01", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:02:51.388897Z", "event": "question_started", "run": 2, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_09"}
+{"timestamp": "2026-08-15T20:02:53.036544Z", "event": "question_completed", "run": 2, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_07", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:02:53.037057Z", "event": "question_started", "run": 2, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_10"}
+{"timestamp": "2026-08-15T20:02:53.345798Z", "event": "question_completed", "run": 2, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_05", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:02:53.346068Z", "event": "question_started", "run": 2, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_11"}
+{"timestamp": "2026-08-15T20:02:56.315465Z", "event": "question_completed", "run": 2, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_11", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:02:56.315713Z", "event": "question_started", "run": 2, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_12"}
+{"timestamp": "2026-08-15T20:02:56.477812Z", "event": "question_completed", "run": 2, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_08", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:02:56.478070Z", "event": "question_started", "run": 2, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_13"}
+{"timestamp": "2026-08-15T20:02:56.733334Z", "event": "question_completed", "run": 2, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_06", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:02:56.733593Z", "event": "question_started", "run": 2, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_14"}
+{"timestamp": "2026-08-15T20:02:57.162162Z", "event": "question_completed", "run": 2, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_09", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:02:57.162443Z", "event": "question_started", "run": 2, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_15"}
+{"timestamp": "2026-08-15T20:02:58.444481Z", "event": "question_completed", "run": 2, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_10", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:02:59.813355Z", "event": "question_completed", "run": 2, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_13", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:03:02.474579Z", "event": "question_completed", "run": 2, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_12", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:03:02.475151Z", "event": "question_completed", "run": 2, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_14", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:03:07.399072Z", "event": "question_completed", "run": 2, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_15", "failure_class": "generation", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:03:07.399896Z", "event": "run_completed", "run": 2, "responses": 15}
+{"timestamp": "2026-08-15T20:03:07.400301Z", "event": "run_started", "run": 3}
+{"timestamp": "2026-08-15T20:03:07.400926Z", "event": "question_started", "run": 3, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_01"}
+{"timestamp": "2026-08-15T20:03:07.401221Z", "event": "question_started", "run": 3, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_02"}
+{"timestamp": "2026-08-15T20:03:07.401390Z", "event": "question_started", "run": 3, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_03"}
+{"timestamp": "2026-08-15T20:03:07.402343Z", "event": "question_started", "run": 3, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_04"}
+{"timestamp": "2026-08-15T20:03:07.402626Z", "event": "question_started", "run": 3, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_05"}
+{"timestamp": "2026-08-15T20:03:09.981007Z", "event": "question_completed", "run": 3, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_03", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:03:09.981256Z", "event": "question_started", "run": 3, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_06"}
+{"timestamp": "2026-08-15T20:03:10.566389Z", "event": "question_completed", "run": 3, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_02", "failure_class": "retrieval_and_generation", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:03:10.566618Z", "event": "question_started", "run": 3, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_07"}
+{"timestamp": "2026-08-15T20:03:12.198247Z", "event": "question_completed", "run": 3, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_01", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:03:12.198516Z", "event": "question_started", "run": 3, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_08"}
+{"timestamp": "2026-08-15T20:03:12.227033Z", "event": "question_completed", "run": 3, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_04", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:03:12.227277Z", "event": "question_started", "run": 3, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_09"}
+{"timestamp": "2026-08-15T20:03:13.147570Z", "event": "question_completed", "run": 3, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_07", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:03:13.147968Z", "event": "question_started", "run": 3, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_10"}
+{"timestamp": "2026-08-15T20:03:13.658015Z", "event": "question_completed", "run": 3, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_05", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:03:13.658242Z", "event": "question_started", "run": 3, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_11"}
+{"timestamp": "2026-08-15T20:03:16.471391Z", "event": "question_completed", "run": 3, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_06", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:03:16.471610Z", "event": "question_started", "run": 3, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_12"}
+{"timestamp": "2026-08-15T20:03:16.502350Z", "event": "question_completed", "run": 3, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_11", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:03:16.502558Z", "event": "question_started", "run": 3, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_13"}
+{"timestamp": "2026-08-15T20:03:16.814785Z", "event": "question_completed", "run": 3, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_08", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:03:16.815170Z", "event": "question_started", "run": 3, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_14"}
+{"timestamp": "2026-08-15T20:03:17.997100Z", "event": "question_completed", "run": 3, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_10", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:03:17.997333Z", "event": "question_started", "run": 3, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_15"}
+{"timestamp": "2026-08-15T20:03:18.438015Z", "event": "question_completed", "run": 3, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_09", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:03:19.303652Z", "event": "question_completed", "run": 3, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_13", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:03:22.472461Z", "event": "question_completed", "run": 3, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_14", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:03:24.045359Z", "event": "question_completed", "run": 3, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_12", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:03:27.205081Z", "event": "question_completed", "run": 3, "case": "ABTR_INPUT_K2", "item_id": "abtr_param_15", "failure_class": "none", "resolved_model": "gpt-5.6-sol"}
+{"timestamp": "2026-08-15T20:03:27.206034Z", "event": "run_completed", "run": 3, "responses": 15}
+{"timestamp": "2026-08-15T20:03:27.218612Z", "event": "evaluation_completed", "responses": 45}

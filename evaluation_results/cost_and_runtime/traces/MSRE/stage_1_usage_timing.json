@@ -1,0 +1,82 @@
+{
+  "elapsed_seconds": 182.53195429997868,
+  "legacy_callback": {
+    "prompt_tokens": 543098,
+    "completion_tokens": 14745,
+    "total_tokens": 557843,
+    "successful_requests": 10,
+    "total_cost_usd_library_estimate": 0.0081219
+  },
+  "usage_metadata_by_model": {
+    "gpt-5.2-2025-12-11": {
+      "output_token_details": {
+        "reasoning": 0,
+        "audio": 0
+      },
+      "input_token_details": {
+        "audio": 0,
+        "cache_read": 479616
+      },
+      "total_tokens": 506322,
+      "input_tokens": 492964,
+      "output_tokens": 13358
+    },
+    "gpt-4o-mini-2024-07-18": {
+      "output_token_details": {
+        "reasoning": 0,
+        "audio": 0
+      },
+      "input_token_details": {
+        "audio": 0,
+        "cache_read": 3072
+      },
+      "total_tokens": 51521,
+      "input_tokens": 50134,
+      "output_tokens": 1387
+    }
+  },
+  "direct_api_calls": [
+    {
+      "kind": "direct_chat_or_vision",
+      "model": "gpt-5.2-2025-12-11",
+      "elapsed_seconds": 14.718097699980717,
+      "usage": {
+        "completion_tokens": 915,
+        "prompt_tokens": 2469,
+        "total_tokens": 3384,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cached_tokens": 0
+        }
+      },
+      "timestamp_utc": "2026-08-22T20:56:05.223965+00:00"
+    },
+    {
+      "kind": "embedding",
+      "model": "text-embedding-ada-002",
+      "elapsed_seconds": 0.42471709998790175,
+      "usage": {
+        "prompt_tokens": 921,
+        "total_tokens": 921
+      },
+      "timestamp_utc": "2026-08-22T20:56:05.827509+00:00"
+    },
+    {
+      "kind": "embedding",
+      "model": "text-embedding-ada-002",
+      "elapsed_seconds": 0.3043755999824498,
+      "usage": {
+        "prompt_tokens": 26,
+        "total_tokens": 26
+      },
+      "timestamp_utc": "2026-08-22T20:56:06.185996+00:00"
+    }
+  ],
+  "timestamp_utc": "2026-08-22T20:58:42.082348+00:00"
+}

@@ -1,0 +1,15 @@
+Create a source-grounded YAML intermediate representation for the Pipe SAM test case.
+
+Inspect the files in the working directory and use every applicable AutoSAM input-processing tool:
+1. Use CSVandEXCELFileReaderTool for each CSV or Excel workbook and inspect all relevant rows and sheets.
+2. If PDF files are present, use PDFProcessorTool with focused queries to recover the solid and fluid material properties, initial conditions, boundary conditions, components, junctions, reactor power or other heat sources, geometry, discretization, and system topology. Use additional focused queries when one retrieval call does not cover all categories.
+3. If a system diagram or other image is present, use ImageAnalysisTool to recover component placement, connections, flow directions, and boundary locations. Treat visually inferred values as inferred rather than directly reported.
+4. Use TextFileReaderTool for any relevant text, JSON, or YAML source file. Do not use a pre-existing generated SAM input or intermediate file as a source.
+
+Organize the result as valid YAML with sections for source files, coordinate system, equations of state, solid and fluid materials, components, junctions and connections, geometry and discretization, initial conditions, boundary conditions, power or heat sources, execution settings, extracted values, inferred values, assumptions, missing parameters, and human-review questions. Preserve numerical values and units. For each value, record its source file and page, sheet, row, or image when available. Do not silently invent missing engineering information; use null and explain the gap.
+
+Save the complete YAML as "intermediate_pipe.yaml" in:
+<AUTOSAM_ROOT>\case_generation_cost_runs\20260822T202329Z_gpt-52\Pipe\workdir
+Use PythonREPLTool only to save the assembled text. Return the complete YAML in the final response as well.
+
+Working directory: <AUTOSAM_ROOT>\case_generation_cost_runs\20260822T202329Z_gpt-52\Pipe\workdir

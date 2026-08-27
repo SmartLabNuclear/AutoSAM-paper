@@ -1,0 +1,4 @@
+﻿run,true_positive_parameters,false_positive_parameters,false_negative_parameters,parameter_precision,parameter_recall,parameter_f1,numeric_parameters_required,numeric_parameters_recovered_with_correct_value_and_unit,unit_accuracy_on_recovered_numeric_parameters,numeric_parameter_coverage,mean_numerical_relative_error_on_recovered_parameters,maximum_numerical_relative_error_on_recovered_parameters,generated_claims,unsupported_parameter_claims,assumption_hallucination_rate
+1,24,0,3,1.0,0.8888888888888888,0.9411764705882353,19,16,1.0,0.8421052631578947,0.0,0.0,25,0,0.0
+2,24,0,3,1.0,0.8888888888888888,0.9411764705882353,19,16,1.0,0.8421052631578947,0.0,0.0,25,0,0.0
+3,24,0,3,1.0,0.8888888888888888,0.9411764705882353,19,16,1.0,0.8421052631578947,0.0,0.0,26,0,0.0

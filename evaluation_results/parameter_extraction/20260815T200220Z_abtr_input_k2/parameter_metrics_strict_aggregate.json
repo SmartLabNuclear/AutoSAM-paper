@@ -1,0 +1,18 @@
+{
+  "case": "ABTR_INPUT_K2",
+  "runs": 3,
+  "parameter_precision_mean": 0.9459459459459459,
+  "parameter_precision_sd": 0.0,
+  "parameter_recall_mean": 0.9459459459459459,
+  "parameter_recall_sd": 0.0,
+  "parameter_f1_mean": 0.9459459459459459,
+  "parameter_f1_sd": 0.0,
+  "unit_accuracy_mean": 1.0,
+  "unit_accuracy_sd": 0.0,
+  "mean_numerical_relative_error_mean": 0.2685125238928652,
+  "mean_numerical_relative_error_sd": 0.0,
+  "maximum_numerical_relative_error_mean": 2.3286377628215167,
+  "maximum_numerical_relative_error_sd": 0.0,
+  "assumption_hallucination_rate_mean": 0.03508771929824561,
+  "assumption_hallucination_rate_sd": 0.0
+}

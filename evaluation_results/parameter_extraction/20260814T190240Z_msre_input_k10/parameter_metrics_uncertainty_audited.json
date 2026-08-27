@@ -1,0 +1,47 @@
+[
+  {
+    "metric": "parameter_precision",
+    "successes": 24,
+    "trials": 24,
+    "estimate": 1.0,
+    "lower_95": 0.8620237953250198,
+    "upper_95": 1.0,
+    "opportunity_unit": "extracted parameter decisions"
+  },
+  {
+    "metric": "parameter_recall",
+    "successes": 24,
+    "trials": 27,
+    "estimate": 0.8888888888888888,
+    "lower_95": 0.7194219918172017,
+    "upper_95": 0.9614796517169016,
+    "opportunity_unit": "reference parameter claims"
+  },
+  {
+    "metric": "unit_accuracy",
+    "successes": 16,
+    "trials": 16,
+    "estimate": 1.0,
+    "lower_95": 0.8063923194655637,
+    "upper_95": 1.0,
+    "opportunity_unit": "recovered numeric parameters"
+  },
+  {
+    "metric": "numeric_parameter_coverage",
+    "successes": 16,
+    "trials": 19,
+    "estimate": 0.8421052631578947,
+    "lower_95": 0.6243452472967093,
+    "upper_95": 0.9447952836146585,
+    "opportunity_unit": "reference numeric parameters"
+  },
+  {
+    "metric": "assumption_hallucination_rate",
+    "successes": 0,
+    "trials": 25,
+    "estimate": 0.0,
+    "lower_95": 1.3877787807814457e-17,
+    "upper_95": 0.13319225093904846,
+    "opportunity_unit": "generated atomic claims"
+  }
+]

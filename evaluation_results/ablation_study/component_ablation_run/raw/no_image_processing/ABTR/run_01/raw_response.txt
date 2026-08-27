@@ -1,0 +1,269 @@
+# ABTR_SAM_intermediate_representation
+# NOTES/ASSUMPTIONS (from provided IR, no added inference):
+# - Topology/connectivity is UNKNOWN; no component-to-component connections or boundary attachments are provided, so no closed-loop network is constructed.
+# - Component type ambiguity preserved in comments; SAM requires a concrete type selection to run.
+# - Required but unavailable values are marked with "# MISSING:" at point of use.
+
+[GlobalParams]
+  # Global initial conditions (provided)
+  global_init_P = 100000.0        # Pa
+  global_init_V = 2.0             # m/s
+  global_init_T = 628.15          # K
+  solid_init_T  = 628.15          # K
+
+  # Coolant (provided as sodium), but EOS model not specified
+  fluid = sodium
+[]
+
+[Functions]
+[]
+
+[EOS]
+  # Sodium coolant EOS
+  [coolant]
+    # MISSING: sam_eos_type (required to configure sodium properties)
+    # MISSING: parameters (EOS-specific coefficients/settings)
+    # coolant = sodium   # provided in IR; exact key may differ by SAM version
+  []
+[]
+
+[MaterialProperties]
+  # Thermal materials for heat structures (provided where available)
+
+  [fuel-mat]
+    type = ConstantMaterial
+    k   = 16.0       # W/m-K
+    Cp  = 191.67     # J/kg-K
+    rho = 14583.0    # kg/m^3
+  []
+
+  [gap-mat]
+    type = ConstantMaterial
+    k   = 64.0       # W/m-K
+    Cp  = 1272.0     # J/kg-K
+    rho = 865.0      # kg/m^3
+  []
+
+  [clad-mat]
+    type = ConstantMaterial
+    k   = # MISSING: materials.clad-mat.k_W_mK
+    Cp  = # MISSING: materials.clad-mat.Cp_J_kgK
+    rho = # MISSING: materials.clad-mat.rho_kg_m3
+  []
+
+  [ss-mat]
+    type = ConstantMaterial
+    k   = # MISSING: materials.ss-mat.k_W_mK
+    Cp  = # MISSING: materials.ss-mat.Cp_J_kgK
+    rho = # MISSING: materials.ss-mat.rho_kg_m3
+  []
+[]
+
+[Components]
+  # IMPORTANT:
+  # - Port names, port counts, and component-to-component connectivity are not provided.
+  # - Length/axial discretization/node counts are not provided for any 1D component.
+  # - Total core power / absolute heat input is not provided (only fractions).
+
+  # Boundary conditions
+  [Boundary_inlet]
+    type = PBTDJ
+    velocity = 3.25        # m/s
+    temperature = 628.15   # K
+    mass_flow = # MISSING: boundary_values.inlet.mass_flow_kg_s
+    # MISSING: boundary attachment (which component/port this boundary connects to)
+  []
+
+  [Boundary_outlet]
+    type = PBTDV
+    pressure = 100000.0    # Pa
+    temperature = 628.15   # K
+    # MISSING: boundary attachment (which component/port this boundary connects to)
+  []
+
+  # Flow components (type ambiguity retained in comment; SAM requires an actual type)
+  [Pipe1]
+    # Provided: "PBOneDFluidComponent (or PBPipe)"
+    # MISSING: choose concrete SAM component type (e.g., PBPipe)
+    type = # MISSING: Pipe1.type_selection
+    A  = 0.44934           # m^2
+    Dh = 0.002972          # m
+    # MISSING: length
+    # MISSING: axial discretization / number of elements or nodes
+    # MISSING: port definitions and connections
+  []
+
+  [Pipe2]
+    # Provided: "PBOneDFluidComponent (or PBPipe)"
+    # MISSING: choose concrete SAM component type (e.g., PBPipe)
+    type = # MISSING: Pipe2.type_selection
+    A  = 0.44934           # m^2
+    Dh = 0.002972          # m
+    # MISSING: length
+    # MISSING: axial discretization / number of elements or nodes
+    # MISSING: port definitions and connections
+  []
+
+  # Core channels (type ambiguity retained in comment; SAM requires an actual type)
+  [CH1]
+    # Provided: "PBCoreChannel (or PBOneDFluidComponent)"
+    type = # MISSING: CH1.type_selection
+    A  = 0.0049237         # m^2
+    Dh = 0.002972          # m
+
+    power_fraction = 0.02248
+    friction_factor = 0.022
+    heat_transfer_coefficient = 161290.0      # W/m^2-K
+    heat_transfer_area_density = 1107.8       # 1/m
+
+    # Branch form losses (mapping to SAM junction/branch is unspecified)
+    branch1_form_loss = 0.1
+    branch2_form_loss = 0.0
+
+    # MISSING: length
+    # MISSING: axial discretization / number of elements or nodes
+    # MISSING: total core power / absolute heat input model
+
+    # Heat structure definition (layer widths and materials provided)
+    n_heatstruct = 3
+    hs_names = 'fuel gap clad'
+    hs_widths = '0.003015 0.000465 0.00052'   # m
+    hs_materials = 'fuel-mat gap-mat clad-mat'
+    hs_elems = # MISSING: CH1.heat_structure.elem_number_of_hs
+
+    # MISSING: ports and connections
+  []
+
+  [CH2]
+    # Provided: "PBCoreChannel (or PBOneDFluidComponent)"
+    type = # MISSING: CH2.type_selection
+    A  = 0.11323           # m^2
+    Dh = 0.002972          # m
+
+    power_fraction = 0.41924
+    friction_factor = 0.022
+    heat_transfer_coefficient = 161290.0
+    heat_transfer_area_density = 1107.8
+
+    branch1_form_loss = 0.5
+    branch2_form_loss = 0.0
+
+    # MISSING: length
+    # MISSING: axial discretization / number of elements or nodes
+    # MISSING: total core power / absolute heat input model
+
+    n_heatstruct = 3
+    hs_names = 'fuel gap clad'
+    hs_widths = '0.003015 0.000465 0.00052'
+    hs_materials = 'fuel-mat gap-mat clad-mat'
+    hs_elems = # MISSING: CH2.heat_structure.elem_number_of_hs
+
+    # MISSING: ports and connections
+  []
+
+  [CH3]
+    # Provided: "PBCoreChannel (or PBOneDFluidComponent)"
+    type = # MISSING: CH3.type_selection
+    A  = 0.029539          # m^2
+    Dh = 0.002972          # m
+
+    power_fraction = 0.09852
+    friction_factor = 0.022
+    heat_transfer_coefficient = 161290.0
+    heat_transfer_area_density = 1107.8
+
+    branch1_form_loss = 1.96
+    branch2_form_loss = 0.0
+
+    # MISSING: length
+    # MISSING: axial discretization / number of elements or nodes
+    # MISSING: total core power / absolute heat input model
+
+    n_heatstruct = 3
+    hs_names = 'fuel gap clad'
+    hs_widths = '0.003015 0.000465 0.00052'
+    hs_materials = 'fuel-mat gap-mat clad-mat'
+    hs_elems = # MISSING: CH3.heat_structure.elem_number_of_hs
+
+    # MISSING: ports and connections
+  []
+
+  [CH4]
+    # Provided: "PBCoreChannel (or PBOneDFluidComponent)"
+    type = # MISSING: CH4.type_selection
+    A  = 0.14769           # m^2
+    Dh = 0.002972          # m
+
+    power_fraction = 0.43116
+    friction_factor = 0.022
+    heat_transfer_coefficient = 161290.0
+    heat_transfer_area_density = 1107.8
+
+    branch1_form_loss = 2.16
+    branch2_form_loss = 0.0
+
+    # MISSING: length
+    # MISSING: axial discretization / number of elements or nodes
+    # MISSING: total core power / absolute heat input model
+
+    n_heatstruct = 3
+    hs_names = 'fuel gap clad'
+    hs_widths = '0.003015 0.000465 0.00052'
+    hs_materials = 'fuel-mat gap-mat clad-mat'
+    hs_elems = # MISSING: CH4.heat_structure.elem_number_of_hs
+
+    # MISSING: ports and connections
+  []
+
+  [CH5]
+    # Provided: "PBCoreChannel (or PBOneDFluidComponent)"
+    type = # MISSING: CH5.type_selection
+    A  = 0.153955129       # m^2
+    Dh = 0.002972          # m
+
+    power_fraction = 0.0286
+    friction_factor = 0.04
+    heat_transfer_coefficient = 13619.0
+    heat_transfer_area_density = 2013.6
+
+    branch1_form_loss = 4.5
+    branch2_form_loss = 0.0
+
+    # MISSING: length
+    # MISSING: axial discretization / number of elements or nodes
+    # MISSING: total core power / absolute heat input model
+
+    n_heatstruct = 2
+    hs_names = 'fuel clad'
+    hs_widths = '0.0063234 0.0007026'
+    hs_materials = 'fuel-mat clad-mat'
+    hs_elems = # MISSING: CH5.heat_structure.elem_number_of_hs
+
+    # MISSING: ports and connections
+  []
+
+  # MISSING: Explicit connectivity block/table.
+  # The IR states topology.connectivity = [] and status UNKNOWN, therefore no connections are declared.
+[]
+
+[Preconditioning]
+  # Minimal/default placeholder; case-specific settings not provided
+  # MISSING: recommended preconditioning options for this ABTR network once topology is known
+[]
+
+[Postprocessors]
+  # No requested postprocessors provided in IR
+[]
+
+[Executioner]
+  type = Transient
+  # MISSING: end_time
+  # MISSING: dt / time step controls
+  # MISSING: nonlinear/linear solver settings appropriate for SAM
+[]
+
+[Outputs]
+  exodus = true
+  csv = true
+  # MISSING: output interval / file base names (if required by workflow)
+[]

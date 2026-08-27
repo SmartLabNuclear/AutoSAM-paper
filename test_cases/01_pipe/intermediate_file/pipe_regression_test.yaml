@@ -1,0 +1,49 @@
+description: "This SAM input file models a steady-state thermal\u2013hydraulic test\
+  \ of a PBPipe component carrying liquid sodium through a 1-meter heated pipe with\
+  \ conjugate heat transfer to a thin solid wall. The pipe is discretized into 20\
+  \ axial elements and uses a simplified linearized sodium equation of state with\
+  \ constant thermophysical properties. A solid heat structure with two radial elements\
+  \ represents the pipe wall, which conducts heat outward while the external boundary\
+  \ is maintained adiabatic. The heated perimeter is computed from the pipe hydraulic\
+  \ diameter, and heat transfer between fluid and wall is governed through a specified\
+  \ wall heat flux coefficient. Inlet and outlet boundary conditions impose a fixed\
+  \ velocity and temperature at the pipe entrance and a fixed pressure at the exit,\
+  \ creating a controlled flow environment."
+initial_conditions:
+  pressure: 0.1 MPa
+  velocity: 1 m/s
+  temperature: 628.15 K
+coolant_properties:
+  density: 865.51 kg/m^3
+  thermal_expansion: 2.7524e-4 K^-1
+  specific_heat: 1272 J/kg.K
+  enthalpy: 7.9898e5 J/kg
+  viscosity: 2.6216e-4 Pa.s
+  thermal_conductivity: 72 W/m.K
+wall_properties:
+  density: 5000 kg/m^3
+  thermal_conductivity: 20 W/m.K
+  specific_heat: 300 J/kg.K
+pipe_dimensions:
+  area: 0.000314
+  hydraulic_diameter: 0.02
+  length: 1.0
+  wall_thickness: 0.001
+boundary_conditions:
+  inlet_temperature: 628.15 K
+  inlet_velocity: 1 m/s
+  outlet_pressure: 0.1 MPa
+physical_setup:
+  convective_heat_transfer_coefficient: 10000.0
+  friction_factor: 0.01
+  heated_perimeter: 0.062831853
+numerical_discretization:
+  pipe_axial_elements: 20
+  wall_radial_elements: 2
+  time: Steady state
+output_information:
+- Pipe outlet temperature
+- Pipe inlet temperature
+- Wall average temperature
+- Inlet energy
+- Outlet energy

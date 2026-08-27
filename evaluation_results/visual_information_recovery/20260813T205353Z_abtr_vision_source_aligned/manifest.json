@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.0",
+  "run_id": "20260813T205353Z_abtr_vision_source_aligned",
+  "status": "complete",
+  "started_at": "2026-08-13T20:53:53.397016Z",
+  "completed_at": "2026-08-13T20:53:53.397022Z",
+  "script": "evaluation/rescore_abtr_vision_source_aligned.py",
+  "script_sha256": "09508134458b5650c42702a520293bb2d40661f9892ea7677043cc3da8597cb5",
+  "benchmark": "evaluation/autosam_abtr_visual_benchmark_source_aligned.json",
+  "benchmark_sha256": "678235bf9bdb2b02830c129b4ea780fce445172bacca8e0e2350dbdbaf45c296",
+  "authoritative_source_hashes": {
+    "ABTR_case_pdf/intermediate_ABTR.yaml": "095c9701e8e99503eacb3ac9233e9145fbe4e4ee72ff5d3421b8c05474690247",
+    "ABTR_case_pdf/ABTR_5channel_min_working.i": "ff9e67b15d7ca5623111e9df897258c9f7b67cb3142993748933397d3de1a87e"
+  },
+  "source_runs": {
+    "gpt4o_baseline": {
+      "path": "<AUTOSAM_ROOT>\\evaluation_runs\\20260813T201032Z_rescore",
+      "manifest_sha256": "2c4a7335049f05d2f2cda24790f4a4fe81251b7a23afac03e63b643b0baa0313"
+    },
+    "gpt56_generic": {
+      "path": "<AUTOSAM_ROOT>\\evaluation_runs\\20260813T203816Z_vision_gpt56sol_strict",
+      "manifest_sha256": "38f3ef1001011624dd21b59c24c402421531f01ba801b4e7a0545e73f42a799f"
+    },
+    "gpt56_abtr_instructions": {
+      "path": "<AUTOSAM_ROOT>\\evaluation_runs\\20260813T204831Z_abtr_vision_gpt56sol_instructions",
+      "manifest_sha256": "e2b67c83d822f8572f5668153d73856a28fef7b91d138682b135fa6efe1a7d49"
+    }
+  },
+  "copied_raw_hashes": {
+    "raw/gpt4o_baseline/run_01_ABTR.json": "f8ff5a930dbb7b8409655d4cb10942e130e908899778c819e9833c1590a5755d",
+    "raw/gpt4o_baseline/run_02_ABTR.json": "fbeb2dc1495cce73a1f82f82f7c01a90e644d6334fa92ee05f13244e5bcc452d",
+    "raw/gpt4o_baseline/run_03_ABTR.json": "0e19e68f03a1a82660c27efab20fd69bb7835be7a3c82e1c4e87ea99c606648e",
+    "raw/gpt56_generic/run_01_ABTR.json": "e968e97545dc8a685eefd80917a24ce297baa7892c68d2c29c5ca6d582a904cf",
+    "raw/gpt56_generic/run_02_ABTR.json": "b20c976acca2144e239ab3a6c2990737a597cdbee0c63e22497e358d7fd75683",
+    "raw/gpt56_generic/run_03_ABTR.json": "a46482800bd21d91430c28457ec979c10431176d18d3c68e24e6f2bb6be106f4",
+    "raw/gpt56_abtr_instructions/run_01_ABTR.json": "bae966c7001df856678dc5fad5f0f67f567071801c8004711305583e9cd8f53d",
+    "raw/gpt56_abtr_instructions/run_02_ABTR.json": "7b2a3cec294fd3166ef071acfb3961006ad5b5714a731f67ebef1aa1f973277d",
+    "raw/gpt56_abtr_instructions/run_03_ABTR.json": "8247bf932b67d0f5a4e6a3abe3dae95a9d18367079ce507aa3e0dae14cc4dee9"
+  },
+  "configuration": {
+    "runs_per_configuration": 3,
+    "facts_per_run": 15,
+    "coordinate_tolerance": 0.005,
+    "length_relative_tolerance": 0.01,
+    "exact_normalized_label_aliases": {
+      "abtr_v01": [
+        "inlet"
+      ],
+      "abtr_v02": [
+        "outlet"
+      ],
+      "abtr_v03": [
+        "CH1",
+        "CH1 start",
+        "channel 1",
+        "channel 1 start"
+      ],
+      "abtr_v04": [
+        "CH2",
+        "CH2 start",
+        "channel 2",
+        "channel 2 start"
+      ],
+      "abtr_v05": [
+        "CH3",
+        "CH3 start",
+        "channel 3",
+        "channel 3 start"
+      ],
+      "abtr_v06": [
+        "CH4",
+        "CH4 start",
+        "channel 4",
+        "channel 4 start"
+      ],
+      "abtr_v07": [
+        "CH5",
+        "CH5 start",
+        "channel 5",
+        "channel 5 start"
+      ],
+      "abtr_v08": [
+        "Pipe2 end",
+        "Pipe2 lower endpoint"
+      ]
+    }
+  },
+  "audit_flags": {
+    "raw_api_calls_repeated": false,
+    "source_runs_modified": false,
+    "existing_benchmark_modified": false,
+    "application_files_modified": false
+  }
+}

@@ -1,0 +1,375 @@
+You are AutoSAM, a case-neutral expert assistant for generating System Analysis Module (SAM) input files. Use only the supplied case facts. Preserve the supplied component names. Include the standard GlobalParams, Functions, EOS, MaterialProperties, Components, Preconditioning, Postprocessors, Executioner, and Outputs blocks. Check component ports and closed-loop connectivity. Never silently invent a case parameter: mark unavailable required values with a `# MISSING:` comment and list assumptions explicitly. Return concise, auditable engineering output.
+
+Generate a complete SAM `.i` input deck for the MSRE case.
+
+Condition: no_intermediate_file.
+Use the facts below exactly and preserve canonical component names. Do not claim to have used tools that are unavailable in this condition. Mark any unavailable required value as `# MISSING: <field>` rather than guessing. Explicitly comment any engineering assumption. Ensure every component port is connected to another component or a boundary condition.
+
+DOCUMENT- AND SPREADSHEET-DERIVED FACTS
+- pdf_extracted.fluids.fuel_salt.density.correlation: 2553.3 - 0.562*T
+- pdf_extracted.fluids.fuel_salt.density.units: kg/m^3
+- pdf_extracted.fluids.fuel_salt.density.T_range_K[0]: 750
+- pdf_extracted.fluids.fuel_salt.density.T_range_K[1]: 1200
+- pdf_extracted.fluids.fuel_salt.density.citation: Table 1
+- pdf_extracted.fluids.fuel_salt.viscosity.correlation: 8.4e-5 * exp(2390/T)
+- pdf_extracted.fluids.fuel_salt.viscosity.units: Pa*s
+- pdf_extracted.fluids.fuel_salt.viscosity.T_range_K[0]: 750
+- pdf_extracted.fluids.fuel_salt.viscosity.T_range_K[1]: 1200
+- pdf_extracted.fluids.fuel_salt.viscosity.citation: Table 1
+- pdf_extracted.fluids.fuel_salt.thermal_conductivity.value: 1.0
+- pdf_extracted.fluids.fuel_salt.thermal_conductivity.units: W/(m*K)
+- pdf_extracted.fluids.fuel_salt.thermal_conductivity.citation: Table 1
+- pdf_extracted.fluids.fuel_salt.specific_heat.value: 2009.66
+- pdf_extracted.fluids.fuel_salt.specific_heat.units: J/(kg*K)
+- pdf_extracted.fluids.fuel_salt.specific_heat.citation: Table 1
+- pdf_extracted.fluids.coolant_salt_hx.description: LiF-BeF2 0.66-0.34
+- pdf_extracted.fluids.coolant_salt_hx.density.correlation: 2146.3 - 0.488*T
+- pdf_extracted.fluids.coolant_salt_hx.density.units: kg/m^3
+- pdf_extracted.fluids.coolant_salt_hx.density.citation: Table 2
+- pdf_extracted.fluids.coolant_salt_hx.viscosity.correlation: 1.16e-4 * exp(3755/T)
+- pdf_extracted.fluids.coolant_salt_hx.viscosity.units: Pa*s
+- pdf_extracted.fluids.coolant_salt_hx.viscosity.citation: Table 2
+- pdf_extracted.fluids.coolant_salt_hx.thermal_conductivity.value: 1.1
+- pdf_extracted.fluids.coolant_salt_hx.thermal_conductivity.units: W/(m*K)
+- pdf_extracted.fluids.coolant_salt_hx.thermal_conductivity.citation: Table 2
+- pdf_extracted.fluids.coolant_salt_hx.specific_heat.value: 2390.0
+- pdf_extracted.fluids.coolant_salt_hx.specific_heat.units: J/(kg*K)
+- pdf_extracted.fluids.coolant_salt_hx.specific_heat.citation: Table 2
+- pdf_extracted.solids.hx_wall_alloy.material: Hastelloy N
+- pdf_extracted.solids.hx_wall_alloy.density.value: 8860
+- pdf_extracted.solids.hx_wall_alloy.density.units: kg/m^3
+- pdf_extracted.solids.hx_wall_alloy.density.citation: Table 3
+- pdf_extracted.solids.hx_wall_alloy.thermal_conductivity.value: 23.6
+- pdf_extracted.solids.hx_wall_alloy.thermal_conductivity.units: W/(m*K)
+- pdf_extracted.solids.hx_wall_alloy.thermal_conductivity.citation: Table 3
+- pdf_extracted.solids.hx_wall_alloy.specific_heat.value: 578
+- pdf_extracted.solids.hx_wall_alloy.specific_heat.units: J/(kg*K)
+- pdf_extracted.solids.hx_wall_alloy.specific_heat.citation: Table 3
+- pdf_extracted.initial_conditions.global.pressure.value: 100000.0
+- pdf_extracted.initial_conditions.global.pressure.units: Pa
+- pdf_extracted.initial_conditions.global.velocity.value: 0.001
+- pdf_extracted.initial_conditions.global.velocity.units: m/s
+- pdf_extracted.initial_conditions.global.temperature.value: 908.15
+- pdf_extracted.initial_conditions.global.temperature.units: K
+- pdf_extracted.initial_conditions.global.gravity.value[0]: 0
+- pdf_extracted.initial_conditions.global.gravity.value[1]: -9.8
+- pdf_extracted.initial_conditions.global.gravity.value[2]: 0
+- pdf_extracted.initial_conditions.global.gravity.units: m/s^2
+- pdf_extracted.initial_conditions.pump.internal_pressure.value: 110000.0
+- pdf_extracted.initial_conditions.pump.internal_pressure.units: Pa
+- pdf_extracted.initial_conditions.secondary_side_initial_tube_temperature.components[0]: hx_tube1
+- pdf_extracted.initial_conditions.secondary_side_initial_tube_temperature.components[1]: hx_tube2
+- pdf_extracted.initial_conditions.secondary_side_initial_tube_temperature.components[2]: hx_tube3
+- pdf_extracted.initial_conditions.secondary_side_initial_tube_temperature.temperature.value: 824.8167
+- pdf_extracted.initial_conditions.secondary_side_initial_tube_temperature.temperature.units: K
+- pdf_extracted.boundary_conditions.secondary_loop_inlet.name: hx_s_in
+- pdf_extracted.boundary_conditions.secondary_loop_inlet.velocity.value: 1.6
+- pdf_extracted.boundary_conditions.secondary_loop_inlet.velocity.units: m/s
+- pdf_extracted.boundary_conditions.secondary_loop_inlet.temperature.value: 824.8167
+- pdf_extracted.boundary_conditions.secondary_loop_inlet.temperature.units: K
+- pdf_extracted.boundary_conditions.secondary_loop_outlet.name: hx_s_out
+- pdf_extracted.boundary_conditions.secondary_loop_outlet.pressure.value: 100000.0
+- pdf_extracted.boundary_conditions.secondary_loop_outlet.pressure.units: Pa
+- pdf_extracted.boundary_conditions.secondary_loop_outlet.temperature.value: 866.4833
+- pdf_extracted.boundary_conditions.secondary_loop_outlet.temperature.units: K
+- pdf_extracted.boundary_conditions.primary_loop_reference.name: pipe_ref
+- pdf_extracted.boundary_conditions.primary_loop_reference.pressure.value: 123335.1
+- pdf_extracted.boundary_conditions.primary_loop_reference.pressure.units: Pa
+- pdf_extracted.boundary_conditions.primary_loop_reference.temperature.value: 908.15
+- pdf_extracted.boundary_conditions.primary_loop_reference.temperature.units: K
+- spreadsheet_extracted.file: MSRE_specifications.xlsx
+- spreadsheet_extracted.components.deowncomer.A: 0.1589
+- spreadsheet_extracted.components.deowncomer.Dh: 0.0508
+- spreadsheet_extracted.components.inlet plenum.A: 0.3932
+- spreadsheet_extracted.components.inlet plenum.Dh: 0.6997
+- spreadsheet_extracted.components.core.A: 0.3512
+- spreadsheet_extracted.components.core.Dh: 0.6687
+- spreadsheet_extracted.components.upper plenum.A: 0.3932
+- spreadsheet_extracted.components.upper plenum.Dh: 0.6997
+- spreadsheet_extracted.components.pipe1.A: 0.01267
+- spreadsheet_extracted.components.pipe1.Dh: 0.127
+- spreadsheet_extracted.components.pipe2.A: 0.01267
+- spreadsheet_extracted.components.pipe2.Dh: 0.127
+- spreadsheet_extracted.components.pipe3.A: 0.01267
+- spreadsheet_extracted.components.pipe3.Dh: 0.127
+- spreadsheet_extracted.components.HX primary side.A: 0.10183
+- spreadsheet_extracted.components.HX primary side.Dh: 0.020945
+- spreadsheet_extracted.components.HX secondary side.A: 0.027885
+- spreadsheet_extracted.components.HX secondary side.Dh: 0.010566
+- spreadsheet_extracted.components.pipe_ref.A: 0.01267
+- spreadsheet_extracted.components.pipe_ref.Dh: 0.127
+- spreadsheet_extracted.components.pipe4.A: 0.01267
+- spreadsheet_extracted.components.pipe4.Dh: 0.127
+- spreadsheet_extracted.components.pipe5.A: 0.01267
+- spreadsheet_extracted.components.pipe5.Dh: 0.127
+- spreadsheet_extracted.branches[0].name: downcomer_to_inlet_plenum
+- spreadsheet_extracted.branches[0].description: downcomer to inlet plenum
+- spreadsheet_extracted.branches[0].Area: 0.1155
+- spreadsheet_extracted.branches[1].name: inlet_plenum_to_core
+- spreadsheet_extracted.branches[1].description: inlet plenum to core
+- spreadsheet_extracted.branches[1].Area: 0.1155
+- spreadsheet_extracted.branches[2].name: core_to_upper_plenum
+- spreadsheet_extracted.branches[2].description: core to upper plenum
+- spreadsheet_extracted.branches[2].Area: 0.1155
+- spreadsheet_extracted.branches[3].name: upper_plenum_to_pipe1
+- spreadsheet_extracted.branches[3].description: upper plenum to pipe1
+- spreadsheet_extracted.branches[3].Area: 0.1155
+- spreadsheet_extracted.branches[4].name: pipe1_to_pipe2
+- spreadsheet_extracted.branches[4].description: pipe1 to pipe2
+- spreadsheet_extracted.branches[4].Area: 0.01292
+- spreadsheet_extracted.branches[5].name: pipe2_to_pipe3
+- spreadsheet_extracted.branches[5].description: pipe2 to pipe3
+- spreadsheet_extracted.branches[5].Area: 0.01292 (pump)
+- spreadsheet_extracted.branches[6].name: pipe3_to_HX_primary
+- spreadsheet_extracted.branches[6].description: pipe3 to HX primary
+- spreadsheet_extracted.branches[6].Area: 0.01267
+- spreadsheet_extracted.branches[7].name: HX_primary_to_pipe_ref_and_pipe4
+- spreadsheet_extracted.branches[7].description: HX primary to pipe_ref and pipe4
+- spreadsheet_extracted.branches[7].Area: 0.01267
+- spreadsheet_extracted.branches[8].name: pipe4_to_pipe5
+- spreadsheet_extracted.branches[8].description: pipe4 to pipe5
+- spreadsheet_extracted.branches[8].Area: 0.01267
+- spreadsheet_extracted.branches[9].name: pipe5_to_downcomer
+- spreadsheet_extracted.branches[9].description: pipe5 to downcomer
+- spreadsheet_extracted.branches[9].Area: 0.01267
+- spreadsheet_extracted.pump.K: 0.15 0.1
+- spreadsheet_extracted.pump.initial_P: 110000
+- spreadsheet_extracted.pump.initial_P_units: Pa
+- spreadsheet_extracted.pump.Head: 43909.58
+- spreadsheet_extracted.pump.Head_units: Pa
+- spreadsheet_extracted.pump.source: MSRE_specifications.xlsx
+- spreadsheet_extracted.hx_wall.HT_surface_area_density: 1000
+- spreadsheet_extracted.hx_wall.HT_surface_area_density_units: 1/m
+- spreadsheet_extracted.hx_wall.wall_geometry_type: Cylinder
+- spreadsheet_extracted.hx_wall.wall_thickness: 0.0010668
+- spreadsheet_extracted.hx_wall.wall_thickness_units: m
+- spreadsheet_extracted.hx_wall.radius_i: 0.0052832
+- spreadsheet_extracted.hx_wall.radius_i_units: m
+- spreadsheet_extracted.hx_wall.source: MSRE_specifications.xlsx
+- sam_mapping_hints.recommended_component_types.inlet_plenum: PBOneDFluidComponent or PBVolumeBranch (not enough info here to choose)
+- sam_mapping_hints.recommended_component_types.core: PBOneDFluidComponent (or PBCoreChannel if power/HS details exist elsewhere)
+- sam_mapping_hints.recommended_component_types.upper_plenum: PBOneDFluidComponent
+- sam_mapping_hints.recommended_component_types.pipe1: PBOneDFluidComponent
+- sam_mapping_hints.recommended_component_types.pipe2: PBOneDFluidComponent
+- sam_mapping_hints.recommended_component_types.pump: PBPump
+- sam_mapping_hints.recommended_component_types.pipe3: PBOneDFluidComponent
+- sam_mapping_hints.recommended_component_types.HX: PBHeatExchanger
+- sam_mapping_hints.recommended_component_types.pipe_ref: PBOneDFluidComponent (stub) + ReferenceBoundary
+- sam_mapping_hints.recommended_component_types.pipe4: PBOneDFluidComponent
+- sam_mapping_hints.recommended_component_types.pipe5: PBOneDFluidComponent
+- sam_mapping_hints.recommended_component_types.downcomer: PBOneDFluidComponent
+- sam_mapping_hints.junctions.two_way: PBSingleJunction
+- sam_mapping_hints.junctions.tee: PBBranch
+
+SPREADSHEET TABLE
+Sheet Sheet1:
+component,Area (m^2),Dh (m),Branches,Area,pump specification,Unnamed: 6,HX specifications,Unnamed: 8
+deowncomer,0.1589,0.0508,downcomer to inlet plenum,0.1155,K,0.15 0.1,Heat transfer surface area density ,1000
+inlet plenum,0.3932,0.6997,inlet plenum to core,0.1155,Intial P,110000,Type,Cylinder
+core,0.3512,0.6687,core to upper plenum,0.1155,Head,43909.58,Width of heat structure,0.0010668
+upper plenum,0.3932,0.6997,upper plenum to pipe1,0.1155,,,Radius,0.0052832
+pipe1,0.01267,0.127,pipe1 to pipe2,0.01292,,,,
+pipe2,0.01267,0.127,pipe2 to pipe3,0.01292 (pump),,,,
+pipe3,0.01267,0.127,pipe3 to HX primary,0.01267,,,,
+HX primary side,0.10183,0.020945,HX primary to pipe_ref and pipe4,0.01267,,,,
+HX secondary side,0.027885,0.010566,pipe4 to pipe5,0.01267,,,,
+pipe_ref,0.01267,0.127,pipe5 to downcomer,0.01267,,,,
+pipe4,0.01267,0.127,,,,,,
+pipe5,0.01267,0.127,,,,,,
+
+IMAGE-DERIVED FACTS
+- coordinate_system.plane: XY
+- coordinate_system.all_z: 0.0
+- coordinate_system.note: Positions/orientations derived from MSRE_system_layout.png
+- key_points.A.x: 0.0
+- key_points.A.y: 0.0
+- key_points.A.z: 0.0
+- key_points.B.x: -0.7366
+- key_points.B.y: 0.0
+- key_points.B.z: 0.0
+- key_points.C.x: 0.0
+- key_points.C.y: 1.7272
+- key_points.C.z: 0.0
+- key_points.D.x: 0.0
+- key_points.D.y: 2.1618
+- key_points.D.z: 0.0
+- key_points.E.x: 1.8288
+- key_points.E.y: 2.1618
+- key_points.E.z: 0.0
+- key_points.F.x: 1.8288
+- key_points.F.y: 2.9746
+- key_points.F.z: 0.0
+- key_points.G.x: 0.762
+- key_points.G.y: 2.9746
+- key_points.G.z: 0.0
+- key_points.H.x: -1.7678
+- key_points.H.y: 2.9746
+- key_points.H.z: 0.0
+- key_points.I.x: -2.2678
+- key_points.I.y: 2.9746
+- key_points.I.z: 0.0
+- key_points.J.x: -1.7678
+- key_points.J.y: 1.7272
+- key_points.J.z: 0.0
+- key_points.K.x: -0.7366
+- key_points.K.y: 1.7272
+- key_points.K.z: 0.0
+- boundary_condition_markers_black_circle.ref_p.x: -2.2678
+- boundary_condition_markers_black_circle.ref_p.y: 2.9746
+- boundary_condition_markers_black_circle.ref_p.z: 0.0
+- boundary_condition_markers_black_circle.ref_p.defined_by: black_circle
+- boundary_condition_markers_black_circle.HX_secondary_in.x: -1.7678
+- boundary_condition_markers_black_circle.HX_secondary_in.y: 2.9746
+- boundary_condition_markers_black_circle.HX_secondary_in.z: 0.0
+- boundary_condition_markers_black_circle.HX_secondary_in.defined_by: black_circle
+- boundary_condition_markers_black_circle.HX_secondary_out.x: 0.762
+- boundary_condition_markers_black_circle.HX_secondary_out.y: 2.9746
+- boundary_condition_markers_black_circle.HX_secondary_out.z: 0.0
+- boundary_condition_markers_black_circle.HX_secondary_out.defined_by: black_circle
+- components[0].name: inlet_plenum
+- components[0].start.x: -0.7366
+- components[0].start.y: 0.0
+- components[0].start.z: 0.0
+- components[0].end.x: 0.0
+- components[0].end.y: 0.0
+- components[0].end.z: 0.0
+- components[0].orientation.x: 1.0
+- components[0].orientation.y: 0.0
+- components[0].orientation.z: 0.0
+- components[0].length: 0.7366
+- components[0].length_units: m
+- components[1].name: core
+- components[1].start.x: 0.0
+- components[1].start.y: 0.0
+- components[1].start.z: 0.0
+- components[1].end.x: 0.0
+- components[1].end.y: 1.7272
+- components[1].end.z: 0.0
+- components[1].orientation.x: 0.0
+- components[1].orientation.y: 1.0
+- components[1].orientation.z: 0.0
+- components[1].length: 1.7272
+- components[1].length_units: m
+- components[2].name: upper_plenum
+- components[2].start.x: 0.0
+- components[2].start.y: 1.7272
+- components[2].start.z: 0.0
+- components[2].end.x: 0.0
+- components[2].end.y: 2.1618
+- components[2].end.z: 0.0
+- components[2].orientation.x: 0.0
+- components[2].orientation.y: 1.0
+- components[2].orientation.z: 0.0
+- components[2].length: 0.4345999999999999
+- components[2].length_units: m
+- components[3].name: pipe1
+- components[3].start.x: 0.0
+- components[3].start.y: 2.1618
+- components[3].start.z: 0.0
+- components[3].end.x: 1.8288
+- components[3].end.y: 2.1618
+- components[3].end.z: 0.0
+- components[3].orientation.x: 1.0
+- components[3].orientation.y: 0.0
+- components[3].orientation.z: 0.0
+- components[3].length: 1.8288
+- components[3].length_units: m
+- components[4].name: pipe2
+- components[4].start.x: 1.8288
+- components[4].start.y: 2.1618
+- components[4].start.z: 0.0
+- components[4].end.x: 1.8288
+- components[4].end.y: 2.9746
+- components[4].end.z: 0.0
+- components[4].orientation.x: 0.0
+- components[4].orientation.y: 1.0
+- components[4].orientation.z: 0.0
+- components[4].length: 0.8128000000000002
+- components[4].length_units: m
+- components[5].name: pipe3
+- components[5].start.x: 1.8288
+- components[5].start.y: 2.9746
+- components[5].start.z: 0.0
+- components[5].end.x: 0.762
+- components[5].end.y: 2.9746
+- components[5].end.z: 0.0
+- components[5].orientation.x: -1.0
+- components[5].orientation.y: 0.0
+- components[5].orientation.z: 0.0
+- components[5].length: 1.0668
+- components[5].length_units: m
+- components[6].name: HX
+- components[6].start.x: 0.762
+- components[6].start.y: 2.9746
+- components[6].start.z: 0.0
+- components[6].end.x: -1.7678
+- components[6].end.y: 2.9746
+- components[6].end.z: 0.0
+- components[6].orientation.x: -1.0
+- components[6].orientation.y: 0.0
+- components[6].orientation.z: 0.0
+- components[6].length: 2.5298
+- components[6].length_units: m
+- components[7].name: pipe_ref
+- components[7].start.x: -1.7678
+- components[7].start.y: 2.9746
+- components[7].start.z: 0.0
+- components[7].end.x: -2.2678
+- components[7].end.y: 2.9746
+- components[7].end.z: 0.0
+- components[7].orientation.x: -1.0
+- components[7].orientation.y: 0.0
+- components[7].orientation.z: 0.0
+- components[7].length: 0.4999999999999998
+- components[7].length_units: m
+- components[8].name: pipe4
+- components[8].start.x: -1.7678
+- components[8].start.y: 2.9746
+- components[8].start.z: 0.0
+- components[8].end.x: -1.7678
+- components[8].end.y: 1.7272
+- components[8].end.z: 0.0
+- components[8].orientation.x: 0.0
+- components[8].orientation.y: -1.0
+- components[8].orientation.z: 0.0
+- components[8].length: 1.2474
+- components[8].length_units: m
+- components[9].name: pipe5
+- components[9].start.x: -1.7678
+- components[9].start.y: 1.7272
+- components[9].start.z: 0.0
+- components[9].end.x: -0.7366
+- components[9].end.y: 1.7272
+- components[9].end.z: 0.0
+- components[9].orientation.x: 1.0
+- components[9].orientation.y: 0.0
+- components[9].orientation.z: 0.0
+- components[9].length: 1.0312000000000001
+- components[9].length_units: m
+- components[10].name: downcomer
+- components[10].start.x: -0.7366
+- components[10].start.y: 1.7272
+- components[10].start.z: 0.0
+- components[10].end.x: -0.7366
+- components[10].end.y: 0.0
+- components[10].end.z: 0.0
+- components[10].orientation.x: 0.0
+- components[10].orientation.y: -1.0
+- components[10].orientation.z: 0.0
+- components[10].length: 1.7272
+- components[10].length_units: m
+- topology.flow_path[0]: inlet_plenum
+- topology.flow_path[1]: core
+- topology.flow_path[2]: upper_plenum
+- topology.flow_path[3]: pipe1
+- topology.flow_path[4]: pipe2
+- topology.flow_path[5]: pump
+- topology.flow_path[6]: pipe3
+- topology.flow_path[7]: HX
+- topology.flow_path[8]: pipe4
+- topology.flow_path[9]: pipe5
+- topology.flow_path[10]: downcomer
+- topology.notes[0]: pump is non-geometric in SAM (no position/orientation/length), only connectivity
+- topology.notes[1]: tee at H connects HX, pipe4, and pipe_ref (requires PBBranch)
+
+Return only the complete input deck, without Markdown fences or explanatory text.

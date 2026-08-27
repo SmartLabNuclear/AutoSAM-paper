@@ -1,0 +1,10 @@
+﻿configuration,run,required_facts,recovered_facts,ViR
+gpt4o_baseline,1,15,3,0.2
+gpt4o_baseline,2,15,2,0.13333333333333333
+gpt4o_baseline,3,15,2,0.13333333333333333
+gpt56_abtr_instructions,1,15,15,1.0
+gpt56_abtr_instructions,2,15,15,1.0
+gpt56_abtr_instructions,3,15,15,1.0
+gpt56_generic,1,15,4,0.26666666666666666
+gpt56_generic,2,15,5,0.3333333333333333
+gpt56_generic,3,15,6,0.4

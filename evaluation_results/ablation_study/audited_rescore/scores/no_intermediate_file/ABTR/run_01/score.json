@@ -1,0 +1,122 @@
+{
+  "condition": "no_intermediate_file",
+  "case": "ABTR",
+  "run": 1,
+  "resolved_model": "gpt-5.2-2025-12-11",
+  "latency_seconds": 26.7778896000018,
+  "required_block_fraction": 1.0,
+  "required_blocks_present": [
+    "components",
+    "eos",
+    "executioner",
+    "functions",
+    "globalparams",
+    "materialproperties",
+    "outputs",
+    "postprocessors",
+    "preconditioning"
+  ],
+  "required_blocks_missing": [],
+  "component_recall": 0.9166666666666666,
+  "missing_components": [
+    "reactor"
+  ],
+  "parameter_precision": 0.8955223880597015,
+  "parameter_recall": 0.5084745762711864,
+  "parameter_f1": 0.6486486486486487,
+  "parameter_tp": 60,
+  "parameter_fp": 7,
+  "parameter_fn": 58,
+  "parameter_mismatches": [
+    {
+      "path": "globalparams",
+      "key": "gravity",
+      "expected": "0 0 -9.8",
+      "actual": "0 0 0"
+    },
+    {
+      "path": "materialproperties/fuel-mat",
+      "key": "type",
+      "expected": "SolidMaterialProps",
+      "actual": "SolidMaterialProperties"
+    },
+    {
+      "path": "materialproperties/gap-mat",
+      "key": "type",
+      "expected": "SolidMaterialProps",
+      "actual": "SolidMaterialProperties"
+    },
+    {
+      "path": "materialproperties/clad-mat",
+      "key": "type",
+      "expected": "SolidMaterialProps",
+      "actual": "SolidMaterialProperties"
+    },
+    {
+      "path": "components/pipe2",
+      "key": "type",
+      "expected": "PBOneDFluidComponent",
+      "actual": "PBPipe"
+    },
+    {
+      "path": "components/pipe1",
+      "key": "type",
+      "expected": "PBOneDFluidComponent",
+      "actual": "PBPipe"
+    },
+    {
+      "path": "executioner",
+      "key": "type",
+      "expected": "Steady",
+      "actual": "Transient"
+    }
+  ],
+  "topology_recall": 0.0,
+  "topology_precision": 0.0,
+  "missing_topology_edges": [
+    [
+      "ch1(out)",
+      "pipe1(in)"
+    ],
+    [
+      "ch2(out)",
+      "pipe1(in)"
+    ],
+    [
+      "ch3(out)",
+      "pipe1(in)"
+    ],
+    [
+      "ch4(out)",
+      "pipe1(in)"
+    ],
+    [
+      "ch5(out)",
+      "pipe1(in)"
+    ],
+    [
+      "pipe2(out)",
+      "ch1(in)"
+    ],
+    [
+      "pipe2(out)",
+      "ch2(in)"
+    ],
+    [
+      "pipe2(out)",
+      "ch3(in)"
+    ],
+    [
+      "pipe2(out)",
+      "ch4(in)"
+    ],
+    [
+      "pipe2(out)",
+      "ch5(in)"
+    ]
+  ],
+  "extra_topology_edges": [],
+  "explicit_missing_markers": 21,
+  "assumption_markers": 0,
+  "characters": 6962
+}

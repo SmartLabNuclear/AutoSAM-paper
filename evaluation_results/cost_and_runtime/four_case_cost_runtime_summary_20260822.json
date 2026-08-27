@@ -1,0 +1,83 @@
+{
+  "scope": "Repeat generation using prebuilt PDF retrieval stores; spreadsheet parsing, image analysis, intermediate-YAML generation, SAM input generation, and validator review included; SAM execution and one-time PDF indexing excluded.",
+  "model": "gpt-5.2-2025-12-11",
+  "temperature": 1,
+  "agent_iteration_limit": 15,
+  "date": "2026-08-22",
+  "environment": {
+    "os": "Microsoft Windows NT 10.0.19045.0",
+    "logical_processors": 32,
+    "python": "3.13.3"
+  },
+  "pricing_usd_per_million_tokens": {
+    "gpt_5_2_uncached_input": 1.75,
+    "gpt_5_2_cached_input": 0.175,
+    "gpt_5_2_output": 14.0,
+    "text_embedding_ada_002_input": 0.10,
+    "pricing_source": "https://developers.openai.com/api/docs/pricing"
+  },
+  "cases": [
+    {
+      "case": "Pipe",
+      "input_tokens": 1631514,
+      "cached_input_tokens": 1353728,
+      "uncached_input_tokens": 277786,
+      "output_tokens": 13673,
+      "embedding_tokens": 0,
+      "wall_time_seconds": 153.816,
+      "estimated_cost_usd": 0.9144,
+      "tool_calls": 21,
+      "validator_calls": 3,
+      "trace": "case_generation_cost_runs/20260822T202329Z_gpt-52/Pipe"
+    },
+    {
+      "case": "PKE",
+      "input_tokens": 1396870,
+      "cached_input_tokens": 1287296,
+      "uncached_input_tokens": 109574,
+      "output_tokens": 15337,
+      "embedding_tokens": 0,
+      "wall_time_seconds": 158.937,
+      "estimated_cost_usd": 0.6317,
+      "tool_calls": 16,
+      "validator_calls": 3,
+      "trace": "case_generation_cost_runs/20260822T202915Z_gpt-52/PKE"
+    },
+    {
+      "case": "ABTR",
+      "input_tokens": 1837583,
+      "cached_input_tokens": 1693696,
+      "uncached_input_tokens": 143887,
+      "output_tokens": 27822,
+      "embedding_tokens": 521,
+      "wall_time_seconds": 292.205,
+      "estimated_cost_usd": 0.9378,
+      "tool_calls": 20,
+      "validator_calls": 3,
+      "trace": "case_generation_cost_runs/20260822T203716Z_gpt-52/ABTR"
+    },
+    {
+      "case": "MSRE",
+      "input_tokens": 1397468,
+      "cached_input_tokens": 1263488,
+      "uncached_input_tokens": 133980,
+      "output_tokens": 29470,
+      "embedding_tokens": 947,
+      "wall_time_seconds": 350.058,
+      "estimated_cost_usd": 0.8683,
+      "tool_calls": 20,
+      "validator_calls": 3,
+      "note": "Includes the first validator path error and the successful two-call validation retry from the same valid intermediate YAML.",
+      "trace": "case_generation_cost_runs/20260822T205533Z_gpt-52/MSRE"
+    }
+  ],
+  "total": {
+    "input_tokens": 6263435,
+    "cached_input_tokens": 5598208,
+    "uncached_input_tokens": 665227,
+    "output_tokens": 86302,
+    "embedding_tokens": 1468,
+    "wall_time_seconds": 955.016,
+    "estimated_cost_usd": 3.3522
+  }
+}

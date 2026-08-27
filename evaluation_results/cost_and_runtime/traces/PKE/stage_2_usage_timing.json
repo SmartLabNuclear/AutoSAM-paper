@@ -1,0 +1,27 @@
+{
+  "elapsed_seconds": 65.39699340000516,
+  "legacy_callback": {
+    "prompt_tokens": 635134,
+    "completion_tokens": 6172,
+    "total_tokens": 641306,
+    "successful_requests": 7,
+    "total_cost_usd_library_estimate": 0.0
+  },
+  "usage_metadata_by_model": {
+    "gpt-5.2-2025-12-11": {
+      "input_token_details": {
+        "audio": 0,
+        "cache_read": 541568
+      },
+      "input_tokens": 635134,
+      "output_tokens": 6172,
+      "output_token_details": {
+        "reasoning": 0,
+        "audio": 0
+      },
+      "total_tokens": 641306
+    }
+  },
+  "direct_api_calls": [],
+  "timestamp_utc": "2026-08-22T20:32:02.187238+00:00"
+}

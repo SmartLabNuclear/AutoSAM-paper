@@ -1,0 +1,65 @@
+[
+  {
+    "metric": "EvidenceRecallAt10",
+    "successes": 14,
+    "trials": 15,
+    "estimate": 0.9333333333333333,
+    "lower_95": 0.7018347012621998,
+    "upper_95": 0.9881331045067315,
+    "opportunity_unit": "canonical page opportunities"
+  },
+  {
+    "metric": "CoP",
+    "successes": 24,
+    "trials": 27,
+    "estimate": 0.8888888888888888,
+    "lower_95": 0.7194219918172017,
+    "upper_95": 0.9614796517169016,
+    "opportunity_unit": "atomic reference claims"
+  },
+  {
+    "metric": "CiP",
+    "successes": 12,
+    "trials": 12,
+    "estimate": 1.0,
+    "lower_95": 0.7575059933447592,
+    "upper_95": 1.0,
+    "opportunity_unit": "generated citations"
+  },
+  {
+    "metric": "CiH",
+    "successes": 12,
+    "trials": 15,
+    "estimate": 0.8,
+    "lower_95": 0.5481455128483065,
+    "upper_95": 0.9295245065301844,
+    "opportunity_unit": "questions"
+  },
+  {
+    "metric": "HR",
+    "successes": 0,
+    "trials": 25,
+    "estimate": 0.0,
+    "lower_95": 1.3877787807814457e-17,
+    "upper_95": 0.13319225093904846,
+    "opportunity_unit": "generated atomic claims"
+  },
+  {
+    "metric": "ExactAnswerRate",
+    "successes": 12,
+    "trials": 15,
+    "estimate": 0.8,
+    "lower_95": 0.5481455128483065,
+    "upper_95": 0.9295245065301844,
+    "opportunity_unit": "questions"
+  },
+  {
+    "metric": "NoiseCitationRate",
+    "successes": 0,
+    "trials": 12,
+    "estimate": 0.0,
+    "lower_95": 2.7755575615628914e-17,
+    "upper_95": 0.24249400665524085,
+    "opportunity_unit": "generated citations"
+  }
+]

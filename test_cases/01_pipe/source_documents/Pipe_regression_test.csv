@@ -1,0 +1,11 @@
+﻿Initial conditions,,Coolant properties,,Wall properties,,Pipe dimensions,,Boundary conditions,,Physical setup ,,Numerial discretization,,Output information
+Pressure,0.1 Mpa,Density,865.51 kg/m^3,Density,5000 kg/m^3,Area,3.14E-04,Inlet temperature,628.15,Convective heat transfer coefficient,1.00E+04,Pipe length,20,Pipe outlet temperature
+Velocity,1 m/s,Thermal expansion,2.7524e-4 K^-1,Thermal conductivity,20 W/m.K,Hydraulic dimaeter,0.02,Inlet velocity,1 m/s,Friction factor,0.01,Wall width,2,Pipe inlet temperature
+Temperature,628.15 K,Specific heat,1272 J/kg.K,Specific heat,300 J/kg.K,Length ,1,Outlet pressure,0.1 Mpa,Heated perimeter ,0.062831853,Time,Steady state,Wall avergae temperature
+,,Enthalpy,7.9898e5 J/kg,,,Wall thickness,0.001,,,,,,,Inlet energy
+,,Viscosity,2.6216e-4 Pa.s,,,,,,,,,,,Outlet energy
+,,Thermal conductivity,72 W/m.K,,,,,,,,,,,
+,,,,,,,,,,,,,,
+"This SAM input file models a steady-state thermal–hydraulic test of a PBPipe component carrying liquid sodium through a 1-meter heated pipe with conjugate heat transfer to a thin solid wall. The pipe is discretized into 20 axial elements and uses a simplified linearized sodium equation of state with constant thermophysical properties. A solid heat structure with two radial elements represents the pipe wall, which conducts heat outward while the external boundary is maintained adiabatic. The heated perimeter is computed from the pipe hydraulic diameter, and heat transfer between fluid and wall is governed through a specified wall heat flux coefficient. Inlet and outlet boundary conditions impose a fixed velocity and temperature at the pipe entrance and a fixed pressure at the exit, creating a controlled flow environment.",,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+"The purpose of the test is to verify PBPipe’s ability to correctly model fluid temperature evolution, frictional and thermal behavior, wall conduction, and energy transfer. Postprocessors compute the outlet bulk fluid temperature, the average wall temperature, and the component’s overall energy balance to ensure consistent and physically accurate results. This case provides a clean validation scenario that checks the coupling between fluid and solid regions, the correctness of boundary condition handling, and the numerical solver’s ability to converge under steady-state conditions.",,,,,,,,,,,,,,

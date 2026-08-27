@@ -1,0 +1,162 @@
+{
+  "timestamp": "2026-08-15T20:02:53.035689Z",
+  "run": 2,
+  "case": "ABTR_INPUT_K2",
+  "item": {
+    "id": "abtr_param_07",
+    "type": "direct",
+    "question": "What minimum time step is allowed by the ABTR executioner? Give the value with units.",
+    "answerable": true,
+    "required_claims": [
+      {
+        "id": "dt_min",
+        "kind": "numeric",
+        "value": 1e-05,
+        "unit": "s",
+        "relative_tolerance": 0.001,
+        "evidence": [
+          {
+            "source": "ABTR_case.pdf",
+            "page": 3
+          }
+        ]
+      }
+    ]
+  },
+  "configuration": {
+    "embedding_model": "text-embedding-3-large",
+    "top_k": 2,
+    "qa_model": "gpt-5.6-sol",
+    "qa_temperature": 0,
+    "reasoning_effort": "none",
+    "target_source": "ABTR_case.pdf"
+  },
+  "retrieved_documents": [
+    {
+      "rank": 1,
+      "chunk_id": "target-abtr-case-p0003",
+      "source": "ABTR_case.pdf",
+      "page": 3,
+      "document_role": "target",
+      "cosine_distance": 0.5286864042282104,
+      "content": "0.8 m, providing uniform spatial resolution for capturing coolant temperature rise, pressure drop, and heat transfer variations along the flow direction. The heat structures associated with each channel are likewise discretized axially according to the specified element counts for the fuel, gap, and cladding layers (5, 1, and 1 elements, respectively, for the reference fuel channels; 5 and 1 elements for the reflector channel). Horizontally, the model resolves five parallel channels coupled through their inlet and outlet junctions.\n\nThe time discretization for this case is governed by a transient executioner combined with a piecewise linear time-step control function. Although the physical boundary conditions remain constant throughout the simulation, the transient framework allows the solution to evolve in time toward a numerically converged state. The base time step is initially very small, with values defined by the time_stepper function: \\(\\Delta t=0.01\\) s from \\(t=0\\) to 0.1 s, increasing to \\(\\Delta t=0.1\\) s by \\(t=0.2\\) s, and eventually reaching a maximum allowable step size of \\(\\Delta t=1\\) s for times beyond 2 s. This gradual increase in time-step size ensures stability and accuracy during the early stages of the computation, where strong nonlinear coupling between fluid and solid temperatures may require tighter control. The executioner further enforces limits of \\(\\Delta t_{\\rm min}=10^{-5}\\) s and a nominal starting step of \\(\\Delta t=0.1\\) s, allowing the nonlinear solver to reduce the time step adaptively as needed. Despite the transient formulation, only five time steps are executed, making the simulation effectively a pseudo-steady-state solve in which the time discretization primarily serves as a numerical mechanism to achieve convergence rather than to resolve physical temporal behavior.\n\n",
+      "content_sha256": "6b2701231c2c018dea557518e32111a307a6cdcd63160297847323ac58a4d053"
+    },
+    {
+      "rank": 2,
+      "chunk_id": "target-abtr-case-p0001",
+      "source": "ABTR_case.pdf",
+      "page": 1,
+      "document_role": "target",
+      "cosine_distance": 0.5842063426971436,
+      "content": "\n\n# ABTR case\n\nzaidabulawi Abulawi\n\nDecember 2025\n\n## 1 ABTR description\n\nA demonstrative system model based on the Advanced Burner Test Reactor (ABTR) conceptual design has been developed with the SAM for the reactor core.\n\nThe primary system is configured in a pool-type arrangement, with the reactor core. The primary coolant is sodium. The reactor core consists of 24 assemblies in an inner enrichment zone and 30 assemblies in the outer zone. A total of nine test locations are provided for fuel (6 assemblies) and material (3 assemblies) tests. On the basis of the reactor physics calculations, a five-channel model was selected to model the reactor core. Channel 1 is used to represent the peak-power inner-core subassembly with fresh fuel. Channels 2 and 4 represent the average subassemblies in the inner and outer enrichment zones respectively, while channel 3 represents the average of the mid-core fuel test assemblies. Channel 5 represents all of the non-fuel subassemblies, including the mid-core materials test assemblies. Figure 1 shows the initial subassembly powers at the beginning of equilibrium cycle conditions, and the average axial power shape for all assemblies. The geometric data and input conditions employed in the multi-channel core model are shown in Table 1.\n\nTable 2 shows additional characteristics of the core channels including friction factor, heat transfer coefficient, materials of heat structure, power fraction, and heat transfer area density.\n\nThe material properties used in this model include four solid materials: **fuel-mat**, **gap-mat**, **clad-mat**, and **duct-mat**. The fuel-mat is defined with a thermal conductivity of 16 W/m\\(\\cdot\\)K, a heat capacity (\\(C_{p}\\)) of 191.67 J/kg\\(\\cdot\\)K, and a density of \\(1.4583\\times 10^{4}\\) kg/m\\({}^{3}\\). The gap-mat has a thermal conductivity of 64 W/m\\(\\cdot\\)K, a heat capacity of 1272 J/kg\\(\\cdot\\)K, and a density of 865 kg/m\\({}^{3}\\). The clad-mat is modeled with a thermal\n\nFigure 1: Assembly radial (left) and axial (right) power distribution at BOC.\n\n",
+      "content_sha256": "75917e5dcc2933faf13bbc96233ab91e6b07d053689d52ac16bebfa51bdc7c8f"
+    }
+  ],
+  "system_prompt": "You are AutoSAM's retrieval question-answering component in an input-parameter extraction benchmark.\nThe authoritative target is ABTR_case.pdf. Other retrieved documents discuss the historical ABTR but are distractors for this task.\n\nUse only evidence from ABTR_case.pdf. Do not substitute a value from another document and do not use outside knowledge. If the retrieved target text is insufficient, set answerable to false rather than guessing.\n\nAnswer every requested field that is supported. Preserve equations and units exactly. Split the response into atomic claims so that distinct requested parameters are separately auditable. Give each claim its own target-document page and a short exact evidence quote.\n\nReturn one JSON object with exactly these fields:\n{\n  \"answerable\": true or false,\n  \"answer\": \"concise complete answer\",\n  \"claims\": [\n    {\n      \"text\": \"one atomic parameter claim\",\n      \"reported_value\": number or null,\n      \"reported_unit\": \"unit\" or null,\n      \"evidence_quote\": \"short exact supporting excerpt\",\n      \"source\": \"document filename\",\n      \"page\": integer\n    }\n  ],\n  \"citations\": [{\"source\": \"document filename\", \"page\": integer}]\n}\n\nUse document and page identifiers exactly as shown in the evidence headers. Return JSON only.",
+  "user_prompt": "QUESTION:\nWhat minimum time step is allowed by the ABTR executioner? Give the value with units.\n\nRETRIEVED EVIDENCE:\n[DOCUMENT source=ABTR_case.pdf page=3 chunk_id=target-abtr-case-p0003 cosine_distance=0.52868640]\n0.8 m, providing uniform spatial resolution for capturing coolant temperature rise, pressure drop, and heat transfer variations along the flow direction. The heat structures associated with each channel are likewise discretized axially according to the specified element counts for the fuel, gap, and cladding layers (5, 1, and 1 elements, respectively, for the reference fuel channels; 5 and 1 elements for the reflector channel). Horizontally, the model resolves five parallel channels coupled through their inlet and outlet junctions.\n\nThe time discretization for this case is governed by a transient executioner combined with a piecewise linear time-step control function. Although the physical boundary conditions remain constant throughout the simulation, the transient framework allows the solution to evolve in time toward a numerically converged state. The base time step is initially very small, with values defined by the time_stepper function: \\(\\Delta t=0.01\\) s from \\(t=0\\) to 0.1 s, increasing to \\(\\Delta t=0.1\\) s by \\(t=0.2\\) s, and eventually reaching a maximum allowable step size of \\(\\Delta t=1\\) s for times beyond 2 s. This gradual increase in time-step size ensures stability and accuracy during the early stages of the computation, where strong nonlinear coupling between fluid and solid temperatures may require tighter control. The executioner further enforces limits of \\(\\Delta t_{\\rm min}=10^{-5}\\) s and a nominal starting step of \\(\\Delta t=0.1\\) s, allowing the nonlinear solver to reduce the time step adaptively as needed. Despite the transient formulation, only five time steps are executed, making the simulation effectively a pseudo-steady-state solve in which the time discretization primarily serves as a numerical mechanism to achieve convergence rather than to resolve physical temporal behavior.\n\n\n\n[DOCUMENT source=ABTR_case.pdf page=1 chunk_id=target-abtr-case-p0001 cosine_distance=0.58420634]\n\n\n# ABTR case\n\nzaidabulawi Abulawi\n\nDecember 2025\n\n## 1 ABTR description\n\nA demonstrative system model based on the Advanced Burner Test Reactor (ABTR) conceptual design has been developed with the SAM for the reactor core.\n\nThe primary system is configured in a pool-type arrangement, with the reactor core. The primary coolant is sodium. The reactor core consists of 24 assemblies in an inner enrichment zone and 30 assemblies in the outer zone. A total of nine test locations are provided for fuel (6 assemblies) and material (3 assemblies) tests. On the basis of the reactor physics calculations, a five-channel model was selected to model the reactor core. Channel 1 is used to represent the peak-power inner-core subassembly with fresh fuel. Channels 2 and 4 represent the average subassemblies in the inner and outer enrichment zones respectively, while channel 3 represents the average of the mid-core fuel test assemblies. Channel 5 represents all of the non-fuel subassemblies, including the mid-core materials test assemblies. Figure 1 shows the initial subassembly powers at the beginning of equilibrium cycle conditions, and the average axial power shape for all assemblies. The geometric data and input conditions employed in the multi-channel core model are shown in Table 1.\n\nTable 2 shows additional characteristics of the core channels including friction factor, heat transfer coefficient, materials of heat structure, power fraction, and heat transfer area density.\n\nThe material properties used in this model include four solid materials: **fuel-mat**, **gap-mat**, **clad-mat**, and **duct-mat**. The fuel-mat is defined with a thermal conductivity of 16 W/m\\(\\cdot\\)K, a heat capacity (\\(C_{p}\\)) of 191.67 J/kg\\(\\cdot\\)K, and a density of \\(1.4583\\times 10^{4}\\) kg/m\\({}^{3}\\). The gap-mat has a thermal conductivity of 64 W/m\\(\\cdot\\)K, a heat capacity of 1272 J/kg\\(\\cdot\\)K, and a density of 865 kg/m\\({}^{3}\\). The clad-mat is modeled with a thermal\n\nFigure 1: Assembly radial (left) and axial (right) power distribution at BOC.\n\n",
+  "response_text": "{\n  \"answerable\": true,\n  \"answer\": \"The minimum time step allowed by the ABTR executioner is 10^{-5} s.\",\n  \"claims\": [\n    {\n      \"text\": \"The ABTR executioner enforces a minimum time step of 10^{-5} s.\",\n      \"reported_value\": 0.00001,\n      \"reported_unit\": \"s\",\n      \"evidence_quote\": \"The executioner further enforces limits of \\\\(\\\\Delta t_{\\\\rm min}=10^{-5}\\\\) s\",\n      \"source\": \"ABTR_case.pdf\",\n      \"page\": 3\n    }\n  ],\n  \"citations\": [\n    {\n      \"source\": \"ABTR_case.pdf\",\n      \"page\": 3\n    }\n  ]\n}",
+  "parsed_response": {
+    "answerable": true,
+    "answer": "The minimum time step allowed by the ABTR executioner is 10^{-5} s.",
+    "claims": [
+      {
+        "text": "The ABTR executioner enforces a minimum time step of 10^{-5} s.",
+        "reported_value": 1e-05,
+        "reported_unit": "s",
+        "evidence_quote": "The executioner further enforces limits of \\(\\Delta t_{\\rm min}=10^{-5}\\) s",
+        "source": "ABTR_case.pdf",
+        "page": 3
+      }
+    ],
+    "citations": [
+      {
+        "source": "ABTR_case.pdf",
+        "page": 3
+      }
+    ]
+  },
+  "parse_warning": null,
+  "response_metadata": {
+    "id": "chatcmpl-EDEscMEc3uhtxA3dIGNCc8CcheM58",
+    "request_id": "req_34957a17f21d4ad69b226f5b361211f0",
+    "created": 1786824170,
+    "resolved_model": "gpt-5.6-sol",
+    "system_fingerprint": null,
+    "usage": {
+      "completion_tokens": 171,
+      "prompt_tokens": 1229,
+      "total_tokens": 1400,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1226,
+        "cache_write_tokens": 0
+      }
+    }
+  },
+  "latency_seconds": 2.6452571999980137,
+  "scores": {
+    "answerable": true,
+    "response_answerable": true,
+    "question_type": "direct",
+    "required_claim_count": 1,
+    "recovered_claim_count": 1,
+    "recovered_claims": {
+      "dt_min": true
+    },
+    "CoP": 1.0,
+    "exact_answer": true,
+    "required_evidence_count": 1,
+    "retrieved_required_evidence_count": 1,
+    "retrieved_required_evidence": [
+      {
+        "source": "abtr_case.pdf",
+        "page": 3
+      }
+    ],
+    "all_required_evidence_retrieved": true,
+    "citation_count": 1,
+    "supported_citation_count": 1,
+    "CiP": 1.0,
+    "CiH": 1.0,
+    "generated_claim_count": 1,
+    "unsupported_claim_count": 0,
+    "HR": 0.0,
+    "abstention_correct": null,
+    "claim_support_details": [
+      {
+        "index": 0,
+        "text": "The ABTR executioner enforces a minimum time step of 10^{-5} s.",
+        "matched_required_claims": [
+          "dt_min"
+        ],
+        "context_supported": true,
+        "supporting_retrieved_pages": [
+          {
+            "source": "abtr_case.pdf",
+            "page": 3
+          }
+        ],
+        "citation": {
+          "source": "ABTR_case.pdf",
+          "page": 3
+        },
+        "citation_supported": true,
+        "citation_mode": "claim_or_quote_supported_on_cited_page"
+      }
+    ],
+    "failure_class": "none",
+    "EvidenceRecallAt2": 1.0,
+    "target_citation_count": 1,
+    "noise_citation_count": 0,
+    "retrieved_target_chunks": 2,
+    "retrieved_noise_chunks": 0,
+    "retrieved_noise_fraction": 0.0
+  }
+}

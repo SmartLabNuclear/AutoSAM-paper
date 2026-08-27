@@ -1,0 +1,1872 @@
+[
+  {
+    "item_id": "msre_param_01",
+    "question": "What are the thermophysical properties of the fuel salt used in the MSRE model? Report the melting temperature, density correlation, dynamic-viscosity correlation, thermal conductivity, and specific heat capacity with units.",
+    "top_k": 10,
+    "retrieved_chunk_ids": [
+      "target-msre-case-p0001",
+      "target-msre-case-p0002",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0003",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0015",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0014",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0006",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0017",
+      "noise-neams-msre-p0018",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0002",
+      "noise-neams-msre-p0016"
+    ],
+    "target_chunks": 2,
+    "noise_chunks": 8,
+    "noise_fraction": 0.8,
+    "required_evidence": [
+      {
+        "source": "MSRE_case.pdf",
+        "page": 1
+      }
+    ],
+    "retrieved_required_evidence": [
+      {
+        "source": "msre_case.pdf",
+        "page": 1
+      }
+    ],
+    "EvidenceRecallAt10": 1.0,
+    "ranking": [
+      {
+        "rank": 1,
+        "chunk_id": "target-msre-case-p0001",
+        "source": "MSRE_case.pdf",
+        "page": 1,
+        "document_role": "target",
+        "cosine_distance": 0.27800536155700684,
+        "content_sha256": "31d2e79ba6e96aae62821e4d70fb468fcc2ee900fb5e340cdc9afde030c608bc"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "target-msre-case-p0002",
+        "source": "MSRE_case.pdf",
+        "page": 2,
+        "document_role": "target",
+        "cosine_distance": 0.299172043800354,
+        "content_sha256": "659f66c1bcab9e8582afc6ed1bb31fd9d05f43dc5929c042d372d41b978177ab"
+      },
+      {
+        "rank": 3,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0003",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 3,
+        "document_role": "noise",
+        "cosine_distance": 0.38447046279907227,
+        "content_sha256": "d4ccf9d1e3afb861b3e19abecdb0195a62fb162a7de3964f57cd3acaddec71c0"
+      },
+      {
+        "rank": 4,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0015",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 15,
+        "document_role": "noise",
+        "cosine_distance": 0.40272772312164307,
+        "content_sha256": "9fdf76519fb8d4aea9016e98bc2ce086e2970f089b48daf99f1da411fcfb0ab7"
+      },
+      {
+        "rank": 5,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0014",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 14,
+        "document_role": "noise",
+        "cosine_distance": 0.41530686616897583,
+        "content_sha256": "bf8cc60bb0468cfec39846cc30ef02d6c2d4c928665f34b66fcb7cba99b94130"
+      },
+      {
+        "rank": 6,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0006",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 6,
+        "document_role": "noise",
+        "cosine_distance": 0.4200723171234131,
+        "content_sha256": "0fbacf596b85b5e7cbe2e929eaf33eb77609da6c8aac305f6f4af6a3162e5e5a"
+      },
+      {
+        "rank": 7,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0017",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 17,
+        "document_role": "noise",
+        "cosine_distance": 0.42344969511032104,
+        "content_sha256": "e8a357544ac6e3b8dc37a52fd3b8345d6f8a55844eb025d2598e25efa2fb6216"
+      },
+      {
+        "rank": 8,
+        "chunk_id": "noise-neams-msre-p0018",
+        "source": "neams-msre.pdf",
+        "page": 18,
+        "document_role": "noise",
+        "cosine_distance": 0.42609238624572754,
+        "content_sha256": "04b04825dc864ab7ac7d8903f88317fd1151f5d3b7e24bc37e6fa3d4e405c02b"
+      },
+      {
+        "rank": 9,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0002",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 2,
+        "document_role": "noise",
+        "cosine_distance": 0.4267951250076294,
+        "content_sha256": "19c94a25815f62418515504524f0417c8de3feeccbd2bba7809e69e3ec825554"
+      },
+      {
+        "rank": 10,
+        "chunk_id": "noise-neams-msre-p0016",
+        "source": "neams-msre.pdf",
+        "page": 16,
+        "document_role": "noise",
+        "cosine_distance": 0.4272953271865845,
+        "content_sha256": "7d553d778f4ae72dda30ad256e2462dd03b72a3c7b44047f420c62a73a7d757c"
+      }
+    ]
+  },
+  {
+    "item_id": "msre_param_02",
+    "question": "What equation is used for the MSRE fuel-salt density? Give the complete temperature-dependent correlation and its units.",
+    "top_k": 10,
+    "retrieved_chunk_ids": [
+      "target-msre-case-p0001",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0015",
+      "target-msre-case-p0002",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0003",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0014",
+      "target-msre-case-p0003",
+      "noise-neams-msre-p0018",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0006",
+      "noise-neams-msre-p0013",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0012"
+    ],
+    "target_chunks": 3,
+    "noise_chunks": 7,
+    "noise_fraction": 0.7,
+    "required_evidence": [
+      {
+        "source": "MSRE_case.pdf",
+        "page": 1
+      }
+    ],
+    "retrieved_required_evidence": [
+      {
+        "source": "msre_case.pdf",
+        "page": 1
+      }
+    ],
+    "EvidenceRecallAt10": 1.0,
+    "ranking": [
+      {
+        "rank": 1,
+        "chunk_id": "target-msre-case-p0001",
+        "source": "MSRE_case.pdf",
+        "page": 1,
+        "document_role": "target",
+        "cosine_distance": 0.3826538920402527,
+        "content_sha256": "31d2e79ba6e96aae62821e4d70fb468fcc2ee900fb5e340cdc9afde030c608bc"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0015",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 15,
+        "document_role": "noise",
+        "cosine_distance": 0.4215373396873474,
+        "content_sha256": "9fdf76519fb8d4aea9016e98bc2ce086e2970f089b48daf99f1da411fcfb0ab7"
+      },
+      {
+        "rank": 3,
+        "chunk_id": "target-msre-case-p0002",
+        "source": "MSRE_case.pdf",
+        "page": 2,
+        "document_role": "target",
+        "cosine_distance": 0.42809760570526123,
+        "content_sha256": "659f66c1bcab9e8582afc6ed1bb31fd9d05f43dc5929c042d372d41b978177ab"
+      },
+      {
+        "rank": 4,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0003",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 3,
+        "document_role": "noise",
+        "cosine_distance": 0.48084235191345215,
+        "content_sha256": "d4ccf9d1e3afb861b3e19abecdb0195a62fb162a7de3964f57cd3acaddec71c0"
+      },
+      {
+        "rank": 5,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0014",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 14,
+        "document_role": "noise",
+        "cosine_distance": 0.4815508723258972,
+        "content_sha256": "bf8cc60bb0468cfec39846cc30ef02d6c2d4c928665f34b66fcb7cba99b94130"
+      },
+      {
+        "rank": 6,
+        "chunk_id": "target-msre-case-p0003",
+        "source": "MSRE_case.pdf",
+        "page": 3,
+        "document_role": "target",
+        "cosine_distance": 0.48729389905929565,
+        "content_sha256": "46b12c8b9e90a823d4927290372a33626654692e451f11867d3ef51f2b961493"
+      },
+      {
+        "rank": 7,
+        "chunk_id": "noise-neams-msre-p0018",
+        "source": "neams-msre.pdf",
+        "page": 18,
+        "document_role": "noise",
+        "cosine_distance": 0.5028152465820312,
+        "content_sha256": "04b04825dc864ab7ac7d8903f88317fd1151f5d3b7e24bc37e6fa3d4e405c02b"
+      },
+      {
+        "rank": 8,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0006",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 6,
+        "document_role": "noise",
+        "cosine_distance": 0.5074847936630249,
+        "content_sha256": "0fbacf596b85b5e7cbe2e929eaf33eb77609da6c8aac305f6f4af6a3162e5e5a"
+      },
+      {
+        "rank": 9,
+        "chunk_id": "noise-neams-msre-p0013",
+        "source": "neams-msre.pdf",
+        "page": 13,
+        "document_role": "noise",
+        "cosine_distance": 0.5112241506576538,
+        "content_sha256": "4f87f8886e5d08ca1b1434547d9d5cefafa80727a9f495e19c648c98dd529c92"
+      },
+      {
+        "rank": 10,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0012",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 12,
+        "document_role": "noise",
+        "cosine_distance": 0.5176162719726562,
+        "content_sha256": "d095197ca32bec73851b0272c121b5f6c1af1505881448ec870c7157f6cea9a6"
+      }
+    ]
+  },
+  {
+    "item_id": "msre_param_03",
+    "question": "What thermal conductivity and specific heat capacity are specified for the MSRE fuel salt? Give both values with units.",
+    "top_k": 10,
+    "retrieved_chunk_ids": [
+      "target-msre-case-p0001",
+      "target-msre-case-p0002",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0003",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0015",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0017",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0014",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0006",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0002",
+      "noise-neams-msre-p0018",
+      "noise-neams-msre-p0027"
+    ],
+    "target_chunks": 2,
+    "noise_chunks": 8,
+    "noise_fraction": 0.8,
+    "required_evidence": [
+      {
+        "source": "MSRE_case.pdf",
+        "page": 1
+      }
+    ],
+    "retrieved_required_evidence": [
+      {
+        "source": "msre_case.pdf",
+        "page": 1
+      }
+    ],
+    "EvidenceRecallAt10": 1.0,
+    "ranking": [
+      {
+        "rank": 1,
+        "chunk_id": "target-msre-case-p0001",
+        "source": "MSRE_case.pdf",
+        "page": 1,
+        "document_role": "target",
+        "cosine_distance": 0.36995047330856323,
+        "content_sha256": "31d2e79ba6e96aae62821e4d70fb468fcc2ee900fb5e340cdc9afde030c608bc"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "target-msre-case-p0002",
+        "source": "MSRE_case.pdf",
+        "page": 2,
+        "document_role": "target",
+        "cosine_distance": 0.4304669499397278,
+        "content_sha256": "659f66c1bcab9e8582afc6ed1bb31fd9d05f43dc5929c042d372d41b978177ab"
+      },
+      {
+        "rank": 3,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0003",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 3,
+        "document_role": "noise",
+        "cosine_distance": 0.4442327618598938,
+        "content_sha256": "d4ccf9d1e3afb861b3e19abecdb0195a62fb162a7de3964f57cd3acaddec71c0"
+      },
+      {
+        "rank": 4,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0015",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 15,
+        "document_role": "noise",
+        "cosine_distance": 0.4805941581726074,
+        "content_sha256": "9fdf76519fb8d4aea9016e98bc2ce086e2970f089b48daf99f1da411fcfb0ab7"
+      },
+      {
+        "rank": 5,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0017",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 17,
+        "document_role": "noise",
+        "cosine_distance": 0.48567521572113037,
+        "content_sha256": "e8a357544ac6e3b8dc37a52fd3b8345d6f8a55844eb025d2598e25efa2fb6216"
+      },
+      {
+        "rank": 6,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0014",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 14,
+        "document_role": "noise",
+        "cosine_distance": 0.49814027547836304,
+        "content_sha256": "bf8cc60bb0468cfec39846cc30ef02d6c2d4c928665f34b66fcb7cba99b94130"
+      },
+      {
+        "rank": 7,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0006",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 6,
+        "document_role": "noise",
+        "cosine_distance": 0.5023423433303833,
+        "content_sha256": "0fbacf596b85b5e7cbe2e929eaf33eb77609da6c8aac305f6f4af6a3162e5e5a"
+      },
+      {
+        "rank": 8,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0002",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 2,
+        "document_role": "noise",
+        "cosine_distance": 0.5070935487747192,
+        "content_sha256": "19c94a25815f62418515504524f0417c8de3feeccbd2bba7809e69e3ec825554"
+      },
+      {
+        "rank": 9,
+        "chunk_id": "noise-neams-msre-p0018",
+        "source": "neams-msre.pdf",
+        "page": 18,
+        "document_role": "noise",
+        "cosine_distance": 0.5098066329956055,
+        "content_sha256": "04b04825dc864ab7ac7d8903f88317fd1151f5d3b7e24bc37e6fa3d4e405c02b"
+      },
+      {
+        "rank": 10,
+        "chunk_id": "noise-neams-msre-p0027",
+        "source": "neams-msre.pdf",
+        "page": 27,
+        "document_role": "noise",
+        "cosine_distance": 0.5129270553588867,
+        "content_sha256": "8e4626dc8369af96286ea94168e84547865c4d449e0380d8805eb50fd39b8f9d"
+      }
+    ]
+  },
+  {
+    "item_id": "msre_param_04",
+    "question": "What are the thermophysical properties of the coolant salt in the MSRE heat exchanger? Report the melting temperature, density correlation, dynamic-viscosity correlation, thermal conductivity, and specific heat capacity with units.",
+    "top_k": 10,
+    "retrieved_chunk_ids": [
+      "target-msre-case-p0001",
+      "target-msre-case-p0002",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0003",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0015",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0017",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0006",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0002",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0018",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0005",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0014"
+    ],
+    "target_chunks": 2,
+    "noise_chunks": 8,
+    "noise_fraction": 0.8,
+    "required_evidence": [
+      {
+        "source": "MSRE_case.pdf",
+        "page": 2
+      }
+    ],
+    "retrieved_required_evidence": [
+      {
+        "source": "msre_case.pdf",
+        "page": 2
+      }
+    ],
+    "EvidenceRecallAt10": 1.0,
+    "ranking": [
+      {
+        "rank": 1,
+        "chunk_id": "target-msre-case-p0001",
+        "source": "MSRE_case.pdf",
+        "page": 1,
+        "document_role": "target",
+        "cosine_distance": 0.28401780128479004,
+        "content_sha256": "31d2e79ba6e96aae62821e4d70fb468fcc2ee900fb5e340cdc9afde030c608bc"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "target-msre-case-p0002",
+        "source": "MSRE_case.pdf",
+        "page": 2,
+        "document_role": "target",
+        "cosine_distance": 0.3221312165260315,
+        "content_sha256": "659f66c1bcab9e8582afc6ed1bb31fd9d05f43dc5929c042d372d41b978177ab"
+      },
+      {
+        "rank": 3,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0003",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 3,
+        "document_role": "noise",
+        "cosine_distance": 0.3727268576622009,
+        "content_sha256": "d4ccf9d1e3afb861b3e19abecdb0195a62fb162a7de3964f57cd3acaddec71c0"
+      },
+      {
+        "rank": 4,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0015",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 15,
+        "document_role": "noise",
+        "cosine_distance": 0.4051125645637512,
+        "content_sha256": "9fdf76519fb8d4aea9016e98bc2ce086e2970f089b48daf99f1da411fcfb0ab7"
+      },
+      {
+        "rank": 5,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0017",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 17,
+        "document_role": "noise",
+        "cosine_distance": 0.40695732831954956,
+        "content_sha256": "e8a357544ac6e3b8dc37a52fd3b8345d6f8a55844eb025d2598e25efa2fb6216"
+      },
+      {
+        "rank": 6,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0006",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 6,
+        "document_role": "noise",
+        "cosine_distance": 0.4120781421661377,
+        "content_sha256": "0fbacf596b85b5e7cbe2e929eaf33eb77609da6c8aac305f6f4af6a3162e5e5a"
+      },
+      {
+        "rank": 7,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0002",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 2,
+        "document_role": "noise",
+        "cosine_distance": 0.4220873713493347,
+        "content_sha256": "19c94a25815f62418515504524f0417c8de3feeccbd2bba7809e69e3ec825554"
+      },
+      {
+        "rank": 8,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0018",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 18,
+        "document_role": "noise",
+        "cosine_distance": 0.42579346895217896,
+        "content_sha256": "e62c7cde9f96ee69301094ff99f5c12a58175b3c515c767efa32676ff4ccfd0c"
+      },
+      {
+        "rank": 9,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0005",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 5,
+        "document_role": "noise",
+        "cosine_distance": 0.4262657165527344,
+        "content_sha256": "1190f01da9e2a461eb9b415e508b676bad6e0ae5f479ab735e398e08aac9db44"
+      },
+      {
+        "rank": 10,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0014",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 14,
+        "document_role": "noise",
+        "cosine_distance": 0.4385112524032593,
+        "content_sha256": "bf8cc60bb0468cfec39846cc30ef02d6c2d4c928665f34b66fcb7cba99b94130"
+      }
+    ]
+  },
+  {
+    "item_id": "msre_param_05",
+    "question": "What equation is used for the dynamic viscosity of the coolant salt in the MSRE heat exchanger? Give the complete temperature-dependent correlation and its units.",
+    "top_k": 10,
+    "retrieved_chunk_ids": [
+      "target-msre-case-p0002",
+      "target-msre-case-p0001",
+      "noise-neams-msre-p0018",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0003",
+      "target-msre-case-p0003",
+      "noise-neams-msre-p0019",
+      "noise-neams-msre-p0023",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0015",
+      "noise-neams-msre-p0025",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0017"
+    ],
+    "target_chunks": 3,
+    "noise_chunks": 7,
+    "noise_fraction": 0.7,
+    "required_evidence": [
+      {
+        "source": "MSRE_case.pdf",
+        "page": 2
+      }
+    ],
+    "retrieved_required_evidence": [
+      {
+        "source": "msre_case.pdf",
+        "page": 2
+      }
+    ],
+    "EvidenceRecallAt10": 1.0,
+    "ranking": [
+      {
+        "rank": 1,
+        "chunk_id": "target-msre-case-p0002",
+        "source": "MSRE_case.pdf",
+        "page": 2,
+        "document_role": "target",
+        "cosine_distance": 0.41462963819503784,
+        "content_sha256": "659f66c1bcab9e8582afc6ed1bb31fd9d05f43dc5929c042d372d41b978177ab"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "target-msre-case-p0001",
+        "source": "MSRE_case.pdf",
+        "page": 1,
+        "document_role": "target",
+        "cosine_distance": 0.41936779022216797,
+        "content_sha256": "31d2e79ba6e96aae62821e4d70fb468fcc2ee900fb5e340cdc9afde030c608bc"
+      },
+      {
+        "rank": 3,
+        "chunk_id": "noise-neams-msre-p0018",
+        "source": "neams-msre.pdf",
+        "page": 18,
+        "document_role": "noise",
+        "cosine_distance": 0.4714318513870239,
+        "content_sha256": "04b04825dc864ab7ac7d8903f88317fd1151f5d3b7e24bc37e6fa3d4e405c02b"
+      },
+      {
+        "rank": 4,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0003",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 3,
+        "document_role": "noise",
+        "cosine_distance": 0.4882696270942688,
+        "content_sha256": "d4ccf9d1e3afb861b3e19abecdb0195a62fb162a7de3964f57cd3acaddec71c0"
+      },
+      {
+        "rank": 5,
+        "chunk_id": "target-msre-case-p0003",
+        "source": "MSRE_case.pdf",
+        "page": 3,
+        "document_role": "target",
+        "cosine_distance": 0.5002557635307312,
+        "content_sha256": "46b12c8b9e90a823d4927290372a33626654692e451f11867d3ef51f2b961493"
+      },
+      {
+        "rank": 6,
+        "chunk_id": "noise-neams-msre-p0019",
+        "source": "neams-msre.pdf",
+        "page": 19,
+        "document_role": "noise",
+        "cosine_distance": 0.5049633979797363,
+        "content_sha256": "9da68c82720b46e9113577a7211313697e35225dee79d1c353cabb5e83cc3208"
+      },
+      {
+        "rank": 7,
+        "chunk_id": "noise-neams-msre-p0023",
+        "source": "neams-msre.pdf",
+        "page": 23,
+        "document_role": "noise",
+        "cosine_distance": 0.5123619437217712,
+        "content_sha256": "f56bb53ed43359343d8e05f804d02072a06dbbc955fce13adca727bd69a42165"
+      },
+      {
+        "rank": 8,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0015",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 15,
+        "document_role": "noise",
+        "cosine_distance": 0.5158222913742065,
+        "content_sha256": "9fdf76519fb8d4aea9016e98bc2ce086e2970f089b48daf99f1da411fcfb0ab7"
+      },
+      {
+        "rank": 9,
+        "chunk_id": "noise-neams-msre-p0025",
+        "source": "neams-msre.pdf",
+        "page": 25,
+        "document_role": "noise",
+        "cosine_distance": 0.5247800350189209,
+        "content_sha256": "b575fbe4e594e0d89b8924fce7f44302160eb21c5746099221650cabf57141e2"
+      },
+      {
+        "rank": 10,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0017",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 17,
+        "document_role": "noise",
+        "cosine_distance": 0.5260024070739746,
+        "content_sha256": "e8a357544ac6e3b8dc37a52fd3b8345d6f8a55844eb025d2598e25efa2fb6216"
+      }
+    ]
+  },
+  {
+    "item_id": "msre_param_06",
+    "question": "What thermal conductivity and specific heat capacity are specified for the coolant salt in the MSRE heat exchanger? Give both values with units.",
+    "top_k": 10,
+    "retrieved_chunk_ids": [
+      "target-msre-case-p0001",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0003",
+      "target-msre-case-p0002",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0017",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0015",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0006",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0018",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0005",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0002",
+      "noise-neams-msre-p0018"
+    ],
+    "target_chunks": 2,
+    "noise_chunks": 8,
+    "noise_fraction": 0.8,
+    "required_evidence": [
+      {
+        "source": "MSRE_case.pdf",
+        "page": 2
+      }
+    ],
+    "retrieved_required_evidence": [
+      {
+        "source": "msre_case.pdf",
+        "page": 2
+      }
+    ],
+    "EvidenceRecallAt10": 1.0,
+    "ranking": [
+      {
+        "rank": 1,
+        "chunk_id": "target-msre-case-p0001",
+        "source": "MSRE_case.pdf",
+        "page": 1,
+        "document_role": "target",
+        "cosine_distance": 0.3552253246307373,
+        "content_sha256": "31d2e79ba6e96aae62821e4d70fb468fcc2ee900fb5e340cdc9afde030c608bc"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0003",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 3,
+        "document_role": "noise",
+        "cosine_distance": 0.42469894886016846,
+        "content_sha256": "d4ccf9d1e3afb861b3e19abecdb0195a62fb162a7de3964f57cd3acaddec71c0"
+      },
+      {
+        "rank": 3,
+        "chunk_id": "target-msre-case-p0002",
+        "source": "MSRE_case.pdf",
+        "page": 2,
+        "document_role": "target",
+        "cosine_distance": 0.4287525415420532,
+        "content_sha256": "659f66c1bcab9e8582afc6ed1bb31fd9d05f43dc5929c042d372d41b978177ab"
+      },
+      {
+        "rank": 4,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0017",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 17,
+        "document_role": "noise",
+        "cosine_distance": 0.4621095061302185,
+        "content_sha256": "e8a357544ac6e3b8dc37a52fd3b8345d6f8a55844eb025d2598e25efa2fb6216"
+      },
+      {
+        "rank": 5,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0015",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 15,
+        "document_role": "noise",
+        "cosine_distance": 0.47459566593170166,
+        "content_sha256": "9fdf76519fb8d4aea9016e98bc2ce086e2970f089b48daf99f1da411fcfb0ab7"
+      },
+      {
+        "rank": 6,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0006",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 6,
+        "document_role": "noise",
+        "cosine_distance": 0.4828197956085205,
+        "content_sha256": "0fbacf596b85b5e7cbe2e929eaf33eb77609da6c8aac305f6f4af6a3162e5e5a"
+      },
+      {
+        "rank": 7,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0018",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 18,
+        "document_role": "noise",
+        "cosine_distance": 0.48750585317611694,
+        "content_sha256": "e62c7cde9f96ee69301094ff99f5c12a58175b3c515c767efa32676ff4ccfd0c"
+      },
+      {
+        "rank": 8,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0005",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 5,
+        "document_role": "noise",
+        "cosine_distance": 0.48822563886642456,
+        "content_sha256": "1190f01da9e2a461eb9b415e508b676bad6e0ae5f479ab735e398e08aac9db44"
+      },
+      {
+        "rank": 9,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0002",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 2,
+        "document_role": "noise",
+        "cosine_distance": 0.4965561628341675,
+        "content_sha256": "19c94a25815f62418515504524f0417c8de3feeccbd2bba7809e69e3ec825554"
+      },
+      {
+        "rank": 10,
+        "chunk_id": "noise-neams-msre-p0018",
+        "source": "neams-msre.pdf",
+        "page": 18,
+        "document_role": "noise",
+        "cosine_distance": 0.503719687461853,
+        "content_sha256": "04b04825dc864ab7ac7d8903f88317fd1151f5d3b7e24bc37e6fa3d4e405c02b"
+      }
+    ]
+  },
+  {
+    "item_id": "msre_param_07",
+    "question": "What solid material is used to construct the MSRE heat exchanger?",
+    "top_k": 10,
+    "retrieved_chunk_ids": [
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0003",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0006",
+      "target-msre-case-p0001",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0005",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0018",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0017",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0013",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0002",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0014",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0004"
+    ],
+    "target_chunks": 1,
+    "noise_chunks": 9,
+    "noise_fraction": 0.9,
+    "required_evidence": [
+      {
+        "source": "MSRE_case.pdf",
+        "page": 1
+      }
+    ],
+    "retrieved_required_evidence": [
+      {
+        "source": "msre_case.pdf",
+        "page": 1
+      }
+    ],
+    "EvidenceRecallAt10": 1.0,
+    "ranking": [
+      {
+        "rank": 1,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0003",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 3,
+        "document_role": "noise",
+        "cosine_distance": 0.36309707164764404,
+        "content_sha256": "d4ccf9d1e3afb861b3e19abecdb0195a62fb162a7de3964f57cd3acaddec71c0"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0006",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 6,
+        "document_role": "noise",
+        "cosine_distance": 0.3984660506248474,
+        "content_sha256": "0fbacf596b85b5e7cbe2e929eaf33eb77609da6c8aac305f6f4af6a3162e5e5a"
+      },
+      {
+        "rank": 3,
+        "chunk_id": "target-msre-case-p0001",
+        "source": "MSRE_case.pdf",
+        "page": 1,
+        "document_role": "target",
+        "cosine_distance": 0.42530572414398193,
+        "content_sha256": "31d2e79ba6e96aae62821e4d70fb468fcc2ee900fb5e340cdc9afde030c608bc"
+      },
+      {
+        "rank": 4,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0005",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 5,
+        "document_role": "noise",
+        "cosine_distance": 0.44575613737106323,
+        "content_sha256": "1190f01da9e2a461eb9b415e508b676bad6e0ae5f479ab735e398e08aac9db44"
+      },
+      {
+        "rank": 5,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0018",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 18,
+        "document_role": "noise",
+        "cosine_distance": 0.4704829454421997,
+        "content_sha256": "e62c7cde9f96ee69301094ff99f5c12a58175b3c515c767efa32676ff4ccfd0c"
+      },
+      {
+        "rank": 6,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0017",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 17,
+        "document_role": "noise",
+        "cosine_distance": 0.4763413071632385,
+        "content_sha256": "e8a357544ac6e3b8dc37a52fd3b8345d6f8a55844eb025d2598e25efa2fb6216"
+      },
+      {
+        "rank": 7,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0013",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 13,
+        "document_role": "noise",
+        "cosine_distance": 0.47650134563446045,
+        "content_sha256": "7ed712137595d8821aca299ddbcabd241e4a5ac4dda4abd3e8c01030b4d8dedd"
+      },
+      {
+        "rank": 8,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0002",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 2,
+        "document_role": "noise",
+        "cosine_distance": 0.49344873428344727,
+        "content_sha256": "19c94a25815f62418515504524f0417c8de3feeccbd2bba7809e69e3ec825554"
+      },
+      {
+        "rank": 9,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0014",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 14,
+        "document_role": "noise",
+        "cosine_distance": 0.502090334892273,
+        "content_sha256": "bf8cc60bb0468cfec39846cc30ef02d6c2d4c928665f34b66fcb7cba99b94130"
+      },
+      {
+        "rank": 10,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0004",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 4,
+        "document_role": "noise",
+        "cosine_distance": 0.5053719282150269,
+        "content_sha256": "5dcaa641277a03ca0025a3346e8073a42241efb56b7fd62ae573b355d5ff43d2"
+      }
+    ]
+  },
+  {
+    "item_id": "msre_param_08",
+    "question": "What density is specified for Hastelloy N in the MSRE heat-exchanger model? Give the value with units.",
+    "top_k": 10,
+    "retrieved_chunk_ids": [
+      "target-msre-case-p0001",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0003",
+      "noise-neams-msre-p0018",
+      "noise-neams-msre-p0023",
+      "noise-neams-msre-p0021",
+      "target-msre-case-p0002",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0015",
+      "noise-neams-msre-p0022",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0013",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0014"
+    ],
+    "target_chunks": 2,
+    "noise_chunks": 8,
+    "noise_fraction": 0.8,
+    "required_evidence": [
+      {
+        "source": "MSRE_case.pdf",
+        "page": 2
+      }
+    ],
+    "retrieved_required_evidence": [
+      {
+        "source": "msre_case.pdf",
+        "page": 2
+      }
+    ],
+    "EvidenceRecallAt10": 1.0,
+    "ranking": [
+      {
+        "rank": 1,
+        "chunk_id": "target-msre-case-p0001",
+        "source": "MSRE_case.pdf",
+        "page": 1,
+        "document_role": "target",
+        "cosine_distance": 0.4882175326347351,
+        "content_sha256": "31d2e79ba6e96aae62821e4d70fb468fcc2ee900fb5e340cdc9afde030c608bc"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0003",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 3,
+        "document_role": "noise",
+        "cosine_distance": 0.4984250068664551,
+        "content_sha256": "d4ccf9d1e3afb861b3e19abecdb0195a62fb162a7de3964f57cd3acaddec71c0"
+      },
+      {
+        "rank": 3,
+        "chunk_id": "noise-neams-msre-p0018",
+        "source": "neams-msre.pdf",
+        "page": 18,
+        "document_role": "noise",
+        "cosine_distance": 0.5391420125961304,
+        "content_sha256": "04b04825dc864ab7ac7d8903f88317fd1151f5d3b7e24bc37e6fa3d4e405c02b"
+      },
+      {
+        "rank": 4,
+        "chunk_id": "noise-neams-msre-p0023",
+        "source": "neams-msre.pdf",
+        "page": 23,
+        "document_role": "noise",
+        "cosine_distance": 0.5445870161056519,
+        "content_sha256": "f56bb53ed43359343d8e05f804d02072a06dbbc955fce13adca727bd69a42165"
+      },
+      {
+        "rank": 5,
+        "chunk_id": "noise-neams-msre-p0021",
+        "source": "neams-msre.pdf",
+        "page": 21,
+        "document_role": "noise",
+        "cosine_distance": 0.5515968799591064,
+        "content_sha256": "b0b31895f51e7cd8c400682bc0fd62e912dcda6b46d056d3e2366c123a0ccecf"
+      },
+      {
+        "rank": 6,
+        "chunk_id": "target-msre-case-p0002",
+        "source": "MSRE_case.pdf",
+        "page": 2,
+        "document_role": "target",
+        "cosine_distance": 0.5555155277252197,
+        "content_sha256": "659f66c1bcab9e8582afc6ed1bb31fd9d05f43dc5929c042d372d41b978177ab"
+      },
+      {
+        "rank": 7,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0015",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 15,
+        "document_role": "noise",
+        "cosine_distance": 0.5582394003868103,
+        "content_sha256": "9fdf76519fb8d4aea9016e98bc2ce086e2970f089b48daf99f1da411fcfb0ab7"
+      },
+      {
+        "rank": 8,
+        "chunk_id": "noise-neams-msre-p0022",
+        "source": "neams-msre.pdf",
+        "page": 22,
+        "document_role": "noise",
+        "cosine_distance": 0.5638114809989929,
+        "content_sha256": "ed5376113d816214daeececee3e6f4842a94bfffb0d5fef9c5c5a10495f061da"
+      },
+      {
+        "rank": 9,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0013",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 13,
+        "document_role": "noise",
+        "cosine_distance": 0.564419686794281,
+        "content_sha256": "7ed712137595d8821aca299ddbcabd241e4a5ac4dda4abd3e8c01030b4d8dedd"
+      },
+      {
+        "rank": 10,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0014",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 14,
+        "document_role": "noise",
+        "cosine_distance": 0.5814354419708252,
+        "content_sha256": "bf8cc60bb0468cfec39846cc30ef02d6c2d4c928665f34b66fcb7cba99b94130"
+      }
+    ]
+  },
+  {
+    "item_id": "msre_param_09",
+    "question": "How is the MSRE fuel-salt enthalpy function defined over 750-1200 K? State both endpoint temperature-enthalpy pairs and describe the interpolation.",
+    "top_k": 10,
+    "retrieved_chunk_ids": [
+      "target-msre-case-p0001",
+      "target-msre-case-p0002",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0003",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0015",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0014",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0002",
+      "noise-neams-msre-p0027",
+      "target-msre-case-p0003",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0017",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0006"
+    ],
+    "target_chunks": 3,
+    "noise_chunks": 7,
+    "noise_fraction": 0.7,
+    "required_evidence": [
+      {
+        "source": "MSRE_case.pdf",
+        "page": 2
+      }
+    ],
+    "retrieved_required_evidence": [
+      {
+        "source": "msre_case.pdf",
+        "page": 2
+      }
+    ],
+    "EvidenceRecallAt10": 1.0,
+    "ranking": [
+      {
+        "rank": 1,
+        "chunk_id": "target-msre-case-p0001",
+        "source": "MSRE_case.pdf",
+        "page": 1,
+        "document_role": "target",
+        "cosine_distance": 0.3680770993232727,
+        "content_sha256": "31d2e79ba6e96aae62821e4d70fb468fcc2ee900fb5e340cdc9afde030c608bc"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "target-msre-case-p0002",
+        "source": "MSRE_case.pdf",
+        "page": 2,
+        "document_role": "target",
+        "cosine_distance": 0.3778500556945801,
+        "content_sha256": "659f66c1bcab9e8582afc6ed1bb31fd9d05f43dc5929c042d372d41b978177ab"
+      },
+      {
+        "rank": 3,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0003",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 3,
+        "document_role": "noise",
+        "cosine_distance": 0.44365495443344116,
+        "content_sha256": "d4ccf9d1e3afb861b3e19abecdb0195a62fb162a7de3964f57cd3acaddec71c0"
+      },
+      {
+        "rank": 4,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0015",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 15,
+        "document_role": "noise",
+        "cosine_distance": 0.45342516899108887,
+        "content_sha256": "9fdf76519fb8d4aea9016e98bc2ce086e2970f089b48daf99f1da411fcfb0ab7"
+      },
+      {
+        "rank": 5,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0014",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 14,
+        "document_role": "noise",
+        "cosine_distance": 0.4707503914833069,
+        "content_sha256": "bf8cc60bb0468cfec39846cc30ef02d6c2d4c928665f34b66fcb7cba99b94130"
+      },
+      {
+        "rank": 6,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0002",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 2,
+        "document_role": "noise",
+        "cosine_distance": 0.4777374863624573,
+        "content_sha256": "19c94a25815f62418515504524f0417c8de3feeccbd2bba7809e69e3ec825554"
+      },
+      {
+        "rank": 7,
+        "chunk_id": "noise-neams-msre-p0027",
+        "source": "neams-msre.pdf",
+        "page": 27,
+        "document_role": "noise",
+        "cosine_distance": 0.48850589990615845,
+        "content_sha256": "8e4626dc8369af96286ea94168e84547865c4d449e0380d8805eb50fd39b8f9d"
+      },
+      {
+        "rank": 8,
+        "chunk_id": "target-msre-case-p0003",
+        "source": "MSRE_case.pdf",
+        "page": 3,
+        "document_role": "target",
+        "cosine_distance": 0.48947423696517944,
+        "content_sha256": "46b12c8b9e90a823d4927290372a33626654692e451f11867d3ef51f2b961493"
+      },
+      {
+        "rank": 9,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0017",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 17,
+        "document_role": "noise",
+        "cosine_distance": 0.5067121982574463,
+        "content_sha256": "e8a357544ac6e3b8dc37a52fd3b8345d6f8a55844eb025d2598e25efa2fb6216"
+      },
+      {
+        "rank": 10,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0006",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 6,
+        "document_role": "noise",
+        "cosine_distance": 0.5109133720397949,
+        "content_sha256": "0fbacf596b85b5e7cbe2e929eaf33eb77609da6c8aac305f6f4af6a3162e5e5a"
+      }
+    ]
+  },
+  {
+    "item_id": "msre_param_10",
+    "question": "What velocity boundary condition is imposed at the inlet of the MSRE heat-exchanger secondary side? Give the value with units.",
+    "top_k": 10,
+    "retrieved_chunk_ids": [
+      "noise-neams-msre-p0023",
+      "target-msre-case-p0005",
+      "target-msre-case-p0001",
+      "target-msre-case-p0006",
+      "noise-neams-msre-p0024",
+      "target-msre-case-p0003",
+      "noise-neams-msre-p0021",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0003",
+      "noise-neams-msre-p0018",
+      "noise-neams-msre-p0025"
+    ],
+    "target_chunks": 4,
+    "noise_chunks": 6,
+    "noise_fraction": 0.6,
+    "required_evidence": [
+      {
+        "source": "MSRE_case.pdf",
+        "page": 5
+      }
+    ],
+    "retrieved_required_evidence": [
+      {
+        "source": "msre_case.pdf",
+        "page": 5
+      }
+    ],
+    "EvidenceRecallAt10": 1.0,
+    "ranking": [
+      {
+        "rank": 1,
+        "chunk_id": "noise-neams-msre-p0023",
+        "source": "neams-msre.pdf",
+        "page": 23,
+        "document_role": "noise",
+        "cosine_distance": 0.44883549213409424,
+        "content_sha256": "f56bb53ed43359343d8e05f804d02072a06dbbc955fce13adca727bd69a42165"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "target-msre-case-p0005",
+        "source": "MSRE_case.pdf",
+        "page": 5,
+        "document_role": "target",
+        "cosine_distance": 0.47671765089035034,
+        "content_sha256": "a9c501712c2e7ef7c032f2ddb1534987432e9b96981a64bf868ebe04126a68cc"
+      },
+      {
+        "rank": 3,
+        "chunk_id": "target-msre-case-p0001",
+        "source": "MSRE_case.pdf",
+        "page": 1,
+        "document_role": "target",
+        "cosine_distance": 0.48124343156814575,
+        "content_sha256": "31d2e79ba6e96aae62821e4d70fb468fcc2ee900fb5e340cdc9afde030c608bc"
+      },
+      {
+        "rank": 4,
+        "chunk_id": "target-msre-case-p0006",
+        "source": "MSRE_case.pdf",
+        "page": 6,
+        "document_role": "target",
+        "cosine_distance": 0.48662763833999634,
+        "content_sha256": "f0a613118d39e69a3ca706d82b3a0a3c9981946321819ae66d32aca7c0098e49"
+      },
+      {
+        "rank": 5,
+        "chunk_id": "noise-neams-msre-p0024",
+        "source": "neams-msre.pdf",
+        "page": 24,
+        "document_role": "noise",
+        "cosine_distance": 0.49290937185287476,
+        "content_sha256": "7eea3ef350cc90dbf28edbbb8a1d589275bcfcb5870d9477917a08bdc05106a1"
+      },
+      {
+        "rank": 6,
+        "chunk_id": "target-msre-case-p0003",
+        "source": "MSRE_case.pdf",
+        "page": 3,
+        "document_role": "target",
+        "cosine_distance": 0.4937705397605896,
+        "content_sha256": "46b12c8b9e90a823d4927290372a33626654692e451f11867d3ef51f2b961493"
+      },
+      {
+        "rank": 7,
+        "chunk_id": "noise-neams-msre-p0021",
+        "source": "neams-msre.pdf",
+        "page": 21,
+        "document_role": "noise",
+        "cosine_distance": 0.49528276920318604,
+        "content_sha256": "b0b31895f51e7cd8c400682bc0fd62e912dcda6b46d056d3e2366c123a0ccecf"
+      },
+      {
+        "rank": 8,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0003",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 3,
+        "document_role": "noise",
+        "cosine_distance": 0.5076521635055542,
+        "content_sha256": "d4ccf9d1e3afb861b3e19abecdb0195a62fb162a7de3964f57cd3acaddec71c0"
+      },
+      {
+        "rank": 9,
+        "chunk_id": "noise-neams-msre-p0018",
+        "source": "neams-msre.pdf",
+        "page": 18,
+        "document_role": "noise",
+        "cosine_distance": 0.5126160383224487,
+        "content_sha256": "04b04825dc864ab7ac7d8903f88317fd1151f5d3b7e24bc37e6fa3d4e405c02b"
+      },
+      {
+        "rank": 10,
+        "chunk_id": "noise-neams-msre-p0025",
+        "source": "neams-msre.pdf",
+        "page": 25,
+        "document_role": "noise",
+        "cosine_distance": 0.5160930752754211,
+        "content_sha256": "b575fbe4e594e0d89b8924fce7f44302160eb21c5746099221650cabf57141e2"
+      }
+    ]
+  },
+  {
+    "item_id": "msre_param_11",
+    "question": "What pressure boundary condition is imposed at the outlet of the MSRE heat-exchanger secondary side? Give the value with units.",
+    "top_k": 10,
+    "retrieved_chunk_ids": [
+      "target-msre-case-p0005",
+      "target-msre-case-p0001",
+      "target-msre-case-p0006",
+      "noise-neams-msre-p0023",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0003",
+      "target-msre-case-p0004",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0018",
+      "noise-neams-msre-p0018",
+      "noise-neams-msre-p0021",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0004"
+    ],
+    "target_chunks": 4,
+    "noise_chunks": 6,
+    "noise_fraction": 0.6,
+    "required_evidence": [
+      {
+        "source": "MSRE_case.pdf",
+        "page": 5
+      }
+    ],
+    "retrieved_required_evidence": [
+      {
+        "source": "msre_case.pdf",
+        "page": 5
+      }
+    ],
+    "EvidenceRecallAt10": 1.0,
+    "ranking": [
+      {
+        "rank": 1,
+        "chunk_id": "target-msre-case-p0005",
+        "source": "MSRE_case.pdf",
+        "page": 5,
+        "document_role": "target",
+        "cosine_distance": 0.43723469972610474,
+        "content_sha256": "a9c501712c2e7ef7c032f2ddb1534987432e9b96981a64bf868ebe04126a68cc"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "target-msre-case-p0001",
+        "source": "MSRE_case.pdf",
+        "page": 1,
+        "document_role": "target",
+        "cosine_distance": 0.45703452825546265,
+        "content_sha256": "31d2e79ba6e96aae62821e4d70fb468fcc2ee900fb5e340cdc9afde030c608bc"
+      },
+      {
+        "rank": 3,
+        "chunk_id": "target-msre-case-p0006",
+        "source": "MSRE_case.pdf",
+        "page": 6,
+        "document_role": "target",
+        "cosine_distance": 0.47332680225372314,
+        "content_sha256": "f0a613118d39e69a3ca706d82b3a0a3c9981946321819ae66d32aca7c0098e49"
+      },
+      {
+        "rank": 4,
+        "chunk_id": "noise-neams-msre-p0023",
+        "source": "neams-msre.pdf",
+        "page": 23,
+        "document_role": "noise",
+        "cosine_distance": 0.4745413064956665,
+        "content_sha256": "f56bb53ed43359343d8e05f804d02072a06dbbc955fce13adca727bd69a42165"
+      },
+      {
+        "rank": 5,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0003",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 3,
+        "document_role": "noise",
+        "cosine_distance": 0.48030537366867065,
+        "content_sha256": "d4ccf9d1e3afb861b3e19abecdb0195a62fb162a7de3964f57cd3acaddec71c0"
+      },
+      {
+        "rank": 6,
+        "chunk_id": "target-msre-case-p0004",
+        "source": "MSRE_case.pdf",
+        "page": 4,
+        "document_role": "target",
+        "cosine_distance": 0.48320454359054565,
+        "content_sha256": "3509c1a12e28b26c966660d8efb378d633fa71ff87b3de8aec100c57864dfbdc"
+      },
+      {
+        "rank": 7,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0018",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 18,
+        "document_role": "noise",
+        "cosine_distance": 0.5016559362411499,
+        "content_sha256": "e62c7cde9f96ee69301094ff99f5c12a58175b3c515c767efa32676ff4ccfd0c"
+      },
+      {
+        "rank": 8,
+        "chunk_id": "noise-neams-msre-p0018",
+        "source": "neams-msre.pdf",
+        "page": 18,
+        "document_role": "noise",
+        "cosine_distance": 0.5037103891372681,
+        "content_sha256": "04b04825dc864ab7ac7d8903f88317fd1151f5d3b7e24bc37e6fa3d4e405c02b"
+      },
+      {
+        "rank": 9,
+        "chunk_id": "noise-neams-msre-p0021",
+        "source": "neams-msre.pdf",
+        "page": 21,
+        "document_role": "noise",
+        "cosine_distance": 0.5064983367919922,
+        "content_sha256": "b0b31895f51e7cd8c400682bc0fd62e912dcda6b46d056d3e2366c123a0ccecf"
+      },
+      {
+        "rank": 10,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0004",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 4,
+        "document_role": "noise",
+        "cosine_distance": 0.514682948589325,
+        "content_sha256": "5dcaa641277a03ca0025a3346e8073a42241efb56b7fd62ae573b355d5ff43d2"
+      }
+    ]
+  },
+  {
+    "item_id": "msre_param_12",
+    "question": "What global initial fluid pressure is specified for the MSRE model? Give the value with units.",
+    "top_k": 10,
+    "retrieved_chunk_ids": [
+      "target-msre-case-p0006",
+      "target-msre-case-p0001",
+      "target-msre-case-p0005",
+      "noise-neams-msre-p0023",
+      "target-msre-case-p0004",
+      "noise-neams-msre-p0018",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0003",
+      "noise-neams-msre-p0021",
+      "noise-neams-msre-p0027",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0002"
+    ],
+    "target_chunks": 4,
+    "noise_chunks": 6,
+    "noise_fraction": 0.6,
+    "required_evidence": [
+      {
+        "source": "MSRE_case.pdf",
+        "page": 5
+      }
+    ],
+    "retrieved_required_evidence": [
+      {
+        "source": "msre_case.pdf",
+        "page": 5
+      }
+    ],
+    "EvidenceRecallAt10": 1.0,
+    "ranking": [
+      {
+        "rank": 1,
+        "chunk_id": "target-msre-case-p0006",
+        "source": "MSRE_case.pdf",
+        "page": 6,
+        "document_role": "target",
+        "cosine_distance": 0.44698458909988403,
+        "content_sha256": "f0a613118d39e69a3ca706d82b3a0a3c9981946321819ae66d32aca7c0098e49"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "target-msre-case-p0001",
+        "source": "MSRE_case.pdf",
+        "page": 1,
+        "document_role": "target",
+        "cosine_distance": 0.47387194633483887,
+        "content_sha256": "31d2e79ba6e96aae62821e4d70fb468fcc2ee900fb5e340cdc9afde030c608bc"
+      },
+      {
+        "rank": 3,
+        "chunk_id": "target-msre-case-p0005",
+        "source": "MSRE_case.pdf",
+        "page": 5,
+        "document_role": "target",
+        "cosine_distance": 0.492906391620636,
+        "content_sha256": "a9c501712c2e7ef7c032f2ddb1534987432e9b96981a64bf868ebe04126a68cc"
+      },
+      {
+        "rank": 4,
+        "chunk_id": "noise-neams-msre-p0023",
+        "source": "neams-msre.pdf",
+        "page": 23,
+        "document_role": "noise",
+        "cosine_distance": 0.5187686085700989,
+        "content_sha256": "f56bb53ed43359343d8e05f804d02072a06dbbc955fce13adca727bd69a42165"
+      },
+      {
+        "rank": 5,
+        "chunk_id": "target-msre-case-p0004",
+        "source": "MSRE_case.pdf",
+        "page": 4,
+        "document_role": "target",
+        "cosine_distance": 0.5216336846351624,
+        "content_sha256": "3509c1a12e28b26c966660d8efb378d633fa71ff87b3de8aec100c57864dfbdc"
+      },
+      {
+        "rank": 6,
+        "chunk_id": "noise-neams-msre-p0018",
+        "source": "neams-msre.pdf",
+        "page": 18,
+        "document_role": "noise",
+        "cosine_distance": 0.5246875286102295,
+        "content_sha256": "04b04825dc864ab7ac7d8903f88317fd1151f5d3b7e24bc37e6fa3d4e405c02b"
+      },
+      {
+        "rank": 7,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0003",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 3,
+        "document_role": "noise",
+        "cosine_distance": 0.5251798033714294,
+        "content_sha256": "d4ccf9d1e3afb861b3e19abecdb0195a62fb162a7de3964f57cd3acaddec71c0"
+      },
+      {
+        "rank": 8,
+        "chunk_id": "noise-neams-msre-p0021",
+        "source": "neams-msre.pdf",
+        "page": 21,
+        "document_role": "noise",
+        "cosine_distance": 0.5284003019332886,
+        "content_sha256": "b0b31895f51e7cd8c400682bc0fd62e912dcda6b46d056d3e2366c123a0ccecf"
+      },
+      {
+        "rank": 9,
+        "chunk_id": "noise-neams-msre-p0027",
+        "source": "neams-msre.pdf",
+        "page": 27,
+        "document_role": "noise",
+        "cosine_distance": 0.5330707430839539,
+        "content_sha256": "8e4626dc8369af96286ea94168e84547865c4d449e0380d8805eb50fd39b8f9d"
+      },
+      {
+        "rank": 10,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0002",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 2,
+        "document_role": "noise",
+        "cosine_distance": 0.542814314365387,
+        "content_sha256": "19c94a25815f62418515504524f0417c8de3feeccbd2bba7809e69e3ec825554"
+      }
+    ]
+  },
+  {
+    "item_id": "msre_param_13",
+    "question": "What flow area is specified for the MSRE reactor core? Give the value with units.",
+    "top_k": 10,
+    "retrieved_chunk_ids": [
+      "noise-neams-msre-p0021",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0006",
+      "noise-neams-msre-p0023",
+      "noise-neams-msre-p0022",
+      "target-msre-case-p0004",
+      "target-msre-case-p0001",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0003",
+      "target-msre-case-p0003",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0004",
+      "noise-neams-msre-p0018"
+    ],
+    "target_chunks": 3,
+    "noise_chunks": 7,
+    "noise_fraction": 0.7,
+    "required_evidence": [
+      {
+        "source": "MSRE_case.pdf",
+        "page": 4
+      }
+    ],
+    "retrieved_required_evidence": [
+      {
+        "source": "msre_case.pdf",
+        "page": 4
+      }
+    ],
+    "EvidenceRecallAt10": 1.0,
+    "ranking": [
+      {
+        "rank": 1,
+        "chunk_id": "noise-neams-msre-p0021",
+        "source": "neams-msre.pdf",
+        "page": 21,
+        "document_role": "noise",
+        "cosine_distance": 0.4331071972846985,
+        "content_sha256": "b0b31895f51e7cd8c400682bc0fd62e912dcda6b46d056d3e2366c123a0ccecf"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0006",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 6,
+        "document_role": "noise",
+        "cosine_distance": 0.45255690813064575,
+        "content_sha256": "0fbacf596b85b5e7cbe2e929eaf33eb77609da6c8aac305f6f4af6a3162e5e5a"
+      },
+      {
+        "rank": 3,
+        "chunk_id": "noise-neams-msre-p0023",
+        "source": "neams-msre.pdf",
+        "page": 23,
+        "document_role": "noise",
+        "cosine_distance": 0.459439754486084,
+        "content_sha256": "f56bb53ed43359343d8e05f804d02072a06dbbc955fce13adca727bd69a42165"
+      },
+      {
+        "rank": 4,
+        "chunk_id": "noise-neams-msre-p0022",
+        "source": "neams-msre.pdf",
+        "page": 22,
+        "document_role": "noise",
+        "cosine_distance": 0.4616432785987854,
+        "content_sha256": "ed5376113d816214daeececee3e6f4842a94bfffb0d5fef9c5c5a10495f061da"
+      },
+      {
+        "rank": 5,
+        "chunk_id": "target-msre-case-p0004",
+        "source": "MSRE_case.pdf",
+        "page": 4,
+        "document_role": "target",
+        "cosine_distance": 0.47789013385772705,
+        "content_sha256": "3509c1a12e28b26c966660d8efb378d633fa71ff87b3de8aec100c57864dfbdc"
+      },
+      {
+        "rank": 6,
+        "chunk_id": "target-msre-case-p0001",
+        "source": "MSRE_case.pdf",
+        "page": 1,
+        "document_role": "target",
+        "cosine_distance": 0.48561662435531616,
+        "content_sha256": "31d2e79ba6e96aae62821e4d70fb468fcc2ee900fb5e340cdc9afde030c608bc"
+      },
+      {
+        "rank": 7,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0003",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 3,
+        "document_role": "noise",
+        "cosine_distance": 0.49111121892929077,
+        "content_sha256": "d4ccf9d1e3afb861b3e19abecdb0195a62fb162a7de3964f57cd3acaddec71c0"
+      },
+      {
+        "rank": 8,
+        "chunk_id": "target-msre-case-p0003",
+        "source": "MSRE_case.pdf",
+        "page": 3,
+        "document_role": "target",
+        "cosine_distance": 0.49246323108673096,
+        "content_sha256": "46b12c8b9e90a823d4927290372a33626654692e451f11867d3ef51f2b961493"
+      },
+      {
+        "rank": 9,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0004",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 4,
+        "document_role": "noise",
+        "cosine_distance": 0.4947485327720642,
+        "content_sha256": "5dcaa641277a03ca0025a3346e8073a42241efb56b7fd62ae573b355d5ff43d2"
+      },
+      {
+        "rank": 10,
+        "chunk_id": "noise-neams-msre-p0018",
+        "source": "neams-msre.pdf",
+        "page": 18,
+        "document_role": "noise",
+        "cosine_distance": 0.51372230052948,
+        "content_sha256": "04b04825dc864ab7ac7d8903f88317fd1151f5d3b7e24bc37e6fa3d4e405c02b"
+      }
+    ]
+  },
+  {
+    "item_id": "msre_param_14",
+    "question": "What hydraulic diameter is specified for the MSRE downcomer? Give the value with units.",
+    "top_k": 10,
+    "retrieved_chunk_ids": [
+      "target-msre-case-p0004",
+      "noise-neams-msre-p0023",
+      "noise-neams-msre-p0021",
+      "noise-neams-msre-p0022",
+      "target-msre-case-p0001",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0006",
+      "target-msre-case-p0005",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0003",
+      "noise-neams-msre-p0018",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0005"
+    ],
+    "target_chunks": 3,
+    "noise_chunks": 7,
+    "noise_fraction": 0.7,
+    "required_evidence": [
+      {
+        "source": "MSRE_case.pdf",
+        "page": 4
+      }
+    ],
+    "retrieved_required_evidence": [
+      {
+        "source": "msre_case.pdf",
+        "page": 4
+      }
+    ],
+    "EvidenceRecallAt10": 1.0,
+    "ranking": [
+      {
+        "rank": 1,
+        "chunk_id": "target-msre-case-p0004",
+        "source": "MSRE_case.pdf",
+        "page": 4,
+        "document_role": "target",
+        "cosine_distance": 0.5371471643447876,
+        "content_sha256": "3509c1a12e28b26c966660d8efb378d633fa71ff87b3de8aec100c57864dfbdc"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "noise-neams-msre-p0023",
+        "source": "neams-msre.pdf",
+        "page": 23,
+        "document_role": "noise",
+        "cosine_distance": 0.5558840036392212,
+        "content_sha256": "f56bb53ed43359343d8e05f804d02072a06dbbc955fce13adca727bd69a42165"
+      },
+      {
+        "rank": 3,
+        "chunk_id": "noise-neams-msre-p0021",
+        "source": "neams-msre.pdf",
+        "page": 21,
+        "document_role": "noise",
+        "cosine_distance": 0.5672044157981873,
+        "content_sha256": "b0b31895f51e7cd8c400682bc0fd62e912dcda6b46d056d3e2366c123a0ccecf"
+      },
+      {
+        "rank": 4,
+        "chunk_id": "noise-neams-msre-p0022",
+        "source": "neams-msre.pdf",
+        "page": 22,
+        "document_role": "noise",
+        "cosine_distance": 0.5925371646881104,
+        "content_sha256": "ed5376113d816214daeececee3e6f4842a94bfffb0d5fef9c5c5a10495f061da"
+      },
+      {
+        "rank": 5,
+        "chunk_id": "target-msre-case-p0001",
+        "source": "MSRE_case.pdf",
+        "page": 1,
+        "document_role": "target",
+        "cosine_distance": 0.5943812131881714,
+        "content_sha256": "31d2e79ba6e96aae62821e4d70fb468fcc2ee900fb5e340cdc9afde030c608bc"
+      },
+      {
+        "rank": 6,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0006",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 6,
+        "document_role": "noise",
+        "cosine_distance": 0.5999053120613098,
+        "content_sha256": "0fbacf596b85b5e7cbe2e929eaf33eb77609da6c8aac305f6f4af6a3162e5e5a"
+      },
+      {
+        "rank": 7,
+        "chunk_id": "target-msre-case-p0005",
+        "source": "MSRE_case.pdf",
+        "page": 5,
+        "document_role": "target",
+        "cosine_distance": 0.6133714914321899,
+        "content_sha256": "a9c501712c2e7ef7c032f2ddb1534987432e9b96981a64bf868ebe04126a68cc"
+      },
+      {
+        "rank": 8,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0003",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 3,
+        "document_role": "noise",
+        "cosine_distance": 0.6217439770698547,
+        "content_sha256": "d4ccf9d1e3afb861b3e19abecdb0195a62fb162a7de3964f57cd3acaddec71c0"
+      },
+      {
+        "rank": 9,
+        "chunk_id": "noise-neams-msre-p0018",
+        "source": "neams-msre.pdf",
+        "page": 18,
+        "document_role": "noise",
+        "cosine_distance": 0.6219892501831055,
+        "content_sha256": "04b04825dc864ab7ac7d8903f88317fd1151f5d3b7e24bc37e6fa3d4e405c02b"
+      },
+      {
+        "rank": 10,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0005",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 5,
+        "document_role": "noise",
+        "cosine_distance": 0.6333842873573303,
+        "content_sha256": "1190f01da9e2a461eb9b415e508b676bad6e0ae5f479ab735e398e08aac9db44"
+      }
+    ]
+  },
+  {
+    "item_id": "msre_param_15",
+    "question": "What axial length is specified for the MSRE reactor core? Give the value with units.",
+    "top_k": 10,
+    "retrieved_chunk_ids": [
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0006",
+      "noise-neams-msre-p0022",
+      "target-msre-case-p0001",
+      "noise-neams-msre-p0021",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0015",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0003",
+      "noise-neams-msre-p0027",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0002",
+      "noise-experience-with-the-molten-salt-reactor-experiment-p0005",
+      "noise-neams-msre-p0023"
+    ],
+    "target_chunks": 1,
+    "noise_chunks": 9,
+    "noise_fraction": 0.9,
+    "required_evidence": [
+      {
+        "source": "MSRE_case.pdf",
+        "page": 4
+      }
+    ],
+    "retrieved_required_evidence": [],
+    "EvidenceRecallAt10": 0.0,
+    "ranking": [
+      {
+        "rank": 1,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0006",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 6,
+        "document_role": "noise",
+        "cosine_distance": 0.48457324504852295,
+        "content_sha256": "0fbacf596b85b5e7cbe2e929eaf33eb77609da6c8aac305f6f4af6a3162e5e5a"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "noise-neams-msre-p0022",
+        "source": "neams-msre.pdf",
+        "page": 22,
+        "document_role": "noise",
+        "cosine_distance": 0.48645877838134766,
+        "content_sha256": "ed5376113d816214daeececee3e6f4842a94bfffb0d5fef9c5c5a10495f061da"
+      },
+      {
+        "rank": 3,
+        "chunk_id": "target-msre-case-p0001",
+        "source": "MSRE_case.pdf",
+        "page": 1,
+        "document_role": "target",
+        "cosine_distance": 0.49719858169555664,
+        "content_sha256": "31d2e79ba6e96aae62821e4d70fb468fcc2ee900fb5e340cdc9afde030c608bc"
+      },
+      {
+        "rank": 4,
+        "chunk_id": "noise-neams-msre-p0021",
+        "source": "neams-msre.pdf",
+        "page": 21,
+        "document_role": "noise",
+        "cosine_distance": 0.5087891817092896,
+        "content_sha256": "b0b31895f51e7cd8c400682bc0fd62e912dcda6b46d056d3e2366c123a0ccecf"
+      },
+      {
+        "rank": 5,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0015",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 15,
+        "document_role": "noise",
+        "cosine_distance": 0.508858323097229,
+        "content_sha256": "9fdf76519fb8d4aea9016e98bc2ce086e2970f089b48daf99f1da411fcfb0ab7"
+      },
+      {
+        "rank": 6,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0003",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 3,
+        "document_role": "noise",
+        "cosine_distance": 0.5176364183425903,
+        "content_sha256": "d4ccf9d1e3afb861b3e19abecdb0195a62fb162a7de3964f57cd3acaddec71c0"
+      },
+      {
+        "rank": 7,
+        "chunk_id": "noise-neams-msre-p0027",
+        "source": "neams-msre.pdf",
+        "page": 27,
+        "document_role": "noise",
+        "cosine_distance": 0.5241702198982239,
+        "content_sha256": "8e4626dc8369af96286ea94168e84547865c4d449e0380d8805eb50fd39b8f9d"
+      },
+      {
+        "rank": 8,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0002",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 2,
+        "document_role": "noise",
+        "cosine_distance": 0.5367960929870605,
+        "content_sha256": "19c94a25815f62418515504524f0417c8de3feeccbd2bba7809e69e3ec825554"
+      },
+      {
+        "rank": 9,
+        "chunk_id": "noise-experience-with-the-molten-salt-reactor-experiment-p0005",
+        "source": "Experience with the Molten-Salt Reactor Experiment.pdf",
+        "page": 5,
+        "document_role": "noise",
+        "cosine_distance": 0.5371036529541016,
+        "content_sha256": "1190f01da9e2a461eb9b415e508b676bad6e0ae5f479ab735e398e08aac9db44"
+      },
+      {
+        "rank": 10,
+        "chunk_id": "noise-neams-msre-p0023",
+        "source": "neams-msre.pdf",
+        "page": 23,
+        "document_role": "noise",
+        "cosine_distance": 0.5428769588470459,
+        "content_sha256": "f56bb53ed43359343d8e05f804d02072a06dbbc955fce13adca727bd69a42165"
+      }
+    ]
+  }
+]

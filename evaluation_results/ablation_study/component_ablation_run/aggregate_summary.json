@@ -1,0 +1,482 @@
+{
+  "full_pipeline_existing": {
+    "ABTR": {
+      "n": 1,
+      "required_block_fraction": {
+        "mean": 0.8888888888888888,
+        "sd": null
+      },
+      "component_recall": {
+        "mean": 1.0,
+        "sd": null
+      },
+      "parameter_precision": {
+        "mean": 1.0,
+        "sd": null
+      },
+      "parameter_recall": {
+        "mean": 1.0,
+        "sd": null
+      },
+      "parameter_f1": {
+        "mean": 1.0,
+        "sd": null
+      },
+      "topology_recall": {
+        "mean": 1.0,
+        "sd": null
+      },
+      "topology_precision": {
+        "mean": 1.0,
+        "sd": null
+      },
+      "explicit_missing_markers": {
+        "mean": 0.0,
+        "sd": null
+      },
+      "assumption_markers": {
+        "mean": 11.0,
+        "sd": null
+      }
+    },
+    "MSRE": {
+      "n": 1,
+      "required_block_fraction": {
+        "mean": 1.0,
+        "sd": null
+      },
+      "component_recall": {
+        "mean": 1.0,
+        "sd": null
+      },
+      "parameter_precision": {
+        "mean": 1.0,
+        "sd": null
+      },
+      "parameter_recall": {
+        "mean": 1.0,
+        "sd": null
+      },
+      "parameter_f1": {
+        "mean": 1.0,
+        "sd": null
+      },
+      "topology_recall": {
+        "mean": 1.0,
+        "sd": null
+      },
+      "topology_precision": {
+        "mean": 1.0,
+        "sd": null
+      },
+      "explicit_missing_markers": {
+        "mean": 0.0,
+        "sd": null
+      },
+      "assumption_markers": {
+        "mean": 40.0,
+        "sd": null
+      }
+    }
+  },
+  "llm_only": {
+    "ABTR": {
+      "n": 3,
+      "required_block_fraction": {
+        "mean": 0.5555555555555556,
+        "sd": 0.0
+      },
+      "component_recall": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "parameter_precision": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "parameter_recall": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "parameter_f1": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "topology_recall": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "topology_precision": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "explicit_missing_markers": {
+        "mean": 0.6666666666666666,
+        "sd": 0.5773502691896257
+      },
+      "assumption_markers": {
+        "mean": 1.0,
+        "sd": 0.0
+      }
+    },
+    "MSRE": {
+      "n": 3,
+      "required_block_fraction": {
+        "mean": 0.3333333333333333,
+        "sd": 0.1924500897298753
+      },
+      "component_recall": {
+        "mean": 0.3333333333333333,
+        "sd": 0.5773502691896257
+      },
+      "parameter_precision": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "parameter_recall": {
+        "mean": 0.3515981735159817,
+        "sd": 0.5615324535953894
+      },
+      "parameter_f1": {
+        "mean": 0.3688888888888889,
+        "sd": 0.5465582548328457
+      },
+      "topology_recall": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "topology_precision": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "explicit_missing_markers": {
+        "mean": 11.333333333333334,
+        "sd": 2.8867513459481287
+      },
+      "assumption_markers": {
+        "mean": 1.0,
+        "sd": 0.0
+      }
+    }
+  },
+  "no_image_processing": {
+    "ABTR": {
+      "n": 3,
+      "required_block_fraction": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "component_recall": {
+        "mean": 0.6944444444444445,
+        "sd": 0.0962250448649376
+      },
+      "parameter_precision": {
+        "mean": 0.695896275643516,
+        "sd": 0.08721303094265861
+      },
+      "parameter_recall": {
+        "mean": 0.2627118644067797,
+        "sd": 0.044035190022937556
+      },
+      "parameter_f1": {
+        "mean": 0.38049402360779605,
+        "sd": 0.05510692258700289
+      },
+      "topology_recall": {
+        "mean": 0.0,
+        "sd": 0.0
+      },
+      "topology_precision": {
+        "mean": 0.0,
+        "sd": 0.0
+      },
+      "explicit_missing_markers": {
+        "mean": 56.0,
+        "sd": 5.291502622129181
+      },
+      "assumption_markers": {
+        "mean": 0.0,
+        "sd": 0.0
+      }
+    },
+    "MSRE": {
+      "n": 3,
+      "required_block_fraction": {
+        "mean": 0.2962962962962963,
+        "sd": 0.12830005981991682
+      },
+      "component_recall": {
+        "mean": 0.0,
+        "sd": 0.0
+      },
+      "parameter_precision": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "parameter_recall": {
+        "mean": 0.00684931506849315,
+        "sd": 0.0
+      },
+      "parameter_f1": {
+        "mean": 0.013605442176870748,
+        "sd": 0.0
+      },
+      "topology_recall": {
+        "mean": 0.0,
+        "sd": 0.0
+      },
+      "topology_precision": {
+        "mean": 0.0,
+        "sd": 0.0
+      },
+      "explicit_missing_markers": {
+        "mean": 83.33333333333333,
+        "sd": 21.82506204649447
+      },
+      "assumption_markers": {
+        "mean": 0.3333333333333333,
+        "sd": 0.5773502691896257
+      }
+    }
+  },
+  "no_intermediate_file": {
+    "ABTR": {
+      "n": 3,
+      "required_block_fraction": {
+        "mean": 0.25925925925925924,
+        "sd": 0.06415002990995841
+      },
+      "component_recall": {
+        "mean": 0.0,
+        "sd": 0.0
+      },
+      "parameter_precision": {
+        "mean": 0.0,
+        "sd": 0.0
+      },
+      "parameter_recall": {
+        "mean": 0.0,
+        "sd": 0.0
+      },
+      "parameter_f1": {
+        "mean": 0.0,
+        "sd": 0.0
+      },
+      "topology_recall": {
+        "mean": 0.0,
+        "sd": 0.0
+      },
+      "topology_precision": {
+        "mean": 0.0,
+        "sd": 0.0
+      },
+      "explicit_missing_markers": {
+        "mean": 28.333333333333332,
+        "sd": 7.023769168568492
+      },
+      "assumption_markers": {
+        "mean": 0.6666666666666666,
+        "sd": 0.5773502691896257
+      }
+    },
+    "MSRE": {
+      "n": 3,
+      "required_block_fraction": {
+        "mean": 0.48148148148148145,
+        "sd": 0.4490502093697089
+      },
+      "component_recall": {
+        "mean": 0.0,
+        "sd": 0.0
+      },
+      "parameter_precision": {
+        "mean": 0.8333333333333334,
+        "sd": 0.28867513459481287
+      },
+      "parameter_recall": {
+        "mean": 0.00684931506849315,
+        "sd": 0.0
+      },
+      "parameter_f1": {
+        "mean": 0.013574799289085003,
+        "sd": 5.3075038535542266e-05
+      },
+      "topology_recall": {
+        "mean": 0.0,
+        "sd": 0.0
+      },
+      "topology_precision": {
+        "mean": 0.0,
+        "sd": 0.0
+      },
+      "explicit_missing_markers": {
+        "mean": 17.0,
+        "sd": 12.12435565298214
+      },
+      "assumption_markers": {
+        "mean": 15.333333333333334,
+        "sd": 3.2145502536643185
+      }
+    }
+  },
+  "no_validator": {
+    "ABTR": {
+      "n": 3,
+      "required_block_fraction": {
+        "mean": 0.8888888888888888,
+        "sd": 0.0
+      },
+      "component_recall": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "parameter_precision": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "parameter_recall": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "parameter_f1": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "topology_recall": {
+        "mean": 0.9,
+        "sd": 0.0
+      },
+      "topology_precision": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "explicit_missing_markers": {
+        "mean": 0.0,
+        "sd": 0.0
+      },
+      "assumption_markers": {
+        "mean": 11.0,
+        "sd": 0.0
+      }
+    },
+    "MSRE": {
+      "n": 3,
+      "required_block_fraction": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "component_recall": {
+        "mean": 0.9583333333333334,
+        "sd": 0.0
+      },
+      "parameter_precision": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "parameter_recall": {
+        "mean": 0.9794520547945206,
+        "sd": 0.0
+      },
+      "parameter_f1": {
+        "mean": 0.9896193771626297,
+        "sd": 0.0
+      },
+      "topology_recall": {
+        "mean": 0.9090909090909091,
+        "sd": 0.0
+      },
+      "topology_precision": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "explicit_missing_markers": {
+        "mean": 0.0,
+        "sd": 0.0
+      },
+      "assumption_markers": {
+        "mean": 39.0,
+        "sd": 0.0
+      }
+    }
+  },
+  "validator_repair": {
+    "ABTR": {
+      "n": 3,
+      "required_block_fraction": {
+        "mean": 0.8888888888888888,
+        "sd": 0.0
+      },
+      "component_recall": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "parameter_precision": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "parameter_recall": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "parameter_f1": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "topology_recall": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "topology_precision": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "explicit_missing_markers": {
+        "mean": 0.0,
+        "sd": 0.0
+      },
+      "assumption_markers": {
+        "mean": 10.0,
+        "sd": 0.0
+      }
+    },
+    "MSRE": {
+      "n": 3,
+      "required_block_fraction": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "component_recall": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "parameter_precision": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "parameter_recall": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "parameter_f1": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "topology_recall": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "topology_precision": {
+        "mean": 1.0,
+        "sd": 0.0
+      },
+      "explicit_missing_markers": {
+        "mean": 0.0,
+        "sd": 0.0
+      },
+      "assumption_markers": {
+        "mean": 39.0,
+        "sd": 0.0
+      }
+    }
+  }
+}

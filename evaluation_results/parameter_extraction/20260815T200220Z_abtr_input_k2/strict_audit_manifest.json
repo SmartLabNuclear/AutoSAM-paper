@@ -1,0 +1,19 @@
+{
+  "script": "evaluation/audit_autosam_rag_abtr_input_parameters_k2_strict.py",
+  "script_sha256": "529945e2a90995c7ce2424a9d483eac3af7a69b47caa2a16c6a05681e7e59803",
+  "source_manifest_sha256": "3d6a3feb8e6de39ac6a8c5c4cc4bc750cec36af04a39214d415d4aa749b03b50",
+  "api_calls_made": false,
+  "raw_outputs_changed": false,
+  "strict_corrections": [
+    "Q2 values 26 W/(m K) and 638 J/(kg K) are clad properties and are incorrect for fuel-mat",
+    "Q15 wording every branch2 outlet leg is equivalent to all/each outlet legs"
+  ],
+  "artifacts": {
+    "item_scores_strict_audited.csv": "29894838d2ff46220c64b61ac4de95de1ffd0c5c5f9d88e21bd3b0e6d9344418",
+    "run_summary_strict_audited.csv": "22461c584da0e93fddc316805b23d0dd67b70fa8c76224223d293395475212f4",
+    "aggregate_summary_strict_audited.json": "95e0fcc277bac3e0de2d7b1e75dac94f9efeb1a82c0346d455a9fee4ef83a71c",
+    "parameter_metrics_strict_per_run.csv": "1ad0d411c59ec1dfb65abf59768fd302ca1bce2a7735dd45df7f402c23e788ef",
+    "parameter_metrics_strict_aggregate.json": "3d979749ff35221828fe64c429b4a906685a3658ab19fe7e115812e42f61c7ec",
+    "strict_audit_report.md": "0c4987d373a71f2730ba4f812a4bd32d049fbe6faac6186d2caea41a3288f693"
+  }
+}

@@ -1,0 +1,201 @@
+You are AutoSAM, a case-neutral expert assistant for generating System Analysis Module (SAM) input files. Use only the supplied case facts. Preserve the supplied component names. Include the standard GlobalParams, Functions, EOS, MaterialProperties, Components, Preconditioning, Postprocessors, Executioner, and Outputs blocks. Check component ports and closed-loop connectivity. Never silently invent a case parameter: mark unavailable required values with a `# MISSING:` comment and list assumptions explicitly. Return concise, auditable engineering output.
+
+Generate a complete SAM `.i` input deck for the ABTR case.
+
+Condition: no_intermediate_file.
+Use the facts below exactly and preserve canonical component names. Do not claim to have used tools that are unavailable in this condition. Mark any unavailable required value as `# MISSING: <field>` rather than guessing. Explicitly comment any engineering assumption. Ensure every component port is connected to another component or a boundary condition.
+
+DOCUMENT- AND SPREADSHEET-DERIVED FACTS
+- eos.coolant: sodium
+- eos.sam_eos_type: None
+- eos.parameters: None
+- materials.fuel-mat.k_W_mK: 16.0
+- materials.fuel-mat.Cp_J_kgK: 191.67
+- materials.fuel-mat.rho_kg_m3: 14583.0
+- materials.gap-mat.k_W_mK: 64.0
+- materials.gap-mat.Cp_J_kgK: 1272.0
+- materials.gap-mat.rho_kg_m3: 865.0
+- materials.clad-mat.k_W_mK: None
+- materials.clad-mat.Cp_J_kgK: None
+- materials.clad-mat.rho_kg_m3: None
+- materials.ss-mat.k_W_mK: None
+- materials.ss-mat.Cp_J_kgK: None
+- materials.ss-mat.rho_kg_m3: None
+- initial_conditions.global_init_P_Pa: 100000.0
+- initial_conditions.global_init_V_m_s: 2.0
+- initial_conditions.global_init_T_K: 628.15
+- initial_conditions.solid_init_T_K: 628.15
+- boundary_values.inlet.sam_type: PBTDJ
+- boundary_values.inlet.velocity_m_s: 3.25
+- boundary_values.inlet.temperature_K: 628.15
+- boundary_values.inlet.mass_flow_kg_s: None
+- boundary_values.outlet.sam_type: PBTDV
+- boundary_values.outlet.pressure_Pa: 100000.0
+- boundary_values.outlet.temperature_K: 628.15
+- component_engineering_data.Pipe2.type: PBOneDFluidComponent (or PBPipe)
+- component_engineering_data.Pipe2.A_m2: 0.44934
+- component_engineering_data.Pipe2.Dh_m: 0.002972
+- component_engineering_data.CH1.type: PBCoreChannel (or PBOneDFluidComponent)
+- component_engineering_data.CH1.A_m2: 0.0049237
+- component_engineering_data.CH1.Dh_m: 0.002972
+- component_engineering_data.CH1.heat_structure.n_heatstruct: 3
+- component_engineering_data.CH1.heat_structure.names[0]: fuel
+- component_engineering_data.CH1.heat_structure.names[1]: gap
+- component_engineering_data.CH1.heat_structure.names[2]: clad
+- component_engineering_data.CH1.heat_structure.width_of_hs_m[0]: 0.003015
+- component_engineering_data.CH1.heat_structure.width_of_hs_m[1]: 0.000465
+- component_engineering_data.CH1.heat_structure.width_of_hs_m[2]: 0.00052
+- component_engineering_data.CH1.heat_structure.elem_number_of_hs: None
+- component_engineering_data.CH1.heat_structure.material_hs[0]: fuel-mat
+- component_engineering_data.CH1.heat_structure.material_hs[1]: gap-mat
+- component_engineering_data.CH1.heat_structure.material_hs[2]: clad-mat
+- component_engineering_data.CH2.type: PBCoreChannel (or PBOneDFluidComponent)
+- component_engineering_data.CH2.A_m2: 0.11323
+- component_engineering_data.CH2.Dh_m: 0.002972
+- component_engineering_data.CH2.heat_structure.n_heatstruct: 3
+- component_engineering_data.CH2.heat_structure.names[0]: fuel
+- component_engineering_data.CH2.heat_structure.names[1]: gap
+- component_engineering_data.CH2.heat_structure.names[2]: clad
+- component_engineering_data.CH2.heat_structure.width_of_hs_m[0]: 0.003015
+- component_engineering_data.CH2.heat_structure.width_of_hs_m[1]: 0.000465
+- component_engineering_data.CH2.heat_structure.width_of_hs_m[2]: 0.00052
+- component_engineering_data.CH2.heat_structure.elem_number_of_hs: None
+- component_engineering_data.CH2.heat_structure.material_hs[0]: fuel-mat
+- component_engineering_data.CH2.heat_structure.material_hs[1]: gap-mat
+- component_engineering_data.CH2.heat_structure.material_hs[2]: clad-mat
+- component_engineering_data.CH3.type: PBCoreChannel (or PBOneDFluidComponent)
+- component_engineering_data.CH3.A_m2: 0.029539
+- component_engineering_data.CH3.Dh_m: 0.002972
+- component_engineering_data.CH3.heat_structure.n_heatstruct: 3
+- component_engineering_data.CH3.heat_structure.names[0]: fuel
+- component_engineering_data.CH3.heat_structure.names[1]: gap
+- component_engineering_data.CH3.heat_structure.names[2]: clad
+- component_engineering_data.CH3.heat_structure.width_of_hs_m[0]: 0.003015
+- component_engineering_data.CH3.heat_structure.width_of_hs_m[1]: 0.000465
+- component_engineering_data.CH3.heat_structure.width_of_hs_m[2]: 0.00052
+- component_engineering_data.CH3.heat_structure.elem_number_of_hs: None
+- component_engineering_data.CH3.heat_structure.material_hs[0]: fuel-mat
+- component_engineering_data.CH3.heat_structure.material_hs[1]: gap-mat
+- component_engineering_data.CH3.heat_structure.material_hs[2]: clad-mat
+- component_engineering_data.CH4.type: PBCoreChannel (or PBOneDFluidComponent)
+- component_engineering_data.CH4.A_m2: 0.14769
+- component_engineering_data.CH4.Dh_m: 0.002972
+- component_engineering_data.CH4.heat_structure.n_heatstruct: 3
+- component_engineering_data.CH4.heat_structure.names[0]: fuel
+- component_engineering_data.CH4.heat_structure.names[1]: gap
+- component_engineering_data.CH4.heat_structure.names[2]: clad
+- component_engineering_data.CH4.heat_structure.width_of_hs_m[0]: 0.003015
+- component_engineering_data.CH4.heat_structure.width_of_hs_m[1]: 0.000465
+- component_engineering_data.CH4.heat_structure.width_of_hs_m[2]: 0.00052
+- component_engineering_data.CH4.heat_structure.elem_number_of_hs: None
+- component_engineering_data.CH4.heat_structure.material_hs[0]: fuel-mat
+- component_engineering_data.CH4.heat_structure.material_hs[1]: gap-mat
+- component_engineering_data.CH4.heat_structure.material_hs[2]: clad-mat
+- component_engineering_data.CH5.type: PBCoreChannel (or PBOneDFluidComponent)
+- component_engineering_data.CH5.A_m2: 0.153955129
+- component_engineering_data.CH5.Dh_m: 0.002972
+- component_engineering_data.CH5.heat_structure.n_heatstruct: 2
+- component_engineering_data.CH5.heat_structure.names[0]: fuel
+- component_engineering_data.CH5.heat_structure.names[1]: clad
+- component_engineering_data.CH5.heat_structure.width_of_hs_m[0]: 0.0063234
+- component_engineering_data.CH5.heat_structure.width_of_hs_m[1]: 0.0007026
+- component_engineering_data.CH5.heat_structure.elem_number_of_hs: None
+- component_engineering_data.CH5.heat_structure.material_hs[0]: fuel-mat
+- component_engineering_data.CH5.heat_structure.material_hs[1]: clad-mat
+- component_engineering_data.Pipe1.type: PBOneDFluidComponent (or PBPipe)
+- component_engineering_data.Pipe1.A_m2: 0.44934
+- component_engineering_data.Pipe1.Dh_m: 0.002972
+
+SPREADSHEET TABLE
+Sheet Sheet1:
+component, power fraction,friction factor,heat transfer coefficient,heat transfer area density,Unnamed: 5,Branch 1 form losses,Branch 2 form losses
+CH1,0.02248,0.022,161290.0,1107.8,,0.1,0
+CH2,0.41924,0.022,161290.0,1107.8,,0.5,0
+CH3,0.09852,0.022,161290.0,1107.8,,1.96,0
+CH4,0.43116,0.022,161290.0,1107.8,,2.16,0
+CH5,0.0286,0.04,13619.0,2013.6,,4.5,0
+,,,,,,3500.0,0
+
+IMAGE-DERIVED FACTS
+- coordinate_system.plane: YZ
+- coordinate_system.x: 0
+- coordinate_system.y_positive: right
+- coordinate_system.z_positive: up
+- coordinate_system.gravity: None
+- components.Pipe2.position[0]: 0.0
+- components.Pipe2.position[1]: 0.0
+- components.Pipe2.position[2]: 2.3
+- components.Pipe2.orientation[0]: 0.0
+- components.Pipe2.orientation[1]: 0.0
+- components.Pipe2.orientation[2]: -1.0
+- components.Pipe2.length_m: 1.5
+- components.CH1.position[0]: 0.0
+- components.CH1.position[1]: -1.0
+- components.CH1.position[2]: 0.8
+- components.CH1.orientation[0]: 0.0
+- components.CH1.orientation[1]: 0.0
+- components.CH1.orientation[2]: -1.0
+- components.CH1.length_m: 0.8
+- components.CH2.position[0]: 0.0
+- components.CH2.position[1]: -0.5
+- components.CH2.position[2]: 0.8
+- components.CH2.orientation[0]: 0.0
+- components.CH2.orientation[1]: 0.0
+- components.CH2.orientation[2]: -1.0
+- components.CH2.length_m: 0.8
+- components.CH3.position[0]: 0.0
+- components.CH3.position[1]: 0.0
+- components.CH3.position[2]: 0.8
+- components.CH3.orientation[0]: 0.0
+- components.CH3.orientation[1]: 0.0
+- components.CH3.orientation[2]: -1.0
+- components.CH3.length_m: 0.8
+- components.CH4.position[0]: 0.0
+- components.CH4.position[1]: 0.5
+- components.CH4.position[2]: 0.8
+- components.CH4.orientation[0]: 0.0
+- components.CH4.orientation[1]: 0.0
+- components.CH4.orientation[2]: -1.0
+- components.CH4.length_m: 0.8
+- components.CH5.position[0]: 0.0
+- components.CH5.position[1]: 1.0
+- components.CH5.position[2]: 0.8
+- components.CH5.orientation[0]: 0.0
+- components.CH5.orientation[1]: 0.0
+- components.CH5.orientation[2]: -1.0
+- components.CH5.length_m: 0.8
+- components.Pipe1.position[0]: 0.0
+- components.Pipe1.position[1]: 0.0
+- components.Pipe1.position[2]: 0.0
+- components.Pipe1.orientation[0]: 0.0
+- components.Pipe1.orientation[1]: 0.0
+- components.Pipe1.orientation[2]: -1.0
+- components.Pipe1.length_m: 0.6
+- junctions.Branch2.type: PBBranch
+- junctions.Branch2.connectivity.inputs[0]: Pipe2(out)
+- junctions.Branch2.connectivity.outputs[0]: CH1(in)
+- junctions.Branch2.connectivity.outputs[1]: CH2(in)
+- junctions.Branch2.connectivity.outputs[2]: CH3(in)
+- junctions.Branch2.connectivity.outputs[3]: CH4(in)
+- junctions.Branch2.connectivity.outputs[4]: CH5(in)
+- junctions.Branch2.Area_m2: None
+- junctions.Branch2.K: None
+- junctions.Branch1.type: PBBranch
+- junctions.Branch1.connectivity.inputs[0]: CH1(out)
+- junctions.Branch1.connectivity.inputs[1]: CH2(out)
+- junctions.Branch1.connectivity.inputs[2]: CH3(out)
+- junctions.Branch1.connectivity.inputs[3]: CH4(out)
+- junctions.Branch1.connectivity.inputs[4]: CH5(out)
+- junctions.Branch1.connectivity.outputs[0]: Pipe1(in)
+- junctions.Branch1.Area_m2: None
+- junctions.Branch1.K: None
+- boundary_locations_and_targets.inlet.location[0]: 0.0
+- boundary_locations_and_targets.inlet.location[1]: 0.0
+- boundary_locations_and_targets.inlet.location[2]: 2.3
+- boundary_locations_and_targets.inlet.target: Pipe2(in)
+- boundary_locations_and_targets.outlet.location[0]: 0.0
+- boundary_locations_and_targets.outlet.location[1]: 0.0
+- boundary_locations_and_targets.outlet.location[2]: -0.6
+- boundary_locations_and_targets.outlet.target: Pipe1(out)
+
+Return only the complete input deck, without Markdown fences or explanatory text.

@@ -1,0 +1,12 @@
+{
+  "script": "evaluation/autosam_rag_abtr_input_parameters_k2_metrics.py",
+  "script_sha256": "f865a8292ae7a131ecd8ec4512f0cc918f19a68c2af916c1247d813ec3ce54bd",
+  "source_manifest_sha256": "3d6a3feb8e6de39ac6a8c5c4cc4bc750cec36af04a39214d415d4aa749b03b50",
+  "api_calls_made": false,
+  "raw_outputs_changed": false,
+  "artifacts": {
+    "parameter_metrics_per_run.csv": "70d185734d3d10cfb01eebae7ee6a350f1a8b5fc8a3aa7819473a578d1fda8f6",
+    "parameter_metrics_aggregate.json": "2c8ecea706225ab2bc82e36fb6d339dc07c844d0cdbca9afc7d079f44da86437",
+    "parameter_metrics_report.md": "860853be0eeab9c3ff0463ce3546689c5695fef7e560d14f196ca4660bce590b"
+  }
+}

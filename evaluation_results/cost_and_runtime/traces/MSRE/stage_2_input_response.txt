@@ -1,0 +1,416 @@
+```text
+# MSRE SAM test case - GENERATED FROM user-reviewed intermediate_msre.yaml
+# NOTE:
+# - This input attempts to remain source-faithful to the intermediate representation.
+# - HOWEVER, the intermediate file contains NULLs for required SAM parameters:
+#     * component lengths
+#     * n_elems (axial discretization)
+#     * initial conditions (P/T/V)
+#     * boundary conditions
+#     * coolant salt EOS properties
+#     * solid material properties
+#   SAM requires these to run. Where values are unknown, this file uses placeholder
+#   assumptions clearly marked with 'ASSUMPTION:' comments. These MUST be reviewed.
+# - A pipe branch (B1) splits HX(primary_out) to pipe_ref and pipe4. pipe_ref is
+#   otherwise unconstrained; to ensure every endpoint is connected exactly once,
+#   pipe_ref is terminated with a pressure boundary (PBTDV) as an assumed outlet.
+
+[GlobalParams]
+  gravity = '0 0 -9.8'
+  scaling_factor_var = '1 1e-3 1e-6'
+
+  # ASSUMPTION: global initial conditions were missing in sources
+  global_init_P = 1.0e5      # Pa
+  global_init_T = 900.0      # K  (must be within fuel salt validity range per intermediate: 750-1200 K)
+  global_init_V = 0.1        # m/s
+[]
+
+[EOS]
+  # The intermediate representation calls this a custom fuel salt mixture.
+  # SAM built-in SaltEquationOfState supports Flibe/Flinak/etc; exact MSRE fuel salt
+  # may not be available as a built-in 'salt_type'.
+  # ASSUMPTION (for executability): use PTFunctionsEOS with parsed functions matching
+  # the extracted correlations. Enthalpy is computed internally over T_min..T_max.
+
+  [fuel_salt]
+    type = PTFunctionsEOS
+    # rho(T) = 2553.3 - 0.562*T  [kg/m^3]
+    rho = rho_fuel
+    # cp = 2009.66 [J/kg-K]
+    cp  = 2009.66
+    # mu(T) = 8.4e-5 * exp(2390/T) [Pa-s]
+    mu  = mu_fuel
+    # k = 1.0 [W/m-K]
+    k   = 1.0
+    T_min = 750.0
+    T_max = 1200.0
+    h_0 = 0.0
+  []
+
+  # Coolant salt EOS was missing. For executability we define a placeholder constant EOS.
+  # ASSUMPTION: placeholder properties (must be replaced with source-grounded values).
+  [coolant_salt]
+    type = PTConstantEOS
+    p_0 = 1.0e5
+    T_0 = 900.0
+    rho_0 = 2000.0     # ASSUMPTION
+    beta  = 2.0e-4     # ASSUMPTION
+    cp    = 1500.0     # ASSUMPTION
+    h_0   = 0.0        # ASSUMPTION
+    mu    = 5.0e-3     # ASSUMPTION
+    k     = 1.0        # ASSUMPTION
+  []
+[]
+
+[Functions]
+  [rho_fuel]
+    type = ParsedFunction
+    expression = 2553.3 - 0.562*x
+  []
+
+  [mu_fuel]
+    type = ParsedFunction
+    expression = 8.4e-5*exp(2390/x)
+  []
+[]
+
+[MaterialProperties]
+  # Solid properties were missing in the intermediate file.
+  # ASSUMPTION: define placeholder constants for Hastelloy-N and graphite.
+  [hastelloy_n]
+    type = HeatConductionMaterialProps
+    k = 13.0        # ASSUMPTION
+    Cp = 500.0      # ASSUMPTION
+    rho = 9000.0    # ASSUMPTION
+  []
+
+  [graphite]
+    type = HeatConductionMaterialProps
+    k = 80.0        # ASSUMPTION
+    Cp = 700.0      # ASSUMPTION
+    rho = 1800.0    # ASSUMPTION
+  []
+[]
+
+[Components]
+  # Primary loop components from spreadsheet
+  # NOTE: length and n_elems were missing; placeholders used.
+
+  [downcomer]
+    type = PBOneDFluidComponent
+    eos = fuel_salt
+    position = '0 -0.7 0'
+    orientation = '0 1 0'
+    A = 0.1589
+    Dh = 0.0508
+    length = 1.7272       # ASSUMPTION: use image delta-y as length
+    n_elems = 10          # ASSUMPTION
+  []
+
+  [inlet_plenum]
+    type = PBOneDFluidComponent
+    eos = fuel_salt
+    position = '0 -0.7366 0'
+    orientation = '0 1 0'
+    A = 0.3932
+    Dh = 0.6997
+    length = 0.7366       # ASSUMPTION: image delta-y
+    n_elems = 4           # ASSUMPTION
+  []
+
+  [core]
+    type = PBOneDFluidComponent
+    eos = fuel_salt
+    position = '0 0 0'
+    orientation = '0 1 0'
+    A = 0.3512
+    Dh = 0.6687
+    length = 1.7272       # ASSUMPTION: image delta-y
+    n_elems = 10          # ASSUMPTION
+
+    # Reactor power (10 MWth) not mapped to volumetric heat_source due to missing volume.
+    # heat_source = ???
+  []
+
+  [upper_plenum]
+    type = PBOneDFluidComponent
+    eos = fuel_salt
+    position = '0 1.7272 0'
+    orientation = '0 1 0'
+    A = 0.3932
+    Dh = 0.6997
+    length = 0.4346       # ASSUMPTION: 2.1618-1.7272
+    n_elems = 4           # ASSUMPTION
+  []
+
+  [pipe1]
+    type = PBOneDFluidComponent
+    eos = fuel_salt
+    position = '0 2.1618 0'
+    orientation = '0 1 0'
+    A = 0.01267
+    Dh = 0.127
+    length = 1.8288       # ASSUMPTION: image delta-y
+    n_elems = 10          # ASSUMPTION
+  []
+
+  [pipe2]
+    type = PBOneDFluidComponent
+    eos = fuel_salt
+    position = '0 3.9906 0'
+    orientation = '0 1 0'
+    A = 0.01267
+    Dh = 0.127
+    length = 0.8128       # ASSUMPTION: 2.9746-2.1618
+    n_elems = 6           # ASSUMPTION
+  []
+
+  [pipe3]
+    type = PBOneDFluidComponent
+    eos = fuel_salt
+    position = '0 2.9746 0'
+    orientation = '0 1 0'
+    A = 0.01267
+    Dh = 0.127
+    length = 1.0668       # ASSUMPTION: 1.8288-0.762
+    n_elems = 6           # ASSUMPTION
+  []
+
+  [HX]
+    type = PBHeatExchanger
+    eos = fuel_salt
+    eos_secondary = coolant_salt
+    position = '0 1.8288 0'
+    orientation = '0 1 0'
+
+    A = 0.10183
+    Dh = 0.020945
+    A_secondary = 0.027885
+    Dh_secondary = 0.010566
+
+    length = 2.5
+    n_elems = 10               # ASSUMPTION (missing)
+
+    # ASSUMPTION: use same HT area density on both sides to satisfy SAM requirements
+    HT_surface_area_density = 1000
+    HT_surface_area_density_secondary = 1000
+
+    hs_type = cylinder
+    radius_i = 0.0052832
+    wall_thickness = 0.0010668
+    Twall_init = 900.0         # ASSUMPTION (missing)
+    dim_wall = 1
+    n_wall_elems = 1           # ASSUMPTION (missing)
+    material_wall = hastelloy_n
+
+    initial_V_secondary = -0.1  # ASSUMPTION to establish counterflow direction
+  []
+
+  [pipe_ref]
+    type = PBOneDFluidComponent
+    eos = fuel_salt
+    position = '0 -2.2678 0'
+    orientation = '0 1 0'
+    A = 0.01267
+    Dh = 0.127
+    length = 0.5            # ASSUMPTION: from image (-2.2678 to -1.7678)
+    n_elems = 2             # ASSUMPTION
+  []
+
+  [pipe4]
+    type = PBOneDFluidComponent
+    eos = fuel_salt
+    position = '0 -1.7678 0'
+    orientation = '0 -1 0'
+    A = 0.01267
+    Dh = 0.127
+    length = 1.2474         # ASSUMPTION: 2.9746-1.7272
+    n_elems = 6             # ASSUMPTION
+  []
+
+  [pipe5]
+    type = PBOneDFluidComponent
+    eos = fuel_salt
+    position = '0 -1.7678 0'
+    orientation = '0 1 0'
+    A = 0.01267
+    Dh = 0.127
+    length = 1.0678         # ASSUMPTION: -0.7 - (-1.7678)
+    n_elems = 6             # ASSUMPTION
+  []
+
+  # Junctions and pump (from spreadsheet)
+  [J1]
+    type = PBSingleJunction
+    eos = fuel_salt
+    inputs = 'downcomer(out)'
+    outputs = 'inlet_plenum(in)'
+    Area = 0.1155
+  []
+  [J2]
+    type = PBSingleJunction
+    eos = fuel_salt
+    inputs = 'inlet_plenum(out)'
+    outputs = 'core(in)'
+    Area = 0.1155
+  []
+  [J3]
+    type = PBSingleJunction
+    eos = fuel_salt
+    inputs = 'core(out)'
+    outputs = 'upper_plenum(in)'
+    Area = 0.1155
+  []
+  [J4]
+    type = PBSingleJunction
+    eos = fuel_salt
+    inputs = 'upper_plenum(out)'
+    outputs = 'pipe1(in)'
+    Area = 0.1155
+  []
+  [J5]
+    type = PBSingleJunction
+    eos = fuel_salt
+    inputs = 'pipe1(out)'
+    outputs = 'pipe2(in)'
+    Area = 0.01292
+  []
+
+  [pump]
+    type = PBPump
+    eos = fuel_salt
+    inputs = 'pipe2(out)'
+    outputs = 'pipe3(in)'
+    K = '0.15 0.1'
+    Area = 0.01292
+    initial_P = 110000
+    Head = 43909.58
+  []
+
+  [J7]
+    type = PBSingleJunction
+    eos = fuel_salt
+    inputs = 'pipe3(out)'
+    outputs = 'HX(primary_in)'
+    Area = 0.01267
+  []
+
+  [B1]
+    type = PBBranch
+    eos = fuel_salt
+    inputs = 'HX(primary_out)'
+    outputs = 'pipe_ref(in) pipe4(in)'
+    # K was missing in sources.
+    K = '0.0 0.0 0.0'     # ASSUMPTION
+    Area = 0.01267
+  []
+
+  [J8]
+    type = PBSingleJunction
+    eos = fuel_salt
+    inputs = 'pipe4(out)'
+    outputs = 'pipe5(in)'
+    Area = 0.01267
+  []
+
+  [J9]
+    type = PBSingleJunction
+    eos = fuel_salt
+    inputs = 'pipe5(out)'
+    outputs = 'downcomer(in)'
+    Area = 0.01267
+  []
+
+  # Boundary conditions (MISSING in sources). Added minimally to fully constrain model.
+  # ASSUMPTION: pressure reference at downcomer(in)
+  [p_ref]
+    type = ReferenceBoundary
+    input = 'downcomer(in)'
+    variable = pressure
+    value = 1.0e5
+  []
+
+  # ASSUMPTION: terminate pipe_ref outlet with a fixed pressure boundary
+  [pipe_ref_outlet]
+    type = PBTDV
+    input = 'pipe_ref(out)'
+    eos = fuel_salt
+    p_bc = 1.0e5
+    T_bc = 900.0
+  []
+
+  # Secondary side boundary conditions for HX (MISSING in sources). Added for closure.
+  [sec_inlet]
+    type = PBTDJ
+    input = 'HX(secondary_in)'
+    eos = coolant_salt
+    v_bc = -0.1        # ASSUMPTION
+    T_bc = 850.0       # ASSUMPTION
+  []
+
+  [sec_outlet]
+    type = PBTDV
+    input = 'HX(secondary_out)'
+    eos = coolant_salt
+    p_bc = 1.0e5
+  []
+[]
+
+[Preconditioning]
+  [SMP_PJFNK]
+    type = SMP
+    full = true
+    solve_type = 'PJFNK'
+    petsc_options_iname = '-pc_type'
+    petsc_options_value = 'lu'
+  []
+[]
+
+[Postprocessors]
+  [T_core_in]
+    type = ComponentBoundaryVariableValue
+    input = core(in)
+    variable = temperature
+  []
+  [T_core_out]
+    type = ComponentBoundaryVariableValue
+    input = core(out)
+    variable = temperature
+  []
+  [mdot_primary]
+    type = ComponentBoundaryFlow
+    input = downcomer(in)
+  []
+  [T_HX_p_out]
+    type = ComponentBoundaryVariableValue
+    input = HX(primary_out)
+    variable = temperature
+  []
+  [T_HX_s_out]
+    type = ComponentBoundaryVariableValue
+    input = HX(secondary_out)
+    variable = temperature
+  []
+[]
+
+[Executioner]
+  # ASSUMPTION: Steady run to initialize loop
+  type = Steady
+  nl_rel_tol = 1e-7
+  nl_abs_tol = 1e-6
+  nl_max_its = 30
+  l_tol = 1e-5
+  l_max_its = 200
+[]
+
+[Outputs]
+  perf_graph = true
+  csv = true
+  [console]
+    type = Console
+    execute_scalars_on = 'none'
+  []
+[]
+```
+
+**Validation result:** `SAMInputFileValidatorTool` could not be run due to a tool I/O error: **Permission denied** when accessing the directory (`Errno 13`). The input file was saved successfully as `sam_model_generated.i`, but I could not complete validator-based correction/re-validation in this environment.

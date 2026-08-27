@@ -1,0 +1,154 @@
+{
+  "schema_version": "1.0",
+  "run_id": "20260814T190240Z_msre_input_k10",
+  "status": "complete",
+  "started_at": "2026-08-14T19:02:40.142670Z",
+  "completed_at": "2026-08-14T19:15:40.103691Z",
+  "script": "evaluation/autosam_rag_msre_input_parameters_k10_evaluation.py",
+  "script_sha256": "f74d294a4ece6b25fdd6d7c6e0694966e7fa1c5bdd6d1882549880032a50b5c9",
+  "configuration": {
+    "runs": 3,
+    "smoke_test": false,
+    "embedding_model": "text-embedding-3-large",
+    "qa_model": "gpt-5.6-sol",
+    "qa_temperature": 0,
+    "reasoning_effort": "none",
+    "endpoint": "chat.completions",
+    "top_k": 10,
+    "max_workers": 5,
+    "target_source": "MSRE_case.pdf",
+    "corpus_chunks": 71,
+    "target_chunks": 6,
+    "noise_chunks": 65
+  },
+  "evaluation_scope": {
+    "authoritative_target": "MSRE_case.pdf",
+    "distractors": [
+      "Experience with the Molten-Salt Reactor Experiment.pdf",
+      "neams-msre.pdf"
+    ],
+    "model_sees_hidden_document_role": false,
+    "all_questions_answerable_in_rendered_target_pdf": true,
+    "known_ingestion_limitation": "Most Table 7 rows on page 4 are absent from the stored target text."
+  },
+  "store_build": {
+    "path": "<AUTOSAM_ROOT>\\msre_pdf_noise\\vector_store_builds\\20260814T181228Z_msre_noise_k20",
+    "run_id": "20260814T181228Z_msre_noise_k20",
+    "manifest_sha256": "daed431abbe3cb7a136ab62d6055d5ad932e970575d5c41e6809f7babf8716d4",
+    "collection_name": "autosam_msre_noise_k20",
+    "note": "The immutable 71-chunk store is reused; k is selected at query time."
+  },
+  "benchmark": "evaluation/autosam_rag_msre_input_parameters_k10_benchmark.json",
+  "benchmark_sha256": "437715ede0d7dba431c6bd40a2f0ae663b48b1fef942fa87dfc672131bec796b",
+  "ground_truth_status": "values verified against rendered MSRE_case.pdf; domain-expert signoff pending",
+  "source_hashes": {
+    "evaluation/autosam_rag_msre_input_parameters_k10_evaluation.py": "f74d294a4ece6b25fdd6d7c6e0694966e7fa1c5bdd6d1882549880032a50b5c9",
+    "evaluation/autosam_rag_msre_input_parameters_k10_benchmark.json": "437715ede0d7dba431c6bd40a2f0ae663b48b1fef942fa87dfc672131bec796b",
+    "msre_pdf_noise/vector_store_builds/20260814T181228Z_msre_noise_k20/manifest.json": "daed431abbe3cb7a136ab62d6055d5ad932e970575d5c41e6809f7babf8716d4",
+    "msre_pdf_noise/vector_store_builds/20260814T181228Z_msre_noise_k20/documents_library.json": "0fa23328ce2e80fa361e83bf0decdc3f89985f71e5c4cd73081bbaf9f0a465b1",
+    "evaluation/rescore_autosam_rag_k2_audited.py": "4988f1de077f6f750323b362e8b0cf8d1840569288f1393c502aaac5b1406a93",
+    "evaluation/resume_autosam_rag_msre_input_parameters_k10.py": "856724da923f03c471aba4c1730b4371dcf15b5fd5f101ad6fb2d46454f9c789",
+    "evaluation/rescore_autosam_rag_msre_input_parameters_k10_audited.py": "c50a481d281d167169e0c8ab6415f559e602250490e4fe489a0793c23487c610",
+    "evaluation/autosam_rag_msre_input_parameters_k10_metrics.py": "d47b71bb479f31769da3889095a1c2f7fda498a38dd3ee9de0075b87e2181b48"
+  },
+  "credential_flags": {
+    "OPENAI_API_KEY": "present"
+  },
+  "environment": {
+    "python": "3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "packages": {
+      "openai": "1.82.0",
+      "langchain-openai": "0.3.18",
+      "langchain-chroma": "0.2.4",
+      "chromadb": "1.0.10"
+    }
+  },
+  "existing_application_or_store_files_modified": false,
+  "resumption_progress": {
+    "script": "evaluation/resume_autosam_rag_msre_input_parameters_k10.py",
+    "script_sha256": "856724da923f03c471aba4c1730b4371dcf15b5fd5f101ad6fb2d46454f9c789",
+    "raw_logs_now_complete": 44,
+    "remaining_run_3_items": [
+      "msre_param_15"
+    ],
+    "completed_calls_repeated": 0
+  },
+  "resolved_models": {
+    "embedding": [
+      "text-embedding-3-large"
+    ],
+    "qa": [
+      "gpt-5.6-sol"
+    ]
+  },
+  "counts": {
+    "responses": 45,
+    "raw_logs": 45,
+    "parse_warnings": 0,
+    "api_failures": 0
+  },
+  "retrieval": {
+    "questions": 15,
+    "rankings_sha256": "95281e8719e9e65cfd29127fbe96dacbba68857ea883811152a250028b5894f3",
+    "required_evidence_opportunities": 15,
+    "retrieved_required_evidence": 14,
+    "mean_noise_fraction_at10": 0.74
+  },
+  "resumption": {
+    "script": "evaluation/resume_autosam_rag_msre_input_parameters_k10.py",
+    "script_sha256": "856724da923f03c471aba4c1730b4371dcf15b5fd5f101ad6fb2d46454f9c789",
+    "existing_raw_logs_reused": 44,
+    "missing_run_3_calls_completed": 1,
+    "retrieval_context_reused_from": "raw/run_01 for the same item",
+    "completed_calls_repeated": 0
+  },
+  "audited_rescoring": {
+    "script": "evaluation/rescore_autosam_rag_msre_input_parameters_k10_audited.py",
+    "script_sha256": "c50a481d281d167169e0c8ab6415f559e602250490e4fe489a0793c23487c610",
+    "api_calls_made": false,
+    "raw_outputs_changed": false,
+    "retrieval_changed": false,
+    "normalization_changes": [
+      "remove LaTeX math wrappers and leftover command slashes",
+      "ignore spacing around multiplication signs in scientific notation",
+      "canonicalize Hastelloy(r) N and Hastelloy registered-mark N to Hastelloy N"
+    ],
+    "artifacts": {
+      "item_scores_audited.csv": "cb2caf58ff95bd9ac8728aa04f2840247b67b5f4df1ba91664caa80f6ebfd2dc",
+      "run_summary_audited.csv": "72db1a99acd64077e0e3adae561a288f39ec07827739f83bf3548014c8de06d6",
+      "aggregate_summary_audited.json": "e6f48a77666ac493af04127d3ae025c6156f7027bf77f2068c9eaacfe5ce4fe4",
+      "report_audited.md": "45d0b31062396c091f8e37d3ae14ee118d767fe6edd0bd054134c3095feec21a",
+      "failure_audit_audited.md": "6ce1ca1819580b61a30c8aaeb87c967dbeb6d11c5b2194331a12e69c6b2e04a4",
+      "manuscript_results_audited.tex": "55e6aa97935607e40fa2aec6fd6ea17e933bae6f4a36a9c9b34d0286521c55e1"
+    }
+  },
+  "parameter_metrics_analysis": {
+    "script": "evaluation/autosam_rag_msre_input_parameters_k10_metrics.py",
+    "script_sha256": "d47b71bb479f31769da3889095a1c2f7fda498a38dd3ee9de0075b87e2181b48",
+    "api_calls_made": false,
+    "definitions": {
+      "false_positive": "incorrect or unsupported generated parameter claim",
+      "unit_accuracy_scope": "recovered numeric reference parameters",
+      "numerical_relative_error_scope": "recovered numeric reference parameters",
+      "uncertainty": "two-sided 95% Wilson interval over one unique opportunity set"
+    },
+    "artifacts": {
+      "parameter_metrics_audited.csv": "ed21fc9ae4577cd106959a645c80bd73dc7df417bd5c1e482be67419e391b9ce",
+      "parameter_metrics_aggregate_audited.json": "40a1425317420d4d3b604f57f9ba0ea6f49f7818f99a01b5edc1856cb05b392e",
+      "parameter_metrics_uncertainty_audited.json": "b1584481fb15b0dd097336a512b3f1933e7459f5c84267c2d12c9f3372745093",
+      "parameter_metrics_report_audited.md": "e4223f0109744c9a9bcec5158f08bf7d7d4dcfc73911d4dcf29d3c3fb88681d8",
+      "rag_finite_sample_intervals_audited.json": "fdd0be5aa31930c7f45a47a84f57618e5502a5488ed394a1eb2fb264c076e0a6",
+      "rag_uncertainty_report_audited.md": "3679ae0a18f0f5ad77fb1535c4dbf7d7848510b3f50ff9e69d759587cb1c5599"
+    }
+  },
+  "rag_uncertainty_analysis": {
+    "method": "two-sided 95% Wilson intervals over the first unique 15-question set",
+    "repeated_runs_counted_as_independent": false,
+    "api_calls_made": false,
+    "artifacts": {
+      "rag_finite_sample_intervals_audited.json": "fdd0be5aa31930c7f45a47a84f57618e5502a5488ed394a1eb2fb264c076e0a6",
+      "rag_uncertainty_report_audited.md": "3679ae0a18f0f5ad77fb1535c4dbf7d7848510b3f50ff9e69d759587cb1c5599"
+    }
+  }
+}

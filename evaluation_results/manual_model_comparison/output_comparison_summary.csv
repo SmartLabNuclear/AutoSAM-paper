@@ -1,0 +1,12 @@
+case,output_quantity,manual,autosam,relative_difference_percent
+Pipe,Outlet fluid temperature (K),628.15,628.15,9.6e-11
+PKE,Total reactivity feedback,-1.4772807857593e-08,-1.4772807857850e-08,1.7e-09
+ABTR,Core inlet temperature (K),636.769,628.150,1.353
+ABTR,Core outlet temperature (K),792.269,783.679,1.084
+ABTR,Core temperature rise (K),155.500,155.529,0.019
+ABTR,Total core mass flow (kg/s),1265.066,1263.951,0.088
+MSRE,Core temperature rise (K),29.799,26.459,11.207
+MSRE,Core pressure drop (kPa),37.044,35.597,3.909
+MSRE,Primary HX temperature drop (K),29.813,27.345,8.278
+MSRE,Primary mass flow (kg/s),167.906,189.178,12.669
+MSRE,Pump head (kPa),43.910,43.910,0.000

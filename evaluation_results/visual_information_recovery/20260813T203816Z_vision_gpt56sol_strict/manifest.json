@@ -1,0 +1,199 @@
+{
+  "schema_version": "1.0",
+  "run_id": "20260813T203816Z_vision_gpt56sol_strict",
+  "status": "complete",
+  "started_at": "2026-08-13T20:38:16.073043Z",
+  "completed_at": "2026-08-13T20:38:16.073049Z",
+  "repository_root": "<AUTOSAM_ROOT>",
+  "script": "evaluation/rescore_vision_runs_strict.py",
+  "script_sha256": "861fb94c9b3fa5c4fa33d679ddaa8be735cdbac561f47daf4c1abdea9f67b516",
+  "benchmark": "evaluation/autosam_rag_benchmark.json",
+  "benchmark_sha256": "f044abc3085ac778ce2950cfdb73ed05c032e84ba62025b9e9fa60bc471f0b05",
+  "benchmark_validation": {
+    "unique_item_ids": 88,
+    "evidence_locations_checked": 52,
+    "status": "passed"
+  },
+  "ground_truth_status": "reconstructed from included source artifacts; domain-expert signoff pending",
+  "configuration": {
+    "runs": 3,
+    "smoke_test": false,
+    "vision_model": "gpt-5.6-sol",
+    "vision_endpoint": "responses",
+    "reasoning_effort": "medium",
+    "image_detail": "original",
+    "description_prompt": "Describe this image in detail.",
+    "structuring_model": "gpt-4o-mini",
+    "structuring_temperature": 0
+  },
+  "comparison_control": {
+    "preserved": [
+      "ABTR/MSRE image files",
+      "description prompt",
+      "GPT-4o-mini geometry-structuring prompt and model",
+      "visual benchmark facts",
+      "deterministic ViR scoring"
+    ],
+    "changed": [
+      "vision model: GPT-4o to GPT-5.6 Sol",
+      "endpoint: Chat Completions to Responses",
+      "image detail: high to original",
+      "reasoning: GPT-5.6 medium reasoning made explicit"
+    ]
+  },
+  "official_documentation": {
+    "model_guidance": "https://developers.openai.com/api/docs/guides/model-guidance?model=gpt-5.6",
+    "model_specification": "https://developers.openai.com/api/docs/models/gpt-5.6-sol"
+  },
+  "baseline": {
+    "path": "<AUTOSAM_ROOT>\\evaluation_runs\\20260813T201032Z_rescore",
+    "manifest_sha256": "2c4a7335049f05d2f2cda24790f4a4fe81251b7a23afac03e63b643b0baa0313",
+    "run_id": "20260813T201032Z_rescore",
+    "vision_models": [
+      "gpt-4o-2024-08-06+gpt-4o-mini-2024-07-18"
+    ],
+    "image_detail": "high",
+    "strict_rescore": true,
+    "ViR": {
+      "ABTR": {
+        "mean": 0.17777777777777778,
+        "sd": 0.03849001794597506
+      },
+      "MSRE": {
+        "mean": 0.6212121212121212,
+        "sd": 0.5068402631417495
+      },
+      "Pooled": {
+        "mean": 0.44144144144144143,
+        "sd": 0.3167278528152603
+      }
+    }
+  },
+  "source_hashes": {
+    "evaluation/autosam_rag_benchmark.json": "f044abc3085ac778ce2950cfdb73ed05c032e84ba62025b9e9fa60bc471f0b05",
+    "evaluation/autosam_vision_evaluation_gpt56_sol.py": "bc04fb1971001e3c24c1721d0c07aaffc573c5a8a9c2e6ac2e1bd03bacf5c660",
+    "evaluation/autosam_rag_evaluation.py": "7e182a71fc8a544e0a40096dfdaeec2e497e3fc9096db1c120f29c44bd9e1981",
+    "tools/image_tools.py": "27416e2ca2b09b6c8e683ca82b6780307f29912abffbfad876371523f53fcbfa",
+    "ABTR_case_pdf/test.png": "8dfc9c4118d68fa29293d897b866748ed783d845e49a9abe342011bb995bd0a5",
+    "MSRE_PDF_CASE/MSRE_system_layout.png": "b65a95888c08676312ecaa03ba1e21878284f1a42a402c5e9446a80fdf4cdca6"
+  },
+  "credential_flags": {
+    "OPENAI_API_KEY": "present"
+  },
+  "environment": {
+    "python": "3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "packages": {
+      "openai": "2.21.0",
+      "python-dotenv": "1.2.1",
+      "Pillow": "12.0.0"
+    }
+  },
+  "counts": {
+    "visual_cases_per_run": 2,
+    "visual_facts_per_run": 37
+  },
+  "application_files_modified": false,
+  "resolved_models": {
+    "vision": [
+      "gpt-5.6-sol"
+    ],
+    "structuring": [
+      "gpt-4o-mini-2024-07-18"
+    ]
+  },
+  "strict_rescore": {
+    "source_sol_run": "<AUTOSAM_ROOT>\\evaluation_runs\\20260813T203159Z_vision_gpt56sol",
+    "source_sol_manifest_sha256": "37e66ea0382bfc7cf3550fbd92bdcf4f0d8e55cbff9f6930ba0446c8ae926e69",
+    "source_baseline_run": "<AUTOSAM_ROOT>\\evaluation_runs\\20260813T201032Z_rescore",
+    "source_baseline_manifest_sha256": "2c4a7335049f05d2f2cda24790f4a4fe81251b7a23afac03e63b643b0baa0313",
+    "raw_api_calls_repeated": false,
+    "source_runs_modified": false,
+    "rule": "Coordinate labels require an exact normalized benchmark alias; substring matching is forbidden.",
+    "alias_map": {
+      "abtr_v01": [
+        "inlet"
+      ],
+      "abtr_v02": [
+        "outlet"
+      ],
+      "abtr_v03": [
+        "CH1",
+        "CH1 start",
+        "channel 1",
+        "channel 1 start"
+      ],
+      "abtr_v04": [
+        "CH2",
+        "CH2 start",
+        "channel 2",
+        "channel 2 start"
+      ],
+      "abtr_v05": [
+        "CH3",
+        "CH3 start",
+        "channel 3",
+        "channel 3 start"
+      ],
+      "abtr_v06": [
+        "CH4",
+        "CH4 start",
+        "channel 4",
+        "channel 4 start"
+      ],
+      "abtr_v07": [
+        "CH5",
+        "CH5 start",
+        "channel 5",
+        "channel 5 start"
+      ],
+      "abtr_v08": [
+        "Pipe2 start",
+        "Pipe2 bottom"
+      ],
+      "msre_v01": [
+        "inlet plenum start",
+        "inlet plenum inlet"
+      ],
+      "msre_v02": [
+        "core top",
+        "core end"
+      ],
+      "msre_v03": [
+        "upper plenum top",
+        "upper plenum end"
+      ],
+      "msre_v04": [
+        "pipe1 end"
+      ],
+      "msre_v05": [
+        "pump",
+        "pump location"
+      ],
+      "msre_v06": [
+        "HX secondary out",
+        "HX secondary outlet"
+      ],
+      "msre_v07": [
+        "HX secondary in",
+        "HX secondary inlet"
+      ],
+      "msre_v08": [
+        "ref p",
+        "reference pressure",
+        "reference pressure point"
+      ],
+      "msre_v09": [
+        "pipe4 end"
+      ],
+      "msre_v10": [
+        "downcomer top",
+        "downcomer end"
+      ],
+      "msre_v11": [
+        "core bottom",
+        "core start"
+      ]
+    }
+  }
+}

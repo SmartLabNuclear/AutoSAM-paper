@@ -1,0 +1,331 @@
+Saved YAML intermediate representation to:
+
+`<AUTOSAM_ROOT>\case_generation_cost_runs\20260822T202329Z_gpt-52\Pipe\workdir\intermediate_pipe.yaml`
+
+Below is the complete, source-grounded YAML content:
+
+```yaml
+# AutoSAM intermediate representation (source-grounded)
+# Case: Pipe SAM test case (PBPipe)
+# Generated: 2026-08-22
+
+source_files:
+  - path: Pipe_regression_test.csv
+    type: csv
+    description: >
+      Single CSV containing tabulated initial conditions, sodium (coolant) properties,
+      wall properties, pipe dimensions, boundary conditions, physical setup,
+      numerical discretization, and a narrative description of the case.
+
+coordinate_system:
+  convention:
+    value: "SAM default: x out-of-plane, y horizontal, z vertical; gravity typically -z"
+    source: {file: Pipe_regression_test.csv, location: "narrative rows 7 and 9", note: "Narrative does not explicitly state axes; convention recorded as assumption."}
+  gravity_vector:
+    value: null
+    units: "m/s^2"
+    source: {file: Pipe_regression_test.csv, location: "not provided"}
+
+system_overview:
+  summary:
+    value: >
+      Steady-state thermal–hydraulic test of a PBPipe component carrying liquid sodium
+      through a 1 m pipe with conjugate heat transfer to a thin solid wall. Pipe is
+      discretized into 20 axial elements. Wall is modeled with 2 radial elements.
+      Outer wall boundary is adiabatic. Inlet: fixed velocity and temperature.
+      Outlet: fixed pressure.
+    source: {file: Pipe_regression_test.csv, location: "row 7 (narrative)"}
+  purpose:
+    value: >
+      Verify PBPipe modeling of temperature evolution, frictional/thermal behavior,
+      wall conduction, energy transfer, and solver convergence; outputs include outlet
+      bulk fluid temperature, average wall temperature, and energy balance.
+    source: {file: Pipe_regression_test.csv, location: "row 9 (narrative)"}
+
+fluids:
+  - name: coolant
+    fluid_id: sodium_linearized
+    role: primary_coolant
+    equation_of_state:
+      type:
+        value: "PTConstantEOS (linearized constant-property EOS)"
+        source: {file: Pipe_regression_test.csv, location: "narrative row 7", note: "Described as simplified linearized EOS with constant properties."}
+      reference_pressure:
+        value: 0.1e6
+        units: Pa
+        source: {file: Pipe_regression_test.csv, location: "Initial conditions: Pressure = 0.1 MPa (row 0)"}
+      reference_temperature:
+        value: 628.15
+        units: K
+        source: {file: Pipe_regression_test.csv, location: "Initial conditions: Temperature = 628.15 K (row 2)"}
+      properties_at_reference:
+        rho_0:
+          value: 865.51
+          units: "kg/m^3"
+          source: {file: Pipe_regression_test.csv, location: "Coolant properties: Density (row 0)"}
+        beta:
+          value: 2.7524e-4
+          units: "1/K"
+          source: {file: Pipe_regression_test.csv, location: "Coolant properties: Thermal expansion (row 1)"}
+        cp:
+          value: 1272.0
+          units: "J/kg-K"
+          source: {file: Pipe_regression_test.csv, location: "Coolant properties: Specific heat (row 2)"}
+        h_0:
+          value: 7.9898e5
+          units: "J/kg"
+          source: {file: Pipe_regression_test.csv, location: "Coolant properties: Enthalpy (row 3)"}
+        mu:
+          value: 2.6216e-4
+          units: "Pa-s"
+          source: {file: Pipe_regression_test.csv, location: "Coolant properties: Viscosity (row 4)"}
+        k:
+          value: 72.0
+          units: "W/m-K"
+          source: {file: Pipe_regression_test.csv, location: "Coolant properties: Thermal conductivity (row 5)"}
+
+solids:
+  - name: pipe_wall
+    material_model:
+      type:
+        value: "SolidMaterialProps (constant properties)"
+        source: {file: Pipe_regression_test.csv, location: "Wall properties table (rows 0-2)", note: "CSV provides rho, k, Cp only."}
+      properties:
+        rho:
+          value: 5000.0
+          units: "kg/m^3"
+          source: {file: Pipe_regression_test.csv, location: "Wall properties: Density (row 0)"}
+        k:
+          value: 20.0
+          units: "W/m-K"
+          source: {file: Pipe_regression_test.csv, location: "Wall properties: Thermal conductivity (row 1)"}
+        Cp:
+          value: 300.0
+          units: "J/kg-K"
+          source: {file: Pipe_regression_test.csv, location: "Wall properties: Specific heat (row 2)"}
+
+components:
+  - name: pipe1
+    sam_type:
+      value: PBPipe
+      source: {file: Pipe_regression_test.csv, location: "narrative row 7"}
+    eos: sodium_linearized
+    geometry:
+      flow_area:
+        value: 3.14e-4
+        units: m^2
+        source: {file: Pipe_regression_test.csv, location: "Pipe dimensions: Area (row 0)"}
+      hydraulic_diameter:
+        value: 0.02
+        units: m
+        source: {file: Pipe_regression_test.csv, location: "Pipe dimensions: Hydraulic diameter (row 1)"}
+      length:
+        value: 1.0
+        units: m
+        source: {file: Pipe_regression_test.csv, location: "Pipe dimensions: Length (row 2)"}
+      heated_perimeter:
+        value: 0.062831853
+        units: m
+        source: {file: Pipe_regression_test.csv, location: "Physical setup: Heated perimeter (row 2)"}
+        note: "Likely computed as $\pi D_h$ with $D_h=0.02$ m (inferred check)."
+      position:
+        value: null
+        units: m
+        source: {file: Pipe_regression_test.csv, location: "not provided"}
+      orientation:
+        value: null
+        units: "-"
+        source: {file: Pipe_regression_test.csv, location: "not provided"}
+    discretization:
+      axial_elems:
+        value: 20
+        units: "count"
+        source: {file: Pipe_regression_test.csv, location: "Numerical discretization: Pipe length = 20 (row 0)"}
+      wall_radial_elems:
+        value: 2
+        units: "count"
+        source: {file: Pipe_regression_test.csv, location: "Numerical discretization: Wall width = 2 (row 1)"}
+    closure_models:
+      friction_factor:
+        value: 0.01
+        units: "-"
+        source: {file: Pipe_regression_test.csv, location: "Physical setup: Friction factor (row 1)"}
+      convective_heat_transfer_coefficient:
+        value: 10000.0
+        units: "W/m^2-K"
+        source: {file: Pipe_regression_test.csv, location: "Physical setup: Convective heat transfer coefficient (row 0)"}
+        note: "Interpreted as PBPipe Hw (fluid-to-wall HTC)."
+    wall:
+      thickness:
+        value: 0.001
+        units: m
+        source: {file: Pipe_regression_test.csv, location: "Pipe dimensions: Wall thickness (row 3)"}
+      outer_boundary_condition:
+        type:
+          value: Adiabatic
+          source: {file: Pipe_regression_test.csv, location: "narrative row 7"}
+
+junctions_and_connections:
+  topology:
+    value: "Single pipe with inlet TDJ and outlet TDV boundary components"
+    source: {file: Pipe_regression_test.csv, location: "narrative row 7"}
+  junctions: []
+  boundaries:
+    - name: inlet
+      sam_type:
+        value: PBTDJ
+        source: {file: Pipe_regression_test.csv, location: "narrative row 7", note: "Boundary type inferred from narrative 'fixed velocity and temperature at the pipe entrance'."}
+      connects_to:
+        value: "pipe1(in)"
+        source: {file: Pipe_regression_test.csv, location: "not explicitly provided"}
+      prescribed:
+        velocity:
+          value: 1.0
+          units: "m/s"
+          source: {file: Pipe_regression_test.csv, location: "Boundary conditions: Inlet velocity = 1 m/s (row 1)"}
+        temperature:
+          value: 628.15
+          units: K
+          source: {file: Pipe_regression_test.csv, location: "Boundary conditions: Inlet temperature = 628.15 (row 0)"}
+        mass_flow_rate:
+          value: null
+          units: "kg/s"
+          source: {file: Pipe_regression_test.csv, location: "not provided"}
+    - name: outlet
+      sam_type:
+        value: PBTDV
+        source: {file: Pipe_regression_test.csv, location: "narrative row 7", note: "Boundary type inferred from narrative 'fixed pressure at the exit'."}
+      connects_to:
+        value: "pipe1(out)"
+        source: {file: Pipe_regression_test.csv, location: "not explicitly provided"}
+      prescribed:
+        pressure:
+          value: 0.1e6
+          units: Pa
+          source: {file: Pipe_regression_test.csv, location: "Boundary conditions: Outlet pressure = 0.1 MPa (row 2)"}
+        temperature:
+          value: null
+          units: K
+          source: {file: Pipe_regression_test.csv, location: "not provided"}
+
+initial_conditions:
+  global:
+    pressure:
+      value: 0.1e6
+      units: Pa
+      source: {file: Pipe_regression_test.csv, location: "Initial conditions: Pressure = 0.1 MPa (row 0)"}
+    velocity:
+      value: 1.0
+      units: "m/s"
+      source: {file: Pipe_regression_test.csv, location: "Initial conditions: Velocity = 1 m/s (row 1)"}
+    temperature:
+      value: 628.15
+      units: K
+      source: {file: Pipe_regression_test.csv, location: "Initial conditions: Temperature = 628.15 K (row 2)"}
+  component_overrides: []
+
+boundary_conditions:
+  - boundary: inlet
+    quantity: [velocity, temperature]
+    type: "Dirichlet / imposed (PBTDJ)"
+    source: {file: Pipe_regression_test.csv, location: "Boundary conditions table (rows 0-2)"}
+  - boundary: outlet
+    quantity: [pressure]
+    type: "Dirichlet / imposed (PBTDV)"
+    source: {file: Pipe_regression_test.csv, location: "Boundary conditions table (rows 0-2)"}
+  - boundary: pipe1_outer_wall
+    quantity: [heat_flux]
+    type: "Adiabatic (zero heat flux)"
+    source: {file: Pipe_regression_test.csv, location: "narrative row 7"}
+
+power_or_heat_sources:
+  fluid_volumetric_heat_source:
+    value: null
+    units: "W/m^3"
+    source: {file: Pipe_regression_test.csv, location: "not provided"}
+    note: "Narrative says '1-meter heated pipe' but no heat flux/volumetric heat input magnitude is given."
+  wall_heat_source:
+    value: null
+    units: "W/m^3"
+    source: {file: Pipe_regression_test.csv, location: "not provided"}
+
+execution_settings:
+  simulation_type:
+    value: Steady
+    source: {file: Pipe_regression_test.csv, location: "Numerical discretization: Time = Steady state (row 2)"}
+  solver_tolerances:
+    value: null
+    source: {file: Pipe_regression_test.csv, location: "not provided"}
+  time_stepper:
+    value: null
+    source: {file: Pipe_regression_test.csv, location: "not applicable / not provided"}
+
+requested_outputs:
+  quantities:
+    - name: pipe_outlet_temperature
+      source: {file: Pipe_regression_test.csv, location: "Output information (row 0)"}
+    - name: pipe_inlet_temperature
+      source: {file: Pipe_regression_test.csv, location: "Output information (row 1)"}
+    - name: wall_average_temperature
+      source: {file: Pipe_regression_test.csv, location: "Output information (row 2)"}
+    - name: inlet_energy
+      source: {file: Pipe_regression_test.csv, location: "Output information (row 3)"}
+    - name: outlet_energy
+      source: {file: Pipe_regression_test.csv, location: "Output information (row 4)"}
+
+extracted_values:
+  unit_normalization_notes:
+    - value: "Converted 0.1 MPa to 1.0e5 Pa where needed"
+      source: {file: Pipe_regression_test.csv, location: "Initial conditions + boundary conditions tables"}
+
+inferred_values:
+  - name: heated_perimeter_formula_check
+    value: "P_h ≈ π D_h = 0.0628319 m"
+    basis: "D_h=0.02 m; provided heated perimeter 0.062831853 m"
+    source: {file: Pipe_regression_test.csv, location: "Pipe dimensions row 1 + Physical setup row 2"}
+  - name: boundary_component_types
+    value: "Inlet modeled as PBTDJ; outlet modeled as PBTDV"
+    basis: "SAM typical mapping for imposed (V,T) inlet and imposed P outlet"
+    source: {file: Pipe_regression_test.csv, location: "narrative row 7"}
+
+assumptions:
+  - id: A1
+    statement: "SAM coordinate system defaults used; gravity not explicitly required for forced-flow case"
+    justification: "No coordinate/gravity data in CSV"
+  - id: A2
+    statement: "Convective heat transfer coefficient corresponds to PBPipe Hw (fluid-to-wall HTC)"
+    justification: "CSV names 'Convective heat transfer coefficient' under Physical setup"
+  - id: A3
+    statement: "Outer wall boundary is adiabatic (HS_BC_type = Adiabatic)"
+    justification: "Explicitly stated in narrative"
+
+missing_parameters:
+  - parameter: "Component placement: position/orientation"
+    reason: "Not provided in CSV; no diagram"
+    value: null
+  - parameter: "Mesh order / p_order, stabilization flags, scaling factors"
+    reason: "Not provided"
+    value: null
+  - parameter: "Outer-wall ambient conditions (if convective)"
+    reason: "Outer wall is adiabatic per narrative"
+    value: null
+  - parameter: "Heating input magnitude (wall heat flux qs_wall or volumetric heat_source)"
+    reason: "Narrative says heated pipe but provides no q'' or power"
+    value: null
+  - parameter: "Executioner solver settings (tolerances, preconditioner)"
+    reason: "Not provided"
+    value: null
+  - parameter: "Wall initial temperature (Twall_init)"
+    reason: "Not provided; likely equals global_init_T but not stated"
+    value: null
+
+human_review_questions:
+  - q: "What is the actual heating specification? (e.g., qs_wall, heat_source, or imposed outer-wall temperature)"
+    why: "Case described as 'heated pipe' but no heat input magnitude is given; needed for reproducible SAM model."
+  - q: "Should the outer wall be adiabatic (as narrative says), or is there an imposed external boundary condition?"
+    why: "Adiabatic outer wall implies no net heat loss outward; heating then must be internal/at inner wall; clarify intent."
+  - q: "Confirm whether the EOS is PTConstantEOS with the provided properties and reference (T_0, p_0) equal to initial conditions."
+    why: "CSV provides properties but not explicit EOS block settings besides narrative description."
+  - q: "Provide any solver / executioner settings used in regression (Steady tolerances, preconditioning) if strict reproduction is required."
+    why: "Not in CSV."
+```

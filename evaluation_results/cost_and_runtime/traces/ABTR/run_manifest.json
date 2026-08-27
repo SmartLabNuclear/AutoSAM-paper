@@ -1,0 +1,216 @@
+{
+  "started_utc": "2026-08-22T20:37:20.875530+00:00",
+  "model": "gpt-5.2",
+  "cases": [
+    "ABTR"
+  ],
+  "script": "<AUTOSAM_ROOT>\\evaluation\\autosam_four_case_cost_runtime.py",
+  "script_sha256": "7a3eb1cc3ff08d90105748c5f6520ef1884d7d406f99aa456d3e565a238a9391",
+  "case_summaries": [
+    {
+      "case": "ABTR",
+      "model_requested": "gpt-5.2",
+      "timestamp_utc": "2026-08-22T20:42:14.252107+00:00",
+      "source_manifest": [
+        {
+          "name": "ABTR_case.pdf",
+          "role": "case_source",
+          "source": "<AUTOSAM_ROOT>\\ABTR_case_pdf\\ABTR_case.pdf",
+          "sha256": "cce875fe9be71d5491a41d4561a7e77d04327fb3740e944b5caef5a37db6f30e",
+          "bytes": 970569
+        },
+        {
+          "name": "model_specifications.xlsx",
+          "role": "case_source",
+          "source": "<AUTOSAM_ROOT>\\ABTR_case_pdf\\model_specifications.xlsx",
+          "sha256": "f06e5ab147a52bed5a83fc15aac75d2d3e6f54a7bc0631ce95cf91c9dae09868",
+          "bytes": 9529
+        },
+        {
+          "name": "test.png",
+          "role": "case_source",
+          "source": "<AUTOSAM_ROOT>\\ABTR_case_pdf\\test.png",
+          "sha256": "8dfc9c4118d68fa29293d897b866748ed783d845e49a9abe342011bb995bd0a5",
+          "bytes": 364688
+        },
+        {
+          "name": "documents_library.json",
+          "role": "prebuilt_retrieval_cache",
+          "source": "<AUTOSAM_ROOT>\\ABTR_case_pdf\\documents_library.json",
+          "sha256": "3750f2e1af8853b5e0f1172390c5445e737067a596710766fb9213bfc85677ab",
+          "bytes": 9773
+        },
+        {
+          "name": "processed_pdfs.txt",
+          "role": "prebuilt_retrieval_cache",
+          "source": "<AUTOSAM_ROOT>\\ABTR_case_pdf\\processed_pdfs.txt",
+          "sha256": "f9e43f11642854726ada3955698f8ddacb6711d890a00f1597499d6d214ba5d2",
+          "bytes": 15
+        },
+        {
+          "name": "gpt_vector_store",
+          "role": "prebuilt_retrieval_cache",
+          "source": "<AUTOSAM_ROOT>\\ABTR_case_pdf\\gpt_vector_store",
+          "sha256": "f19b4d1bfd13fce0576b490043cb17f3565a708f2dd99ac11f1abfe7e2a8cc92"
+        },
+        {
+          "name": "image_descriptions.json",
+          "role": "prebuilt_retrieval_cache",
+          "source": "<AUTOSAM_ROOT>\\ABTR_case_pdf\\image_descriptions.json",
+          "sha256": "23aa505704ba1c9236bae22e8fb0bb1b6259c245a088b08c906ca896055c2792",
+          "bytes": 2464
+        }
+      ],
+      "model_initialization_seconds": 1.033918500004802,
+      "stage_1_seconds": 224.13540379999904,
+      "stage_2_seconds": 68.06922960001975,
+      "end_to_end_seconds_excluding_initialization": 292.2046334000188,
+      "end_to_end_seconds_including_initialization": 293.2385519000236,
+      "stage_1_tools": [
+        "CSVandEXCELFileReaderTool",
+        "CSVandEXCELFileReaderTool",
+        "PDFProcessorTool",
+        "PDFProcessorTool",
+        "ImageAnalysisTool",
+        "TextFileReaderTool",
+        "PythonREPLTool",
+        "PythonREPLTool",
+        "PythonREPLTool",
+        "TextFileReaderTool",
+        "PythonREPLTool",
+        "PythonREPLTool",
+        "PythonREPLTool",
+        "TextFileReaderTool"
+      ],
+      "stage_2_tools": [
+        "TextFileReaderTool",
+        "IntermediateFileToInputFileTool",
+        "PythonREPLTool",
+        "SAMInputFileValidatorTool",
+        "SAMInputFileValidatorTool",
+        "SAMInputFileValidatorTool"
+      ],
+      "validator_calls": 3,
+      "intermediate_file": {
+        "path": "<AUTOSAM_ROOT>\\case_generation_cost_runs\\20260822T203716Z_gpt-52\\ABTR\\workdir\\intermediate_abtr.yaml",
+        "sha256": "250dfd880412eb98819adb076c49e33be953b9a756940f13959d31ec55b02731",
+        "bytes": 32560
+      },
+      "input_file": {
+        "path": "<AUTOSAM_ROOT>\\case_generation_cost_runs\\20260822T203716Z_gpt-52\\ABTR\\workdir\\sam_model_generated.i",
+        "sha256": "51a2e63557b46bf034731fd91dcd2ec0b9227f6b687e312d7e3c53521568d015",
+        "bytes": 8128
+      },
+      "stage_1_usage": {
+        "elapsed_seconds": 224.13540379999904,
+        "legacy_callback": {
+          "prompt_tokens": 1229732,
+          "completion_tokens": 21395,
+          "total_tokens": 1251127,
+          "successful_requests": 17,
+          "total_cost_usd_library_estimate": 0.0026121
+        },
+        "usage_metadata_by_model": {
+          "gpt-5.2-2025-12-11": {
+            "input_tokens": 1214974,
+            "total_tokens": 1235577,
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 1182208
+            },
+            "output_token_details": {
+              "audio": 0,
+              "reasoning": 0
+            },
+            "output_tokens": 20603
+          },
+          "gpt-4o-mini-2024-07-18": {
+            "input_tokens": 14758,
+            "total_tokens": 15550,
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 1024
+            },
+            "output_token_details": {
+              "audio": 0,
+              "reasoning": 0
+            },
+            "output_tokens": 792
+          }
+        },
+        "direct_api_calls": [
+          {
+            "kind": "direct_chat_or_vision",
+            "model": "gpt-5.2-2025-12-11",
+            "elapsed_seconds": 6.521252599981381,
+            "usage": {
+              "completion_tokens": 499,
+              "prompt_tokens": 3314,
+              "total_tokens": 3813,
+              "completion_tokens_details": {
+                "accepted_prediction_tokens": 0,
+                "audio_tokens": 0,
+                "reasoning_tokens": 0,
+                "rejected_prediction_tokens": 0
+              },
+              "prompt_tokens_details": {
+                "audio_tokens": 0,
+                "cached_tokens": 2560
+              }
+            },
+            "timestamp_utc": "2026-08-22T20:37:52.136744+00:00"
+          },
+          {
+            "kind": "embedding",
+            "model": "text-embedding-ada-002",
+            "elapsed_seconds": 0.24661529998411424,
+            "usage": {
+              "prompt_tokens": 494,
+              "total_tokens": 494
+            },
+            "timestamp_utc": "2026-08-22T20:37:52.438264+00:00"
+          },
+          {
+            "kind": "embedding",
+            "model": "text-embedding-ada-002",
+            "elapsed_seconds": 0.2305321999883745,
+            "usage": {
+              "prompt_tokens": 27,
+              "total_tokens": 27
+            },
+            "timestamp_utc": "2026-08-22T20:37:52.713315+00:00"
+          }
+        ],
+        "timestamp_utc": "2026-08-22T20:41:06.176613+00:00"
+      },
+      "stage_2_usage": {
+        "elapsed_seconds": 68.06922960001975,
+        "legacy_callback": {
+          "prompt_tokens": 619295,
+          "completion_tokens": 6720,
+          "total_tokens": 626015,
+          "successful_requests": 6,
+          "total_cost_usd_library_estimate": 0.0
+        },
+        "usage_metadata_by_model": {
+          "gpt-5.2-2025-12-11": {
+            "input_tokens": 619295,
+            "total_tokens": 626015,
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 508928
+            },
+            "output_token_details": {
+              "audio": 0,
+              "reasoning": 0
+            },
+            "output_tokens": 6720
+          }
+        },
+        "direct_api_calls": [],
+        "timestamp_utc": "2026-08-22T20:42:14.250233+00:00"
+      }
+    }
+  ],
+  "completed_utc": "2026-08-22T20:42:14.253797+00:00"
+}

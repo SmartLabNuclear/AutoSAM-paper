@@ -1,0 +1,70 @@
+initial_conditions:
+  pressure: 0.1 MPa
+  velocity: 5 m/s
+  temperature: 628.15 K
+  initial_power: 0
+fluid_properties:
+  reference_pressure: 0.1 MPa
+  reference_density: 865.51 kg/m^3
+  reference_enthalpy: 7.9898e5 J/kg
+  reference_temperature: 628.15
+  viscosity: 0.00026216
+  specific_heat: 1272
+  thermal_conductivity: 72
+  expansion_coefficient: 2.7524e-4 K^-1
+fuel_properties:
+  specific_heat: 191.67
+  thermal_conductivity: 16.0
+  thermal_expansion_coefficient: 1.76e-05
+  youngs_modulus: 28000000000.0
+  density: 14583.0
+clad_properties:
+  specific_heat: 638.0
+  thermal_conductivity: 26.0
+  density: 7646.0
+  youngs_modulus: 150000000000.0
+  thermal_expansion_coefficient: 1.4e-05
+core_specifics:
+  area: 2.0e-05
+  length: 0.8
+  hydraulic_diameter: 0.0031830989
+  friction_factor: 0.017
+  power_profile: Uniform
+  fuel_width: 0.00348
+  clad_width: 0.00052
+  heat_transfer_coefficient: 160000
+  heat_transfer_surface_area_density: 1256.637
+  doppler_reactivity_feedback_coefficient: -1.0e-07
+boundary_conditions:
+  description: Transient inlet boundary condition
+  transient_duration: 10 s
+  transient_inlet_temperature: 628.15 - 728.15 in 10 s
+  inlet_velocity: 8.6654
+  outlet_pressure: 0.2 MPa
+  outlet_temperature: 728.15
+point_kinetics:
+  prompt_neutron_lifetime: 3.46402e-07
+  decay_constants:
+  - 0.013345
+  - 2.8738
+  delayed_neutron_fractions:
+  - 0.00023929
+  - 0.0004921
+numerical_discretization:
+  time_scheme: transient
+  time_step: 0.5
+  start_time: 0
+  end_time: 20
+  max_nonlinear_iterations: 20
+  max_linear_iterations: 100
+  min_time_step: 1.0e-05
+  nonlinear_absolute_tolerance: 1.0e-06
+  nonlinear_relative_tolerance: 1.0e-07
+  axial_discretization_nodes: 20
+  fuel_discretization: 5
+  clad_discretization: 1
+validation_calculation:
+  doppler_reactivity_feedback_coefficient: -1.0e-07
+  reactivity_change: Doppler reactivity feedback coefficent * log(Final temperature/Initial
+    temperature)
+  note: In the postprocessor, check the reactivity change calculation with the Total_Reactivity_Feedback

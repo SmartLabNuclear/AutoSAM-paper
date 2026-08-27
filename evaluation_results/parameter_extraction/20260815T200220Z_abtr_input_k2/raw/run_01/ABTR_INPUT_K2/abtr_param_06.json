@@ -1,0 +1,370 @@
+{
+  "timestamp": "2026-08-15T20:02:33.852708Z",
+  "run": 1,
+  "case": "ABTR_INPUT_K2",
+  "item": {
+    "id": "abtr_param_06",
+    "type": "direct",
+    "question": "How many parallel core channels are in the ABTR model, and how many heat-structure regions are assigned to each channel?",
+    "answerable": true,
+    "required_claims": [
+      {
+        "id": "channel_count",
+        "kind": "numeric",
+        "value": 5,
+        "unit": "channels",
+        "relative_tolerance": 0.0,
+        "evidence": [
+          {
+            "source": "ABTR_case.pdf",
+            "page": 1
+          }
+        ]
+      },
+      {
+        "id": "ch1_4_nhs",
+        "kind": "categorical",
+        "term_groups": [
+          [
+            "CH1-CH4",
+            "CH1 through CH4",
+            "channels 1-4",
+            "CH1, CH2, CH3, and CH4"
+          ],
+          [
+            "3",
+            "three"
+          ],
+          [
+            "heat-structure",
+            "heat structure",
+            "regions"
+          ]
+        ],
+        "evidence": [
+          {
+            "source": "ABTR_case.pdf",
+            "page": 2
+          }
+        ]
+      },
+      {
+        "id": "ch5_nhs",
+        "kind": "categorical",
+        "term_groups": [
+          [
+            "CH5",
+            "channel 5"
+          ],
+          [
+            "2",
+            "two"
+          ],
+          [
+            "heat-structure",
+            "heat structure",
+            "regions"
+          ]
+        ],
+        "evidence": [
+          {
+            "source": "ABTR_case.pdf",
+            "page": 2
+          }
+        ]
+      }
+    ]
+  },
+  "configuration": {
+    "embedding_model": "text-embedding-3-large",
+    "top_k": 2,
+    "qa_model": "gpt-5.6-sol",
+    "qa_temperature": 0,
+    "reasoning_effort": "none",
+    "target_source": "ABTR_case.pdf"
+  },
+  "retrieved_documents": [
+    {
+      "rank": 1,
+      "chunk_id": "target-abtr-case-p0001",
+      "source": "ABTR_case.pdf",
+      "page": 1,
+      "document_role": "target",
+      "cosine_distance": 0.4707542061805725,
+      "content": "\n\n# ABTR case\n\nzaidabulawi Abulawi\n\nDecember 2025\n\n## 1 ABTR description\n\nA demonstrative system model based on the Advanced Burner Test Reactor (ABTR) conceptual design has been developed with the SAM for the reactor core.\n\nThe primary system is configured in a pool-type arrangement, with the reactor core. The primary coolant is sodium. The reactor core consists of 24 assemblies in an inner enrichment zone and 30 assemblies in the outer zone. A total of nine test locations are provided for fuel (6 assemblies) and material (3 assemblies) tests. On the basis of the reactor physics calculations, a five-channel model was selected to model the reactor core. Channel 1 is used to represent the peak-power inner-core subassembly with fresh fuel. Channels 2 and 4 represent the average subassemblies in the inner and outer enrichment zones respectively, while channel 3 represents the average of the mid-core fuel test assemblies. Channel 5 represents all of the non-fuel subassemblies, including the mid-core materials test assemblies. Figure 1 shows the initial subassembly powers at the beginning of equilibrium cycle conditions, and the average axial power shape for all assemblies. The geometric data and input conditions employed in the multi-channel core model are shown in Table 1.\n\nTable 2 shows additional characteristics of the core channels including friction factor, heat transfer coefficient, materials of heat structure, power fraction, and heat transfer area density.\n\nThe material properties used in this model include four solid materials: **fuel-mat**, **gap-mat**, **clad-mat**, and **duct-mat**. The fuel-mat is defined with a thermal conductivity of 16 W/m\\(\\cdot\\)K, a heat capacity (\\(C_{p}\\)) of 191.67 J/kg\\(\\cdot\\)K, and a density of \\(1.4583\\times 10^{4}\\) kg/m\\({}^{3}\\). The gap-mat has a thermal conductivity of 64 W/m\\(\\cdot\\)K, a heat capacity of 1272 J/kg\\(\\cdot\\)K, and a density of 865 kg/m\\({}^{3}\\). The clad-mat is modeled with a thermal\n\nFigure 1: Assembly radial (left) and axial (right) power distribution at BOC.\n\n",
+      "content_sha256": "75917e5dcc2933faf13bbc96233ab91e6b07d053689d52ac16bebfa51bdc7c8f"
+    },
+    {
+      "rank": 2,
+      "chunk_id": "target-abtr-case-p0002",
+      "source": "ABTR_case.pdf",
+      "page": 2,
+      "document_role": "target",
+      "cosine_distance": 0.5345830917358398,
+      "content": "conductivity of 26 W/m\\(\\cdot\\)K, a heat capacity of 638 J/kg\\(\\cdot\\)K, and a density of \\(7.646\\times 10^{3}\\) kg/m\\({}^{3}\\). The duct-mat uses the same thermophysical properties as the cladding, with \\(k=26\\) W/m\\(\\cdot\\)K, \\(C_{p}=638\\) J/kg\\(\\cdot\\)K, and \\(\\rho=7.646\\times 10^{3}\\) kg/m\\({}^{3}\\). These values define the thermal response of all solid regions in the heat-structure system.\n\nThe thermal-hydraulic model consists of five parallel fuel channels (CH1-CH5) that are all vertically oriented along the positive \\(z\\)-axis and share identical inlet and outlet flow directions. These channels represent parallel flow paths within the core. The parallel channels are hydraulically connected between two one-dimensional pipes that serve as the inlet and outlet plenums of the system. Upstream of the channels, pipe1 delivers coolant to a branching junction, which distributes the flow into all five channels simultaneously. This junction includes individual form-loss coefficients (\\(K\\) values) to represent flow-distribution resistances for each channel leg. Specifically, the values used in branch1 are \\(K=0.1,\\ 0.5,\\ 1.96,\\ 2.16,\\ 4.5\\), and \\(3500.0\\), corresponding respectively to the main pipe passage and the five channel inlets (CH1-CH5). Downstream, the outlets of all five channels recombine at a second junction (branch2), where the form-loss coefficients are all set to zero (\\(K=0.0\\) for each outlet leg), allowing the flows to merge without additional hydraulic resistance. This junction gathers the returning coolant and directs it into pipe2, completing the loop back toward the outlet boundary. The branches area is \\(0.44934\\).\n\nThe boundary conditions are imposed using two TDV components: inlet_TDV specifies the inlet velocity and temperature, enforcing a velocity boundary condition of \\(3.25\\) m/s and an inlet coolant temperature of \\(628.15\\) K at the entrance of pipe1. At the system outlet, outlet_TDV applies a fixed pressure of \\(1\\times 10^{5}\\) Pa along with a temperature boundary condition of \\(628.15\\) K at the exit of pipe2. Together, these boundaries define the global driving conditions for the transient simulation, while the internal distribution of mass flow among channels is governed by the hydraulic resistances and form losses specified within the branching components.\n\nThe initial conditions for the simulation are defined globally, setting the thermodynamic state of the system before the transient begins. The coolant throughout all fluid components is initialized at a uniform pressure of \\(1.0\\times 10^{5}\\) Pa, a velocity of \\(2\\) m/s, and a temperature of \\(628.15\\) K. These global values establish a consistent starting point for all channels, pipes, and junctions. For the solid regions of the heat structures, the initial temperature is also set to \\(628.15\\) K, ensuring thermal equilibrium between the solid and fluid domains at startup. A temperature scaling factor of \\(T_{\\text{solid\\_sf}}=1\\times 10^{-3}\\) and variable scaling factors of \\(1\\), \\(10^{-3}\\), and \\(10^{-6}\\) are applied to improve numerical conditioning during the nonlinear solve. Together, these initial conditions provide a well-defined, steady baseline from which the transient evolution of mass flow, temperature, and heat transfer can develop.\n\nThe numerical discretization of the system is defined through both axial and horizontal resolutions. Vertically, each core channel (CH1-CH5) is modeled using 20 axial fluid elements over a heated length of\n\n\\begin{table}\n\\begin{tabular}{l c c c c} \\hline\n**Component** & **A (m\\({}^{2}\\))** & **Dh (m)** & **Length (m)** \\\\ \\hline CH1 & 4.9237e-3 & 2.972e-3 & 0.8 \\\\ CH2 & 0.11323 & 2.972e-3 & 0.8 \\\\ CH3 & 0.029539 & 2.972e-3 & 0.8 \\\\ CH4 & 0.14769 & 2.972e-3 & 0.8 \\\\ CH5 & 0.153955129 & 2.972e-3 & 0.8 \\\\ pipe1 & 0.44934 & 2.972e-3 & 0.6 \\\\ pipe2 & 0.44934 & 2.972e-3 & 1.5 \\\\ \\hline \\end{tabular}\n\\end{table}\nTable 1: Component Geometry Summary\n\n\\begin{table}\n\\begin{tabular}{l c c c c c c} \\hline\n**Component** & \\(n_{hs}\\) & **Width of HS (m)** & **Material** & **f** & **Hw** & **HT Area Density** & **Power Fraction** \\\\ \\hline CH1 & 3 & 0.003015/0.000465/0.00052 & fuel/gap/clad & 0.022 & 1.6129e5 & 1107.8 & 0.02248 \\\\ CH2 & 3 & 0.003015/0.000465/0.00052 & fuel/gap/clad & 0.022 & 1.6129e5 & 1107.8 & 0.41924 \\\\ CH3 & 3 & 0.003015/0.000465/0.00052 & fuel/gap/clad & 0.022 & 1.6129e5 & 1107.8 & 0.09852 \\\\ CH4 & 3 & 0.003015/0.000465/0.00052 & fuel/gap/clad & 0.022 & 1.6129e5 & 1107.8 & 0.43116 \\\\ CH5 & 2 & 6.32340e-3/7.0260e-4 & fuel/clad & 0.04 & 13619 & 2113.6 & 0.02860 \\\\ \\hline \\end{tabular}\n\\end{table}\nTable 2: Heat Structure, Thermal Parameters, and Power Fraction",
+      "content_sha256": "669d09c00c19128dceee7ec05396c2f5c4fba2d18f2887116734cf2f6dec6f21"
+    }
+  ],
+  "system_prompt": "You are AutoSAM's retrieval question-answering component in an input-parameter extraction benchmark.\nThe authoritative target is ABTR_case.pdf. Other retrieved documents discuss the historical ABTR but are distractors for this task.\n\nUse only evidence from ABTR_case.pdf. Do not substitute a value from another document and do not use outside knowledge. If the retrieved target text is insufficient, set answerable to false rather than guessing.\n\nAnswer every requested field that is supported. Preserve equations and units exactly. Split the response into atomic claims so that distinct requested parameters are separately auditable. Give each claim its own target-document page and a short exact evidence quote.\n\nReturn one JSON object with exactly these fields:\n{\n  \"answerable\": true or false,\n  \"answer\": \"concise complete answer\",\n  \"claims\": [\n    {\n      \"text\": \"one atomic parameter claim\",\n      \"reported_value\": number or null,\n      \"reported_unit\": \"unit\" or null,\n      \"evidence_quote\": \"short exact supporting excerpt\",\n      \"source\": \"document filename\",\n      \"page\": integer\n    }\n  ],\n  \"citations\": [{\"source\": \"document filename\", \"page\": integer}]\n}\n\nUse document and page identifiers exactly as shown in the evidence headers. Return JSON only.",
+  "user_prompt": "QUESTION:\nHow many parallel core channels are in the ABTR model, and how many heat-structure regions are assigned to each channel?\n\nRETRIEVED EVIDENCE:\n[DOCUMENT source=ABTR_case.pdf page=1 chunk_id=target-abtr-case-p0001 cosine_distance=0.47075421]\n\n\n# ABTR case\n\nzaidabulawi Abulawi\n\nDecember 2025\n\n## 1 ABTR description\n\nA demonstrative system model based on the Advanced Burner Test Reactor (ABTR) conceptual design has been developed with the SAM for the reactor core.\n\nThe primary system is configured in a pool-type arrangement, with the reactor core. The primary coolant is sodium. The reactor core consists of 24 assemblies in an inner enrichment zone and 30 assemblies in the outer zone. A total of nine test locations are provided for fuel (6 assemblies) and material (3 assemblies) tests. On the basis of the reactor physics calculations, a five-channel model was selected to model the reactor core. Channel 1 is used to represent the peak-power inner-core subassembly with fresh fuel. Channels 2 and 4 represent the average subassemblies in the inner and outer enrichment zones respectively, while channel 3 represents the average of the mid-core fuel test assemblies. Channel 5 represents all of the non-fuel subassemblies, including the mid-core materials test assemblies. Figure 1 shows the initial subassembly powers at the beginning of equilibrium cycle conditions, and the average axial power shape for all assemblies. The geometric data and input conditions employed in the multi-channel core model are shown in Table 1.\n\nTable 2 shows additional characteristics of the core channels including friction factor, heat transfer coefficient, materials of heat structure, power fraction, and heat transfer area density.\n\nThe material properties used in this model include four solid materials: **fuel-mat**, **gap-mat**, **clad-mat**, and **duct-mat**. The fuel-mat is defined with a thermal conductivity of 16 W/m\\(\\cdot\\)K, a heat capacity (\\(C_{p}\\)) of 191.67 J/kg\\(\\cdot\\)K, and a density of \\(1.4583\\times 10^{4}\\) kg/m\\({}^{3}\\). The gap-mat has a thermal conductivity of 64 W/m\\(\\cdot\\)K, a heat capacity of 1272 J/kg\\(\\cdot\\)K, and a density of 865 kg/m\\({}^{3}\\). The clad-mat is modeled with a thermal\n\nFigure 1: Assembly radial (left) and axial (right) power distribution at BOC.\n\n\n\n[DOCUMENT source=ABTR_case.pdf page=2 chunk_id=target-abtr-case-p0002 cosine_distance=0.53458309]\nconductivity of 26 W/m\\(\\cdot\\)K, a heat capacity of 638 J/kg\\(\\cdot\\)K, and a density of \\(7.646\\times 10^{3}\\) kg/m\\({}^{3}\\). The duct-mat uses the same thermophysical properties as the cladding, with \\(k=26\\) W/m\\(\\cdot\\)K, \\(C_{p}=638\\) J/kg\\(\\cdot\\)K, and \\(\\rho=7.646\\times 10^{3}\\) kg/m\\({}^{3}\\). These values define the thermal response of all solid regions in the heat-structure system.\n\nThe thermal-hydraulic model consists of five parallel fuel channels (CH1-CH5) that are all vertically oriented along the positive \\(z\\)-axis and share identical inlet and outlet flow directions. These channels represent parallel flow paths within the core. The parallel channels are hydraulically connected between two one-dimensional pipes that serve as the inlet and outlet plenums of the system. Upstream of the channels, pipe1 delivers coolant to a branching junction, which distributes the flow into all five channels simultaneously. This junction includes individual form-loss coefficients (\\(K\\) values) to represent flow-distribution resistances for each channel leg. Specifically, the values used in branch1 are \\(K=0.1,\\ 0.5,\\ 1.96,\\ 2.16,\\ 4.5\\), and \\(3500.0\\), corresponding respectively to the main pipe passage and the five channel inlets (CH1-CH5). Downstream, the outlets of all five channels recombine at a second junction (branch2), where the form-loss coefficients are all set to zero (\\(K=0.0\\) for each outlet leg), allowing the flows to merge without additional hydraulic resistance. This junction gathers the returning coolant and directs it into pipe2, completing the loop back toward the outlet boundary. The branches area is \\(0.44934\\).\n\nThe boundary conditions are imposed using two TDV components: inlet_TDV specifies the inlet velocity and temperature, enforcing a velocity boundary condition of \\(3.25\\) m/s and an inlet coolant temperature of \\(628.15\\) K at the entrance of pipe1. At the system outlet, outlet_TDV applies a fixed pressure of \\(1\\times 10^{5}\\) Pa along with a temperature boundary condition of \\(628.15\\) K at the exit of pipe2. Together, these boundaries define the global driving conditions for the transient simulation, while the internal distribution of mass flow among channels is governed by the hydraulic resistances and form losses specified within the branching components.\n\nThe initial conditions for the simulation are defined globally, setting the thermodynamic state of the system before the transient begins. The coolant throughout all fluid components is initialized at a uniform pressure of \\(1.0\\times 10^{5}\\) Pa, a velocity of \\(2\\) m/s, and a temperature of \\(628.15\\) K. These global values establish a consistent starting point for all channels, pipes, and junctions. For the solid regions of the heat structures, the initial temperature is also set to \\(628.15\\) K, ensuring thermal equilibrium between the solid and fluid domains at startup. A temperature scaling factor of \\(T_{\\text{solid\\_sf}}=1\\times 10^{-3}\\) and variable scaling factors of \\(1\\), \\(10^{-3}\\), and \\(10^{-6}\\) are applied to improve numerical conditioning during the nonlinear solve. Together, these initial conditions provide a well-defined, steady baseline from which the transient evolution of mass flow, temperature, and heat transfer can develop.\n\nThe numerical discretization of the system is defined through both axial and horizontal resolutions. Vertically, each core channel (CH1-CH5) is modeled using 20 axial fluid elements over a heated length of\n\n\\begin{table}\n\\begin{tabular}{l c c c c} \\hline\n**Component** & **A (m\\({}^{2}\\))** & **Dh (m)** & **Length (m)** \\\\ \\hline CH1 & 4.9237e-3 & 2.972e-3 & 0.8 \\\\ CH2 & 0.11323 & 2.972e-3 & 0.8 \\\\ CH3 & 0.029539 & 2.972e-3 & 0.8 \\\\ CH4 & 0.14769 & 2.972e-3 & 0.8 \\\\ CH5 & 0.153955129 & 2.972e-3 & 0.8 \\\\ pipe1 & 0.44934 & 2.972e-3 & 0.6 \\\\ pipe2 & 0.44934 & 2.972e-3 & 1.5 \\\\ \\hline \\end{tabular}\n\\end{table}\nTable 1: Component Geometry Summary\n\n\\begin{table}\n\\begin{tabular}{l c c c c c c} \\hline\n**Component** & \\(n_{hs}\\) & **Width of HS (m)** & **Material** & **f** & **Hw** & **HT Area Density** & **Power Fraction** \\\\ \\hline CH1 & 3 & 0.003015/0.000465/0.00052 & fuel/gap/clad & 0.022 & 1.6129e5 & 1107.8 & 0.02248 \\\\ CH2 & 3 & 0.003015/0.000465/0.00052 & fuel/gap/clad & 0.022 & 1.6129e5 & 1107.8 & 0.41924 \\\\ CH3 & 3 & 0.003015/0.000465/0.00052 & fuel/gap/clad & 0.022 & 1.6129e5 & 1107.8 & 0.09852 \\\\ CH4 & 3 & 0.003015/0.000465/0.00052 & fuel/gap/clad & 0.022 & 1.6129e5 & 1107.8 & 0.43116 \\\\ CH5 & 2 & 6.32340e-3/7.0260e-4 & fuel/clad & 0.04 & 13619 & 2113.6 & 0.02860 \\\\ \\hline \\end{tabular}\n\\end{table}\nTable 2: Heat Structure, Thermal Parameters, and Power Fraction",
+  "response_text": "{\n  \"answerable\": true,\n  \"answer\": \"The ABTR model has 5 parallel core channels. CH1, CH2, CH3, and CH4 each have 3 heat-structure regions; CH5 has 2.\",\n  \"claims\": [\n    {\n      \"text\": \"The ABTR model has 5 parallel core channels (CH1-CH5).\",\n      \"reported_value\": 5,\n      \"reported_unit\": \"channels\",\n      \"evidence_quote\": \"The thermal-hydraulic model consists of five parallel fuel channels (CH1-CH5)\",\n      \"source\": \"ABTR_case.pdf\",\n      \"page\": 2\n    },\n    {\n      \"text\": \"CH1 has 3 heat-structure regions.\",\n      \"reported_value\": 3,\n      \"reported_unit\": \"heat-structure regions\",\n      \"evidence_quote\": \"CH1 & 3 & 0.003015/0.000465/0.00052 & fuel/gap/clad\",\n      \"source\": \"ABTR_case.pdf\",\n      \"page\": 2\n    },\n    {\n      \"text\": \"CH2 has 3 heat-structure regions.\",\n      \"reported_value\": 3,\n      \"reported_unit\": \"heat-structure regions\",\n      \"evidence_quote\": \"CH2 & 3 & 0.003015/0.000465/0.00052 & fuel/gap/clad\",\n      \"source\": \"ABTR_case.pdf\",\n      \"page\": 2\n    },\n    {\n      \"text\": \"CH3 has 3 heat-structure regions.\",\n      \"reported_value\": 3,\n      \"reported_unit\": \"heat-structure regions\",\n      \"evidence_quote\": \"CH3 & 3 & 0.003015/0.000465/0.00052 & fuel/gap/clad\",\n      \"source\": \"ABTR_case.pdf\",\n      \"page\": 2\n    },\n    {\n      \"text\": \"CH4 has 3 heat-structure regions.\",\n      \"reported_value\": 3,\n      \"reported_unit\": \"heat-structure regions\",\n      \"evidence_quote\": \"CH4 & 3 & 0.003015/0.000465/0.00052 & fuel/gap/clad\",\n      \"source\": \"ABTR_case.pdf\",\n      \"page\": 2\n    },\n    {\n      \"text\": \"CH5 has 2 heat-structure regions.\",\n      \"reported_value\": 2,\n      \"reported_unit\": \"heat-structure regions\",\n      \"evidence_quote\": \"CH5 & 2 & 6.32340e-3/7.0260e-4 & fuel/clad\",\n      \"source\": \"ABTR_case.pdf\",\n      \"page\": 2\n    }\n  ],\n  \"citations\": [\n    {\n      \"source\": \"ABTR_case.pdf\",\n      \"page\": 2\n    }\n  ]\n}",
+  "parsed_response": {
+    "answerable": true,
+    "answer": "The ABTR model has 5 parallel core channels. CH1, CH2, CH3, and CH4 each have 3 heat-structure regions; CH5 has 2.",
+    "claims": [
+      {
+        "text": "The ABTR model has 5 parallel core channels (CH1-CH5).",
+        "reported_value": 5,
+        "reported_unit": "channels",
+        "evidence_quote": "The thermal-hydraulic model consists of five parallel fuel channels (CH1-CH5)",
+        "source": "ABTR_case.pdf",
+        "page": 2
+      },
+      {
+        "text": "CH1 has 3 heat-structure regions.",
+        "reported_value": 3,
+        "reported_unit": "heat-structure regions",
+        "evidence_quote": "CH1 & 3 & 0.003015/0.000465/0.00052 & fuel/gap/clad",
+        "source": "ABTR_case.pdf",
+        "page": 2
+      },
+      {
+        "text": "CH2 has 3 heat-structure regions.",
+        "reported_value": 3,
+        "reported_unit": "heat-structure regions",
+        "evidence_quote": "CH2 & 3 & 0.003015/0.000465/0.00052 & fuel/gap/clad",
+        "source": "ABTR_case.pdf",
+        "page": 2
+      },
+      {
+        "text": "CH3 has 3 heat-structure regions.",
+        "reported_value": 3,
+        "reported_unit": "heat-structure regions",
+        "evidence_quote": "CH3 & 3 & 0.003015/0.000465/0.00052 & fuel/gap/clad",
+        "source": "ABTR_case.pdf",
+        "page": 2
+      },
+      {
+        "text": "CH4 has 3 heat-structure regions.",
+        "reported_value": 3,
+        "reported_unit": "heat-structure regions",
+        "evidence_quote": "CH4 & 3 & 0.003015/0.000465/0.00052 & fuel/gap/clad",
+        "source": "ABTR_case.pdf",
+        "page": 2
+      },
+      {
+        "text": "CH5 has 2 heat-structure regions.",
+        "reported_value": 2,
+        "reported_unit": "heat-structure regions",
+        "evidence_quote": "CH5 & 2 & 6.32340e-3/7.0260e-4 & fuel/clad",
+        "source": "ABTR_case.pdf",
+        "page": 2
+      }
+    ],
+    "citations": [
+      {
+        "source": "ABTR_case.pdf",
+        "page": 2
+      }
+    ]
+  },
+  "parse_warning": null,
+  "response_metadata": {
+    "id": "chatcmpl-EDEsGOWBrwN1MX0MPq0jdijWrj5J8",
+    "request_id": "req_7c676c3dd3d746308b5878cdcc494ca0",
+    "created": 1786824148,
+    "resolved_model": "gpt-5.6-sol",
+    "system_fingerprint": null,
+    "usage": {
+      "completion_tokens": 629,
+      "prompt_tokens": 2257,
+      "total_tokens": 2886,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0,
+        "cache_write_tokens": 2254
+      }
+    }
+  },
+  "latency_seconds": 5.795859999998356,
+  "scores": {
+    "answerable": true,
+    "response_answerable": true,
+    "question_type": "direct",
+    "required_claim_count": 3,
+    "recovered_claim_count": 3,
+    "recovered_claims": {
+      "channel_count": true,
+      "ch1_4_nhs": true,
+      "ch5_nhs": true
+    },
+    "CoP": 1.0,
+    "exact_answer": true,
+    "required_evidence_count": 2,
+    "retrieved_required_evidence_count": 2,
+    "retrieved_required_evidence": [
+      {
+        "source": "abtr_case.pdf",
+        "page": 1
+      },
+      {
+        "source": "abtr_case.pdf",
+        "page": 2
+      }
+    ],
+    "all_required_evidence_retrieved": true,
+    "citation_count": 1,
+    "supported_citation_count": 1,
+    "CiP": 1.0,
+    "CiH": 1.0,
+    "generated_claim_count": 6,
+    "unsupported_claim_count": 0,
+    "HR": 0.0,
+    "abstention_correct": null,
+    "claim_support_details": [
+      {
+        "index": 0,
+        "text": "The ABTR model has 5 parallel core channels (CH1-CH5).",
+        "matched_required_claims": [
+          "channel_count",
+          "ch5_nhs"
+        ],
+        "context_supported": true,
+        "supporting_retrieved_pages": [
+          {
+            "source": "abtr_case.pdf",
+            "page": 1
+          },
+          {
+            "source": "abtr_case.pdf",
+            "page": 2
+          }
+        ],
+        "citation": {
+          "source": "ABTR_case.pdf",
+          "page": 2
+        },
+        "citation_supported": true,
+        "citation_mode": "claim_or_quote_supported_on_cited_page"
+      },
+      {
+        "index": 1,
+        "text": "CH1 has 3 heat-structure regions.",
+        "matched_required_claims": [
+          "ch1_4_nhs",
+          "ch5_nhs"
+        ],
+        "context_supported": true,
+        "supporting_retrieved_pages": [
+          {
+            "source": "abtr_case.pdf",
+            "page": 2
+          }
+        ],
+        "citation": {
+          "source": "ABTR_case.pdf",
+          "page": 2
+        },
+        "citation_supported": true,
+        "citation_mode": "claim_or_quote_supported_on_cited_page"
+      },
+      {
+        "index": 2,
+        "text": "CH2 has 3 heat-structure regions.",
+        "matched_required_claims": [
+          "ch1_4_nhs",
+          "ch5_nhs"
+        ],
+        "context_supported": true,
+        "supporting_retrieved_pages": [
+          {
+            "source": "abtr_case.pdf",
+            "page": 2
+          }
+        ],
+        "citation": {
+          "source": "ABTR_case.pdf",
+          "page": 2
+        },
+        "citation_supported": true,
+        "citation_mode": "claim_or_quote_supported_on_cited_page"
+      },
+      {
+        "index": 3,
+        "text": "CH3 has 3 heat-structure regions.",
+        "matched_required_claims": [
+          "ch1_4_nhs",
+          "ch5_nhs"
+        ],
+        "context_supported": true,
+        "supporting_retrieved_pages": [
+          {
+            "source": "abtr_case.pdf",
+            "page": 2
+          }
+        ],
+        "citation": {
+          "source": "ABTR_case.pdf",
+          "page": 2
+        },
+        "citation_supported": true,
+        "citation_mode": "claim_or_quote_supported_on_cited_page"
+      },
+      {
+        "index": 4,
+        "text": "CH4 has 3 heat-structure regions.",
+        "matched_required_claims": [
+          "ch1_4_nhs",
+          "ch5_nhs"
+        ],
+        "context_supported": true,
+        "supporting_retrieved_pages": [
+          {
+            "source": "abtr_case.pdf",
+            "page": 2
+          }
+        ],
+        "citation": {
+          "source": "ABTR_case.pdf",
+          "page": 2
+        },
+        "citation_supported": true,
+        "citation_mode": "claim_or_quote_supported_on_cited_page"
+      },
+      {
+        "index": 5,
+        "text": "CH5 has 2 heat-structure regions.",
+        "matched_required_claims": [
+          "ch1_4_nhs",
+          "ch5_nhs"
+        ],
+        "context_supported": true,
+        "supporting_retrieved_pages": [
+          {
+            "source": "abtr_case.pdf",
+            "page": 2
+          }
+        ],
+        "citation": {
+          "source": "ABTR_case.pdf",
+          "page": 2
+        },
+        "citation_supported": true,
+        "citation_mode": "claim_or_quote_supported_on_cited_page"
+      }
+    ],
+    "failure_class": "none",
+    "EvidenceRecallAt2": 1.0,
+    "target_citation_count": 1,
+    "noise_citation_count": 0,
+    "retrieved_target_chunks": 2,
+    "retrieved_noise_chunks": 0,
+    "retrieved_noise_fraction": 0.0
+  }
+}

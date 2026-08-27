@@ -1,0 +1,82 @@
+{
+  "elapsed_seconds": 224.13540379999904,
+  "legacy_callback": {
+    "prompt_tokens": 1229732,
+    "completion_tokens": 21395,
+    "total_tokens": 1251127,
+    "successful_requests": 17,
+    "total_cost_usd_library_estimate": 0.0026121
+  },
+  "usage_metadata_by_model": {
+    "gpt-5.2-2025-12-11": {
+      "input_tokens": 1214974,
+      "total_tokens": 1235577,
+      "input_token_details": {
+        "audio": 0,
+        "cache_read": 1182208
+      },
+      "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+      },
+      "output_tokens": 20603
+    },
+    "gpt-4o-mini-2024-07-18": {
+      "input_tokens": 14758,
+      "total_tokens": 15550,
+      "input_token_details": {
+        "audio": 0,
+        "cache_read": 1024
+      },
+      "output_token_details": {
+        "audio": 0,
+        "reasoning": 0
+      },
+      "output_tokens": 792
+    }
+  },
+  "direct_api_calls": [
+    {
+      "kind": "direct_chat_or_vision",
+      "model": "gpt-5.2-2025-12-11",
+      "elapsed_seconds": 6.521252599981381,
+      "usage": {
+        "completion_tokens": 499,
+        "prompt_tokens": 3314,
+        "total_tokens": 3813,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cached_tokens": 2560
+        }
+      },
+      "timestamp_utc": "2026-08-22T20:37:52.136744+00:00"
+    },
+    {
+      "kind": "embedding",
+      "model": "text-embedding-ada-002",
+      "elapsed_seconds": 0.24661529998411424,
+      "usage": {
+        "prompt_tokens": 494,
+        "total_tokens": 494
+      },
+      "timestamp_utc": "2026-08-22T20:37:52.438264+00:00"
+    },
+    {
+      "kind": "embedding",
+      "model": "text-embedding-ada-002",
+      "elapsed_seconds": 0.2305321999883745,
+      "usage": {
+        "prompt_tokens": 27,
+        "total_tokens": 27
+      },
+      "timestamp_utc": "2026-08-22T20:37:52.713315+00:00"
+    }
+  ],
+  "timestamp_utc": "2026-08-22T20:41:06.176613+00:00"
+}

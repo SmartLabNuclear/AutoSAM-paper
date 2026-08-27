@@ -1,0 +1,598 @@
+Saved:  
+`<AUTOSAM_ROOT>\case_generation_cost_runs\20260822T205533Z_gpt-52\MSRE\workdir\intermediate_msre.yaml`
+
+Validated: `yaml.safe_load()` **succeeds**.
+
+Below is the complete YAML content (identical to the saved file):
+
+```yaml
+metadata:
+  case_name: MSRE SAM test case (intermediate representation)
+  created_utc: '2026-08-22T20:57:47Z'
+  working_directory: <AUTOSAM_ROOT>\case_generation_cost_runs\20260822T205533Z_gpt-52\MSRE\workdir
+  notes:
+  - Source-grounded intermediate YAML assembled from files found in working directory via AutoSAM tools.
+  - Do not treat visually inferred coordinates as authoritative engineering dimensions; they are only for SAM component placement.
+source_files:
+  spreadsheets:
+  - path: <AUTOSAM_ROOT>\case_generation_cost_runs\20260822T205533Z_gpt-52\MSRE\workdir\MSRE_specifications.xlsx
+    used: true
+    sheets:
+    - sheet_name: Sheet1
+      tool: CSVandEXCELFileReaderTool
+      rows_inspected: 0-11 (12 rows total shown by tool)
+      columns_present:
+      - component
+      - Area (m^2)
+      - Dh (m)
+      - Branches
+      - Area
+      - pump specification
+      - Unnamed: 6
+      - HX specifications
+      - Unnamed: 8
+  pdfs:
+  - path: <AUTOSAM_ROOT>\case_generation_cost_runs\20260822T205533Z_gpt-52\MSRE\workdir\MSRE_case.pdf
+    used: true
+    tool: PDFProcessorTool
+    citations:
+    - PDFProcessorTool returned narrative extraction but did not provide explicit page numbers in tool output; page-level citations therefore unavailable (gap).
+  images:
+  - path: <AUTOSAM_ROOT>\case_generation_cost_runs\20260822T205533Z_gpt-52\MSRE\workdir\MSRE_system_layout.png
+    used: true
+    tool: ImageAnalysisTool
+    notes:
+    - Used to infer component placement and connectivity in XY plane; values are approximate and treated as inferred.
+  text_json_yaml: []
+coordinate_system:
+  sam_convention:
+    gravity_vector_SI:
+    - 0.0
+    - 0.0
+    - -9.8
+    axes_definition:
+      x: out-of-plane (toward viewer) by AutoSAM convention
+      y: horizontal in diagram plane
+      z: vertical (positive upward)
+  layout_reference:
+    image_view_plane: XY Plane (per MSRE_system_layout.png UI label)
+    note: Image shows a 2D XY layout; SAM models are 3D. If used for SAM placement, set z=0 for all components unless elevation data are provided.
+equations_of_state:
+  fluids:
+  - name: fuel_salt_eos
+    type: SaltEquationOfState (expected in SAM)
+    salt_composition: LiF-BeF4-ZrF4-UF4 (fuel salt) (as reported in PDF extraction)
+    property_correlations:
+      density_kg_per_m3:
+        expression: 2553.3 - 0.562*T
+        T_units: K
+        source:
+          file: MSRE_case.pdf
+          location: page_unknown (tool did not provide page)
+      dynamic_viscosity_Pa_s:
+        expression: 8.4e-5 * exp(2390/T)
+        T_units: K
+        source:
+          file: MSRE_case.pdf
+          location: page_unknown
+      thermal_conductivity_W_per_mK:
+        value: 1.0
+        source:
+          file: MSRE_case.pdf
+          location: page_unknown
+      cp_J_per_kgK:
+        value: 2009.66
+        source:
+          file: MSRE_case.pdf
+          location: page_unknown
+      melting_temperature_K:
+        value: 722.15
+        source:
+          file: MSRE_case.pdf
+          location: page_unknown
+      valid_temperature_range_K:
+        min: 750.0
+        max: 1200.0
+        source:
+          file: MSRE_case.pdf
+          location: page_unknown
+    notes:
+    - SAM has built-in SaltEquationOfState options (Flibe/Flinak/etc). PDF describes custom fuel salt mixture; may require PTFunctionsEOS/TabulatedEquationOfState if not built-in.
+  - name: coolant_salt_eos
+    type: SaltEquationOfState or user-defined EOS (expected in SAM)
+    salt_composition: LiF-BeF2 (0.66-0.34) coolant salt (as reported in PDF extraction)
+    property_correlations:
+      density_kg_per_m3: null
+      dynamic_viscosity_Pa_s: null
+      thermal_conductivity_W_per_mK: null
+      cp_J_per_kgK: null
+    source:
+      file: MSRE_case.pdf
+      location: page_unknown
+    missing:
+    - Coolant salt thermophysical property correlations/values not recovered by tool output.
+materials:
+  solids:
+  - name: graphite
+    type: SolidMaterialProps/HeatConductionMaterialProps (SAM)
+    properties:
+      k_W_per_mK: null
+      Cp_J_per_kgK: null
+      rho_kg_per_m3: null
+    source:
+      file: MSRE_case.pdf
+      location: page_unknown
+    missing:
+    - Thermophysical properties not extracted (k, Cp, rho vs T).
+  - name: hastelloy_n
+    type: SolidMaterialProps/HeatConductionMaterialProps (SAM)
+    properties:
+      k_W_per_mK: null
+      Cp_J_per_kgK: null
+      rho_kg_per_m3: null
+    source:
+      file: MSRE_case.pdf
+      location: page_unknown
+    notes:
+    - Identified as heat exchanger construction material in PDF extraction.
+    missing:
+    - Thermophysical properties not extracted (k, Cp, rho vs T).
+  fluids:
+  - name: fuel_salt
+    eos: fuel_salt_eos
+    source:
+      file: MSRE_case.pdf
+      location: page_unknown
+  - name: coolant_salt
+    eos: coolant_salt_eos
+    source:
+      file: MSRE_case.pdf
+      location: page_unknown
+components:
+  fluid_components:
+  - name: downcomer
+    sam_type: PBOneDFluidComponent (expected)
+    A_m2: 0.1589
+    Dh_m: 0.0508
+    length_m: null
+    n_elems: null
+    position_orientation:
+      inferred_from_image: true
+      plane: XY
+      approx_start_xy:
+      - -0.7
+      - 0.0
+      approx_end_xy:
+      - -0.7
+      - 1.7272
+      orientation_guess: along +y in XY plot (note: this corresponds to SAM y-axis if using z=0 plane)
+    source:
+      file: MSRE_specifications.xlsx
+      location: row 0
+  - name: inlet_plenum
+    sam_type: PBOneDFluidComponent or PBVolumeBranch (uncertain)
+    A_m2: 0.3932
+    Dh_m: 0.6997
+    length_m: null
+    n_elems: null
+    position_orientation:
+      inferred_from_image: true
+      approx_start_xy:
+      - -0.7366
+      - 0.0
+      approx_end_xy:
+      - 0.0
+      - 0.0
+    source:
+      file: MSRE_specifications.xlsx
+      location: row 1
+    notes:
+    - Spreadsheet labels inlet plenum as a component with area and Dh; could be modeled as 1D component or as 0D volume depending on intended SAM test case.
+  - name: core
+    sam_type: PBOneDFluidComponent or PBMoltenSaltChannel/PBCoreChannel (uncertain)
+    A_m2: 0.3512
+    Dh_m: 0.6687
+    length_m: null
+    n_elems: null
+    position_orientation:
+      inferred_from_image: true
+      approx_start_xy:
+      - 0.0
+      - 0.0
+      approx_end_xy:
+      - 0.0
+      - 1.7272
+      orientation_guess: vertical in plot (+y)
+    source:
+      file: MSRE_specifications.xlsx
+      location: row 2
+    missing:
+    - Core heat structure / moderator coupling details not provided by spreadsheet.
+  - name: upper_plenum
+    sam_type: PBOneDFluidComponent or PBVolumeBranch (uncertain)
+    A_m2: 0.3932
+    Dh_m: 0.6997
+    length_m: null
+    n_elems: null
+    position_orientation:
+      inferred_from_image: true
+      approx_start_xy:
+      - 0.0
+      - 1.7272
+      approx_end_xy:
+      - 0.0
+      - 2.1618
+    source:
+      file: MSRE_specifications.xlsx
+      location: row 3
+  - name: pipe1
+    sam_type: PBOneDFluidComponent
+    A_m2: 0.01267
+    Dh_m: 0.127
+    length_m: null
+    n_elems: null
+    position_orientation:
+      inferred_from_image: true
+      approx_start_xy:
+      - 0.0
+      - 2.1618
+      approx_end_xy:
+      - 1.8288
+      - 2.1618
+    source:
+      file: MSRE_specifications.xlsx
+      location: row 4
+  - name: pipe2
+    sam_type: PBOneDFluidComponent
+    A_m2: 0.01267
+    Dh_m: 0.127
+    length_m: null
+    n_elems: null
+    position_orientation:
+      inferred_from_image: true
+      approx_start_xy:
+      - 1.8288
+      - 2.1618
+      approx_end_xy:
+      - 1.8288
+      - 2.9746
+    source:
+      file: MSRE_specifications.xlsx
+      location: row 5
+  - name: pipe3
+    sam_type: PBOneDFluidComponent
+    A_m2: 0.01267
+    Dh_m: 0.127
+    length_m: null
+    n_elems: null
+    position_orientation:
+      inferred_from_image: true
+      approx_start_xy:
+      - 0.762
+      - 2.9746
+      approx_end_xy:
+      - 1.8288
+      - 2.9746
+    source:
+      file: MSRE_specifications.xlsx
+      location: row 6
+  - name: HX
+    sam_type: PBHeatExchanger
+    primary_side:
+      A_m2: 0.10183
+      Dh_m: 0.020945
+    secondary_side:
+      A_m2: 0.027885
+      Dh_m: 0.010566
+    length_m: 2.5
+    n_elems: null
+    heat_transfer_surface_area_density_m2_per_m3: 1000
+    wall:
+      hs_type: cylinder
+      wall_thickness_m: 0.0010668
+      radius_i_m: 0.0052832
+      material: hastelloy_n
+    source:
+    - file: MSRE_specifications.xlsx
+      location: rows 7-8 (A, Dh) + HX specs rows 0-3
+    - file: MSRE_case.pdf
+      location: page_unknown (length ~2.5 m, tube diameter/thickness)
+    missing:
+    - Number of axial elements n_elems not specified.
+    - Friction factors / HTC options not specified.
+  - name: pipe_ref
+    sam_type: PBOneDFluidComponent
+    A_m2: 0.01267
+    Dh_m: 0.127
+    length_m: null
+    n_elems: null
+    position_orientation:
+      inferred_from_image: true
+      approx_start_xy:
+      - -2.2678
+      - 2.9746
+      approx_end_xy:
+      - -1.7678
+      - 2.9746
+    source:
+      file: MSRE_specifications.xlsx
+      location: row 9
+    notes:
+    - Appears to be a short reference leg connected at HX secondary inlet in plot.
+  - name: pipe4
+    sam_type: PBOneDFluidComponent
+    A_m2: 0.01267
+    Dh_m: 0.127
+    length_m: null
+    n_elems: null
+    position_orientation:
+      inferred_from_image: true
+      approx_start_xy:
+      - -1.7678
+      - 2.9746
+      approx_end_xy:
+      - -1.7678
+      - 1.7272
+    source:
+      file: MSRE_specifications.xlsx
+      location: row 10
+  - name: pipe5
+    sam_type: PBOneDFluidComponent
+    A_m2: 0.01267
+    Dh_m: 0.127
+    length_m: null
+    n_elems: null
+    position_orientation:
+      inferred_from_image: true
+      approx_start_xy:
+      - -1.7678
+      - 1.7272
+      approx_end_xy:
+      - -0.7
+      - 1.7272
+    source:
+      file: MSRE_specifications.xlsx
+      location: row 11
+  pumps:
+  - name: pump
+    sam_type: PBPump
+    K_forward:
+    - 0.15
+    - 0.1
+    Area_m2: 0.01292
+    initial_P_Pa: 110000
+    Head_Pa: 43909.58
+    source:
+      file: MSRE_specifications.xlsx
+      location: pump specification rows 0-2 + branch area row 5
+junctions_and_connections:
+  connections:
+  - name: J1_downcomer_to_inlet_plenum
+    sam_type: PBSingleJunction
+    from: downcomer(out)
+    to: inlet_plenum(in)
+    Area_m2: 0.1155
+    source:
+      file: MSRE_specifications.xlsx
+      location: Branches row 0, Area column row 0
+  - name: J2_inlet_plenum_to_core
+    sam_type: PBSingleJunction
+    from: inlet_plenum(out)
+    to: core(in)
+    Area_m2: 0.1155
+    source:
+      file: MSRE_specifications.xlsx
+      location: Branches row 1, Area column row 1
+  - name: J3_core_to_upper_plenum
+    sam_type: PBSingleJunction
+    from: core(out)
+    to: upper_plenum(in)
+    Area_m2: 0.1155
+    source:
+      file: MSRE_specifications.xlsx
+      location: Branches row 2, Area column row 2
+  - name: J4_upper_plenum_to_pipe1
+    sam_type: PBSingleJunction
+    from: upper_plenum(out)
+    to: pipe1(in)
+    Area_m2: 0.1155
+    source:
+      file: MSRE_specifications.xlsx
+      location: Branches row 3, Area column row 3
+  - name: J5_pipe1_to_pipe2
+    sam_type: PBSingleJunction
+    from: pipe1(out)
+    to: pipe2(in)
+    Area_m2: 0.01292
+    source:
+      file: MSRE_specifications.xlsx
+      location: Branches row 4, Area column row 4
+  - name: J6_pipe2_to_pipe3_via_pump
+    sam_type: PBPump (junction-like)
+    from: pipe2(out)
+    to: pipe3(in)
+    Area_m2: 0.01292
+    source:
+      file: MSRE_specifications.xlsx
+      location: Branches row 5, Area column row 5
+  - name: J7_pipe3_to_HX_primary
+    sam_type: PBSingleJunction
+    from: pipe3(out)
+    to: HX(primary_in)
+    Area_m2: 0.01267
+    source:
+      file: MSRE_specifications.xlsx
+      location: Branches row 6, Area column row 6
+  - name: B1_HX_primary_split_to_pipe_ref_and_pipe4
+    sam_type: PBBranch
+    inputs:
+    - HX(primary_out)
+    outputs:
+    - pipe_ref(in)
+    - pipe4(in)
+    Area_m2: 0.01267
+    K: null
+    source:
+      file: MSRE_specifications.xlsx
+      location: Branches row 7, Area column row 7
+    notes:
+    - Spreadsheet indicates a split after HX primary; loss coefficients not provided.
+  - name: J8_pipe4_to_pipe5
+    sam_type: PBSingleJunction
+    from: pipe4(out)
+    to: pipe5(in)
+    Area_m2: 0.01267
+    source:
+      file: MSRE_specifications.xlsx
+      location: Branches row 8, Area column row 8
+  - name: J9_pipe5_to_downcomer
+    sam_type: PBSingleJunction
+    from: pipe5(out)
+    to: downcomer(in)
+    Area_m2: 0.01267
+    source:
+      file: MSRE_specifications.xlsx
+      location: Branches row 9, Area column row 9
+  topology_note: Primary loop appears closed: downcomer -> inlet_plenum -> core -> upper_plenum -> pipe1 -> pipe2 -> pump -> pipe3 -> HX(primary) -> split to pipe_ref and pipe4 -> pipe5 -> downcomer. Secondary loop topology and boundary conditions not present in spreadsheet; PDF mentions secondary loop, pumps, radiator but not extracted in detail.
+geometry_and_discretization:
+  global:
+    length_units: m
+    area_units: m^2
+    hydraulic_diameter_units: m
+  component_geometry_from_spreadsheet:
+    file: MSRE_specifications.xlsx
+    rows: 0-11
+    fields:
+    - A_m2
+    - Dh_m
+  heat_exchanger_geometry_from_pdf:
+    length_m: 2.5
+    shell_diameter_m: 0.41
+    tube_diameter_m: 0.0127
+    tube_thickness_m: 0.00107
+    hydraulic_diameter_shell_m: 0.0209
+    hydraulic_diameter_tube_m: 0.0106
+    source:
+      file: MSRE_case.pdf
+      location: page_unknown
+  discretization:
+    n_elems_per_component: null
+    notes:
+    - No axial discretization counts found in spreadsheet or tool PDF extraction output.
+initial_conditions:
+  global:
+    pressure_Pa: null
+    temperature_K: null
+    velocity_m_per_s: null
+    source: null
+  component_overrides: []
+boundary_conditions:
+  inlets: []
+  outlets: []
+  reference_pressure: null
+  notes:
+  - No explicit SAM boundary components (PBTDJ/PBTDV/ReferenceBoundary) were extracted from spreadsheet.
+  - PDF narrative indicates heat rejection to atmosphere via radiator, implying boundary conditions on secondary loop not captured here.
+power_or_heat_sources:
+  reactor_power:
+    nominal_power_MWth: 10.0
+    power_history: null
+    point_kinetics: null
+    source:
+      file: MSRE_case.pdf
+      location: page_unknown
+  component_heat_sources: []
+execution_settings:
+  executioner_type: null
+  steady_or_transient: null
+  time_step: null
+  end_time: null
+  solver_tolerances: null
+  source: null
+  missing:
+  - Executioner/solver settings not recovered from sources in directory.
+extracted_values:
+  from_spreadsheet:
+    components_table_rows_0_11: true
+    branches_table_rows_0_9: true
+    pump_specs_present: true
+    hx_specs_present: true
+  from_pdf:
+    fuel_salt_properties: true
+    coolant_salt_properties: false
+    hx_dimensions_basic: true
+    power_level: true
+  from_image:
+    xy_layout_coordinates: true
+    flow_directions: not explicitly arrowed; inferred from loop connectivity
+inferred_values:
+  component_positions_xy:
+    source: MSRE_system_layout.png
+    confidence: medium (approximate readout from plot labels)
+    note: Coordinates are approximate and should be verified against original CAD/drawings or SAM model.
+  flow_path_direction:
+    inferred_loop_order:
+    - downcomer
+    - inlet_plenum
+    - core
+    - upper_plenum
+    - pipe1
+    - pipe2
+    - pump
+    - pipe3
+    - HX
+    - pipe4
+    - pipe5
+    - downcomer
+    confidence: low-to-medium
+    basis: component naming and typical MSRE loop direction; image lacks arrows.
+assumptions:
+- All quantities are SI units consistent with SAM.
+- If using image-based placement, model is placed in the SAM x=0 plane and uses (y,z) or (x,y) mapping as needed; no elevation (z) data were provided.
+- Heat exchanger length set to 2.5 m based on PDF extraction narrative; spreadsheet did not provide HX length.
+- Friction factors, heat transfer coefficients, and detailed closure selections are unspecified and must be added later.
+missing_parameters:
+- parameter: Axial lengths for all components (except HX)
+  value: null
+  impact: Cannot compute volumes, pressure drops, residence times.
+  sources_checked:
+  - MSRE_specifications.xlsx
+  - MSRE_case.pdf
+  notes: Not found in tool outputs.
+- parameter: n_elems for each 1D component and wall mesh (n_wall_elems)
+  value: null
+  impact: Cannot define discretization.
+  sources_checked:
+  - MSRE_specifications.xlsx
+  - MSRE_case.pdf
+- parameter: Boundary conditions (inlet mass flow/velocity, outlet pressure) for both loops
+  value: null
+  impact: Model not runnable.
+  sources_checked:
+  - MSRE_specifications.xlsx
+  - MSRE_case.pdf
+- parameter: Coolant salt EOS properties
+  value: null
+  impact: Secondary loop cannot be parameterized.
+  sources_checked:
+  - MSRE_case.pdf
+  notes: Only composition identified.
+- parameter: Solid material properties for graphite and Hastelloy-N
+  value: null
+  impact: Heat structures cannot be solved accurately.
+  sources_checked:
+  - MSRE_case.pdf
+- parameter: Heat exchanger HTC/friction parameters and wall discretization
+  value: null
+  impact: HX performance uncertain.
+  sources_checked:
+  - MSRE_specifications.xlsx
+  - MSRE_case.pdf
+human_review_questions:
+- Confirm whether inlet_plenum and upper_plenum are intended as 0-D volumes (PBVolumeBranch/PBLiquidVolume) or 1-D segments (PBOneDFluidComponent). Spreadsheet provides A and Dh which suggests 1-D, but plenum semantics suggest 0-D.
+- Confirm whether the core should be modeled as PBMoltenSaltChannel (with moving fuel and possible precursor drift) and whether point kinetics is coupled.
+- Provide axial lengths and discretization (n_elems) for each component per the official MSRE SAM test case.
+- Provide secondary loop topology and boundary conditions (coolant pump, radiator, etc.) if included in the test case.
+- Provide loss coefficients K for branch/split at HX(primary_out) and other junctions if non-zero.
+- Provide initial conditions (global P/T/V) used for steady-state initialization and transient start.
+```

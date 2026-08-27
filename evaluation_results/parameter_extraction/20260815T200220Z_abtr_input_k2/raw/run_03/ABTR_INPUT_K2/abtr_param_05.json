@@ -1,0 +1,426 @@
+{
+  "timestamp": "2026-08-15T20:03:13.657199Z",
+  "run": 3,
+  "case": "ABTR_INPUT_K2",
+  "item": {
+    "id": "abtr_param_05",
+    "type": "direct",
+    "question": "What heat-structure layer widths are specified for channels CH1-CH5? Identify each width by channel group and material layer, with units.",
+    "answerable": true,
+    "required_claims": [
+      {
+        "id": "ch1_4_fuel_width",
+        "kind": "categorical",
+        "term_groups": [
+          [
+            "CH1-CH4",
+            "CH1 through CH4",
+            "channels 1-4",
+            "CH1, CH2, CH3, and CH4"
+          ],
+          [
+            "fuel"
+          ],
+          [
+            "0.003015"
+          ],
+          [
+            "m",
+            "meter"
+          ]
+        ],
+        "evidence": [
+          {
+            "source": "ABTR_case.pdf",
+            "page": 2
+          }
+        ]
+      },
+      {
+        "id": "ch1_4_gap_width",
+        "kind": "categorical",
+        "term_groups": [
+          [
+            "CH1-CH4",
+            "CH1 through CH4",
+            "channels 1-4",
+            "CH1, CH2, CH3, and CH4"
+          ],
+          [
+            "gap"
+          ],
+          [
+            "0.000465"
+          ],
+          [
+            "m",
+            "meter"
+          ]
+        ],
+        "evidence": [
+          {
+            "source": "ABTR_case.pdf",
+            "page": 2
+          }
+        ]
+      },
+      {
+        "id": "ch1_4_clad_width",
+        "kind": "categorical",
+        "term_groups": [
+          [
+            "CH1-CH4",
+            "CH1 through CH4",
+            "channels 1-4",
+            "CH1, CH2, CH3, and CH4"
+          ],
+          [
+            "clad"
+          ],
+          [
+            "0.00052",
+            "0.000520"
+          ],
+          [
+            "m",
+            "meter"
+          ]
+        ],
+        "evidence": [
+          {
+            "source": "ABTR_case.pdf",
+            "page": 2
+          }
+        ]
+      },
+      {
+        "id": "ch5_fuel_width",
+        "kind": "categorical",
+        "term_groups": [
+          [
+            "CH5",
+            "channel 5"
+          ],
+          [
+            "fuel"
+          ],
+          [
+            "0.00632340",
+            "0.0063234",
+            "6.32340e-3"
+          ],
+          [
+            "m",
+            "meter"
+          ]
+        ],
+        "evidence": [
+          {
+            "source": "ABTR_case.pdf",
+            "page": 2
+          }
+        ]
+      },
+      {
+        "id": "ch5_clad_width",
+        "kind": "categorical",
+        "term_groups": [
+          [
+            "CH5",
+            "channel 5"
+          ],
+          [
+            "clad"
+          ],
+          [
+            "0.00070260",
+            "0.0007026",
+            "7.0260e-4"
+          ],
+          [
+            "m",
+            "meter"
+          ]
+        ],
+        "evidence": [
+          {
+            "source": "ABTR_case.pdf",
+            "page": 2
+          }
+        ]
+      }
+    ]
+  },
+  "configuration": {
+    "embedding_model": "text-embedding-3-large",
+    "top_k": 2,
+    "qa_model": "gpt-5.6-sol",
+    "qa_temperature": 0,
+    "reasoning_effort": "none",
+    "target_source": "ABTR_case.pdf"
+  },
+  "retrieved_documents": [
+    {
+      "rank": 1,
+      "chunk_id": "target-abtr-case-p0002",
+      "source": "ABTR_case.pdf",
+      "page": 2,
+      "document_role": "target",
+      "cosine_distance": 0.5594568848609924,
+      "content": "conductivity of 26 W/m\\(\\cdot\\)K, a heat capacity of 638 J/kg\\(\\cdot\\)K, and a density of \\(7.646\\times 10^{3}\\) kg/m\\({}^{3}\\). The duct-mat uses the same thermophysical properties as the cladding, with \\(k=26\\) W/m\\(\\cdot\\)K, \\(C_{p}=638\\) J/kg\\(\\cdot\\)K, and \\(\\rho=7.646\\times 10^{3}\\) kg/m\\({}^{3}\\). These values define the thermal response of all solid regions in the heat-structure system.\n\nThe thermal-hydraulic model consists of five parallel fuel channels (CH1-CH5) that are all vertically oriented along the positive \\(z\\)-axis and share identical inlet and outlet flow directions. These channels represent parallel flow paths within the core. The parallel channels are hydraulically connected between two one-dimensional pipes that serve as the inlet and outlet plenums of the system. Upstream of the channels, pipe1 delivers coolant to a branching junction, which distributes the flow into all five channels simultaneously. This junction includes individual form-loss coefficients (\\(K\\) values) to represent flow-distribution resistances for each channel leg. Specifically, the values used in branch1 are \\(K=0.1,\\ 0.5,\\ 1.96,\\ 2.16,\\ 4.5\\), and \\(3500.0\\), corresponding respectively to the main pipe passage and the five channel inlets (CH1-CH5). Downstream, the outlets of all five channels recombine at a second junction (branch2), where the form-loss coefficients are all set to zero (\\(K=0.0\\) for each outlet leg), allowing the flows to merge without additional hydraulic resistance. This junction gathers the returning coolant and directs it into pipe2, completing the loop back toward the outlet boundary. The branches area is \\(0.44934\\).\n\nThe boundary conditions are imposed using two TDV components: inlet_TDV specifies the inlet velocity and temperature, enforcing a velocity boundary condition of \\(3.25\\) m/s and an inlet coolant temperature of \\(628.15\\) K at the entrance of pipe1. At the system outlet, outlet_TDV applies a fixed pressure of \\(1\\times 10^{5}\\) Pa along with a temperature boundary condition of \\(628.15\\) K at the exit of pipe2. Together, these boundaries define the global driving conditions for the transient simulation, while the internal distribution of mass flow among channels is governed by the hydraulic resistances and form losses specified within the branching components.\n\nThe initial conditions for the simulation are defined globally, setting the thermodynamic state of the system before the transient begins. The coolant throughout all fluid components is initialized at a uniform pressure of \\(1.0\\times 10^{5}\\) Pa, a velocity of \\(2\\) m/s, and a temperature of \\(628.15\\) K. These global values establish a consistent starting point for all channels, pipes, and junctions. For the solid regions of the heat structures, the initial temperature is also set to \\(628.15\\) K, ensuring thermal equilibrium between the solid and fluid domains at startup. A temperature scaling factor of \\(T_{\\text{solid\\_sf}}=1\\times 10^{-3}\\) and variable scaling factors of \\(1\\), \\(10^{-3}\\), and \\(10^{-6}\\) are applied to improve numerical conditioning during the nonlinear solve. Together, these initial conditions provide a well-defined, steady baseline from which the transient evolution of mass flow, temperature, and heat transfer can develop.\n\nThe numerical discretization of the system is defined through both axial and horizontal resolutions. Vertically, each core channel (CH1-CH5) is modeled using 20 axial fluid elements over a heated length of\n\n\\begin{table}\n\\begin{tabular}{l c c c c} \\hline\n**Component** & **A (m\\({}^{2}\\))** & **Dh (m)** & **Length (m)** \\\\ \\hline CH1 & 4.9237e-3 & 2.972e-3 & 0.8 \\\\ CH2 & 0.11323 & 2.972e-3 & 0.8 \\\\ CH3 & 0.029539 & 2.972e-3 & 0.8 \\\\ CH4 & 0.14769 & 2.972e-3 & 0.8 \\\\ CH5 & 0.153955129 & 2.972e-3 & 0.8 \\\\ pipe1 & 0.44934 & 2.972e-3 & 0.6 \\\\ pipe2 & 0.44934 & 2.972e-3 & 1.5 \\\\ \\hline \\end{tabular}\n\\end{table}\nTable 1: Component Geometry Summary\n\n\\begin{table}\n\\begin{tabular}{l c c c c c c} \\hline\n**Component** & \\(n_{hs}\\) & **Width of HS (m)** & **Material** & **f** & **Hw** & **HT Area Density** & **Power Fraction** \\\\ \\hline CH1 & 3 & 0.003015/0.000465/0.00052 & fuel/gap/clad & 0.022 & 1.6129e5 & 1107.8 & 0.02248 \\\\ CH2 & 3 & 0.003015/0.000465/0.00052 & fuel/gap/clad & 0.022 & 1.6129e5 & 1107.8 & 0.41924 \\\\ CH3 & 3 & 0.003015/0.000465/0.00052 & fuel/gap/clad & 0.022 & 1.6129e5 & 1107.8 & 0.09852 \\\\ CH4 & 3 & 0.003015/0.000465/0.00052 & fuel/gap/clad & 0.022 & 1.6129e5 & 1107.8 & 0.43116 \\\\ CH5 & 2 & 6.32340e-3/7.0260e-4 & fuel/clad & 0.04 & 13619 & 2113.6 & 0.02860 \\\\ \\hline \\end{tabular}\n\\end{table}\nTable 2: Heat Structure, Thermal Parameters, and Power Fraction",
+      "content_sha256": "669d09c00c19128dceee7ec05396c2f5c4fba2d18f2887116734cf2f6dec6f21"
+    },
+    {
+      "rank": 2,
+      "chunk_id": "target-abtr-case-p0003",
+      "source": "ABTR_case.pdf",
+      "page": 3,
+      "document_role": "target",
+      "cosine_distance": 0.6083346009254456,
+      "content": "0.8 m, providing uniform spatial resolution for capturing coolant temperature rise, pressure drop, and heat transfer variations along the flow direction. The heat structures associated with each channel are likewise discretized axially according to the specified element counts for the fuel, gap, and cladding layers (5, 1, and 1 elements, respectively, for the reference fuel channels; 5 and 1 elements for the reflector channel). Horizontally, the model resolves five parallel channels coupled through their inlet and outlet junctions.\n\nThe time discretization for this case is governed by a transient executioner combined with a piecewise linear time-step control function. Although the physical boundary conditions remain constant throughout the simulation, the transient framework allows the solution to evolve in time toward a numerically converged state. The base time step is initially very small, with values defined by the time_stepper function: \\(\\Delta t=0.01\\) s from \\(t=0\\) to 0.1 s, increasing to \\(\\Delta t=0.1\\) s by \\(t=0.2\\) s, and eventually reaching a maximum allowable step size of \\(\\Delta t=1\\) s for times beyond 2 s. This gradual increase in time-step size ensures stability and accuracy during the early stages of the computation, where strong nonlinear coupling between fluid and solid temperatures may require tighter control. The executioner further enforces limits of \\(\\Delta t_{\\rm min}=10^{-5}\\) s and a nominal starting step of \\(\\Delta t=0.1\\) s, allowing the nonlinear solver to reduce the time step adaptively as needed. Despite the transient formulation, only five time steps are executed, making the simulation effectively a pseudo-steady-state solve in which the time discretization primarily serves as a numerical mechanism to achieve convergence rather than to resolve physical temporal behavior.\n\n",
+      "content_sha256": "6b2701231c2c018dea557518e32111a307a6cdcd63160297847323ac58a4d053"
+    }
+  ],
+  "system_prompt": "You are AutoSAM's retrieval question-answering component in an input-parameter extraction benchmark.\nThe authoritative target is ABTR_case.pdf. Other retrieved documents discuss the historical ABTR but are distractors for this task.\n\nUse only evidence from ABTR_case.pdf. Do not substitute a value from another document and do not use outside knowledge. If the retrieved target text is insufficient, set answerable to false rather than guessing.\n\nAnswer every requested field that is supported. Preserve equations and units exactly. Split the response into atomic claims so that distinct requested parameters are separately auditable. Give each claim its own target-document page and a short exact evidence quote.\n\nReturn one JSON object with exactly these fields:\n{\n  \"answerable\": true or false,\n  \"answer\": \"concise complete answer\",\n  \"claims\": [\n    {\n      \"text\": \"one atomic parameter claim\",\n      \"reported_value\": number or null,\n      \"reported_unit\": \"unit\" or null,\n      \"evidence_quote\": \"short exact supporting excerpt\",\n      \"source\": \"document filename\",\n      \"page\": integer\n    }\n  ],\n  \"citations\": [{\"source\": \"document filename\", \"page\": integer}]\n}\n\nUse document and page identifiers exactly as shown in the evidence headers. Return JSON only.",
+  "user_prompt": "QUESTION:\nWhat heat-structure layer widths are specified for channels CH1-CH5? Identify each width by channel group and material layer, with units.\n\nRETRIEVED EVIDENCE:\n[DOCUMENT source=ABTR_case.pdf page=2 chunk_id=target-abtr-case-p0002 cosine_distance=0.55945688]\nconductivity of 26 W/m\\(\\cdot\\)K, a heat capacity of 638 J/kg\\(\\cdot\\)K, and a density of \\(7.646\\times 10^{3}\\) kg/m\\({}^{3}\\). The duct-mat uses the same thermophysical properties as the cladding, with \\(k=26\\) W/m\\(\\cdot\\)K, \\(C_{p}=638\\) J/kg\\(\\cdot\\)K, and \\(\\rho=7.646\\times 10^{3}\\) kg/m\\({}^{3}\\). These values define the thermal response of all solid regions in the heat-structure system.\n\nThe thermal-hydraulic model consists of five parallel fuel channels (CH1-CH5) that are all vertically oriented along the positive \\(z\\)-axis and share identical inlet and outlet flow directions. These channels represent parallel flow paths within the core. The parallel channels are hydraulically connected between two one-dimensional pipes that serve as the inlet and outlet plenums of the system. Upstream of the channels, pipe1 delivers coolant to a branching junction, which distributes the flow into all five channels simultaneously. This junction includes individual form-loss coefficients (\\(K\\) values) to represent flow-distribution resistances for each channel leg. Specifically, the values used in branch1 are \\(K=0.1,\\ 0.5,\\ 1.96,\\ 2.16,\\ 4.5\\), and \\(3500.0\\), corresponding respectively to the main pipe passage and the five channel inlets (CH1-CH5). Downstream, the outlets of all five channels recombine at a second junction (branch2), where the form-loss coefficients are all set to zero (\\(K=0.0\\) for each outlet leg), allowing the flows to merge without additional hydraulic resistance. This junction gathers the returning coolant and directs it into pipe2, completing the loop back toward the outlet boundary. The branches area is \\(0.44934\\).\n\nThe boundary conditions are imposed using two TDV components: inlet_TDV specifies the inlet velocity and temperature, enforcing a velocity boundary condition of \\(3.25\\) m/s and an inlet coolant temperature of \\(628.15\\) K at the entrance of pipe1. At the system outlet, outlet_TDV applies a fixed pressure of \\(1\\times 10^{5}\\) Pa along with a temperature boundary condition of \\(628.15\\) K at the exit of pipe2. Together, these boundaries define the global driving conditions for the transient simulation, while the internal distribution of mass flow among channels is governed by the hydraulic resistances and form losses specified within the branching components.\n\nThe initial conditions for the simulation are defined globally, setting the thermodynamic state of the system before the transient begins. The coolant throughout all fluid components is initialized at a uniform pressure of \\(1.0\\times 10^{5}\\) Pa, a velocity of \\(2\\) m/s, and a temperature of \\(628.15\\) K. These global values establish a consistent starting point for all channels, pipes, and junctions. For the solid regions of the heat structures, the initial temperature is also set to \\(628.15\\) K, ensuring thermal equilibrium between the solid and fluid domains at startup. A temperature scaling factor of \\(T_{\\text{solid\\_sf}}=1\\times 10^{-3}\\) and variable scaling factors of \\(1\\), \\(10^{-3}\\), and \\(10^{-6}\\) are applied to improve numerical conditioning during the nonlinear solve. Together, these initial conditions provide a well-defined, steady baseline from which the transient evolution of mass flow, temperature, and heat transfer can develop.\n\nThe numerical discretization of the system is defined through both axial and horizontal resolutions. Vertically, each core channel (CH1-CH5) is modeled using 20 axial fluid elements over a heated length of\n\n\\begin{table}\n\\begin{tabular}{l c c c c} \\hline\n**Component** & **A (m\\({}^{2}\\))** & **Dh (m)** & **Length (m)** \\\\ \\hline CH1 & 4.9237e-3 & 2.972e-3 & 0.8 \\\\ CH2 & 0.11323 & 2.972e-3 & 0.8 \\\\ CH3 & 0.029539 & 2.972e-3 & 0.8 \\\\ CH4 & 0.14769 & 2.972e-3 & 0.8 \\\\ CH5 & 0.153955129 & 2.972e-3 & 0.8 \\\\ pipe1 & 0.44934 & 2.972e-3 & 0.6 \\\\ pipe2 & 0.44934 & 2.972e-3 & 1.5 \\\\ \\hline \\end{tabular}\n\\end{table}\nTable 1: Component Geometry Summary\n\n\\begin{table}\n\\begin{tabular}{l c c c c c c} \\hline\n**Component** & \\(n_{hs}\\) & **Width of HS (m)** & **Material** & **f** & **Hw** & **HT Area Density** & **Power Fraction** \\\\ \\hline CH1 & 3 & 0.003015/0.000465/0.00052 & fuel/gap/clad & 0.022 & 1.6129e5 & 1107.8 & 0.02248 \\\\ CH2 & 3 & 0.003015/0.000465/0.00052 & fuel/gap/clad & 0.022 & 1.6129e5 & 1107.8 & 0.41924 \\\\ CH3 & 3 & 0.003015/0.000465/0.00052 & fuel/gap/clad & 0.022 & 1.6129e5 & 1107.8 & 0.09852 \\\\ CH4 & 3 & 0.003015/0.000465/0.00052 & fuel/gap/clad & 0.022 & 1.6129e5 & 1107.8 & 0.43116 \\\\ CH5 & 2 & 6.32340e-3/7.0260e-4 & fuel/clad & 0.04 & 13619 & 2113.6 & 0.02860 \\\\ \\hline \\end{tabular}\n\\end{table}\nTable 2: Heat Structure, Thermal Parameters, and Power Fraction\n\n[DOCUMENT source=ABTR_case.pdf page=3 chunk_id=target-abtr-case-p0003 cosine_distance=0.60833460]\n0.8 m, providing uniform spatial resolution for capturing coolant temperature rise, pressure drop, and heat transfer variations along the flow direction. The heat structures associated with each channel are likewise discretized axially according to the specified element counts for the fuel, gap, and cladding layers (5, 1, and 1 elements, respectively, for the reference fuel channels; 5 and 1 elements for the reflector channel). Horizontally, the model resolves five parallel channels coupled through their inlet and outlet junctions.\n\nThe time discretization for this case is governed by a transient executioner combined with a piecewise linear time-step control function. Although the physical boundary conditions remain constant throughout the simulation, the transient framework allows the solution to evolve in time toward a numerically converged state. The base time step is initially very small, with values defined by the time_stepper function: \\(\\Delta t=0.01\\) s from \\(t=0\\) to 0.1 s, increasing to \\(\\Delta t=0.1\\) s by \\(t=0.2\\) s, and eventually reaching a maximum allowable step size of \\(\\Delta t=1\\) s for times beyond 2 s. This gradual increase in time-step size ensures stability and accuracy during the early stages of the computation, where strong nonlinear coupling between fluid and solid temperatures may require tighter control. The executioner further enforces limits of \\(\\Delta t_{\\rm min}=10^{-5}\\) s and a nominal starting step of \\(\\Delta t=0.1\\) s, allowing the nonlinear solver to reduce the time step adaptively as needed. Despite the transient formulation, only five time steps are executed, making the simulation effectively a pseudo-steady-state solve in which the time discretization primarily serves as a numerical mechanism to achieve convergence rather than to resolve physical temporal behavior.\n\n",
+  "response_text": "{\n  \"answerable\": true,\n  \"answer\": \"CH1-CH4 each specify three heat-structure layers: fuel 0.003015 m, gap 0.000465 m, and clad 0.00052 m. CH5 specifies two layers: fuel 6.32340e-3 m and clad 7.0260e-4 m.\",\n  \"claims\": [\n    {\n      \"text\": \"For channels CH1-CH4, the fuel-layer width is 0.003015 m.\",\n      \"reported_value\": 0.003015,\n      \"reported_unit\": \"m\",\n      \"evidence_quote\": \"CH1 & 3 & 0.003015/0.000465/0.00052 & fuel/gap/clad\",\n      \"source\": \"ABTR_case.pdf\",\n      \"page\": 2\n    },\n    {\n      \"text\": \"For channels CH1-CH4, the gap-layer width is 0.000465 m.\",\n      \"reported_value\": 0.000465,\n      \"reported_unit\": \"m\",\n      \"evidence_quote\": \"CH1 & 3 & 0.003015/0.000465/0.00052 & fuel/gap/clad\",\n      \"source\": \"ABTR_case.pdf\",\n      \"page\": 2\n    },\n    {\n      \"text\": \"For channels CH1-CH4, the clad-layer width is 0.00052 m.\",\n      \"reported_value\": 0.00052,\n      \"reported_unit\": \"m\",\n      \"evidence_quote\": \"CH4 & 3 & 0.003015/0.000465/0.00052 & fuel/gap/clad\",\n      \"source\": \"ABTR_case.pdf\",\n      \"page\": 2\n    },\n    {\n      \"text\": \"For channel CH5, the fuel-layer width is 6.32340e-3 m.\",\n      \"reported_value\": 0.0063234,\n      \"reported_unit\": \"m\",\n      \"evidence_quote\": \"CH5 & 2 & 6.32340e-3/7.0260e-4 & fuel/clad\",\n      \"source\": \"ABTR_case.pdf\",\n      \"page\": 2\n    },\n    {\n      \"text\": \"For channel CH5, the clad-layer width is 7.0260e-4 m.\",\n      \"reported_value\": 0.0007026,\n      \"reported_unit\": \"m\",\n      \"evidence_quote\": \"CH5 & 2 & 6.32340e-3/7.0260e-4 & fuel/clad\",\n      \"source\": \"ABTR_case.pdf\",\n      \"page\": 2\n    }\n  ],\n  \"citations\": [\n    {\n      \"source\": \"ABTR_case.pdf\",\n      \"page\": 2\n    }\n  ]\n}",
+  "parsed_response": {
+    "answerable": true,
+    "answer": "CH1-CH4 each specify three heat-structure layers: fuel 0.003015 m, gap 0.000465 m, and clad 0.00052 m. CH5 specifies two layers: fuel 6.32340e-3 m and clad 7.0260e-4 m.",
+    "claims": [
+      {
+        "text": "For channels CH1-CH4, the fuel-layer width is 0.003015 m.",
+        "reported_value": 0.003015,
+        "reported_unit": "m",
+        "evidence_quote": "CH1 & 3 & 0.003015/0.000465/0.00052 & fuel/gap/clad",
+        "source": "ABTR_case.pdf",
+        "page": 2
+      },
+      {
+        "text": "For channels CH1-CH4, the gap-layer width is 0.000465 m.",
+        "reported_value": 0.000465,
+        "reported_unit": "m",
+        "evidence_quote": "CH1 & 3 & 0.003015/0.000465/0.00052 & fuel/gap/clad",
+        "source": "ABTR_case.pdf",
+        "page": 2
+      },
+      {
+        "text": "For channels CH1-CH4, the clad-layer width is 0.00052 m.",
+        "reported_value": 0.00052,
+        "reported_unit": "m",
+        "evidence_quote": "CH4 & 3 & 0.003015/0.000465/0.00052 & fuel/gap/clad",
+        "source": "ABTR_case.pdf",
+        "page": 2
+      },
+      {
+        "text": "For channel CH5, the fuel-layer width is 6.32340e-3 m.",
+        "reported_value": 0.0063234,
+        "reported_unit": "m",
+        "evidence_quote": "CH5 & 2 & 6.32340e-3/7.0260e-4 & fuel/clad",
+        "source": "ABTR_case.pdf",
+        "page": 2
+      },
+      {
+        "text": "For channel CH5, the clad-layer width is 7.0260e-4 m.",
+        "reported_value": 0.0007026,
+        "reported_unit": "m",
+        "evidence_quote": "CH5 & 2 & 6.32340e-3/7.0260e-4 & fuel/clad",
+        "source": "ABTR_case.pdf",
+        "page": 2
+      }
+    ],
+    "citations": [
+      {
+        "source": "ABTR_case.pdf",
+        "page": 2
+      }
+    ]
+  },
+  "parse_warning": null,
+  "response_metadata": {
+    "id": "chatcmpl-EDEste9s5G8FIyxlNquXNgbQvED0n",
+    "request_id": "req_fd9adb46e5024b4b88296c7b8761dc23",
+    "created": 1786824187,
+    "resolved_model": "gpt-5.6-sol",
+    "system_fingerprint": null,
+    "usage": {
+      "completion_tokens": 622,
+      "prompt_tokens": 2160,
+      "total_tokens": 2782,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2157,
+        "cache_write_tokens": 0
+      }
+    }
+  },
+  "latency_seconds": 6.2465994999947725,
+  "scores": {
+    "answerable": true,
+    "response_answerable": true,
+    "question_type": "direct",
+    "required_claim_count": 5,
+    "recovered_claim_count": 5,
+    "recovered_claims": {
+      "ch1_4_fuel_width": true,
+      "ch1_4_gap_width": true,
+      "ch1_4_clad_width": true,
+      "ch5_fuel_width": true,
+      "ch5_clad_width": true
+    },
+    "CoP": 1.0,
+    "exact_answer": true,
+    "required_evidence_count": 1,
+    "retrieved_required_evidence_count": 1,
+    "retrieved_required_evidence": [
+      {
+        "source": "abtr_case.pdf",
+        "page": 2
+      }
+    ],
+    "all_required_evidence_retrieved": true,
+    "citation_count": 1,
+    "supported_citation_count": 1,
+    "CiP": 1.0,
+    "CiH": 1.0,
+    "generated_claim_count": 5,
+    "unsupported_claim_count": 0,
+    "HR": 0.0,
+    "abstention_correct": null,
+    "claim_support_details": [
+      {
+        "index": 0,
+        "text": "For channels CH1-CH4, the fuel-layer width is 0.003015 m.",
+        "matched_required_claims": [
+          "ch1_4_fuel_width",
+          "ch1_4_gap_width",
+          "ch1_4_clad_width",
+          "ch5_fuel_width",
+          "ch5_clad_width"
+        ],
+        "context_supported": true,
+        "supporting_retrieved_pages": [
+          {
+            "source": "abtr_case.pdf",
+            "page": 2
+          }
+        ],
+        "citation": {
+          "source": "ABTR_case.pdf",
+          "page": 2
+        },
+        "citation_supported": true,
+        "citation_mode": "claim_or_quote_supported_on_cited_page"
+      },
+      {
+        "index": 1,
+        "text": "For channels CH1-CH4, the gap-layer width is 0.000465 m.",
+        "matched_required_claims": [
+          "ch1_4_fuel_width",
+          "ch1_4_gap_width",
+          "ch1_4_clad_width",
+          "ch5_fuel_width",
+          "ch5_clad_width"
+        ],
+        "context_supported": true,
+        "supporting_retrieved_pages": [
+          {
+            "source": "abtr_case.pdf",
+            "page": 2
+          }
+        ],
+        "citation": {
+          "source": "ABTR_case.pdf",
+          "page": 2
+        },
+        "citation_supported": true,
+        "citation_mode": "claim_or_quote_supported_on_cited_page"
+      },
+      {
+        "index": 2,
+        "text": "For channels CH1-CH4, the clad-layer width is 0.00052 m.",
+        "matched_required_claims": [
+          "ch1_4_fuel_width",
+          "ch1_4_gap_width",
+          "ch1_4_clad_width",
+          "ch5_fuel_width",
+          "ch5_clad_width"
+        ],
+        "context_supported": true,
+        "supporting_retrieved_pages": [
+          {
+            "source": "abtr_case.pdf",
+            "page": 2
+          }
+        ],
+        "citation": {
+          "source": "ABTR_case.pdf",
+          "page": 2
+        },
+        "citation_supported": true,
+        "citation_mode": "claim_or_quote_supported_on_cited_page"
+      },
+      {
+        "index": 3,
+        "text": "For channel CH5, the fuel-layer width is 6.32340e-3 m.",
+        "matched_required_claims": [
+          "ch1_4_fuel_width",
+          "ch1_4_gap_width",
+          "ch1_4_clad_width",
+          "ch5_fuel_width",
+          "ch5_clad_width"
+        ],
+        "context_supported": true,
+        "supporting_retrieved_pages": [
+          {
+            "source": "abtr_case.pdf",
+            "page": 2
+          }
+        ],
+        "citation": {
+          "source": "ABTR_case.pdf",
+          "page": 2
+        },
+        "citation_supported": true,
+        "citation_mode": "claim_or_quote_supported_on_cited_page"
+      },
+      {
+        "index": 4,
+        "text": "For channel CH5, the clad-layer width is 7.0260e-4 m.",
+        "matched_required_claims": [
+          "ch1_4_fuel_width",
+          "ch1_4_gap_width",
+          "ch1_4_clad_width",
+          "ch5_fuel_width",
+          "ch5_clad_width"
+        ],
+        "context_supported": true,
+        "supporting_retrieved_pages": [
+          {
+            "source": "abtr_case.pdf",
+            "page": 2
+          }
+        ],
+        "citation": {
+          "source": "ABTR_case.pdf",
+          "page": 2
+        },
+        "citation_supported": true,
+        "citation_mode": "claim_or_quote_supported_on_cited_page"
+      }
+    ],
+    "failure_class": "none",
+    "EvidenceRecallAt2": 1.0,
+    "target_citation_count": 1,
+    "noise_citation_count": 0,
+    "retrieved_target_chunks": 2,
+    "retrieved_noise_chunks": 0,
+    "retrieved_noise_fraction": 0.0
+  }
+}

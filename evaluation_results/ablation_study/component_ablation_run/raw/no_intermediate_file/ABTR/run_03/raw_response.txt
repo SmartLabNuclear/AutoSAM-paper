@@ -1,0 +1,365 @@
+# ABTR SAM input deck (no_intermediate_file)
+# Engineering assumptions (explicit):
+# - Gravity not specified in case facts; set to zero (no buoyancy).  # MISSING: coordinate_system.gravity
+# - Spatial positions/orientations provided are not required by SAM for 1D solves; kept as comments only.
+# - Where SAM-required discretization counts are not provided, they are left as # MISSING to avoid guessing.
+# - Core channel power normalization (total power) not provided; use power fractions only as metadata and leave absolute power # MISSING.
+# - Heat transfer coefficients and area densities from spreadsheet are applied as user-specified constants (where supported); otherwise marked # MISSING.
+
+[GlobalParams]
+  initial_P = 100000.0          # Pa
+  initial_T = 628.15            # K
+  initial_V = 2.0               # m/s
+  solid_initial_T = 628.15      # K
+  gravity = '0 0 0'             # assumption due to missing gravity
+[]
+
+[Functions]
+  # Placeholder for power history (absolute level not provided)
+  [./power_ramp]
+    type = ConstantFunction
+    value = 1.0
+  [../]
+[]
+
+[EOS]
+  [./coolant]
+    type = SodiumEquationOfState
+    # eos.sam_eos_type: None
+    # eos.parameters: None
+  [../]
+[]
+
+[MaterialProperties]
+  [./fuel-mat]
+    type = SolidMaterialProperties
+    k = 16.0          # W/m-K
+    cp = 191.67       # J/kg-K
+    rho = 14583.0     # kg/m^3
+  [../]
+
+  [./gap-mat]
+    type = SolidMaterialProperties
+    k = 64.0          # W/m-K
+    cp = 1272.0       # J/kg-K
+    rho = 865.0       # kg/m^3
+  [../]
+
+  [./clad-mat]
+    type = SolidMaterialProperties
+    # MISSING: materials.clad-mat.k_W_mK
+    # MISSING: materials.clad-mat.Cp_J_kgK
+    # MISSING: materials.clad-mat.rho_kg_m3
+  [../]
+
+  [./ss-mat]
+    type = SolidMaterialProperties
+    # MISSING: materials.ss-mat.k_W_mK
+    # MISSING: materials.ss-mat.Cp_J_kgK
+    # MISSING: materials.ss-mat.rho_kg_m3
+  [../]
+[]
+
+[Components]
+  # Boundary conditions
+  [./inlet]
+    type = PBTDJ
+    eos = coolant
+    p = 100000.0            # Pa (use global init P since inlet pressure not provided)
+    v = 3.25                # m/s
+    T = 628.15              # K
+    # MISSING: boundary_values.inlet.mass_flow_kg_s (not used for PBTDJ)
+    connect_to = 'Pipe2:in'
+  [../]
+
+  [./outlet]
+    type = PBTDV
+    eos = coolant
+    p = 100000.0            # Pa
+    T = 628.15              # K
+    connect_to = 'Pipe1:out'
+  [../]
+
+  # Pipe2
+  [./Pipe2]
+    type = PBPipe
+    eos = coolant
+    A = 0.44934          # m^2
+    Dh = 0.002972        # m
+    length = 1.5         # m
+    # position = (0.0, 0.0, 2.3)
+    # orientation = (0.0, 0.0, -1.0)
+    # MISSING: number_of_elems (or similar discretization parameter)
+    # MISSING: roughness / form loss (if required)
+  [../]
+
+  # Branch2: Pipe2(out) -> CH1..CH5(in)
+  [./Branch2]
+    type = PBBranch
+    eos = coolant
+    inputs = 'Pipe2:out'
+    outputs = 'CH1:in CH2:in CH3:in CH4:in CH5:in'
+    # MISSING: junctions.Branch2.Area_m2
+    # MISSING: junctions.Branch2.K
+    # Form losses (spreadsheet "Branch 2 form losses") are all 0; not applied explicitly.
+  [../]
+
+  # Core channels
+  [./CH1]
+    type = PBCoreChannel
+    eos = coolant
+    A = 0.0049237        # m^2
+    Dh = 0.002972        # m
+    length = 0.8         # m
+    f = 0.022            # friction factor
+    htc = 161290.0       # W/m^2-K
+    area_density = 1107.8  # 1/m
+    # power_fraction = 0.02248 (metadata)
+    # Form loss on Branch 1 side = 0.1 (not explicitly mapped; # MISSING if needed by PBBranch or channel)
+    # position = (0.0, -1.0, 0.8)
+    # orientation = (0.0, 0.0, -1.0)
+    # MISSING: n_elems (fluid)
+    [./HeatStructures]
+      n_heatstruct = 3
+      heatstruct_names = 'fuel gap clad'
+      # MISSING: component_engineering_data.CH1.heat_structure.elem_number_of_hs
+      [./fuel]
+        type = PBHeatStructure
+        material = fuel-mat
+        width = 0.003015
+        initial_T = 628.15
+      [../]
+      [./gap]
+        type = PBHeatStructure
+        material = gap-mat
+        width = 0.000465
+        initial_T = 628.15
+      [../]
+      [./clad]
+        type = PBHeatStructure
+        material = clad-mat
+        width = 0.00052
+        initial_T = 628.15
+      [../]
+    [../]
+    # MISSING: absolute power (W) or linear heat rate; required for actual heating
+  [../]
+
+  [./CH2]
+    type = PBCoreChannel
+    eos = coolant
+    A = 0.11323         # m^2
+    Dh = 0.002972       # m
+    length = 0.8        # m
+    f = 0.022
+    htc = 161290.0
+    area_density = 1107.8
+    # power_fraction = 0.41924 (metadata)
+    # Form loss on Branch 1 side = 0.5
+    # position = (0.0, -0.5, 0.8)
+    # orientation = (0.0, 0.0, -1.0)
+    # MISSING: n_elems (fluid)
+    [./HeatStructures]
+      n_heatstruct = 3
+      heatstruct_names = 'fuel gap clad'
+      # MISSING: component_engineering_data.CH2.heat_structure.elem_number_of_hs
+      [./fuel]
+        type = PBHeatStructure
+        material = fuel-mat
+        width = 0.003015
+        initial_T = 628.15
+      [../]
+      [./gap]
+        type = PBHeatStructure
+        material = gap-mat
+        width = 0.000465
+        initial_T = 628.15
+      [../]
+      [./clad]
+        type = PBHeatStructure
+        material = clad-mat
+        width = 0.00052
+        initial_T = 628.15
+      [../]
+    [../]
+    # MISSING: absolute power (W) or linear heat rate
+  [../]
+
+  [./CH3]
+    type = PBCoreChannel
+    eos = coolant
+    A = 0.029539        # m^2
+    Dh = 0.002972       # m
+    length = 0.8        # m
+    f = 0.022
+    htc = 161290.0
+    area_density = 1107.8
+    # power_fraction = 0.09852 (metadata)
+    # Form loss on Branch 1 side = 1.96
+    # position = (0.0, 0.0, 0.8)
+    # orientation = (0.0, 0.0, -1.0)
+    # MISSING: n_elems (fluid)
+    [./HeatStructures]
+      n_heatstruct = 3
+      heatstruct_names = 'fuel gap clad'
+      # MISSING: component_engineering_data.CH3.heat_structure.elem_number_of_hs
+      [./fuel]
+        type = PBHeatStructure
+        material = fuel-mat
+        width = 0.003015
+        initial_T = 628.15
+      [../]
+      [./gap]
+        type = PBHeatStructure
+        material = gap-mat
+        width = 0.000465
+        initial_T = 628.15
+      [../]
+      [./clad]
+        type = PBHeatStructure
+        material = clad-mat
+        width = 0.00052
+        initial_T = 628.15
+      [../]
+    [../]
+    # MISSING: absolute power (W) or linear heat rate
+  [../]
+
+  [./CH4]
+    type = PBCoreChannel
+    eos = coolant
+    A = 0.14769         # m^2
+    Dh = 0.002972       # m
+    length = 0.8        # m
+    f = 0.022
+    htc = 161290.0
+    area_density = 1107.8
+    # power_fraction = 0.43116 (metadata)
+    # Form loss on Branch 1 side = 2.16
+    # position = (0.0, 0.5, 0.8)
+    # orientation = (0.0, 0.0, -1.0)
+    # MISSING: n_elems (fluid)
+    [./HeatStructures]
+      n_heatstruct = 3
+      heatstruct_names = 'fuel gap clad'
+      # MISSING: component_engineering_data.CH4.heat_structure.elem_number_of_hs
+      [./fuel]
+        type = PBHeatStructure
+        material = fuel-mat
+        width = 0.003015
+        initial_T = 628.15
+      [../]
+      [./gap]
+        type = PBHeatStructure
+        material = gap-mat
+        width = 0.000465
+        initial_T = 628.15
+      [../]
+      [./clad]
+        type = PBHeatStructure
+        material = clad-mat
+        width = 0.00052
+        initial_T = 628.15
+      [../]
+    [../]
+    # MISSING: absolute power (W) or linear heat rate
+  [../]
+
+  [./CH5]
+    type = PBCoreChannel
+    eos = coolant
+    A = 0.153955129     # m^2
+    Dh = 0.002972       # m
+    length = 0.8        # m
+    f = 0.04
+    htc = 13619.0
+    area_density = 2013.6
+    # power_fraction = 0.0286 (metadata)
+    # Form loss on Branch 1 side = 4.5
+    # position = (0.0, 1.0, 0.8)
+    # orientation = (0.0, 0.0, -1.0)
+    # MISSING: n_elems (fluid)
+    [./HeatStructures]
+      n_heatstruct = 2
+      heatstruct_names = 'fuel clad'
+      # MISSING: component_engineering_data.CH5.heat_structure.elem_number_of_hs
+      [./fuel]
+        type = PBHeatStructure
+        material = fuel-mat
+        width = 0.0063234
+        initial_T = 628.15
+      [../]
+      [./clad]
+        type = PBHeatStructure
+        material = clad-mat
+        width = 0.0007026
+        initial_T = 628.15
+      [../]
+    [../]
+    # MISSING: absolute power (W) or linear heat rate
+  [../]
+
+  # Branch1: CH1..CH5(out) -> Pipe1(in)
+  [./Branch1]
+    type = PBBranch
+    eos = coolant
+    inputs = 'CH1:out CH2:out CH3:out CH4:out CH5:out'
+    outputs = 'Pipe1:in'
+    # MISSING: junctions.Branch1.Area_m2
+    # MISSING: junctions.Branch1.K
+    # Spreadsheet indicates Branch 1 form losses per channel:
+    #  CH1:0.1 CH2:0.5 CH3:1.96 CH4:2.16 CH5:4.5 (not explicitly mapped; # MISSING if required)
+  [../]
+
+  # Pipe1
+  [./Pipe1]
+    type = PBPipe
+    eos = coolant
+    A = 0.44934          # m^2
+    Dh = 0.002972        # m
+    length = 0.6         # m
+    # position = (0.0, 0.0, 0.0)
+    # orientation = (0.0, 0.0, -1.0)
+    # MISSING: number_of_elems (or similar discretization parameter)
+  [../]
+[]
+
+[Preconditioning]
+  [./SMP]
+    type = SMP
+    full = true
+  [../]
+[]
+
+[Postprocessors]
+  # Basic monitors (exact variable names may be code-dependent)
+  [./inlet_T]
+    type = SAMComponentOutletTemperature
+    component = Pipe2
+    outlet = in
+    # MISSING: correct port naming for this PP if required by SAM version
+  [../]
+  [./outlet_T]
+    type = SAMComponentOutletTemperature
+    component = Pipe1
+    outlet = out
+    # MISSING: correct port naming for this PP if required by SAM version
+  [../]
+[]
+
+[Executioner]
+  type = Transient
+  scheme = bdf2
+  solve_type = NEWTON
+  nl_rel_tol = 1e-8
+  nl_abs_tol = 1e-10
+  dt = 1e-3
+  end_time = 1.0
+  # MISSING: recommended dt/end_time for ABTR case
+[]
+
+[Outputs]
+  exodus = false
+  csv = true
+  print_linear_residuals = false
+[]

@@ -1,0 +1,24 @@
+{
+  "missing_count": 19,
+  "missing_paths": [
+    "coordinate_system.gravity",
+    "eos.sam_eos_type",
+    "eos.parameters",
+    "materials.clad-mat.k_W_mK",
+    "materials.clad-mat.Cp_J_kgK",
+    "materials.clad-mat.rho_kg_m3",
+    "materials.ss-mat.k_W_mK",
+    "materials.ss-mat.Cp_J_kgK",
+    "materials.ss-mat.rho_kg_m3",
+    "network.components.CH1.heat_structure.elem_number_of_hs",
+    "network.components.CH2.heat_structure.elem_number_of_hs",
+    "network.components.CH3.heat_structure.elem_number_of_hs",
+    "network.components.CH4.heat_structure.elem_number_of_hs",
+    "network.components.CH5.heat_structure.elem_number_of_hs",
+    "network.junctions.Branch2.Area_m2",
+    "network.junctions.Branch2.K",
+    "network.junctions.Branch1.Area_m2",
+    "network.junctions.Branch1.K",
+    "boundary_conditions.inlet.mass_flow_kg_s"
+  ]
+}

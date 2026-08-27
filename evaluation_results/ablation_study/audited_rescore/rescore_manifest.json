@@ -1,0 +1,12 @@
+{
+  "created_utc": "2026-08-15T21:44:20.738860+00:00",
+  "source_run": "ablation_runs_gpt52\\20260815T212712Z_component_ablation",
+  "source_manifest_sha256": "fe726794fb8671ad3874178c944fade98b7bf2db1d53cf5c5bfd4f929bc3d568",
+  "source_all_scores_sha256": "e7571eec1196cd7d401440361392acf5d2236a95dd32b5962a77db9160e3d27d",
+  "rescore_script": "evaluation\\rescore_autosam_ablation_gpt52.py",
+  "rescore_script_sha256": "31ed5f4bd371b216533490f40b8c48b403e3d6106117637cb7662f20f991e8e2",
+  "scoring_module": "evaluation\\autosam_ablation_gpt52.py",
+  "scoring_module_sha256": "11b740dc778f46078b3d02c263e6f1e895e3dfa157af6d85629b56b74127c80f",
+  "reason": "Support legacy MOOSE [./name] and [../] block notation in deterministic scoring.",
+  "api_calls_repeated": false
+}

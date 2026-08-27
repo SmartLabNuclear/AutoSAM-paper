@@ -1,0 +1,680 @@
+[
+  {
+    "item_id": "abtr_param_01",
+    "question": "What thermophysical properties are specified for fuel-mat in the ABTR model? Report thermal conductivity, specific heat capacity, and density with units.",
+    "top_k": 2,
+    "retrieved_chunk_ids": [
+      "target-abtr-case-p0001",
+      "target-abtr-case-p0002"
+    ],
+    "target_chunks": 2,
+    "noise_chunks": 0,
+    "noise_fraction": 0.0,
+    "required_evidence": [
+      {
+        "source": "ABTR_case.pdf",
+        "page": 1
+      }
+    ],
+    "retrieved_required_evidence": [
+      {
+        "source": "abtr_case.pdf",
+        "page": 1
+      }
+    ],
+    "EvidenceRecallAt2": 1.0,
+    "ranking": [
+      {
+        "rank": 1,
+        "chunk_id": "target-abtr-case-p0001",
+        "source": "ABTR_case.pdf",
+        "page": 1,
+        "document_role": "target",
+        "cosine_distance": 0.39600664377212524,
+        "content_sha256": "75917e5dcc2933faf13bbc96233ab91e6b07d053689d52ac16bebfa51bdc7c8f"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "target-abtr-case-p0002",
+        "source": "ABTR_case.pdf",
+        "page": 2,
+        "document_role": "target",
+        "cosine_distance": 0.49434560537338257,
+        "content_sha256": "669d09c00c19128dceee7ec05396c2f5c4fba2d18f2887116734cf2f6dec6f21"
+      }
+    ]
+  },
+  {
+    "item_id": "abtr_param_02",
+    "question": "What thermal conductivity and specific heat capacity are specified for fuel-mat? Give both values with units.",
+    "top_k": 2,
+    "retrieved_chunk_ids": [
+      "target-abtr-case-p0002",
+      "noise-abtr-report-p0025"
+    ],
+    "target_chunks": 1,
+    "noise_chunks": 1,
+    "noise_fraction": 0.5,
+    "required_evidence": [
+      {
+        "source": "ABTR_case.pdf",
+        "page": 1
+      }
+    ],
+    "retrieved_required_evidence": [],
+    "EvidenceRecallAt2": 0.0,
+    "ranking": [
+      {
+        "rank": 1,
+        "chunk_id": "target-abtr-case-p0002",
+        "source": "ABTR_case.pdf",
+        "page": 2,
+        "document_role": "target",
+        "cosine_distance": 0.538156270980835,
+        "content_sha256": "669d09c00c19128dceee7ec05396c2f5c4fba2d18f2887116734cf2f6dec6f21"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "noise-abtr-report-p0025",
+        "source": "abtr_report.pdf",
+        "page": 25,
+        "document_role": "noise",
+        "cosine_distance": 0.6153603792190552,
+        "content_sha256": "7e9a21ea7567a7b6114b91559129df43dbf608f1175c1746e4b5c97be04b0740"
+      }
+    ]
+  },
+  {
+    "item_id": "abtr_param_03",
+    "question": "What thermal conductivity is specified for clad-mat? Give the value with units.",
+    "top_k": 2,
+    "retrieved_chunk_ids": [
+      "target-abtr-case-p0002",
+      "noise-abtr-report-p0025"
+    ],
+    "target_chunks": 1,
+    "noise_chunks": 1,
+    "noise_fraction": 0.5,
+    "required_evidence": [
+      {
+        "source": "ABTR_case.pdf",
+        "page": 2
+      }
+    ],
+    "retrieved_required_evidence": [
+      {
+        "source": "abtr_case.pdf",
+        "page": 2
+      }
+    ],
+    "EvidenceRecallAt2": 1.0,
+    "ranking": [
+      {
+        "rank": 1,
+        "chunk_id": "target-abtr-case-p0002",
+        "source": "ABTR_case.pdf",
+        "page": 2,
+        "document_role": "target",
+        "cosine_distance": 0.5777998566627502,
+        "content_sha256": "669d09c00c19128dceee7ec05396c2f5c4fba2d18f2887116734cf2f6dec6f21"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "noise-abtr-report-p0025",
+        "source": "abtr_report.pdf",
+        "page": 25,
+        "document_role": "noise",
+        "cosine_distance": 0.62783282995224,
+        "content_sha256": "7e9a21ea7567a7b6114b91559129df43dbf608f1175c1746e4b5c97be04b0740"
+      }
+    ]
+  },
+  {
+    "item_id": "abtr_param_04",
+    "question": "What power fraction is assigned to each ABTR core channel, CH1 through CH5?",
+    "top_k": 2,
+    "retrieved_chunk_ids": [
+      "target-abtr-case-p0001",
+      "target-abtr-case-p0002"
+    ],
+    "target_chunks": 2,
+    "noise_chunks": 0,
+    "noise_fraction": 0.0,
+    "required_evidence": [
+      {
+        "source": "ABTR_case.pdf",
+        "page": 2
+      }
+    ],
+    "retrieved_required_evidence": [
+      {
+        "source": "abtr_case.pdf",
+        "page": 2
+      }
+    ],
+    "EvidenceRecallAt2": 1.0,
+    "ranking": [
+      {
+        "rank": 1,
+        "chunk_id": "target-abtr-case-p0001",
+        "source": "ABTR_case.pdf",
+        "page": 1,
+        "document_role": "target",
+        "cosine_distance": 0.5727735757827759,
+        "content_sha256": "75917e5dcc2933faf13bbc96233ab91e6b07d053689d52ac16bebfa51bdc7c8f"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "target-abtr-case-p0002",
+        "source": "ABTR_case.pdf",
+        "page": 2,
+        "document_role": "target",
+        "cosine_distance": 0.636795699596405,
+        "content_sha256": "669d09c00c19128dceee7ec05396c2f5c4fba2d18f2887116734cf2f6dec6f21"
+      }
+    ]
+  },
+  {
+    "item_id": "abtr_param_05",
+    "question": "What heat-structure layer widths are specified for channels CH1-CH5? Identify each width by channel group and material layer, with units.",
+    "top_k": 2,
+    "retrieved_chunk_ids": [
+      "target-abtr-case-p0002",
+      "target-abtr-case-p0003"
+    ],
+    "target_chunks": 2,
+    "noise_chunks": 0,
+    "noise_fraction": 0.0,
+    "required_evidence": [
+      {
+        "source": "ABTR_case.pdf",
+        "page": 2
+      }
+    ],
+    "retrieved_required_evidence": [
+      {
+        "source": "abtr_case.pdf",
+        "page": 2
+      }
+    ],
+    "EvidenceRecallAt2": 1.0,
+    "ranking": [
+      {
+        "rank": 1,
+        "chunk_id": "target-abtr-case-p0002",
+        "source": "ABTR_case.pdf",
+        "page": 2,
+        "document_role": "target",
+        "cosine_distance": 0.5594568848609924,
+        "content_sha256": "669d09c00c19128dceee7ec05396c2f5c4fba2d18f2887116734cf2f6dec6f21"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "target-abtr-case-p0003",
+        "source": "ABTR_case.pdf",
+        "page": 3,
+        "document_role": "target",
+        "cosine_distance": 0.6083346009254456,
+        "content_sha256": "6b2701231c2c018dea557518e32111a307a6cdcd63160297847323ac58a4d053"
+      }
+    ]
+  },
+  {
+    "item_id": "abtr_param_06",
+    "question": "How many parallel core channels are in the ABTR model, and how many heat-structure regions are assigned to each channel?",
+    "top_k": 2,
+    "retrieved_chunk_ids": [
+      "target-abtr-case-p0001",
+      "target-abtr-case-p0002"
+    ],
+    "target_chunks": 2,
+    "noise_chunks": 0,
+    "noise_fraction": 0.0,
+    "required_evidence": [
+      {
+        "source": "ABTR_case.pdf",
+        "page": 1
+      },
+      {
+        "source": "ABTR_case.pdf",
+        "page": 2
+      }
+    ],
+    "retrieved_required_evidence": [
+      {
+        "source": "abtr_case.pdf",
+        "page": 1
+      },
+      {
+        "source": "abtr_case.pdf",
+        "page": 2
+      }
+    ],
+    "EvidenceRecallAt2": 1.0,
+    "ranking": [
+      {
+        "rank": 1,
+        "chunk_id": "target-abtr-case-p0001",
+        "source": "ABTR_case.pdf",
+        "page": 1,
+        "document_role": "target",
+        "cosine_distance": 0.4707542061805725,
+        "content_sha256": "75917e5dcc2933faf13bbc96233ab91e6b07d053689d52ac16bebfa51bdc7c8f"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "target-abtr-case-p0002",
+        "source": "ABTR_case.pdf",
+        "page": 2,
+        "document_role": "target",
+        "cosine_distance": 0.5345830917358398,
+        "content_sha256": "669d09c00c19128dceee7ec05396c2f5c4fba2d18f2887116734cf2f6dec6f21"
+      }
+    ]
+  },
+  {
+    "item_id": "abtr_param_07",
+    "question": "What minimum time step is allowed by the ABTR executioner? Give the value with units.",
+    "top_k": 2,
+    "retrieved_chunk_ids": [
+      "target-abtr-case-p0003",
+      "target-abtr-case-p0001"
+    ],
+    "target_chunks": 2,
+    "noise_chunks": 0,
+    "noise_fraction": 0.0,
+    "required_evidence": [
+      {
+        "source": "ABTR_case.pdf",
+        "page": 3
+      }
+    ],
+    "retrieved_required_evidence": [
+      {
+        "source": "abtr_case.pdf",
+        "page": 3
+      }
+    ],
+    "EvidenceRecallAt2": 1.0,
+    "ranking": [
+      {
+        "rank": 1,
+        "chunk_id": "target-abtr-case-p0003",
+        "source": "ABTR_case.pdf",
+        "page": 3,
+        "document_role": "target",
+        "cosine_distance": 0.5286864042282104,
+        "content_sha256": "6b2701231c2c018dea557518e32111a307a6cdcd63160297847323ac58a4d053"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "target-abtr-case-p0001",
+        "source": "ABTR_case.pdf",
+        "page": 1,
+        "document_role": "target",
+        "cosine_distance": 0.5842063426971436,
+        "content_sha256": "75917e5dcc2933faf13bbc96233ab91e6b07d053689d52ac16bebfa51bdc7c8f"
+      }
+    ]
+  },
+  {
+    "item_id": "abtr_param_08",
+    "question": "What time-step schedule is defined by the ABTR time_stepper function? State the time-step values and their associated times.",
+    "top_k": 2,
+    "retrieved_chunk_ids": [
+      "target-abtr-case-p0003",
+      "target-abtr-case-p0001"
+    ],
+    "target_chunks": 2,
+    "noise_chunks": 0,
+    "noise_fraction": 0.0,
+    "required_evidence": [
+      {
+        "source": "ABTR_case.pdf",
+        "page": 3
+      }
+    ],
+    "retrieved_required_evidence": [
+      {
+        "source": "abtr_case.pdf",
+        "page": 3
+      }
+    ],
+    "EvidenceRecallAt2": 1.0,
+    "ranking": [
+      {
+        "rank": 1,
+        "chunk_id": "target-abtr-case-p0003",
+        "source": "ABTR_case.pdf",
+        "page": 3,
+        "document_role": "target",
+        "cosine_distance": 0.5968471765518188,
+        "content_sha256": "6b2701231c2c018dea557518e32111a307a6cdcd63160297847323ac58a4d053"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "target-abtr-case-p0001",
+        "source": "ABTR_case.pdf",
+        "page": 1,
+        "document_role": "target",
+        "cosine_distance": 0.5994282960891724,
+        "content_sha256": "75917e5dcc2933faf13bbc96233ab91e6b07d053689d52ac16bebfa51bdc7c8f"
+      }
+    ]
+  },
+  {
+    "item_id": "abtr_param_09",
+    "question": "What axial fluid discretization is used for each core channel, CH1-CH5?",
+    "top_k": 2,
+    "retrieved_chunk_ids": [
+      "target-abtr-case-p0003",
+      "target-abtr-case-p0002"
+    ],
+    "target_chunks": 2,
+    "noise_chunks": 0,
+    "noise_fraction": 0.0,
+    "required_evidence": [
+      {
+        "source": "ABTR_case.pdf",
+        "page": 2
+      }
+    ],
+    "retrieved_required_evidence": [
+      {
+        "source": "abtr_case.pdf",
+        "page": 2
+      }
+    ],
+    "EvidenceRecallAt2": 1.0,
+    "ranking": [
+      {
+        "rank": 1,
+        "chunk_id": "target-abtr-case-p0003",
+        "source": "ABTR_case.pdf",
+        "page": 3,
+        "document_role": "target",
+        "cosine_distance": 0.43010926246643066,
+        "content_sha256": "6b2701231c2c018dea557518e32111a307a6cdcd63160297847323ac58a4d053"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "target-abtr-case-p0002",
+        "source": "ABTR_case.pdf",
+        "page": 2,
+        "document_role": "target",
+        "cosine_distance": 0.4720935821533203,
+        "content_sha256": "669d09c00c19128dceee7ec05396c2f5c4fba2d18f2887116734cf2f6dec6f21"
+      }
+    ]
+  },
+  {
+    "item_id": "abtr_param_10",
+    "question": "What axial length is specified for each core channel, CH1-CH5? Give the value with units.",
+    "top_k": 2,
+    "retrieved_chunk_ids": [
+      "noise-abtr-report-p0019",
+      "target-abtr-case-p0002"
+    ],
+    "target_chunks": 1,
+    "noise_chunks": 1,
+    "noise_fraction": 0.5,
+    "required_evidence": [
+      {
+        "source": "ABTR_case.pdf",
+        "page": 2
+      }
+    ],
+    "retrieved_required_evidence": [
+      {
+        "source": "abtr_case.pdf",
+        "page": 2
+      }
+    ],
+    "EvidenceRecallAt2": 1.0,
+    "ranking": [
+      {
+        "rank": 1,
+        "chunk_id": "noise-abtr-report-p0019",
+        "source": "abtr_report.pdf",
+        "page": 19,
+        "document_role": "noise",
+        "cosine_distance": 0.6225493550300598,
+        "content_sha256": "0093c070eca3a855bf32a56e7e75bc4def4ffc78fa78599f6574f384ea37b28f"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "target-abtr-case-p0002",
+        "source": "ABTR_case.pdf",
+        "page": 2,
+        "document_role": "target",
+        "cosine_distance": 0.6277260780334473,
+        "content_sha256": "669d09c00c19128dceee7ec05396c2f5c4fba2d18f2887116734cf2f6dec6f21"
+      }
+    ]
+  },
+  {
+    "item_id": "abtr_param_11",
+    "question": "What flow areas are specified for pipe1 and pipe2? Give both values with units.",
+    "top_k": 2,
+    "retrieved_chunk_ids": [
+      "target-abtr-case-p0002",
+      "noise-abtr-report-p0019"
+    ],
+    "target_chunks": 1,
+    "noise_chunks": 1,
+    "noise_fraction": 0.5,
+    "required_evidence": [
+      {
+        "source": "ABTR_case.pdf",
+        "page": 2
+      }
+    ],
+    "retrieved_required_evidence": [
+      {
+        "source": "abtr_case.pdf",
+        "page": 2
+      }
+    ],
+    "EvidenceRecallAt2": 1.0,
+    "ranking": [
+      {
+        "rank": 1,
+        "chunk_id": "target-abtr-case-p0002",
+        "source": "ABTR_case.pdf",
+        "page": 2,
+        "document_role": "target",
+        "cosine_distance": 0.5951511859893799,
+        "content_sha256": "669d09c00c19128dceee7ec05396c2f5c4fba2d18f2887116734cf2f6dec6f21"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "noise-abtr-report-p0019",
+        "source": "abtr_report.pdf",
+        "page": 19,
+        "document_role": "noise",
+        "cosine_distance": 0.6479941606521606,
+        "content_sha256": "0093c070eca3a855bf32a56e7e75bc4def4ffc78fa78599f6574f384ea37b28f"
+      }
+    ]
+  },
+  {
+    "item_id": "abtr_param_12",
+    "question": "What hydraulic diameter is specified for each core channel, CH1-CH5? Give the value with units.",
+    "top_k": 2,
+    "retrieved_chunk_ids": [
+      "target-abtr-case-p0002",
+      "noise-abtr-report-p0019"
+    ],
+    "target_chunks": 1,
+    "noise_chunks": 1,
+    "noise_fraction": 0.5,
+    "required_evidence": [
+      {
+        "source": "ABTR_case.pdf",
+        "page": 2
+      }
+    ],
+    "retrieved_required_evidence": [
+      {
+        "source": "abtr_case.pdf",
+        "page": 2
+      }
+    ],
+    "EvidenceRecallAt2": 1.0,
+    "ranking": [
+      {
+        "rank": 1,
+        "chunk_id": "target-abtr-case-p0002",
+        "source": "ABTR_case.pdf",
+        "page": 2,
+        "document_role": "target",
+        "cosine_distance": 0.5578981637954712,
+        "content_sha256": "669d09c00c19128dceee7ec05396c2f5c4fba2d18f2887116734cf2f6dec6f21"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "noise-abtr-report-p0019",
+        "source": "abtr_report.pdf",
+        "page": 19,
+        "document_role": "noise",
+        "cosine_distance": 0.5693600177764893,
+        "content_sha256": "0093c070eca3a855bf32a56e7e75bc4def4ffc78fa78599f6574f384ea37b28f"
+      }
+    ]
+  },
+  {
+    "item_id": "abtr_param_13",
+    "question": "What axial lengths are specified for pipe1 and pipe2? Give both values with units.",
+    "top_k": 2,
+    "retrieved_chunk_ids": [
+      "target-abtr-case-p0002",
+      "noise-abtr-report-p0019"
+    ],
+    "target_chunks": 1,
+    "noise_chunks": 1,
+    "noise_fraction": 0.5,
+    "required_evidence": [
+      {
+        "source": "ABTR_case.pdf",
+        "page": 2
+      }
+    ],
+    "retrieved_required_evidence": [
+      {
+        "source": "abtr_case.pdf",
+        "page": 2
+      }
+    ],
+    "EvidenceRecallAt2": 1.0,
+    "ranking": [
+      {
+        "rank": 1,
+        "chunk_id": "target-abtr-case-p0002",
+        "source": "ABTR_case.pdf",
+        "page": 2,
+        "document_role": "target",
+        "cosine_distance": 0.6116275191307068,
+        "content_sha256": "669d09c00c19128dceee7ec05396c2f5c4fba2d18f2887116734cf2f6dec6f21"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "noise-abtr-report-p0019",
+        "source": "abtr_report.pdf",
+        "page": 19,
+        "document_role": "noise",
+        "cosine_distance": 0.6760128140449524,
+        "content_sha256": "0093c070eca3a855bf32a56e7e75bc4def4ffc78fa78599f6574f384ea37b28f"
+      }
+    ]
+  },
+  {
+    "item_id": "abtr_param_14",
+    "question": "What friction factor is specified for each core channel, CH1-CH5?",
+    "top_k": 2,
+    "retrieved_chunk_ids": [
+      "target-abtr-case-p0002",
+      "noise-abtr-report-p0019"
+    ],
+    "target_chunks": 1,
+    "noise_chunks": 1,
+    "noise_fraction": 0.5,
+    "required_evidence": [
+      {
+        "source": "ABTR_case.pdf",
+        "page": 2
+      }
+    ],
+    "retrieved_required_evidence": [
+      {
+        "source": "abtr_case.pdf",
+        "page": 2
+      }
+    ],
+    "EvidenceRecallAt2": 1.0,
+    "ranking": [
+      {
+        "rank": 1,
+        "chunk_id": "target-abtr-case-p0002",
+        "source": "ABTR_case.pdf",
+        "page": 2,
+        "document_role": "target",
+        "cosine_distance": 0.5601235628128052,
+        "content_sha256": "669d09c00c19128dceee7ec05396c2f5c4fba2d18f2887116734cf2f6dec6f21"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "noise-abtr-report-p0019",
+        "source": "abtr_report.pdf",
+        "page": 19,
+        "document_role": "noise",
+        "cosine_distance": 0.5664215087890625,
+        "content_sha256": "0093c070eca3a855bf32a56e7e75bc4def4ffc78fa78599f6574f384ea37b28f"
+      }
+    ]
+  },
+  {
+    "item_id": "abtr_param_15",
+    "question": "What form-loss coefficients are specified for the main passage and channel legs of branch1 and branch2?",
+    "top_k": 2,
+    "retrieved_chunk_ids": [
+      "noise-abtr-report-p0019",
+      "target-abtr-case-p0002"
+    ],
+    "target_chunks": 1,
+    "noise_chunks": 1,
+    "noise_fraction": 0.5,
+    "required_evidence": [
+      {
+        "source": "ABTR_case.pdf",
+        "page": 2
+      }
+    ],
+    "retrieved_required_evidence": [
+      {
+        "source": "abtr_case.pdf",
+        "page": 2
+      }
+    ],
+    "EvidenceRecallAt2": 1.0,
+    "ranking": [
+      {
+        "rank": 1,
+        "chunk_id": "noise-abtr-report-p0019",
+        "source": "abtr_report.pdf",
+        "page": 19,
+        "document_role": "noise",
+        "cosine_distance": 0.5932912230491638,
+        "content_sha256": "0093c070eca3a855bf32a56e7e75bc4def4ffc78fa78599f6574f384ea37b28f"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "target-abtr-case-p0002",
+        "source": "ABTR_case.pdf",
+        "page": 2,
+        "document_role": "target",
+        "cosine_distance": 0.5994307994842529,
+        "content_sha256": "669d09c00c19128dceee7ec05396c2f5c4fba2d18f2887116734cf2f6dec6f21"
+      }
+    ]
+  }
+]

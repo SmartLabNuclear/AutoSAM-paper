@@ -1,0 +1,11 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+
+# Never publish source code or environments in this repository
+*.py
+*.pyc
+__pycache__/
+venv/
+.env

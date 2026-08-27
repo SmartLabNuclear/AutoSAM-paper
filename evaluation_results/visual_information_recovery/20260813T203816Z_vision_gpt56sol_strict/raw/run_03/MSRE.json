@@ -1,0 +1,617 @@
+{
+  "timestamp": "2026-08-13T20:35:00.326729Z",
+  "run": 3,
+  "case": "MSRE",
+  "configuration": {
+    "vision_model": "gpt-5.6-sol",
+    "vision_endpoint": "responses",
+    "reasoning_effort": "medium",
+    "image_detail": "original",
+    "description_prompt": "Describe this image in detail.",
+    "structuring_model": "gpt-4o-mini",
+    "structuring_temperature": 0
+  },
+  "image": "MSRE_PDF_CASE/MSRE_system_layout.png",
+  "image_sha256": "b65a95888c08676312ecaa03ba1e21878284f1a42a402c5e9446a80fdf4cdca6",
+  "image_dimensions": {
+    "width": 3830,
+    "height": 1884
+  },
+  "description_prompt": "Describe this image in detail.",
+  "image_description": "The image is a screenshot of an interactive engineering-layout plot showing a connected piping or thermal-fluid system in the **X–Y plane**.\n\n- At the upper left is a dropdown labeled **“Select View Plane”**, currently set to **“XY Plane.”**\n- Centered above the plot is the title **“Layout (view: X-Y Plane)”**.\n- The chart has a pale blue background with white gridlines. The horizontal axis is labeled **X** and spans roughly −3 to 3; the vertical axis is labeled **Y** and spans approximately 0 to 3.\n- A faint Plotly-style toolbar appears in the upper-right corner, and a color-coded legend is positioned along the far right.\n\n### Main system layout\n\nThe network consists of thick, colored horizontal and vertical line segments with bold component labels:\n\n1. **Upper horizontal heat-exchanger path**\n   - A black point labeled **ref_p** lies at approximately **(−2.2678, 2.9746)**.\n   - A short pink/red segment labeled **pipe_ref** runs rightward to a second black point, **HX_secondary_in**, at **(−1.7678, 2.9746)**.\n   - From there, a long orange horizontal segment labeled **HX** extends to the black point **HX_secondary_out** at **(0.762, 2.9746)**.\n   - A green segment labeled **pipe3** continues rightward to a **pump** at approximately **(1.8288, 2.9746)**.\n   - The pump is drawn as a white circular symbol containing a dark triangular wedge pointing left.\n\n2. **Right-side return path**\n   - From the pump, a blue vertical line labeled **pipe2** descends to approximately **(1.8288, 2.1618)**.\n   - A magenta horizontal line labeled **pipe1** then runs left to **(0, 2.1618)**.\n   - A short red/pink vertical section labeled **upper_plenum** descends from that point to **(0, 1.7272)**.\n\n3. **Central core and lower inlet**\n   - An orange vertical line labeled **core** runs downward along **x = 0**, from about **y = 1.7272** to **y = 0**.\n   - At the bottom, a green horizontal segment labeled **inlet_plenum** extends left from **(0, 0)** to approximately **(−0.7366, 0)**.\n\n4. **Left-side rising path**\n   - A blue vertical segment labeled **downcomer** rises from **(−0.7366, 0)** to around **(−0.7366, 1.7272)**.\n   - A blue horizontal segment labeled **pipe5** continues left to approximately **(−1.767, 1.7272)**.\n   - A magenta vertical segment labeled **pipe4** rises from there to the upper junction at **(−1.7678, 2.9746)**, where it meets the heat-exchanger inlet.\n\n### Legend\n\nThe legend identifies the colored components:\n\n- **downcomer** – blue/purple  \n- **inlet_plenum** – green  \n- **core** – orange  \n- **upper_plenum** – pink/red  \n- **pipe1** – magenta  \n- **pipe2** – blue  \n- **pipe3** – green  \n- **HX** – orange  \n- **pipe_ref** – pink/red  \n- **pipe4** – magenta  \n- **pipe5** – blue  \n- Black circular markers for **ref_p**, **HX_secondary_in**, and **HX_secondary_out**\n\nOverall, the diagram forms a mostly rectangular circulation loop around the core, with the heat exchanger and pump arranged across the top and several coordinate annotations printed beside key junctions.",
+  "vision_response_metadata": {
+    "id": "resp_03477e7b92fe539d006a7e2a5476408197adb866964b9a101e",
+    "request_id": "req_5b05a8c6c99b48e7adc4643352cff1dc",
+    "created_at": 1786653268.0,
+    "resolved_model": "gpt-5.6-sol",
+    "status": "completed",
+    "incomplete_details": null,
+    "reasoning": {
+      "effort": "medium",
+      "generate_summary": null,
+      "summary": null,
+      "context": "all_turns",
+      "mode": "standard"
+    },
+    "usage": {
+      "input_tokens": 8509,
+      "input_tokens_details": {
+        "cached_tokens": 8506,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 1333,
+      "output_tokens_details": {
+        "reasoning_tokens": 516
+      },
+      "total_tokens": 9842
+    }
+  },
+  "description_latency_seconds": 19.605328100000406,
+  "geometry_system_prompt": "You are AutoSAM's geometry-reasoning component.\nUse only the supplied image description. Extract every stated or inferable 2-D coordinate and derive the length of every straight component when its endpoints are available. Do not invent coordinates.\n\nReturn one JSON object with this structure:\n{\n  \"plane_axes\": [\"first axis\", \"second axis\"],\n  \"coordinates\": [{\"label\": \"point or endpoint\", \"value\": [number, number], \"basis\": \"explicit or inferred\"}],\n  \"components\": [{\"name\": \"component\", \"start\": [number, number] or null, \"end\": [number, number] or null, \"length\": number or null, \"unit\": \"m\", \"basis\": \"explicit or deduced\"}],\n  \"claims\": [{\"text\": \"atomic geometry claim\", \"supporting_description_excerpt\": \"short supporting excerpt\"}]\n}\n\nUse JSON only. Preserve the component names used in the description.",
+  "geometry_user_prompt": "The diagram uses the axes X and Y, in that order.\n\nIMAGE DESCRIPTION:\nThe image is a screenshot of an interactive engineering-layout plot showing a connected piping or thermal-fluid system in the **X–Y plane**.\n\n- At the upper left is a dropdown labeled **“Select View Plane”**, currently set to **“XY Plane.”**\n- Centered above the plot is the title **“Layout (view: X-Y Plane)”**.\n- The chart has a pale blue background with white gridlines. The horizontal axis is labeled **X** and spans roughly −3 to 3; the vertical axis is labeled **Y** and spans approximately 0 to 3.\n- A faint Plotly-style toolbar appears in the upper-right corner, and a color-coded legend is positioned along the far right.\n\n### Main system layout\n\nThe network consists of thick, colored horizontal and vertical line segments with bold component labels:\n\n1. **Upper horizontal heat-exchanger path**\n   - A black point labeled **ref_p** lies at approximately **(−2.2678, 2.9746)**.\n   - A short pink/red segment labeled **pipe_ref** runs rightward to a second black point, **HX_secondary_in**, at **(−1.7678, 2.9746)**.\n   - From there, a long orange horizontal segment labeled **HX** extends to the black point **HX_secondary_out** at **(0.762, 2.9746)**.\n   - A green segment labeled **pipe3** continues rightward to a **pump** at approximately **(1.8288, 2.9746)**.\n   - The pump is drawn as a white circular symbol containing a dark triangular wedge pointing left.\n\n2. **Right-side return path**\n   - From the pump, a blue vertical line labeled **pipe2** descends to approximately **(1.8288, 2.1618)**.\n   - A magenta horizontal line labeled **pipe1** then runs left to **(0, 2.1618)**.\n   - A short red/pink vertical section labeled **upper_plenum** descends from that point to **(0, 1.7272)**.\n\n3. **Central core and lower inlet**\n   - An orange vertical line labeled **core** runs downward along **x = 0**, from about **y = 1.7272** to **y = 0**.\n   - At the bottom, a green horizontal segment labeled **inlet_plenum** extends left from **(0, 0)** to approximately **(−0.7366, 0)**.\n\n4. **Left-side rising path**\n   - A blue vertical segment labeled **downcomer** rises from **(−0.7366, 0)** to around **(−0.7366, 1.7272)**.\n   - A blue horizontal segment labeled **pipe5** continues left to approximately **(−1.767, 1.7272)**.\n   - A magenta vertical segment labeled **pipe4** rises from there to the upper junction at **(−1.7678, 2.9746)**, where it meets the heat-exchanger inlet.\n\n### Legend\n\nThe legend identifies the colored components:\n\n- **downcomer** – blue/purple  \n- **inlet_plenum** – green  \n- **core** – orange  \n- **upper_plenum** – pink/red  \n- **pipe1** – magenta  \n- **pipe2** – blue  \n- **pipe3** – green  \n- **HX** – orange  \n- **pipe_ref** – pink/red  \n- **pipe4** – magenta  \n- **pipe5** – blue  \n- Black circular markers for **ref_p**, **HX_secondary_in**, and **HX_secondary_out**\n\nOverall, the diagram forms a mostly rectangular circulation loop around the core, with the heat exchanger and pump arranged across the top and several coordinate annotations printed beside key junctions.",
+  "structured_response_text": "{\n  \"plane_axes\": [\"X\", \"Y\"],\n  \"coordinates\": [\n    {\"label\": \"ref_p\", \"value\": [-2.2678, 2.9746], \"basis\": \"explicit\"},\n    {\"label\": \"HX_secondary_in\", \"value\": [-1.7678, 2.9746], \"basis\": \"explicit\"},\n    {\"label\": \"HX_secondary_out\", \"value\": [0.762, 2.9746], \"basis\": \"explicit\"},\n    {\"label\": \"pump\", \"value\": [1.8288, 2.9746], \"basis\": \"explicit\"},\n    {\"label\": \"pipe2_end\", \"value\": [1.8288, 2.1618], \"basis\": \"explicit\"},\n    {\"label\": \"pipe1_end\", \"value\": [0, 2.1618], \"basis\": \"explicit\"},\n    {\"label\": \"upper_plenum_end\", \"value\": [0, 1.7272], \"basis\": \"explicit\"},\n    {\"label\": \"core_bottom\", \"value\": [0, 0], \"basis\": \"explicit\"},\n    {\"label\": \"inlet_plenum_end\", \"value\": [-0.7366, 0], \"basis\": \"explicit\"},\n    {\"label\": \"downcomer_top\", \"value\": [-0.7366, 1.7272], \"basis\": \"explicit\"},\n    {\"label\": \"pipe5_end\", \"value\": [-1.767, 1.7272], \"basis\": \"explicit\"},\n    {\"label\": \"pipe4_top\", \"value\": [-1.7678, 2.9746], \"basis\": \"explicit\"}\n  ],\n  \"components\": [\n    {\"name\": \"pipe_ref\", \"start\": [-2.2678, 2.9746], \"end\": [-1.7678, 2.9746], \"length\": 0.5, \"unit\": \"m\", \"basis\": \"deduced\"},\n    {\"name\": \"HX\", \"start\": [-1.7678, 2.9746], \"end\": [0.762, 2.9746], \"length\": 2.5298, \"unit\": \"m\", \"basis\": \"deduced\"},\n    {\"name\": \"pipe3\", \"start\": [0.762, 2.9746], \"end\": [1.8288, 2.9746], \"length\": 1.0668, \"unit\": \"m\", \"basis\": \"deduced\"},\n    {\"name\": \"pipe2\", \"start\": [1.8288, 2.9746], \"end\": [1.8288, 2.1618], \"length\": 0.8128, \"unit\": \"m\", \"basis\": \"deduced\"},\n    {\"name\": \"pipe1\", \"start\": [1.8288, 2.1618], \"end\": [0, 2.1618], \"length\": 1.8288, \"unit\": \"m\", \"basis\": \"deduced\"},\n    {\"name\": \"upper_plenum\", \"start\": [0, 2.1618], \"end\": [0, 1.7272], \"length\": 0.4346, \"unit\": \"m\", \"basis\": \"deduced\"},\n    {\"name\": \"core\", \"start\": [0, 1.7272], \"end\": [0, 0], \"length\": 1.7272, \"unit\": \"m\", \"basis\": \"deduced\"},\n    {\"name\": \"inlet_plenum\", \"start\": [0, 0], \"end\": [-0.7366, 0], \"length\": 0.7366, \"unit\": \"m\", \"basis\": \"deduced\"},\n    {\"name\": \"downcomer\", \"start\": [-0.7366, 0], \"end\": [-0.7366, 1.7272], \"length\": 1.7272, \"unit\": \"m\", \"basis\": \"deduced\"},\n    {\"name\": \"pipe5\", \"start\": [-0.7366, 1.7272], \"end\": [-1.767, 1.7272], \"length\": 1.0304, \"unit\": \"m\", \"basis\": \"deduced\"},\n    {\"name\": \"pipe4\", \"start\": [-1.767, 1.7272], \"end\": [-1.7678, 2.9746], \"length\": 1.2474, \"unit\": \"m\", \"basis\": \"deduced\"}\n  ],\n  \"claims\": [\n    {\"text\": \"The layout forms a rectangular circulation loop around the core.\", \"supporting_description_excerpt\": \"Overall, the diagram forms a mostly rectangular circulation loop around the core.\"}\n  ]\n}",
+  "parsed_geometry": {
+    "plane_axes": [
+      "X",
+      "Y"
+    ],
+    "coordinates": [
+      {
+        "label": "ref_p",
+        "value": [
+          -2.2678,
+          2.9746
+        ],
+        "basis": "explicit"
+      },
+      {
+        "label": "HX_secondary_in",
+        "value": [
+          -1.7678,
+          2.9746
+        ],
+        "basis": "explicit"
+      },
+      {
+        "label": "HX_secondary_out",
+        "value": [
+          0.762,
+          2.9746
+        ],
+        "basis": "explicit"
+      },
+      {
+        "label": "pump",
+        "value": [
+          1.8288,
+          2.9746
+        ],
+        "basis": "explicit"
+      },
+      {
+        "label": "pipe2_end",
+        "value": [
+          1.8288,
+          2.1618
+        ],
+        "basis": "explicit"
+      },
+      {
+        "label": "pipe1_end",
+        "value": [
+          0,
+          2.1618
+        ],
+        "basis": "explicit"
+      },
+      {
+        "label": "upper_plenum_end",
+        "value": [
+          0,
+          1.7272
+        ],
+        "basis": "explicit"
+      },
+      {
+        "label": "core_bottom",
+        "value": [
+          0,
+          0
+        ],
+        "basis": "explicit"
+      },
+      {
+        "label": "inlet_plenum_end",
+        "value": [
+          -0.7366,
+          0
+        ],
+        "basis": "explicit"
+      },
+      {
+        "label": "downcomer_top",
+        "value": [
+          -0.7366,
+          1.7272
+        ],
+        "basis": "explicit"
+      },
+      {
+        "label": "pipe5_end",
+        "value": [
+          -1.767,
+          1.7272
+        ],
+        "basis": "explicit"
+      },
+      {
+        "label": "pipe4_top",
+        "value": [
+          -1.7678,
+          2.9746
+        ],
+        "basis": "explicit"
+      }
+    ],
+    "components": [
+      {
+        "name": "pipe_ref",
+        "start": [
+          -2.2678,
+          2.9746
+        ],
+        "end": [
+          -1.7678,
+          2.9746
+        ],
+        "length": 0.5,
+        "unit": "m",
+        "basis": "deduced"
+      },
+      {
+        "name": "HX",
+        "start": [
+          -1.7678,
+          2.9746
+        ],
+        "end": [
+          0.762,
+          2.9746
+        ],
+        "length": 2.5298,
+        "unit": "m",
+        "basis": "deduced"
+      },
+      {
+        "name": "pipe3",
+        "start": [
+          0.762,
+          2.9746
+        ],
+        "end": [
+          1.8288,
+          2.9746
+        ],
+        "length": 1.0668,
+        "unit": "m",
+        "basis": "deduced"
+      },
+      {
+        "name": "pipe2",
+        "start": [
+          1.8288,
+          2.9746
+        ],
+        "end": [
+          1.8288,
+          2.1618
+        ],
+        "length": 0.8128,
+        "unit": "m",
+        "basis": "deduced"
+      },
+      {
+        "name": "pipe1",
+        "start": [
+          1.8288,
+          2.1618
+        ],
+        "end": [
+          0,
+          2.1618
+        ],
+        "length": 1.8288,
+        "unit": "m",
+        "basis": "deduced"
+      },
+      {
+        "name": "upper_plenum",
+        "start": [
+          0,
+          2.1618
+        ],
+        "end": [
+          0,
+          1.7272
+        ],
+        "length": 0.4346,
+        "unit": "m",
+        "basis": "deduced"
+      },
+      {
+        "name": "core",
+        "start": [
+          0,
+          1.7272
+        ],
+        "end": [
+          0,
+          0
+        ],
+        "length": 1.7272,
+        "unit": "m",
+        "basis": "deduced"
+      },
+      {
+        "name": "inlet_plenum",
+        "start": [
+          0,
+          0
+        ],
+        "end": [
+          -0.7366,
+          0
+        ],
+        "length": 0.7366,
+        "unit": "m",
+        "basis": "deduced"
+      },
+      {
+        "name": "downcomer",
+        "start": [
+          -0.7366,
+          0
+        ],
+        "end": [
+          -0.7366,
+          1.7272
+        ],
+        "length": 1.7272,
+        "unit": "m",
+        "basis": "deduced"
+      },
+      {
+        "name": "pipe5",
+        "start": [
+          -0.7366,
+          1.7272
+        ],
+        "end": [
+          -1.767,
+          1.7272
+        ],
+        "length": 1.0304,
+        "unit": "m",
+        "basis": "deduced"
+      },
+      {
+        "name": "pipe4",
+        "start": [
+          -1.767,
+          1.7272
+        ],
+        "end": [
+          -1.7678,
+          2.9746
+        ],
+        "length": 1.2474,
+        "unit": "m",
+        "basis": "deduced"
+      }
+    ],
+    "claims": [
+      {
+        "text": "The layout forms a rectangular circulation loop around the core.",
+        "supporting_description_excerpt": "Overall, the diagram forms a mostly rectangular circulation loop around the core."
+      }
+    ]
+  },
+  "parse_warning": null,
+  "structuring_response_metadata": {
+    "id": "chatcmpl-ECWQSgHwoiJkMuKiQZdBDikjXQd3l",
+    "request_id": "req_4b012450e82e4d5c8ccd6277dd9f3bec",
+    "created": 1786653288,
+    "resolved_model": "gpt-4o-mini-2024-07-18",
+    "system_fingerprint": "fp_c5ea001cd5",
+    "usage": {
+      "completion_tokens": 1053,
+      "prompt_tokens": 1029,
+      "total_tokens": 2082,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  },
+  "structuring_latency_seconds": 12.374009000001024,
+  "fact_scores": [
+    {
+      "fact_id": "msre_v01",
+      "kind": "coordinate",
+      "provenance": "explicit",
+      "expected": [
+        -0.7366,
+        0.0
+      ],
+      "matched_value": null,
+      "recovered": false,
+      "vir_item": 0.0
+    },
+    {
+      "fact_id": "msre_v02",
+      "kind": "coordinate",
+      "provenance": "explicit",
+      "expected": [
+        0.0,
+        1.7272
+      ],
+      "matched_value": null,
+      "recovered": false,
+      "vir_item": 0.0
+    },
+    {
+      "fact_id": "msre_v03",
+      "kind": "coordinate",
+      "provenance": "explicit",
+      "expected": [
+        0.0,
+        2.1618
+      ],
+      "matched_value": null,
+      "recovered": false,
+      "vir_item": 0.0
+    },
+    {
+      "fact_id": "msre_v04",
+      "kind": "coordinate",
+      "provenance": "explicit",
+      "expected": [
+        1.8288,
+        2.1618
+      ],
+      "matched_value": null,
+      "recovered": false,
+      "vir_item": 0.0
+    },
+    {
+      "fact_id": "msre_v05",
+      "kind": "coordinate",
+      "provenance": "explicit",
+      "expected": [
+        1.8288,
+        2.9746
+      ],
+      "matched_value": {
+        "label": "pump",
+        "value": [
+          1.8288,
+          2.9746
+        ]
+      },
+      "recovered": true,
+      "vir_item": 1.0
+    },
+    {
+      "fact_id": "msre_v06",
+      "kind": "coordinate",
+      "provenance": "explicit",
+      "expected": [
+        0.762,
+        2.9746
+      ],
+      "matched_value": {
+        "label": "HX_secondary_out",
+        "value": [
+          0.762,
+          2.9746
+        ]
+      },
+      "recovered": true,
+      "vir_item": 1.0
+    },
+    {
+      "fact_id": "msre_v07",
+      "kind": "coordinate",
+      "provenance": "explicit",
+      "expected": [
+        -1.7678,
+        2.9746
+      ],
+      "matched_value": {
+        "label": "HX_secondary_in",
+        "value": [
+          -1.7678,
+          2.9746
+        ]
+      },
+      "recovered": true,
+      "vir_item": 1.0
+    },
+    {
+      "fact_id": "msre_v08",
+      "kind": "coordinate",
+      "provenance": "explicit",
+      "expected": [
+        -2.2678,
+        2.9746
+      ],
+      "matched_value": {
+        "label": "ref_p",
+        "value": [
+          -2.2678,
+          2.9746
+        ]
+      },
+      "recovered": true,
+      "vir_item": 1.0
+    },
+    {
+      "fact_id": "msre_v09",
+      "kind": "coordinate",
+      "provenance": "explicit",
+      "expected": [
+        -1.7678,
+        1.7272
+      ],
+      "matched_value": null,
+      "recovered": false,
+      "vir_item": 0.0
+    },
+    {
+      "fact_id": "msre_v10",
+      "kind": "coordinate",
+      "provenance": "inferred",
+      "expected": [
+        -0.7366,
+        1.7272
+      ],
+      "matched_value": {
+        "label": "downcomer_top",
+        "value": [
+          -0.7366,
+          1.7272
+        ]
+      },
+      "recovered": true,
+      "vir_item": 1.0
+    },
+    {
+      "fact_id": "msre_v11",
+      "kind": "coordinate",
+      "provenance": "inferred",
+      "expected": [
+        0.0,
+        0.0
+      ],
+      "matched_value": {
+        "label": "core_bottom",
+        "value": [
+          0.0,
+          0.0
+        ]
+      },
+      "recovered": true,
+      "vir_item": 1.0
+    },
+    {
+      "fact_id": "msre_v12",
+      "kind": "length",
+      "provenance": "deduced",
+      "expected": 1.7272,
+      "matched_value": 1.7272,
+      "recovered": true,
+      "vir_item": 1.0
+    },
+    {
+      "fact_id": "msre_v13",
+      "kind": "length",
+      "provenance": "deduced",
+      "expected": 0.7366,
+      "matched_value": 0.7366,
+      "recovered": true,
+      "vir_item": 1.0
+    },
+    {
+      "fact_id": "msre_v14",
+      "kind": "length",
+      "provenance": "deduced",
+      "expected": 1.7272,
+      "matched_value": 1.7272,
+      "recovered": true,
+      "vir_item": 1.0
+    },
+    {
+      "fact_id": "msre_v15",
+      "kind": "length",
+      "provenance": "deduced",
+      "expected": 0.4346,
+      "matched_value": 0.4346,
+      "recovered": true,
+      "vir_item": 1.0
+    },
+    {
+      "fact_id": "msre_v16",
+      "kind": "length",
+      "provenance": "deduced",
+      "expected": 1.8288,
+      "matched_value": 1.8288,
+      "recovered": true,
+      "vir_item": 1.0
+    },
+    {
+      "fact_id": "msre_v17",
+      "kind": "length",
+      "provenance": "deduced",
+      "expected": 0.8128,
+      "matched_value": 0.8128,
+      "recovered": true,
+      "vir_item": 1.0
+    },
+    {
+      "fact_id": "msre_v18",
+      "kind": "length",
+      "provenance": "deduced",
+      "expected": 1.0668,
+      "matched_value": 1.0668,
+      "recovered": true,
+      "vir_item": 1.0
+    },
+    {
+      "fact_id": "msre_v19",
+      "kind": "length",
+      "provenance": "deduced",
+      "expected": 2.5298,
+      "matched_value": 2.5298,
+      "recovered": true,
+      "vir_item": 1.0
+    },
+    {
+      "fact_id": "msre_v20",
+      "kind": "length",
+      "provenance": "deduced",
+      "expected": 0.5,
+      "matched_value": 0.5,
+      "recovered": true,
+      "vir_item": 1.0
+    },
+    {
+      "fact_id": "msre_v21",
+      "kind": "length",
+      "provenance": "deduced",
+      "expected": 1.2474,
+      "matched_value": 1.2474,
+      "recovered": true,
+      "vir_item": 1.0
+    },
+    {
+      "fact_id": "msre_v22",
+      "kind": "length",
+      "provenance": "deduced",
+      "expected": 1.0312,
+      "matched_value": 1.0304,
+      "recovered": true,
+      "vir_item": 1.0
+    }
+  ],
+  "strict_rescore": {
+    "timestamp": "2026-08-13T20:38:16.068424Z",
+    "script": "evaluation/rescore_vision_runs_strict.py",
+    "rule": "Exact normalized aliases for coordinate labels; no substring matches."
+  }
+}

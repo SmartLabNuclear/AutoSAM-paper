@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "run_id": "20260815T200220Z_abtr_input_k2",
+  "status": "complete",
+  "started_at": "2026-08-15T20:02:20.641268Z",
+  "completed_at": "2026-08-15T20:03:27.210570Z",
+  "script": "evaluation/autosam_rag_abtr_input_parameters_k2_evaluation.py",
+  "script_sha256": "a545b013369b602c9538882c257fafbaedc1f3364d735d9ca3c4f0e17c2c0617",
+  "configuration": {
+    "runs": 3,
+    "smoke_test": false,
+    "embedding_model": "text-embedding-3-large",
+    "qa_model": "gpt-5.6-sol",
+    "qa_temperature": 0,
+    "reasoning_effort": "none",
+    "endpoint": "chat.completions",
+    "top_k": 2,
+    "max_workers": 5,
+    "target_source": "ABTR_case.pdf",
+    "corpus_chunks": 44,
+    "target_chunks": 3,
+    "noise_chunks": 41
+  },
+  "evaluation_scope": {
+    "authoritative_target": "ABTR_case.pdf",
+    "distractors": [
+      "abtr_report.pdf"
+    ],
+    "model_sees_hidden_document_role": false,
+    "all_questions_answerable_in_rendered_target_pdf": true,
+    "known_ingestion_limitation": "Audited key: Q9 uses page 2 and Q14 is scored as five channel-specific claims."
+  },
+  "store_build": {
+    "path": "<AUTOSAM_ROOT>\\ABTR_case_noise\\vector_store_builds\\20260814T194142Z_abtr_noise_k10",
+    "run_id": "20260814T194142Z_abtr_noise_k10",
+    "manifest_sha256": "7ed5715fa5c592a656a4e3d2a4ae728db4a5b286960c74d1db7f543ca2e169c4",
+    "collection_name": "autosam_abtr_noise_k10",
+    "note": "The immutable 44-chunk store is reused; k is selected at query time."
+  },
+  "benchmark": "evaluation/autosam_rag_abtr_input_parameters_k10_benchmark.json",
+  "benchmark_sha256": "78d0540af689157e1de05a04be1a083397376996a634982c8ceede223e7f851c",
+  "ground_truth_status": "values verified against ABTR_case.pdf; audited Q9/Q14 scoring corrections applied; domain-expert signoff pending",
+  "source_hashes": {
+    "evaluation/autosam_rag_abtr_input_parameters_k2_evaluation.py": "a545b013369b602c9538882c257fafbaedc1f3364d735d9ca3c4f0e17c2c0617",
+    "evaluation/autosam_rag_abtr_input_parameters_k10_benchmark.json": "78d0540af689157e1de05a04be1a083397376996a634982c8ceede223e7f851c",
+    "ABTR_case_noise/vector_store_builds/20260814T194142Z_abtr_noise_k10/manifest.json": "7ed5715fa5c592a656a4e3d2a4ae728db4a5b286960c74d1db7f543ca2e169c4",
+    "ABTR_case_noise/vector_store_builds/20260814T194142Z_abtr_noise_k10/documents_library.json": "66192ca498b56d03acb136a88bcf60292b68684ac6292e2310c0dd97e0193cb4",
+    "evaluation/rescore_autosam_rag_k2_audited.py": "4988f1de077f6f750323b362e8b0cf8d1840569288f1393c502aaac5b1406a93"
+  },
+  "credential_flags": {
+    "OPENAI_API_KEY": "present"
+  },
+  "environment": {
+    "python": "3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "packages": {
+      "openai": "1.82.0",
+      "langchain-openai": "0.3.18",
+      "langchain-chroma": "0.2.4",
+      "chromadb": "1.0.10"
+    }
+  },
+  "existing_application_or_store_files_modified": false,
+  "resolved_models": {
+    "embedding": [
+      "text-embedding-3-large"
+    ],
+    "qa": [
+      "gpt-5.6-sol"
+    ]
+  },
+  "counts": {
+    "responses": 45,
+    "raw_logs": 45,
+    "parse_warnings": 0,
+    "api_failures": 0
+  },
+  "retrieval": {
+    "questions": 15,
+    "rankings_sha256": "65a31c260953378319c1bf99f7807776582032fbc2be142681622992b0000efa",
+    "required_evidence_opportunities": 16,
+    "retrieved_required_evidence": 15,
+    "mean_noise_fraction_at2": 0.26666666666666666
+  }
+}

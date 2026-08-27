@@ -1,0 +1,355 @@
+## Generated SAM input file (saved as `sam_model_generated.i`)
+
+Path saved:
+`<AUTOSAM_ROOT>\case_generation_cost_runs\20260822T203716Z_gpt-52\ABTR\workdir\sam_model_generated.i`
+
+```ini
+# ABTR SAM test case (AutoSAM-generated from intermediate_abtr.yaml)
+# Description: 2-branch manifold distributing inlet sodium flow to 5 parallel core channels and recombining to outlet.
+# Quantities of interest (minimal set): channel inlet/outlet temperatures, branch flows, outlet pressure.
+# NOTE: Several values were NOT provided in the reviewed intermediate; they are annotated as ASSUMPTION/UNRESOLVED.
+
+[GlobalParams]
+  # From intermediate_abtr.yaml (ABTR_case.pdf p.2)
+  global_init_P = 1.0e5
+  global_init_T = 628.15
+  global_init_V = 2.0
+  scaling_factor_var = '1 1e-3 1e-6'
+  Tsolid_sf = 1e-3
+  gravity = '0 0 -9.8'
+[]
+
+[EOS]
+  [sodium_eos]
+    type = PBSodiumEquationOfState
+  []
+[]
+
+[Functions]
+  # UNRESOLVED: Numeric axial power shape points not available in intermediate.
+  # Using uniform axial shape as an analyst-approved placeholder to keep file executable.
+  # Human review needed if a non-uniform shape is required.
+  [ppf_axial]
+    type = PiecewiseLinear
+    axis = x
+    x = '0.0 0.8'
+    y = '1.0 1.0'
+  []
+
+  # Time stepper per ABTR_case.pdf p.3 (partial description). Missing exact breakpoints.
+  # ASSUMPTION: implement piecewise schedule consistent with stated dt choices.
+  [time_stepper]
+    type = PiecewiseLinear
+    x = '0.0 0.1 0.2 2.0 1e5'
+    y = '0.01 0.01 0.1 1.0 1.0'
+  []
+[]
+
+[MaterialProperties]
+  [fuel-mat]
+    type = SolidMaterialProps
+    k = 16
+    Cp = 191.67
+    rho = 1.4583e4
+  []
+  [gap-mat]
+    type = SolidMaterialProps
+    k = 64
+    Cp = 1272
+    rho = 865
+  []
+  [clad-mat]
+    type = SolidMaterialProps
+    k = 26
+    Cp = 638
+    rho = 7.646e3
+  []
+[]
+
+[Components]
+  # Reactor power magnitude is NOT provided in intermediate (null). To keep model executable,
+  # we set initial_power = 1.0 W and rely on power fractions; results are scalable.
+  # UNRESOLVED: user must provide actual thermal power.
+  [reactor]
+    type = ReactorPower
+    initial_power = 1.0   # UNRESOLVED placeholder (W)
+  []
+
+  [pipe1]
+    type = PBOneDFluidComponent
+    eos = sodium_eos
+    position = '0 0 -0.6'      # inferred from test.png
+    orientation = '0 0 1'      # inferred vertical up
+    A = 0.44934
+    Dh = 2.972e-3
+    length = 0.6
+    n_elems = 20               # UNRESOLVED: pipe n_elems not stated; using 20 to match channels
+    # friction/HTC not specified for pipe1; leave to default correlations
+  []
+
+  [CH1]
+    type = PBCoreChannel
+    eos = sodium_eos
+    position = '0 -1 0'        # inferred y from test.png; z=0 at branch1
+    orientation = '0 0 1'
+    A = 4.9237e-3
+    Dh = 2.972e-3
+    length = 0.8
+    n_elems = 20
+    f = 0.022
+    Hw = 1.6129e5
+    HT_surface_area_density = 1107.8
+    name_of_hs = 'fuel gap clad'
+    Ts_init = 628.15
+    n_heatstruct = 3
+    fuel_type = cylinder   # ASSUMPTION per intermediate
+    width_of_hs = '0.003015 0.000465 0.00052'
+    elem_number_of_hs = '5 1 1'
+    material_hs = 'fuel-mat gap-mat clad-mat'
+    power_fraction = '0.02248 0.0 0.0'
+    power_shape_function = ppf_axial  # UNRESOLVED (uniform placeholder)
+  []
+
+  [CH2]
+    type = PBCoreChannel
+    eos = sodium_eos
+    position = '0 -0.5 0'
+    orientation = '0 0 1'
+    A = 0.11323
+    Dh = 2.972e-3
+    length = 0.8
+    n_elems = 20
+    f = 0.022
+    Hw = 1.6129e5
+    HT_surface_area_density = 1107.8
+    name_of_hs = 'fuel gap clad'
+    Ts_init = 628.15
+    n_heatstruct = 3
+    fuel_type = cylinder
+    width_of_hs = '0.003015 0.000465 0.00052'
+    elem_number_of_hs = '5 1 1'
+    material_hs = 'fuel-mat gap-mat clad-mat'
+    power_fraction = '0.41924 0.0 0.0'
+    power_shape_function = ppf_axial
+  []
+
+  [CH3]
+    type = PBCoreChannel
+    eos = sodium_eos
+    position = '0 0 0'
+    orientation = '0 0 1'
+    A = 0.029539
+    Dh = 2.972e-3
+    length = 0.8
+    n_elems = 20
+    f = 0.022
+    Hw = 1.6129e5
+    HT_surface_area_density = 1107.8
+    name_of_hs = 'fuel gap clad'
+    Ts_init = 628.15
+    n_heatstruct = 3
+    fuel_type = cylinder
+    width_of_hs = '0.003015 0.000465 0.00052'
+    elem_number_of_hs = '5 1 1'
+    material_hs = 'fuel-mat gap-mat clad-mat'
+    power_fraction = '0.09852 0.0 0.0'
+    power_shape_function = ppf_axial
+  []
+
+  [CH4]
+    type = PBCoreChannel
+    eos = sodium_eos
+    position = '0 0.5 0'
+    orientation = '0 0 1'
+    A = 0.14769
+    Dh = 2.972e-3
+    length = 0.8
+    n_elems = 20
+    f = 0.022
+    Hw = 1.6129e5
+    HT_surface_area_density = 1107.8
+    name_of_hs = 'fuel gap clad'
+    Ts_init = 628.15
+    n_heatstruct = 3
+    fuel_type = cylinder
+    width_of_hs = '0.003015 0.000465 0.00052'
+    elem_number_of_hs = '5 1 1'
+    material_hs = 'fuel-mat gap-mat clad-mat'
+    power_fraction = '0.43116 0.0 0.0'
+    power_shape_function = ppf_axial
+  []
+
+  [CH5]
+    type = PBCoreChannel
+    eos = sodium_eos
+    position = '0 1 0'
+    orientation = '0 0 1'
+    A = 0.153955129
+    Dh = 2.972e-3
+    length = 0.8
+    n_elems = 20
+    f = 0.04
+    Hw = 13619
+    # NOTE inconsistency: HT_surface_area_density is 2013.6 in spreadsheet vs 2113.6 in pdf.
+    # Using spreadsheet value per intermediate, flagged for review.
+    HT_surface_area_density = 2013.6   # UNRESOLVED inconsistency
+    name_of_hs = 'fuel clad'
+    Ts_init = 628.15
+    n_heatstruct = 2
+    fuel_type = cylinder
+    width_of_hs = '0.0063234 0.0007026'
+    elem_number_of_hs = '5 1'
+    material_hs = 'fuel-mat clad-mat'
+    power_fraction = '0.0286 0.0'
+    power_shape_function = ppf_axial
+  []
+
+  [branch1]
+    type = PBBranch
+    eos = sodium_eos
+    inputs = 'pipe1(out)'
+    outputs = 'CH1(in) CH2(in) CH3(in) CH4(in) CH5(in)'
+    Area = 0.44934
+    K = '0.1 0.5 1.96 2.16 4.5 3500.0'
+  []
+
+  [branch2]
+    type = PBBranch
+    eos = sodium_eos
+    inputs = 'CH1(out) CH2(out) CH3(out) CH4(out) CH5(out)'
+    outputs = 'pipe2(in)'
+    Area = 0.44934
+    K = '0 0 0 0 0 0'
+  []
+
+  [pipe2]
+    type = PBOneDFluidComponent
+    eos = sodium_eos
+    position = '0 0 0.8'       # inferred from test.png (branch2 elevation)
+    orientation = '0 0 1'
+    A = 0.44934
+    Dh = 2.972e-3
+    length = 1.5
+    n_elems = 20               # UNRESOLVED: pipe2 n_elems not provided; assumed 20
+  []
+
+  # Boundary conditions
+  [inlet]
+    type = PBTDJ
+    eos = sodium_eos
+    input = 'pipe1(in)'
+    v_bc = 3.25
+    T_bc = 628.15
+    # NOTE: ABTR_case.pdf reportedly labeled this as TDV but specifies velocity+temperature.
+  []
+
+  [outlet]
+    type = PBTDV
+    eos = sodium_eos
+    input = 'pipe2(out)'
+    p_bc = 1.0e5
+    T_bc = 628.15
+  []
+[]
+
+[Preconditioning]
+  active = 'SMP_PJFNK'
+  [SMP_PJFNK]
+    type = SMP
+    full = true
+    solve_type = 'PJFNK'
+    petsc_options_iname = '-pc_type'
+    petsc_options_value = 'lu'
+  []
+[]
+
+[Postprocessors]
+  # Flows
+  [pipe1_in_mdot]
+    type = ComponentBoundaryFlow
+    input = pipe1(in)
+  []
+  [pipe2_out_mdot]
+    type = ComponentBoundaryFlow
+    input = pipe2(out)
+  []
+
+  # Outlet temperatures for channels
+  [CH1_Tout]
+    type = ComponentBoundaryVariableValue
+    input = CH1(out)
+    variable = temperature
+  []
+  [CH2_Tout]
+    type = ComponentBoundaryVariableValue
+    input = CH2(out)
+    variable = temperature
+  []
+  [CH3_Tout]
+    type = ComponentBoundaryVariableValue
+    input = CH3(out)
+    variable = temperature
+  []
+  [CH4_Tout]
+    type = ComponentBoundaryVariableValue
+    input = CH4(out)
+    variable = temperature
+  []
+  [CH5_Tout]
+    type = ComponentBoundaryVariableValue
+    input = CH5(out)
+    variable = temperature
+  []
+
+  [pipe2_pout]
+    type = ComponentBoundaryVariableValue
+    input = pipe2(out)
+    variable = pressure
+  []
+[]
+
+[Executioner]
+  type = Transient
+  dt = 0.1
+  dtmin = 1e-5
+  num_steps = 5
+  # UNRESOLVED: end_time/start_time not provided; using num_steps only.
+  [TimeStepper]
+    type = FunctionDT
+    function = time_stepper
+    min_dt = 1e-5
+  []
+  # Solver tolerances not provided in intermediate; leaving MOOSE defaults.
+  [Quadrature]
+    type = TRAP
+    order = FIRST
+  []
+[]
+
+[Outputs]
+  print_linear_residuals = false
+  perf_graph = true
+  csv = true
+  [console]
+    type = Console
+    execute_scalars_on = 'none'
+  []
+  [out_displaced]
+    type = Exodus
+    use_displaced = true
+    execute_on = 'initial timestep_end'
+    sequence = false
+  []
+[]
+```
+
+## Validator result (concise)
+
+- `SAMInputFileValidatorTool` reports all required top-level blocks are present.
+- The tool’s **geometry-based inferred connection summary is not reliable for this parallel-manifold topology** (it heuristically guessed `PBSingleJunction` links), but the **explicit connectivity specified via `PBBranch` + BCs is complete**:
+  - `inlet -> pipe1(in)`
+  - `pipe1(out) -> branch1 -> CH1..CH5(in)`
+  - `CH1..CH5(out) -> branch2 -> pipe2(in)`
+  - `pipe2(out) -> outlet`
+
+No further automatic corrections were applied after validation.

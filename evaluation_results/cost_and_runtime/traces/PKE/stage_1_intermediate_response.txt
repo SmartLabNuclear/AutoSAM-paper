@@ -1,0 +1,367 @@
+```yaml
+source_files:
+  - file: pke.xlsx
+    type: excel
+    role: primary_specification
+    sheet: Sheet1
+    provenance:
+      extracted_with: CSVandEXCELFileReaderTool + direct pandas read
+      notes: >-
+        Single-sheet workbook with multiple side-by-side tables in columns A-R.
+        Values extracted by row labels.
+
+coordinate_system:
+  convention:
+    gravity_vector_m_per_s2: [0.0, 0.0, -9.8]
+    axes_definition:
+      x: out_of_plane
+      y: horizontal
+      z: vertical
+    source: null
+  inferred: true
+  rationale: SAM default convention (per AutoSAM guidance); not explicitly provided in sources.
+
+equations_of_state:
+  fluid_eos:
+    name: eos
+    type: PTConstantEOS
+    parameters:
+      p_0:
+        value: 0.1
+        units: MPa
+        si_value: 100000.0
+        source: {file: pke.xlsx, sheet: Sheet1, row_label: "Fluid properties: Reference pressure"}
+      rho_0:
+        value: 865.51
+        units: kg/m^3
+        source: {file: pke.xlsx, sheet: Sheet1, row_label: "Fluid properties: Reference density"}
+      h_0:
+        value: 7.9898e5
+        units: J/kg
+        source: {file: pke.xlsx, sheet: Sheet1, row_label: "Fluid properties: Reference enthalpy"}
+      T_0:
+        value: 628.15
+        units: K
+        source: {file: pke.xlsx, sheet: Sheet1, row_label: "Fluid properties: Reference temperature"}
+      mu:
+        value: 0.00026216
+        units: Pa*s
+        source: {file: pke.xlsx, sheet: Sheet1, row_label: "Fluid properties: Viscosity"}
+      cp:
+        value: 1272.0
+        units: J/kg-K
+        source: {file: pke.xlsx, sheet: Sheet1, row_label: "Fluid properties: Specific heat"}
+      k:
+        value: 72.0
+        units: W/m-K
+        source: {file: pke.xlsx, sheet: Sheet1, row_label: "Fluid properties: Thermal conductivity"}
+      beta:
+        value: 2.7524e-4
+        units: 1/K
+        source: {file: pke.xlsx, sheet: Sheet1, row_label: "Fluid properties: Expansion coefficeint"}
+    missing_parameters:
+      cv: null
+      sigma: null
+
+solid_materials:
+  fuel:
+    sam_object_type: SolidMaterialProps
+    name: fuel-mat
+    properties:
+      Cp: {value: 191.67, units: J/kg-K, source: {file: pke.xlsx, sheet: Sheet1, row_label: "Fuel properties: Specific heat"}}
+      k: {value: 16.0, units: W/m-K, source: {file: pke.xlsx, sheet: Sheet1, row_label: "Fuel properties: Thermal conductivity"}}
+      rho: {value: 14583.0, units: kg/m^3, source: {file: pke.xlsx, sheet: Sheet1, row_label: "Fuel properties: Desnity"}}
+      alpha: {value: 1.76e-5, units: 1/K, source: {file: pke.xlsx, sheet: Sheet1, row_label: "Fuel properties: Thermal expansion coefficeint"}}
+      YoungsM: {value: 2.8e10, units: Pa, source: {file: pke.xlsx, sheet: Sheet1, row_label: "Fuel properties: Youngs modulus"}}
+  clad:
+    sam_object_type: SolidMaterialProps
+    name: clad-mat
+    properties:
+      Cp: {value: 638.0, units: J/kg-K, source: {file: pke.xlsx, sheet: Sheet1, row_label: "Clad properties: Specific heat"}}
+      k: {value: 26.0, units: W/m-K, source: {file: pke.xlsx, sheet: Sheet1, row_label: "Clad properties: Thermal conductivity"}}
+      rho: {value: 7646.0, units: kg/m^3, source: {file: pke.xlsx, sheet: Sheet1, row_label: "Clad properties: Density"}}
+      alpha: {value: 1.4e-5, units: 1/K, source: {file: pke.xlsx, sheet: Sheet1, row_label: "Clad properties: Thermal expansion coefficeint"}}
+      YoungsM: {value: 1.5e11, units: Pa, source: {file: pke.xlsx, sheet: Sheet1, row_label: "Clad properties: Youngs modulus"}}
+  gap:
+    sam_object_type: SolidMaterialProps
+    name: gap-mat
+    properties:
+      Cp: null
+      k: null
+      rho: null
+      alpha: null
+      YoungsM: null
+    notes: Gap properties are not provided in the workbook, but a gap region may exist in typical pin models.
+
+fluid_materials:
+  primary_coolant:
+    description: Single-phase liquid sodium-like coolant (properties consistent with sodium constant EOS).
+    eos: eos
+    source: {file: pke.xlsx, sheet: Sheet1, table: "Fluid properties"}
+
+components:
+  reactor_power:
+    name: reactor
+    sam_type: ReactorPower
+    parameters:
+      initial_power:
+        value: 0.0
+        units: W
+        source: {file: pke.xlsx, sheet: Sheet1, row_label: "Initial conditions: Initial power"}
+      power_history_function: null
+    notes: Workbook specifies initial power = 0; no explicit transient power history provided.
+
+  core_channel:
+    name: CH1
+    sam_type: PBCoreChannel
+    eos: eos
+    geometry:
+      A: {value: 2.0e-5, units: m^2, source: {file: pke.xlsx, sheet: Sheet1, row_label: "Core specifics: Area"}}
+      length: {value: 0.8, units: m, source: {file: pke.xlsx, sheet: Sheet1, row_label: "Core specifics: length"}}
+      Dh: {value: 0.0031830989, units: m, source: {file: pke.xlsx, sheet: Sheet1, row_label: "Core specifics: Hydraulic diameter"}}
+      position: null
+      orientation: null
+    closure_models:
+      f: {value: 0.017, units: "-", source: {file: pke.xlsx, sheet: Sheet1, row_label: "Core specifics: Fricrion factor"}}
+      Hw: {value: 160000.0, units: W/m^2-K, source: {file: pke.xlsx, sheet: Sheet1, row_label: "Core specifics: Heat transfer coefficient"}}
+      HT_surface_area_density: {value: 1256.637, units: 1/m, source: {file: pke.xlsx, sheet: Sheet1, row_label: "Core specifics: Heat transfer surface area density"}}
+    discretization:
+      n_elems_axial: {value: 20, units: "-", source: {file: pke.xlsx, sheet: Sheet1, row_label: "Numerial discretization: Axial discretization nodes"}}
+    heat_structures:
+      n_heatstruct: 2
+      fuel_type: cylinder
+      layers:
+        - name: fuel
+          material: fuel-mat
+          thickness: {value: 0.00348, units: m, source: {file: pke.xlsx, sheet: Sheet1, row_label: "Core specifics: Fuel width"}}
+          n_elems_radial: {value: 5, units: "-", source: {file: pke.xlsx, sheet: Sheet1, row_label: "Numerial discretization: Fuel discretization"}}
+          power_fraction: null
+        - name: clad
+          material: clad-mat
+          thickness: {value: 0.00052, units: m, source: {file: pke.xlsx, sheet: Sheet1, row_label: "Core specifics: Clad width"}}
+          n_elems_radial: {value: 1, units: "-", source: {file: pke.xlsx, sheet: Sheet1, row_label: "Numerial discretization: Clad discretization"}}
+          power_fraction: null
+      missing:
+        Ts_init: null
+        name_of_hs_vector: null
+        power_fraction_vector: null
+        power_shape_function: Uniform (string provided; function definition details missing)
+        heat_source: null
+    reactivity_feedback:
+      doppler:
+        enabled: true
+        coefficient:
+          value: -1.0e-7
+          units: (reactivity units)/?
+          source: {file: pke.xlsx, sheet: Sheet1, row_label: "Core specifics: Doppler reactivity feedback coefficent"}
+        model_form: rho_doppler = coef * log(T_fuel / T_ref)
+        source_model: {file: pke.xlsx, sheet: Sheet1, table: "Validation calculation"}
+
+point_kinetics:
+  component:
+    name: pke
+    sam_type: PointKinetics
+    parameters:
+      LAMBDA:
+        value: 3.46402e-7
+        units: s
+        source: {file: pke.xlsx, sheet: Sheet1, row_label: "Physical setup: Prompt neutron lifetime"}
+      lambda:
+        value: [1.33450e-02, 2.87380e+00]
+        units: 1/s
+        source: {file: pke.xlsx, sheet: Sheet1, row_label: "Physical setup: Decay constant for delayed neutrons precursors"}
+      betai:
+        value: [2.39290e-04, 4.92100e-04]
+        units: "-"
+        source: {file: pke.xlsx, sheet: Sheet1, row_label: "Physical setup: Delayed neutrons precursors fractions"}
+      feedback_components: [CH1]
+      feedback_start_time: null
+      rho_fn_name: null
+      additional_reactivity_pps: null
+    notes: Workbook indicates point kinetics; coupling to core channel inferred from feedback intent.
+
+junctions_and_connections:
+  description: Single channel with inlet and outlet boundary conditions; point kinetics coupled for reactivity feedback.
+  connections:
+    - from: inlet_boundary
+      to: CH1(in)
+      type: boundary
+      source: {file: pke.xlsx, sheet: Sheet1, table: "Boundary conditions"}
+    - from: CH1(out)
+      to: outlet_boundary
+      type: boundary
+      source: {file: pke.xlsx, sheet: Sheet1, table: "Boundary conditions"}
+    - from: point_kinetics
+      to: reactor_power
+      type: coupling
+      inferred: true
+      rationale: >-
+        In SAM, ReactorPower may receive power from PointKinetics via pke parameter;
+        workbook specifies PKE but does not specify ReactorPower coupling fields.
+    - from: core_channel
+      to: point_kinetics
+      type: reactivity_feedback
+      inferred: true
+      rationale: Doppler feedback coefficient provided; implies feedback linkage.
+
+geometry_and_discretization:
+  global:
+    p_order: null
+    scaling_factor_var: null
+  fluid_mesh:
+    axial_elements: 20
+    source: {file: pke.xlsx, sheet: Sheet1, row_label: "Numerial discretization: Axial discretization nodes"}
+  solid_mesh:
+    fuel_radial_elements: 5
+    clad_radial_elements: 1
+    source: {file: pke.xlsx, sheet: Sheet1, table: "Numerial discretization"}
+
+initial_conditions:
+  global:
+    pressure:
+      value: 0.1
+      units: MPa
+      si_value: 100000.0
+      source: {file: pke.xlsx, sheet: Sheet1, row_label: "Initial conditions: Pressure"}
+    velocity:
+      value: 5.0
+      units: m/s
+      source: {file: pke.xlsx, sheet: Sheet1, row_label: "Initial conditions: Velocity"}
+    temperature:
+      value: 628.15
+      units: K
+      source: {file: pke.xlsx, sheet: Sheet1, row_label: "Initial conditions: Temperature"}
+  core_channel_overrides:
+    CH1:
+      initial_P: null
+      initial_V: null
+      initial_T: null
+      Ts_init: null
+
+boundary_conditions:
+  inlet:
+    component_type: PBTDJ
+    connected_to: CH1(in)
+    specification:
+      velocity:
+        value: 8.6654
+        units: m/s
+        source: {file: pke.xlsx, sheet: Sheet1, row_label: "Boundary conditions: Inlet velocity"}
+      temperature_transient:
+        description: 628.15 -> 728.15 over 10 s
+        value_start: 628.15
+        value_end: 728.15
+        duration: 10.0
+        units: K
+        source: {file: pke.xlsx, sheet: Sheet1, row_label: "Boundary conditions: Transient inlet temperature"}
+      function_definition: null
+  outlet:
+    component_type: PBTDV
+    connected_to: CH1(out)
+    specification:
+      pressure:
+        value: 0.2
+        units: MPa
+        si_value: 200000.0
+        source: {file: pke.xlsx, sheet: Sheet1, row_label: "Boundary conditions: Outlet pressure"}
+      temperature:
+        value: 728.15
+        units: K
+        source: {file: pke.xlsx, sheet: Sheet1, row_label: "Boundary conditions: Outlet temperature"}
+
+power_or_heat_sources:
+  reactor_power:
+    initial_power: 0.0
+    units: W
+    source: {file: pke.xlsx, sheet: Sheet1, row_label: "Initial conditions: Initial power"}
+    transient_power_history: null
+  fuel_power_deposition:
+    method: ReactorPower -> PBCoreChannel coupling
+    total_power: null
+    axial_shape: Uniform
+    source: {file: pke.xlsx, sheet: Sheet1, row_label: "Core specifics: Power profile"}
+
+execution_settings:
+  executioner_type:
+    value: Transient
+    source: {file: pke.xlsx, sheet: Sheet1, row_label: "Numerial discretization: Time"}
+  time:
+    dt: {value: 0.5, units: s, source: {file: pke.xlsx, sheet: Sheet1, row_label: "Numerial discretization: Time step"}}
+    start_time: {value: 0.0, units: s, source: {file: pke.xlsx, sheet: Sheet1, row_label: "Numerial discretization: Start time"}}
+    end_time: {value: 20.0, units: s, source: {file: pke.xlsx, sheet: Sheet1, row_label: "Numerial discretization: End time"}}
+    dtmin: {value: 1e-5, units: s, source: {file: pke.xlsx, sheet: Sheet1, row_label: "Numerial discretization: Minimum time step"}}
+  nonlinear_solver:
+    nl_max_its: {value: 20, units: "-", source: {file: pke.xlsx, sheet: Sheet1, row_label: "Numerial discretization: Maximum number of nonlinear iterations"}}
+    nl_abs_tol: {value: 1e-6, units: "-", source: {file: pke.xlsx, sheet: Sheet1, row_label: "Numerial discretization: Nonlinear absolute tolerance"}}
+    nl_rel_tol: {value: 1e-7, units: "-", source: {file: pke.xlsx, sheet: Sheet1, row_label: "Numerial discretization: Nonlinear relative tolerance"}}
+  linear_solver:
+    l_max_its: {value: 100, units: "-", source: {file: pke.xlsx, sheet: Sheet1, row_label: "Numerial discretization: Maximum number of linear iterations"}}
+    l_tol: null
+
+extracted_values:
+  doppler_validation_expression:
+    expression: coef * log(T_final/T_initial)
+    coef: -1.0e-7
+    source: {file: pke.xlsx, sheet: Sheet1, row_label: "Validation calculation: Reactivity change"}
+
+inferred_values:
+  eos_fluid_identity:
+    value: Sodium-like coolant
+    confidence: medium
+    rationale: Constant properties match typical sodium test cases; workbook does not explicitly name the fluid.
+  component_positions_orientations:
+    value: null
+    confidence: low
+    rationale: >-
+      No diagram/image provided; spatial placement is not required for a single
+      channel but is needed for consistent displaced mesh visualization.
+  coupling_reactorpower_pke:
+    value: ReactorPower.pke = pke
+    confidence: medium
+    rationale: Typical SAM pattern when PointKinetics drives power; not explicitly specified.
+
+assumptions:
+  - Use SAM default gravity (0 0 -9.8) and coordinate conventions unless overridden.
+  - Model uses a single PBCoreChannel with inlet TDJ and outlet TDV; no additional junctions.
+  - >-
+    Power profile 'Uniform' implies a constant axial power shape function of 1.0 over
+    0..length; actual [Functions] definition not provided.
+  - Doppler feedback uses logarithmic form as indicated in validation calculation note.
+
+missing_parameters:
+  functions:
+    inlet_temperature_function: null
+    power_shape_function_definition: null
+  core_channel:
+    Ts_init: null
+    n_heatstruct_exact: null
+    name_of_hs: null
+    power_fraction: null
+    elem_number_of_hs_vector: null
+  executioner:
+    quadrature: null
+    time_integrator_scheme: null
+  preconditioning:
+    preconditioner_block: null
+  outputs:
+    requested_postprocessors: null
+
+human_review_questions:
+  - >-
+    Should a gap region be modeled (fuel-gap-clad) as in other SAM pin test cases,
+    or is this intended as fuel+clad only? If gap exists, provide gap thickness and
+    material properties.
+  - >-
+    Confirm the total reactor power (currently initial_power = 0 W) and whether a
+    power transient is intended. If power is non-zero, provide initial_power and any
+    power history function.
+  - Provide explicit axial power shape function definition for 'Uniform' and fuel power fractions per heat structure layer.
+  - >-
+    Confirm whether outlet temperature BC (728.15 K) is intended to be applied
+    (note: for outflow, TDV temperature may be ignored depending on flow direction).
+  - Provide any required solver settings not specified (linear tolerance l_tol, PETSc options, preconditioner type).
+  - >-
+    Confirm whether PointKinetics is intended to compute power (ReactorPower.pke
+    coupling) or whether power is imposed independently and PKE used only for
+    reactivity tracking.
+```

@@ -1,0 +1,25 @@
+{
+  "case": "ABTR_INPUT_K2",
+  "runs": 3,
+  "definitions": {
+    "precision": "recovered reference parameter claims / (recovered reference parameter claims + unsupported generated claims)",
+    "recall": "recovered reference parameter claims / all reference parameter claims",
+    "unit_accuracy": "reference numeric parameters matched with correct value and compatible unit / all reference numeric parameters",
+    "numerical_relative_error": "absolute relative error for matched numeric parameter values",
+    "assumption_hallucination_rate": "unsupported generated claims / all generated atomic claims"
+  },
+  "parameter_precision_mean": 1.0,
+  "parameter_precision_sd": 0.0,
+  "parameter_recall_mean": 0.9369369369369369,
+  "parameter_recall_sd": 0.015604061329449314,
+  "parameter_f1_mean": 0.967396974439228,
+  "parameter_f1_sd": 0.008357574319255106,
+  "unit_accuracy_mean": 0.8181818181818182,
+  "unit_accuracy_sd": 0.0,
+  "mean_numerical_relative_error_mean": 0.0,
+  "mean_numerical_relative_error_sd": 0.0,
+  "maximum_numerical_relative_error_mean": 0.0,
+  "maximum_numerical_relative_error_sd": 0.0,
+  "assumption_hallucination_rate_mean": 0.0,
+  "assumption_hallucination_rate_sd": 0.0
+}
