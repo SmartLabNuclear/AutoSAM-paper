@@ -197,8 +197,11 @@ Pooled ABTR–MSRE values are computed from combined parameter-level counts rath
 
 Structural validity and parameter fidelity do not guarantee correct physical behavior. Generated models were therefore compared against equivalent models developed manually by an experienced analyst, using the quantities of interest that characterize the dominant system response. Agreement is reported as the percentage relative difference:
 
-$$\delta_y(\%) = 100\,\frac{\left|y_{\mathrm{AutoSAM}} - y_{\mathrm{manual}}\right|}{\left|y_{\mathrm{manual}}\right|}$$
-
+$$
+\delta_y(\%) = 100 \cdot
+\frac{\left|y_{\mathrm{AutoSAM}} - y_{\mathrm{manual}}\right|}
+{\left|y_{\mathrm{manual}}\right|}
+$$
 Because the manual models were developed independently, this comparison also surfaces component-level modeling simplifications adopted by the agent.
 
 ### 5. Ablation study
