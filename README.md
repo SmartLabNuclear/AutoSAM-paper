@@ -102,7 +102,7 @@ Validation criteria: hottest temperatures near the core outlet, a measurable pri
 
 ## Description
 
-The evaluation is organized into four analyses that separate document-understanding performance from the engineering behavior of the generated models.
+The evaluation is organized into five analyses that separate document-understanding performance from the engineering behavior of the generated models.
 
 The analyses were performed on the **ABTR and MSRE cases**, the only two requiring unstructured multi-modal sources. Reference answers were curated by the authors and verified against the designated case documents. **Each analysis was repeated three times under fixed settings**, and results are reported as mean ± standard deviation to characterize run-to-run variability.
 
@@ -114,7 +114,46 @@ Two images were evaluated: the ABTR schematic (15 required visual facts) and the
 
 $$\mathrm{ViR} = N_{\mathrm{recovered}} / N_{\mathrm{required}}$$
 
-### 2. Parameter extraction
+### 2. Retrieval-augmented generation (RAG)
+
+This analysis isolates the retrieval stage from the rest of the pipeline, measuring whether the agent can find and correctly cite the right evidence when the corpus also contains closely related distractor documents.
+
+**Question set.** Fifteen input-parameter questions per case (30 total), each repeated in three fixed-setting GPT-5.6 Sol runs at temperature zero with `text-embedding-3-large` embeddings. Representative ABTR questions ask for the fuel thermal conductivity and heat capacity, channel power fractions, channel hydraulic diameters, and junction form-loss coefficients. Representative MSRE questions ask for the fuel-salt density equation, coolant-salt viscosity, heat-exchanger wall density, secondary-side velocity boundary condition, and reactor core area.
+
+**Corpora.** Each PDF page is stored as one retrieval chunk, and each corpus holds the authoritative target document together with related-document distractors:
+
+| Case | Corpus pages | Target pages | Distractor pages | *k* | Corpus seen per question |
+| --- | :---: | :---: | :---: | :---: | :---: |
+| ABTR | 44 | 3 | 41 (related ABTR design report) | 2 | 4.5 % |
+| MSRE | 71 | 6 | 65 (*Experience with the MSRE*, 20; NEAMS MSRE report, 45) | 10 | 14.1 % |
+
+The retrieval depths differ deliberately. The ABTR source is compact, and preliminary sensitivity runs at *k* = 3 and *k* = 6 saturated — CoP, CiP, CiH, and evidence recall all 1.000 with HR 0.000 — so *k* = 2 was selected as the more discriminating setting, avoiding a ceiling effect and exposing failures caused by insufficient evidence retrieval. The required MSRE parameters are distributed across all six target pages and the distractors share closely related MSRE terminology, so *k* = 10 gives a moderate retrieval budget while still exposing only 14.1 % of the corpus per question. On average **74 % of the retrieved MSRE pages were distractors** (26.7 % for ABTR).
+
+**Metrics**, adapted from prior work and computed over $Q$ evaluation questions.
+
+*Evidence recall@k* evaluates the retrieval stage alone — the fraction of required evidence locations $\mathcal{E}_q$ recovered among the top-$k$ chunks, whose source locations are $\mathcal{T}^{(k)}_q$:
+
+$$\mathrm{EvidenceRecall}@k = \frac{\sum_{q=1}^{Q}\left|\mathcal{E}_q \cap \mathcal{T}^{(k)}_q\right|}{\sum_{q=1}^{Q}\left|\mathcal{E}_q\right|}$$
+
+*Correctness of prediction* (CoP) is the fraction of atomic reference claims recovered with the correct meaning and numerical value, where $\mathcal{R}_q$ are the reference answers and $\mathcal{C}_q \subseteq \mathcal{R}_q$ those correctly recovered:
+
+$$\mathrm{CoP} = \frac{\sum_{q=1}^{Q}\left|\mathcal{C}_q\right|}{\sum_{q=1}^{Q}\left|\mathcal{R}_q\right|}$$
+
+*Citation precision* (CiP) is the fraction of generated citations $\mathcal{J}_q$ that support the associated answer claims, with $\mathcal{S}_q \subseteq \mathcal{J}_q$ the supporting ones:
+
+$$\mathrm{CiP} = \frac{\sum_{q=1}^{Q}\left|\mathcal{S}_q\right|}{\sum_{q=1}^{Q}\left|\mathcal{J}_q\right|}$$
+
+*Citation hit* (CiH) is the fraction of answers citing at least one required source location, with $\mathbb{I}[\cdot]$ the indicator function:
+
+$$\mathrm{CiH} = \frac{1}{Q}\sum_{q=1}^{Q}\mathbb{I}\!\left[\mathcal{J}_q \cap \mathcal{E}_q \neq \varnothing\right]$$
+
+*Hallucination rate* (HR) is the fraction of generated atomic claims $\mathcal{G}_q$ unsupported by the retrieved evidence, with $\mathcal{U}_q \subseteq \mathcal{G}_q$ the unsupported ones:
+
+$$\mathrm{HR} = \frac{\sum_{q=1}^{Q}\left|\mathcal{U}_q\right|}{\sum_{q=1}^{Q}\left|\mathcal{G}_q\right|}$$
+
+CoP penalizes omitted or incorrect reference claims, whereas HR measures unsupported generated content — so **an omission lowers CoP but is not counted as a hallucination**. By scoring convention, CiP or HR is set to zero when no citations or no claims are generated.
+
+### 3. Parameter extraction
 
 Each parameter in the reference answer is one scoring opportunity, allowing standard retrieval metrics:
 
@@ -124,23 +163,45 @@ Each parameter in the reference answer is one scoring opportunity, allowing stan
 
 An incorrect value contributes both an FP and an FN; an omitted parameter contributes only an FN. This asymmetry reflects the greater consequence of a wrong value than of an evident omission in safety analysis.
 
-Beyond precision, recall, and F1, three metrics address engineering-specific requirements:
+Precision quantifies the reliability of the generated parameters:
 
-- **Unit accuracy** — the fraction of recovered numerical parameters carrying the correct physical unit, evaluated after conversion to a common representation.
-- **Mean relative error (MRE)** — $\frac{1}{N}\sum_i |\hat{x}_i - x_i| / |x_i|$ over recovered numeric parameters. Unrecovered parameters are penalized through recall and excluded here, so MRE characterizes only the accuracy of the extracted subset.
-- **Assumption/hallucination rate (AHR)** — the fraction of generated parameter claims not supported by the designated sources, including both explicitly labeled assumptions and silently inferred values.
+$$\mathrm{Precision} = \frac{TP}{TP + FP}$$
+
+Recall quantifies the fraction of required parameters recovered correctly:
+
+$$\mathrm{Recall} = \frac{TP}{TP + FN}$$
+
+The F1 score is the harmonic mean of the two:
+
+$$\mathrm{F1} = 2\,\frac{\mathrm{Precision} \times \mathrm{Recall}}{\mathrm{Precision} + \mathrm{Recall}}$$
+
+Three further metrics address requirements specific to engineering data.
+
+*Unit accuracy* is the fraction of recovered numerical parameters carrying the correct physical unit, evaluated after conversion to a common representation:
+
+$$\mathrm{UnitAccuracy} = \frac{N_{\mathrm{correct\ unit}}}{N_{\mathrm{recovered,\ numeric}}}$$
+
+*Mean absolute relative error* (MRE) quantifies the deviation of the recovered numerical values from the reference, where $x_i$ and $\hat{x}_i$ are the reference and extracted values in compatible units:
+
+$$\mathrm{MRE} = \frac{1}{N_{\mathrm{recovered,\ numeric}}}\sum_{i=1}^{N_{\mathrm{recovered,\ numeric}}}\frac{\left|\hat{x}_i - x_i\right|}{\left|x_i\right|}$$
+
+Parameters that were not recovered are penalized through recall and excluded from the MRE, which therefore characterizes only the accuracy of the extracted subset.
+
+*Assumption/hallucination rate* (AHR) is the fraction of generated parameter claims not supported by the designated sources. It counts both explicitly labeled assumptions and silently inferred values, since both are content unjustified by the source documents:
+
+$$\mathrm{AHR} = \frac{N_{\mathrm{unsupported\ parameter\ claims}}}{N_{\mathrm{generated\ parameter\ claims}}}$$
 
 Pooled ABTR–MSRE values are computed from combined parameter-level counts rather than by averaging case scores, so each case is weighted by its parameter count.
 
-### 3. Comparison with manually developed models
+### 4. Comparison with manually developed models
 
-Structural validity and parameter fidelity do not guarantee correct physical behavior. Generated models were therefore compared against equivalent models developed manually by an experienced analyst, using the quantities of interest that characterize the dominant system response:
+Structural validity and parameter fidelity do not guarantee correct physical behavior. Generated models were therefore compared against equivalent models developed manually by an experienced analyst, using the quantities of interest that characterize the dominant system response. Agreement is reported as the percentage relative difference:
 
-$$\delta_y(\%) = 100 \cdot |y_{\mathrm{AutoSAM}} - y_{\mathrm{manual}}| / |y_{\mathrm{manual}}|$$
+$$\delta_y(\%) = 100\,\frac{\left|y_{\mathrm{AutoSAM}} - y_{\mathrm{manual}}\right|}{\left|y_{\mathrm{manual}}\right|}$$
 
 Because the manual models were developed independently, this comparison also surfaces component-level modeling simplifications adopted by the agent.
 
-### 4. Ablation study
+### 5. Ablation study
 
 Test cases 3 and 4 were repeated using `gpt-5.2` with one pipeline stage disabled at a time:
 
@@ -165,6 +226,20 @@ Three fixed-setting runs; pooled value weighted by number of required facts.
 The MSRE failures were omission of the inferred downcomer-top coordinate, and assignment of a length of 1.767 m to pipe 5 in place of the correct 1.0312 m.
 
 Despite the relatively high pooled ViR, these failures indicate that **vision-based extraction alone is not sufficient** for constructing engineering models: a single incorrect coordinate, component length, or connection alters the resulting SAM topology or geometry. This supports using a model-building tool that associates each component with structured SAM-specific metadata (component type, geometry, ports, connectivity, boundary conditions). The schematics used here were generated with such a tool, and the underlying metadata were deliberately withheld from AutoSAM to evaluate image-only interpretation. In a deployed workflow the structured metadata would be supplied directly, and visual interpretation would serve as complementary verification rather than as the sole source of model information.
+
+### Retrieval-augmented generation
+
+Performance under related-document noise; mean ± SD over three runs.
+
+| Case | *k* | Evidence recall@*k* | CoP | CiP | CiH | HR |
+| --- | :---: | :---: | :---: | :---: | :---: | :---: |
+| ABTR | 2 | 0.938 ± 0.000 | 0.946 ± 0.000 | 0.933 ± 0.000 | 0.933 ± 0.000 | 0.035 ± 0.000 |
+| MSRE | 10 | 0.933 ± 0.000 | 0.889 ± 0.000 | 0.974 ± 0.044 | 0.800 ± 0.000 | 0.000 ± 0.000 |
+| **Pooled** | — | **0.935 ± 0.000** | **0.922 ± 0.000** | **0.951 ± 0.020** | **0.867 ± 0.000** | **0.024 ± 0.000** |
+
+Evidence recall is similar across the two retrieval settings — 0.938 for ABTR at *k* = 2 and 0.933 for MSRE at *k* = 10 — despite ABTR seeing only 4.5 % of its corpus per question. ABTR achieved higher answer correctness and citation-hit performance; MSRE produced slightly higher citation precision and **no unsupported generated claims**. In both cases the noise citation rate was 0.000: the agent never cited a distractor document, even though 74 % of the pages retrieved for MSRE came from one.
+
+The small standard deviations primarily reflect repeatability under fixed experimental conditions rather than a claim of general stability. The vector store, embeddings, questions, retrieval rankings, prompts, and model settings were all held constant, and answer generation used temperature zero, so nearly identical evidence and responses were produced across the three runs.
 
 ### Parameter extraction
 

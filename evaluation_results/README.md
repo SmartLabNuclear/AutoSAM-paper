@@ -34,12 +34,22 @@ Backs the **ViR** tables. Two images, 15 required visual facts for ABTR and 22 f
 
 ## [`parameter_extraction/`](parameter_extraction/)
 
-Backs the precision / recall / F1 / unit-accuracy / MRE / AHR table. The `parameter_metrics_*` files carry the engineering-specific metrics; the other files carry the underlying retrieval and answer scoring.
+These two run directories back **both** reported tables — the RAG table (evidence recall@*k*, CoP, CiP, CiH, HR) and the parameter-extraction table (precision, recall, F1, unit accuracy, MRE, AHR) — because a single run produces both. The `aggregate_summary*` files carry the RAG metrics; the `parameter_metrics_*` files carry the parameter-extraction metrics.
 
-- **`20260815T200220Z_abtr_input_k2/`** — ABTR at retrieval depth *k* = 2. **Reported row: `parameter_metrics_strict_aggregate.json`** (precision 0.946, recall 0.946, F1 0.946, unit accuracy 1.000, MRE 0.269, AHR 0.035). `strict_audit_report.md` documents the audit; the failure is the substitution of cladding thermal conductivity and heat capacity for the corresponding fuel properties after retrieval missed the fuel-property page.
-- **`20260814T190240Z_msre_input_k10/`** — MSRE at *k* = 10. **Reported row: `parameter_metrics_aggregate_audited.json`** (precision 1.000, recall 0.889, F1 0.941, unit accuracy 1.000, MRE 0.000, AHR 0.000). `failure_audit_audited.md` documents the three ingestion-related false negatives — core flow area, downcomer hydraulic diameter, and core length absent from the vector store because a dense multi-column table was incompletely transcribed at ingestion.
+Both runs used `gpt-5.6-sol` at temperature 0 with `text-embedding-3-large`, three runs each, 15 questions per case. `manifest.json` records the corpus composition, retrieval depth, the immutable vector-store build the run reused, and the benchmark SHA-256.
 
-Each directory's `retrieval/rankings.json` holds the retrieved chunks and their rankings for every question. The MSRE directory additionally carries finite-sample uncertainty intervals (`parameter_metrics_uncertainty_audited.json`, `rag_finite_sample_intervals_audited.json`, `rag_uncertainty_report_audited.md`).
+- **`20260815T200220Z_abtr_input_k2/`** — ABTR at retrieval depth *k* = 2 over a 44-page corpus (3 target pages from `ABTR_case.pdf`, 41 distractor pages from a related ABTR design report).
+  - **Reported RAG row: `aggregate_summary_strict_audited.json`** — evidence recall@2 0.938, CoP 0.946, CiP 0.933, CiH 0.933, HR 0.035, noise citation rate 0.000, retrieved-noise fraction 0.267.
+  - **Reported parameter row: `parameter_metrics_strict_aggregate.json`** — precision 0.946, recall 0.946, F1 0.946, unit accuracy 1.000, MRE 0.269, AHR 0.035.
+  - `strict_audit_report.md` documents the audit. The failure is the substitution of cladding thermal conductivity and heat capacity for the corresponding fuel properties after retrieval missed the fuel-property page.
+- **`20260814T190240Z_msre_input_k10/`** — MSRE at *k* = 10 over a 71-page corpus (6 target pages from `MSRE_case.pdf`, 65 distractor pages from *Experience with the Molten-Salt Reactor Experiment* and a NEAMS MSRE report).
+  - **Reported RAG row: `aggregate_summary_audited.json`** — evidence recall@10 0.933, CoP 0.889, CiP 0.974 ± 0.044, CiH 0.800, HR 0.000, noise citation rate 0.000, retrieved-noise fraction 0.740.
+  - **Reported parameter row: `parameter_metrics_aggregate_audited.json`** — precision 1.000, recall 0.889, F1 0.941, unit accuracy 1.000, MRE 0.000, AHR 0.000.
+  - `failure_audit_audited.md` documents the three ingestion-related false negatives — core flow area, downcomer hydraulic diameter, and core length absent from the vector store because a dense multi-column table was incompletely transcribed at ingestion.
+
+> **Which file is authoritative.** The `manuscript_results.tex` sitting in each directory is the *unaudited* table emitted automatically by the scoring script, and its numbers differ from the reported ones. The audited/strict JSON aggregates named above are what the manuscript reports.
+
+Each directory's `retrieval/rankings.json` holds the retrieved chunks and their rankings for every question, so evidence recall and citation scoring can be recomputed. The MSRE directory additionally carries finite-sample uncertainty intervals (`parameter_metrics_uncertainty_audited.json`, `rag_finite_sample_intervals_audited.json`, `rag_uncertainty_report_audited.md`).
 
 ## [`ablation_study/`](ablation_study/)
 
