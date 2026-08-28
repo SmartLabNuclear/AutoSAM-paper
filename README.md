@@ -166,16 +166,6 @@ The MSRE failures were omission of the inferred downcomer-top coordinate, and as
 
 Despite the relatively high pooled ViR, these failures indicate that **vision-based extraction alone is not sufficient** for constructing engineering models: a single incorrect coordinate, component length, or connection alters the resulting SAM topology or geometry. This supports using a model-building tool that associates each component with structured SAM-specific metadata (component type, geometry, ports, connectivity, boundary conditions). The schematics used here were generated with such a tool, and the underlying metadata were deliberately withheld from AutoSAM to evaluate image-only interpretation. In a deployed workflow the structured metadata would be supplied directly, and visual interpretation would serve as complementary verification rather than as the sole source of model information.
 
-Model comparison on the same benchmark, three runs each:
-
-| Case | GPT-4o | GPT-5.6 Sol | Δ |
-| --- | :---: | :---: | :---: |
-| ABTR | 0.178 ± 0.038 | 0.533 ± 0.240 | +0.356 |
-| MSRE | 0.621 ± 0.507 | 0.818 ± 0.079 | +0.197 |
-| Pooled | 0.441 ± 0.317 | 0.703 ± 0.097 | +0.261 |
-
-With case-specific instructions supplied, ABTR recovery reaches 1.000 ± 0.000 (vs. 0.333 ± 0.067 under a generic prompt and 0.156 ± 0.038 for the GPT-4o baseline).
-
 ### Parameter extraction
 
 Averaged over three fixed-setting runs.
