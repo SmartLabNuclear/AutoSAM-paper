@@ -316,6 +316,31 @@ One AutoSAM generation per case.
 
 Input tokens ranged from ~1.40 to 1.84 million, output tokens from 13,673 to 29,470. Runtime rose from 2.56 min (Pipe) to 5.83 min (MSRE). Estimated cost stayed **below $1 per case**. The large input-token counts are cumulative across the agent's successive tool calls, during which system instructions, tool definitions, conversation history, and intermediate results are all re-included in the model context.
 
+### Representative parameter provenance
+
+The table below presents a manually audited provenance record for representative parameters defining the ABTR and MSRE models. For each parameter, it records the extracted or adopted value and unit, the source and extraction method, and the resulting evidence or review status.
+
+The provenance record distinguishes values that were directly source-backed from those missed during retrieval, supplied from another structured source, introduced as explicit modeling assumptions, or provided during analyst review. It also records the principal RAG and ingestion failures and how affected inputs were recovered before final SAM input generation. This audit trail complements the aggregate extraction metrics by making individual parameter-level decisions, uncertainties, and corrections inspectable.
+
+*Representative, manually audited parameter provenance. PDF page numbers refer to the designated case PDFs.*
+
+| Case | Parameter | Value and unit | Source / extraction method | Evidence / review status |
+| --- | --- | --- | --- | --- |
+| ABTR | Fuel properties | \(k = 16\ \mathrm{W\,m^{-1}K^{-1}}\); \(c_p = 191.67\ \mathrm{J\,kg^{-1}K^{-1}}\); \(\rho = 14583\ \mathrm{kg\,m^{-3}}\) | PDF p. 1; RAG | Source-backed; reference-checked |
+| ABTR | Channel geometry and power split | \(L = 0.8\ \mathrm{m}\); \(D_h = 0.002972\ \mathrm{m}\); fractions = (0.02248, 0.41924, 0.09852, 0.43116, 0.02860) | PDF p. 2; RAG | Source-backed; reference-checked |
+| ABTR | Total reactor power | \(250\ \mathrm{MW}\) | Reference deck; analyst supplied | Supplied during review; replaces the preliminary 1 W draft placeholder |
+| ABTR | Radial heat-structure mesh | CH1–CH4: (2, 1, 1) elements; CH5: (2, 1) elements | No source; generation assumption | Explicit modeling assumption; analyst approval required |
+| MSRE | Fuel-salt density | \(\rho = 2553.3 - 0.562T\ \mathrm{kg\,m^{-3}}\), with \(T\) in K | PDF p. 1; RAG | Source-backed; reference-checked |
+| MSRE | Secondary-salt viscosity | \(\mu = 1.16 \times 10^{-4}\exp(3755/T)\ \mathrm{Pa\,s}\) | PDF p. 2; RAG | Source-backed; reference-checked |
+| MSRE | Core/downcomer geometry | \(A = 0.3512\ \mathrm{m^2}\); \(D_h = 0.0508\ \mathrm{m}\); \(L = 1.7272\ \mathrm{m}\) | PDF p. 4 retrieval miss; spreadsheet/direct structured source | Supplied from a structured source; checked against the reference |
+| MSRE | Secondary boundary conditions | \(v_{\rm in} = 1.6\ \mathrm{m\,s^{-1}}\); \(p_{\rm out} = 100000\ \mathrm{Pa}\) | PDF p. 5; RAG | Source-backed; reference-checked |
+
+#### Interpretation
+
+- The ABTR reactor-power omission illustrates the role of the intermediate representation as a human-review checkpoint: the preliminary 1 W value was explicitly labeled as an assumption, identified during review, and replaced with the source-supported 250 MW value before final simulation.
+- The ABTR radial heat-structure meshes were not specified in the designated case material. They are therefore documented as generation assumptions rather than presented as retrieved engineering facts.
+- The MSRE core flow area, downcomer hydraulic diameter, and core length were absent from the vector store because dense multi-column PDF-table content was incompletely retained during ingestion. These values could not have been recovered by RAG from that store; they were instead supplied from the structured source and checked before final input generation.
+- A provenance record makes omissions, substitutions, structured-source supplements, and analyst interventions visible at the parameter level. This is particularly important for safety-relevant engineering workflows, where a plausible numerical value is not equivalent to a traceable, approved input.
 ---
 
 ## Citation
