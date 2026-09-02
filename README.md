@@ -326,15 +326,14 @@ The provenance record distinguishes values that were directly source-backed from
 
 | Case | Parameter | Value and unit | Source / extraction method | Evidence / review status |
 | --- | --- | --- | --- | --- |
-| ABTR | Fuel properties | \(k = 16\ \mathrm{W\,m^{-1}K^{-1}}\); \(c_p = 191.67\ \mathrm{J\,kg^{-1}K^{-1}}\); \(\rho = 14583\ \mathrm{kg\,m^{-3}}\) | PDF p. 1; RAG | Source-backed; reference-checked |
-| ABTR | Channel geometry and power split | \(L = 0.8\ \mathrm{m}\); \(D_h = 0.002972\ \mathrm{m}\); fractions = (0.02248, 0.41924, 0.09852, 0.43116, 0.02860) | PDF p. 2; RAG | Source-backed; reference-checked |
-| ABTR | Total reactor power | \(250\ \mathrm{MW}\) | Reference deck; analyst supplied | Supplied during review; replaces the preliminary 1 W draft placeholder |
+| ABTR | Fuel properties | Thermal conductivity, k: 16 W/(m·K); heat capacity, cp: 191.67 J/(kg·K); density, rho: 14,583 kg/m³ | PDF p. 1; RAG | Source-backed; reference-checked |
+| ABTR | Channel geometry and power split | Length, L: 0.8 m; hydraulic diameter, Dh: 0.002972 m; channel power fractions: (0.02248, 0.41924, 0.09852, 0.43116, 0.02860) | PDF p. 2; RAG | Source-backed; reference-checked |
+| ABTR | Total reactor power | 250 MW | Reference deck; analyst supplied | Supplied during review; replaces the preliminary 1 W draft placeholder |
 | ABTR | Radial heat-structure mesh | CH1–CH4: (2, 1, 1) elements; CH5: (2, 1) elements | No source; generation assumption | Explicit modeling assumption; analyst approval required |
-| MSRE | Fuel-salt density | \(\rho = 2553.3 - 0.562T\ \mathrm{kg\,m^{-3}}\), with \(T\) in K | PDF p. 1; RAG | Source-backed; reference-checked |
-| MSRE | Secondary-salt viscosity | \(\mu = 1.16 \times 10^{-4}\exp(3755/T)\ \mathrm{Pa\,s}\) | PDF p. 2; RAG | Source-backed; reference-checked |
-| MSRE | Core/downcomer geometry | \(A = 0.3512\ \mathrm{m^2}\); \(D_h = 0.0508\ \mathrm{m}\); \(L = 1.7272\ \mathrm{m}\) | PDF p. 4 retrieval miss; spreadsheet/direct structured source | Supplied from a structured source; checked against the reference |
-| MSRE | Secondary boundary conditions | \(v_{\rm in} = 1.6\ \mathrm{m\,s^{-1}}\); \(p_{\rm out} = 100000\ \mathrm{Pa}\) | PDF p. 5; RAG | Source-backed; reference-checked |
-
+| MSRE | Fuel-salt density | rho = 2553.3 − 0.562 × T kg/m³, where T is in K | PDF p. 1; RAG | Source-backed; reference-checked |
+| MSRE | Secondary-salt viscosity | mu = 1.16 × 10⁻⁴ × exp(3755/T) Pa·s | PDF p. 2; RAG | Source-backed; reference-checked |
+| MSRE | Core/downcomer geometry | Core flow area, A: 0.3512 m²; downcomer hydraulic diameter, Dh: 0.0508 m; core length, L: 1.7272 m | PDF p. 4 retrieval miss; spreadsheet/direct structured source | Supplied from a structured source; checked against the reference |
+| MSRE | Secondary boundary conditions | Inlet velocity, vin: 1.6 m/s; outlet pressure, pout: 100,000 Pa | PDF p. 5; RAG | Source-backed; reference-checked |
 #### Interpretation
 
 - The ABTR reactor-power omission illustrates the role of the intermediate representation as a human-review checkpoint: the preliminary 1 W value was explicitly labeled as an assumption, identified during review, and replaced with the source-supported 250 MW value before final simulation.
