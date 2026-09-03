@@ -1,0 +1,178 @@
+CASE DOCUMENT (ABTR_case.pdf)
+[page 1]
+ABTR case
+zaidabulawi Abulawi
+December 2025
+1
+ABTR description
+A demonstrative system model based on the Advanced Burner Test Reactor (ABTR) conceptual design has
+been developed with the SAM for the reactor core.
+Figure 1: Assembly radial (left) and axial (right) power distribution at BOC.
+The primary system is configured in a pool-type arrangement, with the reactor core. The primary coolant
+is sodium. The reactor core consists of 24 assemblies in an inner enrichment zone and 30 assemblies in the
+outer zone. A total of nine test locations are provided for fuel (6 assemblies) and material (3 assemblies)
+tests. On the basis of the reactor physics calculations, a five-channel model was selected to model the reactor
+core.
+Channel 1 is used to represent the peak-power inner-core subassembly with fresh fuel.
+Channels
+2 and 4 represent the average subassemblies in the inner and outer enrichment zones respectively, while
+channel 3 represents the average of the mid-core fuel test assemblies. Channel 5 represents all of the non-
+fuel subassemblies, including the mid-core materials test assemblies. Figure 1 shows the initial subassembly
+powers at the beginning of equilibrium cycle conditions, and the average axial power shape for all assemblies.
+The geometric data and input conditions employed in the multi-channel core model are shown in Table 1.
+Table 2 shows additional characteristics of the core channels including friction factor, heat transfer
+coefficient, materials of heat structure, power fraction, and heat transfer area density.
+The material properties used in this model include four solid materials: fuel-mat, gap-mat, clad-mat,
+and duct-mat. The fuel-mat is defined with a thermal conductivity of 16 W/m·K, a heat capacity (Cp) of
+191.67 J/kg·K, and a density of 1.4583×104 kg/m3. The gap-mat has a thermal conductivity of 64 W/m·K,
+a heat capacity of 1272 J/kg·K, and a density of 865 kg/m3. The clad-mat is modeled with a thermal
+1
+
+[page 2]
+Table 1: Component Geometry Summary
+Component
+A (m2)
+Dh (m)
+Length (m)
+CH1
+4.9237e-3
+2.972e-3
+0.8
+CH2
+0.11323
+2.972e-3
+0.8
+CH3
+0.029539
+2.972e-3
+0.8
+CH4
+0.14769
+2.972e-3
+0.8
+CH5
+0.153955129
+2.972e-3
+0.8
+pipe1
+0.44934
+2.972e-3
+0.6
+pipe2
+0.44934
+2.972e-3
+1.5
+Table 2: Heat Structure, Thermal Parameters, and Power Fraction
+Component
+nhs
+Width of HS (m)
+Material
+f
+Hw
+HT Area Density
+Power Fraction
+CH1
+3
+0.003015/0.000465/0.00052
+fuel/gap/clad
+0.022
+1.6129e5
+1107.8
+0.02248
+CH2
+3
+0.003015/0.000465/0.00052
+fuel/gap/clad
+0.022
+1.6129e5
+1107.8
+0.41924
+CH3
+3
+0.003015/0.000465/0.00052
+fuel/gap/clad
+0.022
+1.6129e5
+1107.8
+0.09852
+CH4
+3
+0.003015/0.000465/0.00052
+fuel/gap/clad
+0.022
+1.6129e5
+1107.8
+0.43116
+CH5
+2
+6.32340e-3/7.0260e-4
+fuel/clad
+0.04
+13619
+2113.6
+0.02860
+conductivity of 26 W/m·K, a heat capacity of 638 J/kg·K, and a density of 7.646 × 103 kg/m3. The duct-
+mat uses the same thermophysical properties as the cladding, with k = 26 W/m·K, Cp = 638 J/kg·K, and
+ρ = 7.646 × 103 kg/m3. These values define the thermal response of all solid regions in the heat-structure
+system.
+The thermal-hydraulic model consists of five parallel fuel channels (CH1–CH5) that are all vertically
+oriented along the positive z-axis and share identical inlet and outlet flow directions. These channels represent
+parallel flow paths within the core. The parallel channels are hydraulically connected between two one-
+dimensional pipes that serve as the inlet and outlet plenums of the system. Upstream of the channels, pipe1
+delivers coolant to a branching junction, which distributes the flow into all five channels simultaneously.
+This junction includes individual form-loss coefficients (K values) to represent flow-distribution resistances
+for each channel leg. Specifically, the values used in branch1 are K = 0.1, 0.5, 1.96, 2.16, 4.5, and 3500.0,
+corresponding respectively to the main pipe passage and the five channel inlets (CH1–CH5). Downstream,
+the outlets of all five channels recombine at a second junction (branch2), where the form-loss coefficients
+are all set to zero (K = 0.0 for each outlet leg), allowing the flows to merge without additional hydraulic
+resistance. This junction gathers the returning coolant and directs it into pipe2, completing the loop back
+toward the outlet boundary. The branches area is 0.44934.
+The boundary conditions are imposed using two TDV components: inlet TDV specifies the inlet velocity
+and temperature, enforcing a velocity boundary condition of 3.25 m/s and an inlet coolant temperature of
+628.15 K at the entrance of pipe1. At the system outlet, outlet TDV applies a fixed pressure of 1 × 105 Pa
+along with a temperature boundary condition of 628.15 K at the exit of pipe2. Together, these boundaries
+define the global driving conditions for the transient simulation, while the internal distribution of mass flow
+among channels is governed by the hydraulic resistances and form losses specified within the branching
+components.
+The initial conditions for the simulation are defined globally, setting the thermodynamic state of the
+system before the transient begins. The coolant throughout all fluid components is initialized at a uniform
+pressure of 1.0 × 105 Pa, a velocity of 2 m/s, and a temperature of 628.15 K. These global values establish a
+consistent starting point for all channels, pipes, and junctions. For the solid regions of the heat structures,
+the initial temperature is also set to 628.15 K, ensuring thermal equilibrium between the solid and fluid
+domains at startup. A temperature scaling factor of Tsolid sf = 1 × 10−3 and variable scaling factors of 1,
+10−3, and 10−6 are applied to improve numerical conditioning during the nonlinear solve. Together, these
+initial conditions provide a well-defined, steady baseline from which the transient evolution of mass flow,
+temperature, and heat transfer can develop.
+The numerical discretization of the system is defined through both axial and horizontal resolutions.
+Vertically, each core channel (CH1–CH5) is modeled using 20 axial fluid elements over a heated length of
+2
+
+[page 3]
+0.8 m, providing uniform spatial resolution for capturing coolant temperature rise, pressure drop, and heat
+transfer variations along the flow direction. The heat structures associated with each channel are likewise
+discretized axially according to the specified element counts for the fuel, gap, and cladding layers (5, 1,
+and 1 elements, respectively, for the reference fuel channels; 5 and 1 elements for the reflector channel).
+Horizontally, the model resolves five parallel channels coupled through their inlet and outlet junctions.
+The time discretization for this case is governed by a transient executioner combined with a piecewise
+linear time-step control function. Although the physical boundary conditions remain constant throughout
+the simulation, the transient framework allows the solution to evolve in time toward a numerically converged
+state. The base time step is initially very small, with values defined by the time stepper function: ∆t =
+0.01 s from t = 0 to 0.1 s, increasing to ∆t = 0.1 s by t = 0.2 s, and eventually reaching a maximum
+allowable step size of ∆t = 1 s for times beyond 2 s. This gradual increase in time-step size ensures stability
+and accuracy during the early stages of the computation, where strong nonlinear coupling between fluid and
+solid temperatures may require tighter control. The executioner further enforces limits of ∆tmin = 10−5 s
+and a nominal starting step of ∆t = 0.1 s, allowing the nonlinear solver to reduce the time step adaptively as
+needed. Despite the transient formulation, only five time steps are executed, making the simulation effectively
+a pseudo–steady-state solve in which the time discretization primarily serves as a numerical mechanism to
+achieve convergence rather than to resolve physical temporal behavior.
+3
+
+SPREADSHEET TABLE (model_specifications.xlsx)
+Sheet Sheet1:
+component, power fraction,friction factor,heat transfer coefficient,heat transfer area density,Unnamed: 5,Branch 1 form losses,Branch 2 form losses
+CH1,0.02248,0.022,161290.0,1107.8,,0.1,0
+CH2,0.41924,0.022,161290.0,1107.8,,0.5,0
+CH3,0.09852,0.022,161290.0,1107.8,,1.96,0
+CH4,0.43116,0.022,161290.0,1107.8,,2.16,0
+CH5,0.0286,0.04,13619.0,2013.6,,4.5,0
+,,,,,,3500.0,0

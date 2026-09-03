@@ -1,0 +1,33 @@
+SYSTEM SCHEMATIC DESCRIPTION (test.png)
+The image is a screenshot of an interactive plot (Plotly-style) titled **“Layout (view: Y‑Z Plane)”**, showing a schematic layout of pipes/channels on a **Y (horizontal)** vs **Z (vertical)** coordinate grid.
+
+### Interface elements
+- At the top-left there is a dropdown labeled **“Select View Plane”** with **“YZ Plane”** selected.
+- At the top-right are small plot toolbar icons (zoom, pan, etc.).
+- A legend on the right lists colored items: **Pipe1, CH1, CH2, CH3, CH4, CH5, Pipe2**, plus black-dot markers for **Inlet** and **Outlet**.
+
+### Axes and background
+- The horizontal axis is labeled **Y** (with ticks roughly from about −2 to +2).
+- The vertical axis is labeled **Z** (with ticks from about −0.5 up to about 2.5).
+- The background is a light blue/gray plotting area with grid lines.
+
+### Main schematic (pipes and channels)
+- In the center at **Y = 0** there is a vertical line labeled **Pipe2** extending upward to an **Inlet** point.
+  - The **Inlet** is shown as a **black filled circle** near the top, labeled **“Inlet”** with coordinate text **“(0, 2.3)”**.
+- From the central junction, a vertical line continues downward labeled **Pipe1**, ending at the **Outlet** point.
+  - The **Outlet** is another **black filled circle** below the channel region, labeled **“Outlet”** with coordinate text **“(0, −0.6)”**.
+
+### Channel region / branches
+- In the middle is a rectangular region outlined by **two dotted horizontal lines**:
+  - The bottom dotted line lies near **Z = 0**.
+  - The top dotted line lies near **Z ≈ 0.8**.
+- Inside this rectangle are five **vertical colored channel segments** labeled:
+  - **CH1** at approximately **Y = −1**
+  - **CH2** at approximately **Y = −0.5**
+  - **CH3** at **Y = 0** (aligned with Pipe1/Pipe2)
+  - **CH4** at approximately **Y = 0.5**
+  - **CH5** at approximately **Y = 1**
+- The top dotted boundary is annotated **“Branch 2”** near the right side.
+- The bottom dotted boundary is annotated **“Branch 1”** near the right side.
+
+Overall, it depicts a central vertical pipe with an inlet above and outlet below, intersecting a horizontal “manifold” area where five parallel vertical channels (CH1–CH5) connect between two dotted branch lines.

@@ -1,0 +1,452 @@
+[GlobalParams]
+  gravity = '0 -9.8 0'
+  scaling_factor_var_T_solid = 1e-3
+  initial_P = 1.0e5
+  initial_V = 0.001
+  initial_T = 908.15
+[]
+
+[Functions]
+  # Fuel salt properties implemented as user-defined piecewise linear functions per case doc (Tables 4-6)
+
+  [./fuel_salt_rho_func]
+    type = PiecewiseLinear
+    x = '750 1200'
+    y = '2285.31 2032.41'
+  [../]
+
+  [./fuel_salt_enthalpy_func]
+    type = PiecewiseLinear
+    x = '750 1200'
+    y = '1.51e6 2.41e6'
+  [../]
+
+  [./fuel_salt_mu_func]
+    type = PiecewiseLinear
+    x = '750 760 770 780 790 800 810 820 830 840 850 860 870 880 890 900 910 920 930 940 950 960 970 980 990 1000 1010 1020 1030 1040 1050 1060 1070 1080 1090 1100 1110 1120 1130 1140 1150 1160 1170 1180 1190 1200'
+    y = '2.7378E-02 2.5371E-02 2.3557E-02 2.1915E-02 2.0424E-02 1.9069E-02 1.7834E-02 1.6706E-02 1.5674E-02 1.4728E-02 1.3859E-02 1.3060E-02 1.2324E-02 1.1645E-02 1.1017E-02 1.0436E-02 9.8976E-03 9.3976E-03 8.9328E-03 8.5001E-03 8.0969E-03 7.7206E-03 7.3690E-03 7.0402E-03 6.7322E-03 6.4434E-03 6.1724E-03 5.9178E-03 5.6783E-03 5.4529E-03 5.2404E-03 5.0400E-03 4.8508E-03 4.6720E-03 4.5029E-03 4.3428E-03 4.1911E-03 4.0473E-03 3.9109E-03 3.7813E-03 3.6582E-03 3.5411E-03 3.4297E-03 3.3235E-03 3.2224E-03 3.1259E-03'
+  [../]
+[]
+
+[EOS]
+  # Primary loop fuel salt EOS: property functions specified in the document.
+  [./fuel_salt_eos]
+    type = PBFluidEOS
+    # NOTE: SAM EOS fields may differ by version; required mappings not provided in doc.
+    # MISSING: EOS parameter names to link density/enthalpy/viscosity functions
+    # Assumption: this EOS block is used by all primary-loop PBOneDFluidComponents.
+  [../]
+
+  # Secondary side must use "salt equation of state" per doc.
+  [./coolant_salt_eos]
+    type = PBFluidEOS
+    # MISSING: EOS definition for LiF-BeF2 (0.66-0.34) and required parameter names
+    # Assumption: constant properties could be used if SAM requires; but values not enough to define full EOS here.
+  [../]
+[]
+
+[MaterialProperties]
+  # Fuel salt (LiF–BeF4–ZrF4–UF4) base constants from Table 1 where applicable.
+  [./fuel_salt_mat]
+    type = PBFluidMaterial
+    eos = fuel_salt_eos
+    k = 1.0
+    cp = 2009.66
+    T_melt = 722.15
+    # MISSING: how to provide rho(T), mu(T), h(T) functions to SAM material
+    # Assumption: rho, mu, h are taken from EOS/function linkage.
+  [../]
+
+  # Coolant salt (LiF–BeF2 0.66–0.34) from Table 2.
+  [./coolant_salt_mat]
+    type = PBFluidMaterial
+    eos = coolant_salt_eos
+    k = 1.1
+    cp = 2390.0
+    T_melt = 728
+    # MISSING: how to provide rho(T), mu(T), h(T) to SAM for coolant salt
+  [../]
+
+  # Hastelloy N tube wall (Table 3)
+  [./hastelloyN]
+    type = SolidMaterial
+    rho = 8860
+    k = 23.6
+    cp = 578
+  [../]
+[]
+
+[Components]
+  # -------------------------
+  # Primary loop (fuel salt)
+  # -------------------------
+
+  [./downcomer]
+    type = PBOneDFluidComponent
+    fluid_material = fuel_salt_mat
+    eos = fuel_salt_eos
+    A = 0.1589
+    Dh = 0.0508
+    length = 1.7272
+    position = '-0.7366 1.7272 0'
+    orientation = '0 -1 0'
+    n_elems = 18
+  [../]
+
+  [./iplnm]
+    type = PBOneDFluidComponent
+    fluid_material = fuel_salt_mat
+    eos = fuel_salt_eos
+    A = 0.3932
+    Dh = 0.6997
+    length = 0.7366
+    position = '-0.7366 0 0'
+    orientation = '1 0 0'
+    n_elems = 8
+  [../]
+
+  [./core]
+    type = PBOneDFluidComponent
+    fluid_material = fuel_salt_mat
+    eos = fuel_salt_eos
+    A = 0.3512
+    Dh = 0.6687
+    length = 1.7272
+    position = '0 0 0'
+    orientation = '0 1 0'
+    n_elems = 20
+    # MISSING: core volumetric heat source specification to represent nuclear heat generation
+    # Assumption: heat source is required but not provided in doc (no power shape / total power / volume).
+  [../]
+
+  [./uplnm]
+    type = PBOneDFluidComponent
+    fluid_material = fuel_salt_mat
+    eos = fuel_salt_eos
+    A = 0.3932
+    Dh = 0.6997
+    length = 0.4346
+    position = '0 1.7272 0'
+    orientation = '0 1 0'
+    n_elems = 6
+  [../]
+
+  [./pipe1]
+    type = PBOneDFluidComponent
+    fluid_material = fuel_salt_mat
+    eos = fuel_salt_eos
+    A = 0.01267
+    Dh = 0.127
+    length = 1.8288
+    position = '0 2.1618 0'
+    orientation = '1 0 0'
+    n_elems = 19
+  [../]
+
+  [./pipe2]
+    type = PBOneDFluidComponent
+    fluid_material = fuel_salt_mat
+    eos = fuel_salt_eos
+    A = 0.01267
+    Dh = 0.127
+    length = 0.8128
+    position = '1.8288 2.1618 0'
+    orientation = '0 1 0'
+    n_elems = 9
+  [../]
+
+  [./pump]
+    type = PBPump
+    fluid_material = fuel_salt_mat
+    eos = fuel_salt_eos
+    # Pump specification from spreadsheet: initial P and head
+    initial_P = 1.1e5
+    head = 43909.58
+    # MISSING: pump port names and connection definition required by SAM version
+    # Assumption: pump is a 2-port component inserted between pipe2 and pipe3.
+  [../]
+
+  [./pipe3]
+    type = PBOneDFluidComponent
+    fluid_material = fuel_salt_mat
+    eos = fuel_salt_eos
+    A = 0.01267
+    Dh = 0.127
+    length = 1.0668
+    position = '1.8288 2.9746 0'
+    orientation = '-1 0 0'
+    n_elems = 11
+  [../]
+
+  [./hx_primarySide]
+    type = PBOneDFluidComponent
+    fluid_material = fuel_salt_mat
+    eos = fuel_salt_eos
+    A = 0.10183
+    Dh = 0.020945
+    length = 2.5298
+    position = '0.762 2.9746 0'
+    orientation = '-1 0 0'
+    n_elems = 26
+    # MISSING: heat transfer coupling specification to heat structures
+  [../]
+
+  [./pipe_ref]
+    type = PBOneDFluidComponent
+    fluid_material = fuel_salt_mat
+    eos = fuel_salt_eos
+    A = 0.01267
+    Dh = 0.127
+    length = 0.1
+    position = '-1.8678 2.9746 0'
+    orientation = '1 0 0'
+    n_elems = 2
+  [../]
+
+  [./pipe4]
+    type = PBOneDFluidComponent
+    fluid_material = fuel_salt_mat
+    eos = fuel_salt_eos
+    A = 0.01267
+    Dh = 0.127
+    length = 1.2474
+    position = '-1.7678 2.9746 0'
+    orientation = '0 -1 0'
+    n_elems = 13
+  [../]
+
+  [./pipe5]
+    type = PBOneDFluidComponent
+    fluid_material = fuel_salt_mat
+    eos = fuel_salt_eos
+    A = 0.01267
+    Dh = 0.127
+    length = 1.0312
+    position = '-1.7678 1.7272 0'
+    orientation = '1 0 0'
+    n_elems = 11
+  [../]
+
+  # -------------------------
+  # Primary loop branches (Table 8)
+  # -------------------------
+
+  [./j_dn_pl]
+    type = PBBranch
+    A = 0.1155
+    K = '0.0 0.0'
+    connections = 'downcomer:out iplnm:in'
+  [../]
+
+  [./j_ip_c]
+    type = PBBranch
+    A = 0.1155
+    K = '0.0 0.0'
+    connections = 'iplnm:out core:in'
+  [../]
+
+  [./j_c_up]
+    type = PBBranch
+    A = 0.1155
+    K = '0.0 0.0'
+    connections = 'core:out uplnm:in'
+  [../]
+
+  [./j_up_ps1]
+    type = PBBranch
+    A = 0.1155
+    K = '0.0 0.0'
+    connections = 'uplnm:out pipe1:in'
+  [../]
+
+  [./j1]
+    type = PBBranch
+    A = 0.01292
+    K = '0.0 0.0'
+    # Doc table says "pipe1 s1(out) -> pipe2(in)" but primary components list is "pipe1".
+    # Assumption: pipe1 outlet is connected to pipe2 inlet.
+    connections = 'pipe1:out pipe2:in'
+  [../]
+
+  [./j_pump_in]
+    type = PBBranch
+    A = 0.01292
+    K = '0.0 0.0'
+    # Spreadsheet indicates pipe2 to pipe3 via pump.
+    connections = 'pipe2:out pump:in'
+  [../]
+
+  [./j_pump_out]
+    type = PBBranch
+    A = 0.01267
+    K = '0.0 0.0'
+    connections = 'pump:out pipe3:in'
+  [../]
+
+  [./j2]
+    type = PBBranch
+    A = 0.01267
+    K = '0.0 0.0'
+    connections = 'pipe3:out hx_primarySide:in'
+  [../]
+
+  [./j3]
+    type = PBBranch
+    A = 0.01267
+    # Table 8 shows (0.0, 1000, 0.0) for the mixing branch with 3 connections.
+    K = '0.0 1000 0.0'
+    connections = 'hx_primarySide:out pipe_ref:out pipe4:in'
+  [../]
+
+  [./j4]
+    type = PBBranch
+    A = 0.01267
+    K = '0.0 0.0'
+    connections = 'pipe4:out pipe5:in'
+  [../]
+
+  [./j5]
+    type = PBBranch
+    A = 0.01267
+    K = '0.0 0.0'
+    connections = 'pipe5:out downcomer:in'
+  [../]
+
+  # ---------------------------------
+  # Reference pressure boundary (doc)
+  # ---------------------------------
+  [./ref_p]
+    type = PBPressureBoundary
+    p = 1.233351e5
+    T = 908.15
+    # Boundary applied to the pressure-reference leg
+    connection = 'pipe_ref:in'
+  [../]
+
+  # ---------------------------------
+  # Secondary loop in heat exchanger
+  # ---------------------------------
+
+  [./hx_tube1]
+    type = PBOneDFluidComponent
+    fluid_material = coolant_salt_mat
+    eos = coolant_salt_eos
+    A = 0.027885
+    Dh = 0.010566
+    # MISSING: tube1 length, position, orientation, n_elems (not provided; Table 7 omits)
+    length = # MISSING: hx_tube1_length
+    position = '# MISSING: hx_tube1_position'
+    orientation = '# MISSING: hx_tube1_orientation'
+    n_elems = # MISSING: hx_tube1_n_elems
+    initial_T = 824.8167
+  [../]
+
+  [./hx_tube2]
+    type = PBOneDFluidComponent
+    fluid_material = coolant_salt_mat
+    eos = coolant_salt_eos
+    A = 0.027885
+    Dh = 0.010566
+    length = # MISSING: hx_tube2_length
+    position = '# MISSING: hx_tube2_position'
+    orientation = '# MISSING: hx_tube2_orientation'
+    n_elems = # MISSING: hx_tube2_n_elems
+    initial_T = 824.8167
+  [../]
+
+  [./hx_tube3]
+    type = PBOneDFluidComponent
+    fluid_material = coolant_salt_mat
+    eos = coolant_salt_eos
+    A = 0.027885
+    Dh = 0.010566
+    length = # MISSING: hx_tube3_length
+    position = '# MISSING: hx_tube3_position'
+    orientation = '# MISSING: hx_tube3_orientation'
+    n_elems = # MISSING: hx_tube3_n_elems
+    initial_T = 824.8167
+  [../]
+
+  [./hx_s_in]
+    type = PBVelocityBoundary
+    v = 1.6
+    T = 824.8167
+    connection = 'hx_tube1:in'
+  [../]
+
+  [./hx_s_out]
+    type = PBPressureBoundary
+    p = 1.0e5
+    T = 866.4833
+    connection = 'hx_tube3:out'
+  [../]
+
+  [./j_hx_s_12]
+    type = PBBranch
+    A = 0.027885
+    K = '0.0 0.0'
+    connections = 'hx_tube1:out hx_tube2:in'
+  [../]
+
+  [./j_hx_s_23]
+    type = PBBranch
+    A = 0.027885
+    K = '0.0 0.0'
+    connections = 'hx_tube2:out hx_tube3:in'
+  [../]
+
+  # ---------------------------------
+  # Heat structures for HX tube walls
+  # ---------------------------------
+  [./hx_wall1]
+    type = HeatStructure
+    material = hastelloyN
+    # Spreadsheet HX specs:
+    # - Heat transfer surface area density = 1000
+    # - Type = Cylinder
+    # - Width of heat structure = 0.0010668
+    # - Radius = 0.0052832
+    type_hs = Cylinder
+    wall_thickness = 0.0010668
+    radius = 0.0052832
+    heat_transfer_area_density = 1000
+    initial_T = 824.8167
+    # MISSING: axial discretization and length for wall; coupling to fluid components by names/fields
+    # MISSING: SAM-required fields for convective coupling to hx_primarySide and hx_tube1/hx_tube3
+  [../]
+
+  [./hx_wall2]
+    type = HeatStructure
+    material = hastelloyN
+    type_hs = Cylinder
+    wall_thickness = 0.0010668
+    radius = 0.0052832
+    heat_transfer_area_density = 1000
+    initial_T = 824.8167
+    # MISSING: axial discretization and coupling definitions
+  [../]
+[]
+
+[Preconditioning]
+  # MISSING: recommended preconditioning settings for this SAM case
+[]
+
+[Postprocessors]
+  # Minimal diagnostics (exact variable names depend on SAM setup)
+  # MISSING: SAM variable/postprocessor names for loop flow, temperatures, pressures
+[]
+
+[Executioner]
+  type = Transient
+  # MISSING: end_time / dt / solver tolerances from documentation
+  end_time = # MISSING: end_time
+  dt = # MISSING: dt
+  # Assumption: implicit solve
+  solve_type = NEWTON
+[]
+
+[Outputs]
+  file_base = msre_case
+  exodus = true
+  csv = true
+[]

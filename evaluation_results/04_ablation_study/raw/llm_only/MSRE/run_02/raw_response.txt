@@ -1,0 +1,458 @@
+[GlobalParams]
+  gravity = '0 -9.8 0'                        # from doc: gravity in negative y-direction (0, −9.8, 0)
+  initial_P = 1.0e5                           # from doc: fluid pressure initialized to 1.0 × 10^5 Pa
+  initial_T = 908.15                          # from doc: all fluid and solid temperatures begin at 908.15 K (global)
+  initial_vel = 0.001                         # from doc: fluid velocity set to 0.001 m/s
+  solid_scaling = 1.0e-3                      # from doc: small solid temperature scaling factor 10−3
+[]
+
+[Functions]
+  # Fuel-salt property functions implemented via user-defined piecewise linear functions (Tables 4–6)
+  [./fuel_salt_rho_func]
+    type = PiecewiseLinear
+    x = '750 1200'
+    y = '2285.31 2032.41'
+  [../]
+
+  [./fuel_salt_enthalpy_func]
+    type = PiecewiseLinear
+    x = '750 1200'
+    y = '1.51e6 2.41e6'
+  [../]
+
+  [./fuel_salt_mu_func]
+    type = PiecewiseLinear
+    x = '750 760 770 780 790 800 810 820 830 840 850 860 870 880 890 900 910 920 930 940 950 960 970 980 990 1000 1010 1020 1030 1040 1050 1060 1070 1080 1090 1100 1110 1120 1130 1140 1150 1160 1170 1180 1190 1200'
+    y = '2.7378E-02 2.5371E-02 2.3557E-02 2.1915E-02 2.0424E-02 1.9069E-02 1.7834E-02 1.6706E-02 1.5674E-02 1.4728E-02 1.3859E-02 1.3060E-02 1.2324E-02 1.1645E-02 1.1017E-02 1.0436E-02 9.8976E-03 9.3976E-03 8.9328E-03 8.5001E-03 8.0969E-03 7.7206E-03 7.3690E-03 7.0402E-03 6.7322E-03 6.4434E-03 6.1724E-03 5.9178E-03 5.6783E-03 5.4529E-03 5.2404E-03 5.0400E-03 4.8508E-03 4.6720E-03 4.5029E-03 4.3428E-03 4.1911E-03 4.0473E-03 3.9109E-03 3.7813E-03 3.6582E-03 3.5411E-03 3.4297E-03 3.3235E-03 3.2224E-03 3.1259E-03'
+  [../]
+[]
+
+[Materials]
+  # Primary loop fluid: LiF–BeF4–ZrF4–UF4 (fuel salt)
+  [./fuel_salt]
+    type = # MISSING: SAM fuel-salt material model name
+    # MISSING: how SAM maps rho(h,T), h(T), mu(T) functions to fluid material
+    # Provided property correlations and functions from documentation:
+    # Density (Table 1): ρ = 2553.3 − 0.562 T [kg/m^3]
+    # Viscosity (Table 1): µ = 8.4e−5 * exp(2390/T) [Pa·s]
+    # k = 1.0 W/(m·K), cp = 2009.66 J/(kg·K)
+    rho_function = fuel_salt_rho_func          # MISSING: exact keyword expected by SAM
+    h_function   = fuel_salt_enthalpy_func     # MISSING: exact keyword expected by SAM
+    mu_function  = fuel_salt_mu_func           # MISSING: exact keyword expected by SAM
+    k = 1.0
+    cp = 2009.66
+    T_melt = 722.15
+  [../]
+
+  # Secondary loop fluid in HX tubes: LiF–BeF2 (0.66–0.34), but IMPORTANT: salt equation of state used on HX secondary side
+  [./coolant_salt_eos]
+    type = # MISSING: SAM "salt equation of state" material model name
+    # Table 2 properties (if needed by EOS model):
+    # Density: 2146.3 − 0.488 T [kg/m^3]
+    # Viscosity: 1.16e−4 * exp(3755/T) [Pa·s]
+    # k = 1.1 W/(m·K), cp = 2390 J/(kg·K), Tmelt = 728 K
+    k = 1.1
+    cp = 2390.0
+    T_melt = 728
+    # Engineering assumption: EOS model internally handles density/enthalpy; if explicit correlations are required, they are # MISSING.
+  [../]
+
+  # Heat exchanger wall material: Hastelloy N (Table 3)
+  [./hastelloy_n]
+    type = # MISSING: SAM solid material model name (constant properties)
+    rho = 8860
+    k = 23.6
+    cp = 578
+  [../]
+[]
+
+[Components]
+  # -------------------------
+  # Primary-loop 1-D fluid components (Table 7)
+  # -------------------------
+  [./downcomer]
+    type = PBOneDFluidComponent
+    fluid = fuel_salt
+    A = 0.1589
+    Dh = 0.0508
+    length = 1.7272
+    position = '-0.7366 1.7272 0'
+    orientation = '0 -1 0'
+    n_elems = 18
+    initial_T = 908.15
+    initial_P = 1.0e5
+    initial_vel = 0.001
+  [../]
+
+  [./iplnm]
+    type = PBOneDFluidComponent
+    fluid = fuel_salt
+    A = 0.3932
+    Dh = 0.6997
+    length = 0.7366
+    position = '-0.7366 0 0'
+    orientation = '1 0 0'
+    n_elems = 8
+    initial_T = 908.15
+    initial_P = 1.0e5
+    initial_vel = 0.001
+  [../]
+
+  [./core]
+    type = PBOneDFluidComponent
+    fluid = fuel_salt
+    A = 0.3512
+    Dh = 0.6687
+    length = 1.7272
+    position = '0 0 0'
+    orientation = '0 1 0'
+    n_elems = 20
+    initial_T = 908.15
+    initial_P = 1.0e5
+    initial_vel = 0.001
+    # MISSING: volumetric heat source specification in SAM syntax
+    # Engineering assumption: core heat is applied as a uniform volumetric source over the core volume to represent nuclear heating.
+    core_power = # MISSING: core thermal power (doc gives design max 10 MW(th) but not stated as operating power for this case)
+  [../]
+
+  [./uplnm]
+    type = PBOneDFluidComponent
+    fluid = fuel_salt
+    A = 0.3932
+    Dh = 0.6997
+    length = 0.4346
+    position = '0 1.7272 0'
+    orientation = '0 1 0'
+    n_elems = 6
+    initial_T = 908.15
+    initial_P = 1.0e5
+    initial_vel = 0.001
+  [../]
+
+  [./pipe1]
+    type = PBOneDFluidComponent
+    fluid = fuel_salt
+    A = 0.01267
+    Dh = 0.127
+    length = 1.8288
+    position = '0 2.1618 0'
+    orientation = '1 0 0'
+    n_elems = 19
+    initial_T = 908.15
+    initial_P = 1.0e5
+    initial_vel = 0.001
+  [../]
+
+  [./pipe2]
+    type = PBOneDFluidComponent
+    fluid = fuel_salt
+    A = 0.01267
+    Dh = 0.127
+    length = 0.8128
+    position = '1.8288 2.1618 0'
+    orientation = '0 1 0'
+    n_elems = 9
+    initial_T = 908.15
+    initial_P = 1.0e5
+    initial_vel = 0.001
+  [../]
+
+  # Pump is shown between pipe2 and pipe3 in schematic; Table 7 lists pipe3 starting at (1.8288,2.9746,0).
+  [./pump]
+    type = # MISSING: SAM pump component type name
+    fluid = fuel_salt
+    initial_internal_P = 1.1e5                 # doc: pump initial internal pressure 1.1×10^5 Pa
+    head = 43909.58                            # spreadsheet: Head
+    # Spreadsheet pump specification also shows "K, 0.15 0.1" -> unclear meaning in SAM
+    # MISSING: pump loss coefficients / performance curve parameters and correct keywords
+  [../]
+
+  [./pipe3]
+    type = PBOneDFluidComponent
+    fluid = fuel_salt
+    A = 0.01267
+    Dh = 0.127
+    length = 1.0668
+    position = '1.8288 2.9746 0'
+    orientation = '-1 0 0'
+    n_elems = 11
+    initial_T = 908.15
+    initial_P = 1.0e5
+    initial_vel = 0.001
+  [../]
+
+  [./hx_primary]
+    type = PBOneDFluidComponent
+    fluid = fuel_salt
+    A = 0.10183
+    Dh = 0.020945
+    length = 2.5298
+    position = '0.762 2.9746 0'
+    orientation = '-1 0 0'
+    n_elems = 26
+    initial_T = 908.15
+    initial_P = 1.0e5
+    initial_vel = 0.001
+  [../]
+
+  [./pipe_ref]
+    type = PBOneDFluidComponent
+    fluid = fuel_salt
+    A = 0.01267
+    Dh = 0.127
+    length = 0.1
+    position = '-1.8678 2.9746 0'
+    orientation = '1 0 0'
+    n_elems = 2
+    initial_T = 908.15
+    initial_P = 1.0e5
+    initial_vel = 0.001
+  [../]
+
+  [./pipe4]
+    type = PBOneDFluidComponent
+    fluid = fuel_salt
+    A = 0.01267
+    Dh = 0.127
+    length = 1.2474
+    position = '-1.7678 2.9746 0'
+    orientation = '0 -1 0'
+    n_elems = 13
+    initial_T = 908.15
+    initial_P = 1.0e5
+    initial_vel = 0.001
+  [../]
+
+  [./pipe5]
+    type = PBOneDFluidComponent
+    fluid = fuel_salt
+    A = 0.01267
+    Dh = 0.127
+    length = 1.0312
+    position = '-1.7678 1.7272 0'
+    orientation = '1 0 0'
+    n_elems = 11
+    initial_T = 908.15
+    initial_P = 1.0e5
+    initial_vel = 0.001
+  [../]
+
+  # -------------------------
+  # Primary-loop branches (Table 8)
+  # -------------------------
+  [./j_dn_pl]
+    type = PBBranch
+    A = 0.1155
+    K = '0.0 0.0'
+    inputs = 'downcomer:out'
+    outputs = 'iplnm:in'
+  [../]
+
+  [./j_ip_c]
+    type = PBBranch
+    A = 0.1155
+    K = '0.0 0.0'
+    inputs = 'iplnm:out'
+    outputs = 'core:in'
+  [../]
+
+  [./j_c_up]
+    type = PBBranch
+    A = 0.1155
+    K = '0.0 0.0'
+    inputs = 'core:out'
+    outputs = 'uplnm:in'
+  [../]
+
+  [./j_up_ps1]
+    type = PBBranch
+    A = 0.1155
+    K = '0.0 0.0'
+    inputs = 'uplnm:out'
+    outputs = 'pipe1:in'
+  [../]
+
+  [./j1]
+    type = PBBranch
+    A = 0.01292
+    K = '0.0 0.0'
+    inputs = 'pipe1:out'
+    outputs = 'pipe2:in'
+  [../]
+
+  # Connection through pump: pipe2 -> pump -> pipe3
+  [./j_pipe2_pump]
+    type = PBBranch
+    A = 0.01292                                  # engineering assumption: use same as nearby small-pipe junction
+    K = '0.0 0.0'
+    inputs = 'pipe2:out'
+    outputs = 'pump:in'
+  [../]
+
+  [./j_pump_pipe3]
+    type = PBBranch
+    A = 0.01292                                  # engineering assumption
+    K = '0.0 0.0'
+    inputs = 'pump:out'
+    outputs = 'pipe3:in'
+  [../]
+
+  [./j2]
+    type = PBBranch
+    A = 0.01267
+    K = '0.0 0.0'
+    inputs = 'pipe3:out'
+    outputs = 'hx_primary:in'
+  [../]
+
+  # Mixing junction: hx_primary(out) + pipe_ref(out) -> pipe4(in)
+  [./j3]
+    type = PBBranch
+    A = 0.01267
+    K = '0.0 1000 0.0'                             # Table 8: (0.0, 1000, 0.0)
+    inputs = 'hx_primary:out pipe_ref:out'
+    outputs = 'pipe4:in'
+    # Engineering assumption: SAM ordering of K corresponds to each inlet leg; exact mapping is # MISSING.
+  [../]
+
+  [./j4]
+    type = PBBranch
+    A = 0.01267
+    K = '0.0 0.0'
+    inputs = 'pipe4:out'
+    outputs = 'pipe5:in'
+  [../]
+
+  [./j5]
+    type = PBBranch
+    A = 0.01267
+    K = '0.0 0.0'
+    inputs = 'pipe5:out'
+    outputs = 'downcomer:in'
+  [../]
+
+  # -------------------------
+  # Primary-loop pressure reference boundary (ref_p) connected to pipe_ref
+  # -------------------------
+  [./ref_p]
+    type = # MISSING: SAM pressure boundary component type name
+    p = 1.233351e5                                 # doc: ref pressure at 1.233351×10^5 Pa
+    T = 908.15                                      # doc: ref temperature 908.15 K
+    connect_to = 'pipe_ref:in'                       # Engineering assumption: boundary at pipe_ref inlet
+  [../]
+
+  # -------------------------
+  # Heat Exchanger secondary-side fluid components (U-tube described; Table 7 omits length/mesh)
+  # -------------------------
+  [./hx_tube1]
+    type = PBOneDFluidComponent
+    fluid = coolant_salt_eos
+    A = 0.027885
+    Dh = 0.010566
+    length = # MISSING: HX secondary tube leg length (doc says HX roughly 2.5 m total; U-tube has two long legs + short bend)
+    position = # MISSING: hx_tube1 position
+    orientation = # MISSING: hx_tube1 orientation
+    n_elems = # MISSING: hx_tube1 n_elems
+    initial_T = 824.8167                            # doc: initialized at 824.8167 K
+    initial_P = 1.0e5
+    initial_vel = 0.001
+  [../]
+
+  [./hx_tube2]
+    type = PBOneDFluidComponent
+    fluid = coolant_salt_eos
+    A = 0.027885
+    Dh = 0.010566
+    length = # MISSING: HX secondary vertical bend length
+    position = # MISSING: hx_tube2 position
+    orientation = # MISSING: hx_tube2 orientation
+    n_elems = # MISSING: hx_tube2 n_elems
+    initial_T = 824.8167
+    initial_P = 1.0e5
+    initial_vel = 0.001
+  [../]
+
+  [./hx_tube3]
+    type = PBOneDFluidComponent
+    fluid = coolant_salt_eos
+    A = 0.027885
+    Dh = 0.010566
+    length = # MISSING: HX secondary return leg length
+    position = # MISSING: hx_tube3 position
+    orientation = # MISSING: hx_tube3 orientation
+    n_elems = # MISSING: hx_tube3 n_elems
+    initial_T = 824.8167
+    initial_P = 1.0e5
+    initial_vel = 0.001
+  [../]
+
+  # Secondary-side BCs (Table 9 + Initial/Boundary section)
+  [./hx_s_in]
+    type = # MISSING: SAM velocity boundary component type name
+    v = 1.6                                         # doc: velocity BC v = 1.6 m/s
+    T = 824.8167                                    # doc: inlet temperature 824.8167 K
+    connect_to = 'hx_tube1:in'
+  [../]
+
+  [./hx_s_out]
+    type = # MISSING: SAM pressure boundary component type name
+    p = 1.0e5                                       # doc text: outlet pressure boundary p = 1.0 × 10^5 Pa (Table 9 shows 10^5 Pa but one line shows 105 Pa; using 1.0e5 from Initial/Boundary section)
+    T = 866.4833                                    # doc: outlet temperature 866.4833 K
+    connect_to = 'hx_tube3:out'
+  [../]
+
+  # Connect secondary tube segments with branches to ensure full connectivity
+  [./j_hx_tube1_tube2]
+    type = PBBranch
+    A = 0.027885
+    K = '0.0 0.0'
+    inputs = 'hx_tube1:out'
+    outputs = 'hx_tube2:in'
+  [../]
+
+  [./j_hx_tube2_tube3]
+    type = PBBranch
+    A = 0.027885
+    K = '0.0 0.0'
+    inputs = 'hx_tube2:out'
+    outputs = 'hx_tube3:in'
+  [../]
+
+  # -------------------------
+  # Heat structures for HX tube walls (two heat structure components, coupled to primary and secondary)
+  # -------------------------
+  [./hx_wall1]
+    type = # MISSING: SAM heat structure component type name
+    material = hastelloy_n
+    geom_type = Cylinder                              # spreadsheet: Type = Cylinder
+    thickness = 0.0010668                             # spreadsheet: Width of heat structure (tube wall thickness)
+    radius = 0.0052832                                # spreadsheet: Radius
+    # Heat transfer surface area density = 1000 (spreadsheet)
+    htsa_density = 1000                                # MISSING: exact SAM keyword
+    initial_T = 824.8167                               # doc: tube walls initialized at 824.8167 K
+    # Coupling:
+    primary_side = 'hx_primary'                        # MISSING: exact SAM coupling keys/port names
+    secondary_side = 'hx_tube1'                        # engineering assumption: wall1 couples to tube1 leg
+  [../]
+
+  [./hx_wall2]
+    type = # MISSING: SAM heat structure component type name
+    material = hastelloy_n
+    geom_type = Cylinder
+    thickness = 0.0010668
+    radius = 0.0052832
+    htsa_density = 1000                                # MISSING: exact SAM keyword
+    initial_T = 824.8167
+    primary_side = 'hx_primary'
+    secondary_side = 'hx_tube3'                        # engineering assumption: wall2 couples to tube3 return leg
+  [../]
+[]
+
+[Executioner]
+  type = # MISSING: SAM executioner type (e.g., Transient/Steady)
+  # MISSING: time step controls, end time, nonlinear/linear solver settings
+[]
+
+[Outputs]
+  # MISSING: SAM output configuration
+[]

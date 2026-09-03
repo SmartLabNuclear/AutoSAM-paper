@@ -7,7 +7,7 @@ Raw scoring records backing every number in the [top-level README](../README.md#
 | [`01_visual_information_recovery/`](01_visual_information_recovery/) | Analysis 1 | Pooled ViR **0.892 ± 0.047** over 37 required visual facts |
 | [`02_rag_and_parameter_extraction/`](02_rag_and_parameter_extraction/) | Analyses 2 and 3 | Pooled evidence recall **0.935**; parameter F1 **0.944**, unit accuracy **1.000** |
 | [`03_manual_model_comparison/`](03_manual_model_comparison/) | Analysis 4 | Pipe/PKE agree to numerical precision; ABTR ≈ 1 %; MSRE up to 12.7 % |
-| [`04_ablation_study/`](04_ablation_study/) | Analysis 5 | Removing the intermediate file drops parameter F1 to 0.591/0.393 and topology recall to 0 |
+| [`04_ablation_study/`](04_ablation_study/) | Analysis 5 | Single-step generation from documentation reaches parameter F1 0.334/0.477 and topology recall 0 |
 | [`05_cost_and_runtime/`](05_cost_and_runtime/) | Cost table | Under 6 min and below $1 per case |
 
 Analyses 2 and 3 share one directory because a single run produces both the RAG metrics and the parameter-extraction metrics.

@@ -1,0 +1,507 @@
+You are a helpful general-purpose language model. You have no retrieval system, image-processing tool, validator, or intermediate-file workflow. Complete the user's task using only the detailed prompt.
+
+Extract model specifications and parameters from the supplied documentation, then generate a complete SAM `.i` input deck for the MSRE case in a single step.
+
+Condition: llm_only.
+Work only from the documentation below. No intermediate representation is produced and no value is supplied to you pre-extracted. Mark any required value you cannot locate in the documentation as `# MISSING: <field>` rather than guessing. Explicitly comment any engineering assumption. Ensure every component port is connected to another component or a boundary condition.
+
+CASE DOCUMENT (MSRE_case.pdf)
+[page 1]
+MSRE case
+zaidabulawi Abulawi
+December 2025
+1
+MSRE description
+The MSRE was a graphite moderated flowing salt type reactor with a design maximum operating power of
+10 MW(th) developed by Oak Ridge National Laboratory (Robertson, 1965). The fuel salt was a mixture
+of lithium, beryllium, and zirconium fluoride containing uranium or thorium and uranium fluoride. The
+coolant salt was a mixture of lithium fluoride and beryllium fluoride. The reactor consisted of two flow
+loops: a primary loop and a secondary loop. The primary loop connected the reactor vessel to a fuel salt
+centrifugal pump and the shell side of the shell-and-tube heat exchanger. The secondary loop connected the
+tube-side of the shell-and-tube heat exchanger to a coolant salt centrifugal pump and the tube side of an
+air-cooled radiator. Two axial blowers supplied cooling air to the radiator. Piping, drain tanks and “freeze
+valves” made up the remaining components of the heat transport circuits. The heat generated in the core
+was transferred to the secondary loop through the heat exchanger and ultimately rejected to the atmosphere
+through the radiator. The current 1-D MSRE model focuses on the primary loop with all the key reactor
+components represented.
+The fuel salt in the MSRE primary loop was LiF–BeF4–ZrF4–UF4 according to the design specifications
+of the MSRE, of which the thermophysical properties are listed in Table 1.
+Table 1: Thermophysical properties of the fuel salt.
+Property
+Unit
+LiF–BeF4–ZrF4–UF4
+Melting temperature, Tmelt
+K
+722.15
+Density, ρ
+kg/m3
+2553.3 −0.562 T
+Dynamic viscosity, µ
+Pa·s
+8.4 × 10−5e2390/T
+Thermal conductivity, k
+W/(m·K)
+1.0
+Specific heat capacity, cp
+J/(kg·K)
+2009.66
+A conventional, cross-baffled, shell-and-tube type heat exchanger was used in the MSRE. The fuel salt
+flows on the shell side while the coolant salt flows through the tube side. The coolant salt in the heat changer
+is LiF–BeF2 (0.66–0.34), of which the major thermophysical properties are summarized in Table 2. Due to
+the space limitation in the reactor cell, a U-tube configuration is adopted, which results in a heat exchanger
+of roughly 2.5 m in length. The shell diameter is 0.41 m while the tube has a diameter of 1.27 cm and a
+thickness of 1.07 mm. Given a triangular arrangement of the tubes, the hydraulic diameters are 2.09 cm
+(shell-side) and 1.06 cm (tube-side). The construction material of the heat exchanger is Hastelloy® N alloy
+with the properties listed in Table 3. All connecting pipes have a default diameter of 0.127 m. A centrifugal
+pump is utilized, and its head is adjusted to sustain the flow circulation. The downcomer and lower plenum
+to the MSRE core are modeled with SAM 1-D components.
+It is very important to note that the salt
+equation of state is used for the heat exchanger secondary side.
+The thermophysical properties of the fuel salt are defined using three PiecewiseLinear functions. The
+density function (fuel salt rho func) uses two points ranging from 750 K to 1200 K to form a linear fit
+corresponding to the values used by He (2016). The enthalpy function (fuel salt enthalpy func) likewise
+spans the temperature range of 750–1200 K using two points that approximate the temperature dependence
+through cpT.
+1
+
+[page 2]
+Table 2: Thermophysical properties of the coolant salt in the heat exchanger.
+Property
+Unit
+LiF–BeF2 (0.66–0.34)
+Melting temperature, Tmelt
+K
+728
+Density, ρ
+kg/m3
+2146.3 −0.488 T
+Dynamic viscosity, µ
+Pa·s
+1.16 × 10−4e3755/T
+Thermal conductivity, k
+W/(m·K)
+1.1
+Specific heat capacity, cp
+J/(kg·K)
+2390.0
+Table 3: Thermophysical properties of Hastelloy® N alloy used in the heat exchanger.
+Property
+Unit
+Hastelloy N
+Density, ρ
+kg/m3
+8860
+Thermal conductivity, k
+W/(m·K)
+23.6
+Specific heat capacity, cp
+J/(kg·K)
+578
+The dynamic viscosity function (fuel salt mu func) uses a much finer discretization, consisting of 46
+temperature points spanning from 750 K to 1200 K. This provides a detailed representation of the strong
+temperature dependence of the fuel-salt viscosity. The full set of discretization points and values is listed in
+Table 6.
+Table 4: Fuel salt density function (fuel salt rho func).
+Temperature (K)
+Density (kg/m3)
+750
+2285.31
+1200
+2032.41
+Table 5: Fuel salt enthalpy function (fuel salt enthalpy func).
+Temperature (K)
+Enthalpy (J/kg)
+750
+1.51 × 106
+1200
+2.41 × 106
+Tables 4–6 summarize the temperature-dependent thermophysical properties of the MSRE fuel salt as
+implemented in the SAM model through user-defined piecewise-linear functions. Table 1 provides the density
+function fuel salt rho func, which linearly interpolates the salt density between 2285.31 kg/m3 at 750 K
+and 2032.41 kg/m3 at 1200 K, reflecting the expected thermal expansion behavior of molten fluoride fuel
+salts. Table 2 lists the enthalpy function fuel salt enthalpy func, defined as a linear approximation of cpT
+over the range 750–1200 K, increasing from 1.51×106 J/kg to 2.41×106 J/kg. This simplified representation
+is consistent with common MSRE thermodynamic correlations.
+Table 3 contains the detailed viscosity function fuel salt mu func, which is specified at 51 discrete
+temperature points from 750 K to 1200 K. The viscosity decreases monotonically from 2.74 × 10−2 Pa·s
+at 750 K to approximately 3.13 × 10−3 Pa·s at 1200 K, capturing the strong temperature dependence of
+molten-salt rheology. These values are linearly interpolated within SAM, providing a smooth and accurate
+representation of viscosity across the operating temperature range of the MSRE primary loop.
+MSRE Primary Loop Topology Description
+The SAM model represents the Molten Salt Reactor Experiment (MSRE) primary loop as a closed one-
+dimensional fluid network beginning in the downcomer, where the fuel salt flows vertically downward toward
+the inlet plenum. The downcomer is modeled as a straight vertical conduit whose outlet feeds into a junction
+that directs the salt into the inlet plenum. The inlet plenum is a short horizontal region that distributes the
+2
+
+[page 3]
+Table 6: Fuel salt viscosity function (fuel salt mu func).
+Temperature (K)
+Viscosity (Pa·s)
+750
+2.7378E-02
+760
+2.5371E-02
+770
+2.3557E-02
+780
+2.1915E-02
+790
+2.0424E-02
+800
+1.9069E-02
+810
+1.7834E-02
+820
+1.6706E-02
+830
+1.5674E-02
+840
+1.4728E-02
+850
+1.3859E-02
+860
+1.3060E-02
+870
+1.2324E-02
+880
+1.1645E-02
+890
+1.1017E-02
+900
+1.0436E-02
+910
+9.8976E-03
+920
+9.3976E-03
+930
+8.9328E-03
+940
+8.5001E-03
+950
+8.0969E-03
+960
+7.7206E-03
+970
+7.3690E-03
+980
+7.0402E-03
+990
+6.7322E-03
+1000
+6.4434E-03
+1010
+6.1724E-03
+1020
+5.9178E-03
+1030
+5.6783E-03
+1040
+5.4529E-03
+1050
+5.2404E-03
+1060
+5.0400E-03
+1070
+4.8508E-03
+1080
+4.6720E-03
+1090
+4.5029E-03
+1100
+4.3428E-03
+1110
+4.1911E-03
+1120
+4.0473E-03
+1130
+3.9109E-03
+1140
+3.7813E-03
+1150
+3.6582E-03
+1160
+3.5411E-03
+1170
+3.4297E-03
+1180
+3.3235E-03
+1190
+3.2224E-03
+1200
+3.1259E-03
+incoming fuel salt before it enters the bottom of the reactor core. A branch connects the plenum outlet to
+the core inlet, ensuring the proper transition between these two components.
+The reactor core is modeled as a vertical upward-flow channel containing a volumetric heat source rep-
+3
+
+[page 4]
+resenting nuclear heat generation. As the fuel salt flows upward through the core, it absorbs heat and is
+discharged into the upper plenum. This upper plenum serves as a mixing and expansion region at the core
+exit and is connected via a branch to a long horizontal pipe section. The fluid then passes through this
+horizontal pipe, continues through a vertical pipe segment, and finally reaches the pump inlet.
+The pump raises the system pressure and drives the fuel salt through the remainder of the primary loop.
+Downstream of the pump, the flow enters another horizontal pipe and then transitions into the shell side of
+the heat exchanger. The heat exchanger shell is a long horizontal channel carrying the hot fuel salt while it
+transfers heat to a secondary coolant flowing through a U-tube bundle. The primary side contains no internal
+heat source; all heat removal occurs through thermal coupling with the secondary tubes. Two coupled heat
+structure components represent the tube walls, modeling axial and radial conduction as well as convective
+heat transfer on both the shell side and tube side.
+The secondary coolant enters the first tube leg of the heat exchanger through a velocity boundary
+condition. It flows horizontally through the first tube, continues through a short vertical bend, and returns
+through a second long horizontal tube before leaving through a pressure boundary outlet. As it flows, the
+secondary coolant absorbs heat conducted through the tube walls. The heat structures are fully coupled
+to the corresponding primary and secondary flow passages, enabling accurate modeling of heat exchange
+between fluids.
+After the fuel salt releases heat in the heat exchanger, it exits the shell-side channel and enters a mixing
+junction. This junction also receives flow from a short pressure-reference pipe, which is tied to a fixed-
+pressure boundary condition that anchors the loop’s thermodynamic state. The combined flow leaves the
+junction and travels downward through a vertical pipe segment, then horizontally through another pipe, and
+finally re-enters the downcomer through the final branch, completing the circulating loop.
+In this configuration, the SAM model captures the essential components and flow pathways of the MSRE
+primary circuit: downward flow through the downcomer, upward flow through the heated core, transit
+through horizontal and vertical pipes to the pump, heat rejection in the shell side of a U-tube heat exchanger,
+and the return flow back to the downcomer. This topology enables detailed simulation of steady-state and
+transient thermal-hydraulic behavior within the MSRE system.
+Primary-Loop Fluid Components
+Table 7: Components geometry specifications including areas and hydraulic diameters.
+Component
+Area (m2)
+Dh (m)
+Length (m)
+Position (x,y,z)
+Orientation
+n elems
+downcomer
+0.1589
+0.0508
+1.7272
+(-0.7366, 1.7272, 0)
+(0, -1, 0)
+18
+inlet plenum
+0.3932
+0.6997
+0.7366
+(-0.7366, 0, 0)
+(1, 0, 0)
+8
+core
+0.3512
+0.6687
+1.7272
+(0, 0, 0)
+(0, 1, 0)
+20
+upper plenum
+0.3932
+0.6997
+0.4346
+(0, 1.7272, 0)
+(0, 1, 0)
+6
+pipe1
+0.01267
+0.127
+1.8288
+(0, 2.1618, 0)
+(1, 0, 0)
+19
+pipe2
+0.01267
+0.127
+0.8128
+(1.8288, 2.1618, 0)
+(0, 1, 0)
+9
+pipe3
+0.01267
+0.127
+1.0668
+(1.8288, 2.9746, 0)
+(-1, 0, 0)
+11
+hx primarySide
+0.10183
+0.020945
+2.5298
+(0.762, 2.9746, 0)
+(-1, 0, 0)
+26
+hx secondarySide
+0.027885
+0.010566
+-
+-
+-
+-
+pipe ref
+0.01267
+0.127
+0.1
+(-1.8678, 2.9746, 0)
+(1, 0, 0)
+2
+pipe4
+0.01267
+0.127
+1.2474
+(-1.7678, 2.9746, 0)
+(0, -1, 0)
+13
+pipe5
+0.01267
+0.127
+1.0312
+(-1.7678, 1.7272, 0)
+(1, 0, 0)
+11
+Table 7 summarizes the geometric and discretization characteristics of all PBOneDFluidComponent objects
+that make up the MSRE primary loop. Each component is defined by its flow area, hydraulic diameter, axial
+length, spatial position, flow orientation, and number of finite-volume elements used for discretization. The
+table reflects the full one-dimensional representation of the primary circuit, beginning with the downcomer,
+which carries fuel salt downward toward the inlet plenum, followed by the core region where nuclear heat is
+added. Upstream of the core, the model includes the upper plenum and multiple pipe segments that route the
+heated fuel salt to the pump and subsequently to the heat exchanger. The heat exchanger consists of both
+the shell-side passage for the primary fuel salt and the three tube-side segments for the secondary coolant.
+Additional short pipe sections close the loop, including the reference leg (pipe ref) and the return pipes
+(pipe3 s1 and pipe3 s2) leading back to the downcomer. Together, these geometric definitions establish
+the one-dimensional hydraulic network used by SAM to compute mass, momentum, and energy transport
+throughout the MSRE primary-loop system.
+4
+
+[page 5]
+Branch Components
+Table 8: Branch components and associated form-loss coefficients.
+Branch
+Area (m2)
+Loss Coefficients K
+Connections (Input →Output)
+j dn pl
+0.1155
+(0.0, 0.0)
+downcomer(out) →iplnm(in)
+j ip c
+0.1155
+(0.0, 0.0)
+iplnm(out) →core(in)
+j c up
+0.1155
+(0.0, 0.0)
+core(out) →uplnm(in)
+j up ps1
+0.1155
+(0.0, 0.0)
+uplnm(out) →pipe1(in)
+j1
+0.01292
+(0.0, 0.0)
+pipe1 s1(out) →pipe2(in)
+j2
+0.01267
+(0.0, 0.0)
+pipe3(out) →hx primary(in)
+j3
+0.01267
+(0.0, 1000, 0.0)
+hx primary(out), pipe ref(out) →pipe4(in)
+j4
+0.01267
+(0.0, 0.0)
+pipe4(out) →pipe5(in)
+j5
+0.01267
+(0.0, 0.0)
+pipe5(out) →downcomer(in)
+Table 8 summarizes all PBBranch elements used to connect the one-dimensional fluid components through-
+out the MSRE primary loop. Each branch is defined by its hydraulic area, its form-loss coefficients K, and
+the specific components it links together. These branches represent localized junctions where momentum
+losses, flow redirection, or geometric transitions occur. For most branches in the MSRE model, the loss
+coefficients are set to zero, reflecting idealized connections with negligible additional pressure drop. The
+exception is branch j3, which mixes the primary heat-exchanger outlet flow with the reference leg and in-
+cludes a large loss coefficient (K = 1000) on one of its flow paths to control the distribution and stabilize
+the loop pressure. The table illustrates how each junction supports the overall hydraulic network: guiding
+flow from the downcomer into the inlet plenum, from the plenum into the core, from the core to the upper
+plenum, through downstream piping into the heat exchanger, and finally along the return path back to
+the downcomer. Collectively, these branch components ensure proper connectivity, flow directionality, and
+localized momentum modeling within the SAM representation of the MSRE primary circuit.
+Heat Exchanger Characteristics
+Table 9: Heat exchanger BCs.
+Component
+Side
+Notes
+hx s in
+Boundary
+Velocity BC: v = 1.6 m/s
+hx s out
+Boundary
+Pressure BC: p = 105 Pa
+Table 9 includes the boundary-condition components governing the secondary coolant: hx s in, which
+imposes a velocity inlet condition of 1.6 m/s and an inlet temperature of 824.8 K, and hx s out, which spec-
+ifies a pressure outlet boundary of 105 Pa. Together, these components form a fully coupled representation
+of the U-tube heat exchanger, capturing the thermal interaction between the primary fuel salt and the
+secondary Flibe coolant.
+Initial and Boundary Conditions
+The MSRE primary-loop model is initialized using global conditions that establish a uniform and physically
+consistent starting state across the fluid and solid regions. The fluid pressure is initialized to 1.0 × 105 Pa,
+the fluid velocity is set to a small nonzero value of 0.001 m/s, and all fluid and solid temperatures begin at
+908.15 K. A small solid temperature scaling factor of 10−3 is applied, and gravity is specified in the negative
+y-direction as (0, −9.8, 0). The pump component is assigned an initial internal pressure of 1.1 × 105 Pa.
+Within the heat exchanger, the secondary-side tubes (hx tube1, hx tube2, hx tube3) and the coupled tube
+walls (hx wall1, hx wall2) are initialized at a lower temperature of 824.8167 K to represent a colder secondary
+loop at startup, while the primary-side shell adopts the global initial temperature.
+Boundary conditions are imposed on both the secondary loop and a reference location in the primary loop.
+On the secondary side, the inlet is modeled using a velocity boundary condition (hx s in) with v = 1.6 m/s
+and an inlet temperature of 824.8167 K, while the outlet (hx s out) is defined using a pressure boundary with
+p = 1.0 × 105 Pa and an outlet temperature of 866.4833 K. On the primary loop, a short pressure-reference
+leg (pipe ref) anchors the loop pressure through a boundary condition (ref p) that fixes the pressure at
+1.233351×105 Pa and temperature at 908.15 K. This combination of initial and boundary conditions ensures
+5
+
+[page 6]
+a stable, well-posed starting solution for the transient or steady-state simulation of the MSRE primary
+system.
+6
+
+SPREADSHEET TABLE (MSRE_specifications.xlsx)
+Sheet Sheet1:
+component,Area (m^2),Dh (m),Branches,Area,pump specification,Unnamed: 6,HX specifications,Unnamed: 8
+deowncomer,0.1589,0.0508,downcomer to inlet plenum,0.1155,K,0.15 0.1,Heat transfer surface area density ,1000
+inlet plenum,0.3932,0.6997,inlet plenum to core,0.1155,Intial P,110000,Type,Cylinder
+core,0.3512,0.6687,core to upper plenum,0.1155,Head,43909.58,Width of heat structure,0.0010668
+upper plenum,0.3932,0.6997,upper plenum to pipe1,0.1155,,,Radius,0.0052832
+pipe1,0.01267,0.127,pipe1 to pipe2,0.01292,,,,
+pipe2,0.01267,0.127,pipe2 to pipe3,0.01292 (pump),,,,
+pipe3,0.01267,0.127,pipe3 to HX primary,0.01267,,,,
+HX primary side,0.10183,0.020945,HX primary to pipe_ref and pipe4,0.01267,,,,
+HX secondary side,0.027885,0.010566,pipe4 to pipe5,0.01267,,,,
+pipe_ref,0.01267,0.127,pipe5 to downcomer,0.01267,,,,
+pipe4,0.01267,0.127,,,,,,
+pipe5,0.01267,0.127,,,,,,
+
+SYSTEM SCHEMATIC DESCRIPTION (MSRE_system_layout.png)
+The image is a 2D schematic/plot titled **“Layout (view: X‑Y Plane)”** showing a pipe-and-component loop drawn on an X–Y grid (light blue background with horizontal/vertical gridlines). Axes are labeled **X** (horizontal) and **Y** (vertical). At the top left there’s a UI dropdown labeled **“Select View Plane”** set to **“XY Plane.”** On the right is a legend listing colored elements.
+
+### Overall layout (a loop with labeled segments)
+The diagram shows a closed circulation path made of straight, color-coded line segments with component names placed near them:
+
+- **Inlet plenum** (green) sits along the bottom center, roughly at **y = 0**, extending to the right up to **x = 0**. A coordinate label near the bottom reads approximately **(-0.7366, 0)**.
+- From the right end of the inlet plenum at **(0, 0)**, a vertical **core** segment (orange) rises straight up to about **(0, 1.7272)** and continues to **(0, 2.1618)**.
+- Above the core is a short vertical **upper_plenum** segment (reddish/pink) between about **(0, 1.7272)** and **(0, 2.1618)**; the labels **“upper_plenum”** and coordinate callouts **(0, 1.7272)** and **(0, 2.1618)** appear nearby.
+- From the upper plenum, **pipe1** (magenta) runs horizontally to the right from **(0, 2.1618)** to about **(1.8288, 2.1618)** (this right-end coordinate is labeled).
+- At the right end, **pipe2** (blue) goes vertically upward from **(1.8288, 2.1618)** to about **(1.8288, 2.9746)**.
+- At the top right is a **pump** symbol (a circular icon with a triangular wedge/arrow-like graphic inside) labeled **“pump”**, positioned at approximately **(1.8288, 2.9746)**.
+- From the pump area, **pipe3** (green) runs horizontally left along **y ≈ 2.9746** to a point around **(0.762, 2.9746)**, which is labeled **HX_secondary_out**.
+- Continuing further left along the same top line is the **HX** (heat exchanger) segment (orange) spanning across the top center toward the left, ending near **(-1.7678, 2.9746)** where **HX_secondary_in** is labeled.
+- Near the far top-left is a short **pipe_ref** segment (pink/red) around **x ≈ -2.27** at the same y-level, with a black dot marker labeled **ref_p** and a coordinate callout approximately **(-2.2678, 2.9746)**.
+- From **HX_secondary_in** at **(-1.7678, 2.9746)**, **pipe4** (light magenta) drops vertically downward to about **(-1.767, 1.7272)**.
+- From there **pipe5** (blue) runs horizontally right to about **x ≈ -0.7366** at **y ≈ 1.7272**, then turns downward as the **downcomer** (blue) to the bottom, reconnecting to the **inlet plenum** at **(-0.7366, 0)**.
+
+### Markers, labels, and legend
+- Several **black circular markers** indicate key points: **ref_p**, **HX_secondary_in**, and **HX_secondary_out** (also listed in the legend).
+- Many vertices have coordinate annotations in parentheses.
+- The legend on the right lists the colored categories: **downcomer, inlet_plenum, core, upper_plenum, pipe1, pipe2, pipe3, HX, pipe_ref, pipe4, pipe5**, plus the black-dot items **ref_p, HX_secondary_in, HX_secondary_out**.
+
+Overall, it’s a clean, color-coded piping/network layout showing flow components (plenum, core, heat exchanger, pump) connected in a loop, with key junction coordinates labeled.
+
+Return only the complete input deck, without Markdown fences or explanatory text.

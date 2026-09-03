@@ -1,0 +1,24 @@
+SYSTEM SCHEMATIC DESCRIPTION (MSRE_system_layout.png)
+The image is a 2D schematic/plot titled **“Layout (view: X‑Y Plane)”** showing a pipe-and-component loop drawn on an X–Y grid (light blue background with horizontal/vertical gridlines). Axes are labeled **X** (horizontal) and **Y** (vertical). At the top left there’s a UI dropdown labeled **“Select View Plane”** set to **“XY Plane.”** On the right is a legend listing colored elements.
+
+### Overall layout (a loop with labeled segments)
+The diagram shows a closed circulation path made of straight, color-coded line segments with component names placed near them:
+
+- **Inlet plenum** (green) sits along the bottom center, roughly at **y = 0**, extending to the right up to **x = 0**. A coordinate label near the bottom reads approximately **(-0.7366, 0)**.
+- From the right end of the inlet plenum at **(0, 0)**, a vertical **core** segment (orange) rises straight up to about **(0, 1.7272)** and continues to **(0, 2.1618)**.
+- Above the core is a short vertical **upper_plenum** segment (reddish/pink) between about **(0, 1.7272)** and **(0, 2.1618)**; the labels **“upper_plenum”** and coordinate callouts **(0, 1.7272)** and **(0, 2.1618)** appear nearby.
+- From the upper plenum, **pipe1** (magenta) runs horizontally to the right from **(0, 2.1618)** to about **(1.8288, 2.1618)** (this right-end coordinate is labeled).
+- At the right end, **pipe2** (blue) goes vertically upward from **(1.8288, 2.1618)** to about **(1.8288, 2.9746)**.
+- At the top right is a **pump** symbol (a circular icon with a triangular wedge/arrow-like graphic inside) labeled **“pump”**, positioned at approximately **(1.8288, 2.9746)**.
+- From the pump area, **pipe3** (green) runs horizontally left along **y ≈ 2.9746** to a point around **(0.762, 2.9746)**, which is labeled **HX_secondary_out**.
+- Continuing further left along the same top line is the **HX** (heat exchanger) segment (orange) spanning across the top center toward the left, ending near **(-1.7678, 2.9746)** where **HX_secondary_in** is labeled.
+- Near the far top-left is a short **pipe_ref** segment (pink/red) around **x ≈ -2.27** at the same y-level, with a black dot marker labeled **ref_p** and a coordinate callout approximately **(-2.2678, 2.9746)**.
+- From **HX_secondary_in** at **(-1.7678, 2.9746)**, **pipe4** (light magenta) drops vertically downward to about **(-1.767, 1.7272)**.
+- From there **pipe5** (blue) runs horizontally right to about **x ≈ -0.7366** at **y ≈ 1.7272**, then turns downward as the **downcomer** (blue) to the bottom, reconnecting to the **inlet plenum** at **(-0.7366, 0)**.
+
+### Markers, labels, and legend
+- Several **black circular markers** indicate key points: **ref_p**, **HX_secondary_in**, and **HX_secondary_out** (also listed in the legend).
+- Many vertices have coordinate annotations in parentheses.
+- The legend on the right lists the colored categories: **downcomer, inlet_plenum, core, upper_plenum, pipe1, pipe2, pipe3, HX, pipe_ref, pipe4, pipe5**, plus the black-dot items **ref_p, HX_secondary_in, HX_secondary_out**.
+
+Overall, it’s a clean, color-coded piping/network layout showing flow components (plenum, core, heat exchanger, pump) connected in a loop, with key junction coordinates labeled.

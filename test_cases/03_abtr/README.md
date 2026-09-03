@@ -24,7 +24,7 @@ Three physics-based checks: uneven flow distribution among the five channels (br
 
 **A documented retrieval failure and its correction.** During initial extraction, the RAG stage failed to retrieve the 250 MW reactor power stated in the source document, and the preliminary model used a default of 1 W. The agent **explicitly labeled this value as an assumption** and directed the user to verify it. The omission was caught during review of the intermediate representation and corrected before simulation. All results here use the corrected model — this is the intended function of the intermediate-file checkpoint.
 
-The generated deck's header comments record the other explicit assumptions the agent flagged — the sodium EOS selection, gravity vector, element counts, and radial heat-structure mesh — each traceable to a `null` in the intermediate YAML. The full list of 19 `null` fields this case exposes before generation is in [`../../evaluation_results/04_ablation_study/generation_run/review_stage/ABTR_missing_parameters.json`](../../evaluation_results/04_ablation_study/generation_run/review_stage/ABTR_missing_parameters.json).
+The generated deck's header comments record the other explicit assumptions the agent flagged — the sodium EOS selection, gravity vector, element counts, and radial heat-structure mesh — each traceable to a `null` in the intermediate YAML. The full list of 19 `null` fields this case exposes before generation is in [`../../evaluation_results/04_ablation_study/review_stage/ABTR_missing_parameters.json`](../../evaluation_results/04_ablation_study/review_stage/ABTR_missing_parameters.json).
 
 ## Where this case appears in the evaluation
 

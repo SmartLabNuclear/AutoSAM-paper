@@ -1,0 +1,430 @@
+[GlobalParams]
+  gravity = '0 -9.8 0'                       # from doc
+  initial_pressure = 1.0e5                   # from doc (global init)
+  initial_temperature = 908.15               # from doc
+  initial_velocity = 0.001                   # from doc
+  solid_temperature_scaling = 1e-3           # from doc
+  # MISSING: transient/steady controls (end_time, dt, etc.)
+[]
+
+[Executioner]
+  type = # MISSING: Executioner type (Transient/Steady)
+  # MISSING: dt, end_time, solve type, nonlinear/linear solver settings
+[]
+
+# =========================
+# Fluids / Materials
+# =========================
+
+# --- Primary fuel salt (LiF–BeF4–ZrF4–UF4) as user-defined piecewise-linear properties ---
+[Functions]
+  [./fuel_salt_rho_func]
+    type = PiecewiseLinear
+    x = '750 1200'
+    y = '2285.31 2032.41'
+  [../]
+  [./fuel_salt_enthalpy_func]
+    type = PiecewiseLinear
+    x = '750 1200'
+    y = '1.51e6 2.41e6'
+  [../]
+  [./fuel_salt_mu_func]
+    type = PiecewiseLinear
+    x = '750 760 770 780 790 800 810 820 830 840 850 860 870 880 890 900 910 920 930 940 950 960 970 980 990 1000 1010 1020 1030 1040 1050 1060 1070 1080 1090 1100 1110 1120 1130 1140 1150 1160 1170 1180 1190 1200'
+    y = '2.7378E-02 2.5371E-02 2.3557E-02 2.1915E-02 2.0424E-02 1.9069E-02 1.7834E-02 1.6706E-02 1.5674E-02 1.4728E-02 1.3859E-02 1.3060E-02 1.2324E-02 1.1645E-02 1.1017E-02 1.0436E-02 9.8976E-03 9.3976E-03 8.9328E-03 8.5001E-03 8.0969E-03 7.7206E-03 7.3690E-03 7.0402E-03 6.7322E-03 6.4434E-03 6.1724E-03 5.9178E-03 5.6783E-03 5.4529E-03 5.2404E-03 5.0400E-03 4.8508E-03 4.6720E-03 4.5029E-03 4.3428E-03 4.1911E-03 4.0473E-03 3.9109E-03 3.7813E-03 3.6582E-03 3.5411E-03 3.4297E-03 3.3235E-03 3.2224E-03 3.1259E-03'
+  [../]
+[]
+
+[FluidProperties]
+  [./fuel_salt]
+    type = # MISSING: SAM fluid property type for user-defined EOS
+    # Per doc: fuel properties via piecewise-linear density/enthalpy/viscosity + constants k, cp.
+    rho = fuel_salt_rho_func                 # MISSING: correct keyword for function-based rho
+    h   = fuel_salt_enthalpy_func            # MISSING: correct keyword for function-based enthalpy
+    mu  = fuel_salt_mu_func                  # MISSING: correct keyword for function-based viscosity
+    k   = 1.0                                # Table 1
+    cp  = 2009.66                            # Table 1
+    T_melt = 722.15                          # Table 1
+  [../]
+
+  [./coolant_salt]
+    type = # MISSING: SAM fluid property type for salt equation of state (secondary side)
+    # Doc note: "salt equation of state is used for the heat exchanger secondary side."
+    # Available properties (Table 2):
+    # rho = 2146.3 - 0.488*T (kg/m3), mu = 1.16e-4*exp(3755/T) (Pa*s), k=1.1, cp=2390, Tmelt=728
+    # If SAM requires piecewise functions instead of correlations, these are MISSING.
+    # MISSING: keywording for correlation-based rho(T), mu(T)
+    k   = 1.1
+    cp  = 2390.0
+    T_melt = 728
+  [../]
+[]
+
+[SolidMaterials]
+  [./hastelloy_n]
+    type = # MISSING: SAM solid material type
+    rho = 8860                               # Table 3
+    k   = 23.6                               # Table 3
+    cp  = 578                                # Table 3
+  [../]
+[]
+
+# =========================
+# Components: Primary Loop
+# =========================
+
+[Components]
+
+  # ---- Primary 1-D fluid components (PBOneDFluidComponent objects) ----
+  [./downcomer]
+    type = PBOneDFluidComponent
+    fluid_properties = fuel_salt
+    area = 0.1589
+    hydraulic_diameter = 0.0508
+    length = 1.7272
+    position = '-0.7366 1.7272 0'
+    orientation = '0 -1 0'
+    n_elems = 18
+    # MISSING: friction model / roughness / form loss model keywords
+  [../]
+
+  [./iplnm] # inlet plenum
+    type = PBOneDFluidComponent
+    fluid_properties = fuel_salt
+    area = 0.3932
+    hydraulic_diameter = 0.6997
+    length = 0.7366
+    position = '-0.7366 0 0'
+    orientation = '1 0 0'
+    n_elems = 8
+  [../]
+
+  [./core]
+    type = PBOneDFluidComponent
+    fluid_properties = fuel_salt
+    area = 0.3512
+    hydraulic_diameter = 0.6687
+    length = 1.7272
+    position = '0 0 0'
+    orientation = '0 1 0'
+    n_elems = 20
+    # Volumetric heat source representing nuclear heat generation
+    # MISSING: SAM heat source coupling keywords; total power is 10 MW(th) design max, but operating power not specified.
+    power = # MISSING: core thermal power (W) for this case
+  [../]
+
+  [./uplnm] # upper plenum
+    type = PBOneDFluidComponent
+    fluid_properties = fuel_salt
+    area = 0.3932
+    hydraulic_diameter = 0.6997
+    length = 0.4346
+    position = '0 1.7272 0'
+    orientation = '0 1 0'
+    n_elems = 6
+  [../]
+
+  [./pipe1]
+    type = PBOneDFluidComponent
+    fluid_properties = fuel_salt
+    area = 0.01267
+    hydraulic_diameter = 0.127
+    length = 1.8288
+    position = '0 2.1618 0'
+    orientation = '1 0 0'
+    n_elems = 19
+  [../]
+
+  [./pipe2]
+    type = PBOneDFluidComponent
+    fluid_properties = fuel_salt
+    area = 0.01267
+    hydraulic_diameter = 0.127
+    length = 0.8128
+    position = '1.8288 2.1618 0'
+    orientation = '0 1 0'
+    n_elems = 9
+  [../]
+
+  [./pump]
+    type = PBPump
+    fluid_properties = fuel_salt
+    initial_pressure = 1.1e5                 # from doc
+    head = 43909.58                          # from spreadsheet (Head)
+    # Spreadsheet shows "K, 0.15 0.1" under pump specification; unclear meaning in SAM.
+    # MISSING: pump curve / loss coefficients keywording
+    # MISSING: pump inlet/outlet connections done via branches below
+  [../]
+
+  [./pipe3]
+    type = PBOneDFluidComponent
+    fluid_properties = fuel_salt
+    area = 0.01267
+    hydraulic_diameter = 0.127
+    length = 1.0668
+    position = '1.8288 2.9746 0'
+    orientation = '-1 0 0'
+    n_elems = 11
+  [../]
+
+  [./hx_primarySide]
+    type = PBOneDFluidComponent
+    fluid_properties = fuel_salt
+    area = 0.10183
+    hydraulic_diameter = 0.020945
+    length = 2.5298
+    position = '0.762 2.9746 0'
+    orientation = '-1 0 0'
+    n_elems = 26
+  [../]
+
+  [./pipe_ref]
+    type = PBOneDFluidComponent
+    fluid_properties = fuel_salt
+    area = 0.01267
+    hydraulic_diameter = 0.127
+    length = 0.1
+    position = '-1.8678 2.9746 0'
+    orientation = '1 0 0'
+    n_elems = 2
+  [../]
+
+  [./pipe4]
+    type = PBOneDFluidComponent
+    fluid_properties = fuel_salt
+    area = 0.01267
+    hydraulic_diameter = 0.127
+    length = 1.2474
+    position = '-1.7678 2.9746 0'
+    orientation = '0 -1 0'
+    n_elems = 13
+  [../]
+
+  [./pipe5]
+    type = PBOneDFluidComponent
+    fluid_properties = fuel_salt
+    area = 0.01267
+    hydraulic_diameter = 0.127
+    length = 1.0312
+    position = '-1.7678 1.7272 0'
+    orientation = '1 0 0'
+    n_elems = 11
+  [../]
+
+  # ---- Primary branches (PBBranch) ----
+  [./j_dn_pl]
+    type = PBBranch
+    area = 0.1155
+    K = '0.0 0.0'
+    connections = 'downcomer:out iplnm:in'
+  [../]
+
+  [./j_ip_c]
+    type = PBBranch
+    area = 0.1155
+    K = '0.0 0.0'
+    connections = 'iplnm:out core:in'
+  [../]
+
+  [./j_c_up]
+    type = PBBranch
+    area = 0.1155
+    K = '0.0 0.0'
+    connections = 'core:out uplnm:in'
+  [../]
+
+  [./j_up_ps1]
+    type = PBBranch
+    area = 0.1155
+    K = '0.0 0.0'
+    connections = 'uplnm:out pipe1:in'
+  [../]
+
+  [./j1]
+    type = PBBranch
+    area = 0.01292
+    K = '0.0 0.0'
+    connections = 'pipe1:out pipe2:in'
+  [../]
+
+  # Connect pipe2 -> pump inlet
+  [./j_p_in]
+    type = PBBranch
+    area = 0.01267
+    K = '0.0 0.0'
+    connections = 'pipe2:out pump:in'
+  [../]
+
+  # Connect pump outlet -> pipe3
+  [./j_p_out]
+    type = PBBranch
+    area = 0.01267
+    K = '0.0 0.0'
+    connections = 'pump:out pipe3:in'
+  [../]
+
+  [./j2]
+    type = PBBranch
+    area = 0.01267
+    K = '0.0 0.0'
+    connections = 'pipe3:out hx_primarySide:in'
+  [../]
+
+  # Mixing junction: hx primary(out) + pipe_ref(out) -> pipe4(in)
+  [./j3]
+    type = PBBranch
+    area = 0.01267
+    K = '0.0 1000 0.0'  # from Table 8 (one path with high loss)
+    connections = 'hx_primarySide:out pipe_ref:out pipe4:in'
+  [../]
+
+  [./j4]
+    type = PBBranch
+    area = 0.01267
+    K = '0.0 0.0'
+    connections = 'pipe4:out pipe5:in'
+  [../]
+
+  [./j5]
+    type = PBBranch
+    area = 0.01267
+    K = '0.0 0.0'
+    connections = 'pipe5:out downcomer:in'
+  [../]
+
+  # ---- Primary pressure reference boundary (ref_p) attached to pipe_ref inlet ----
+  [./ref_p]
+    type = PBPressureBoundary
+    pressure = 1.233351e5                    # from doc
+    temperature = 908.15                     # from doc
+    # Ensure connection:
+    connection = 'pipe_ref:in'
+  [../]
+
+  # =========================
+  # Components: HX Secondary
+  # =========================
+
+  # Secondary coolant flow passages (U-tube): tube1 (forward), bend (vertical), tube2 (return)
+  # Table 7 only lists hx secondarySide area/Dh but not length/position/orientation/n_elems.
+  # Therefore required fields marked MISSING.
+
+  [./hx_secondary_tube1]
+    type = PBOneDFluidComponent
+    fluid_properties = coolant_salt
+    area = 0.027885                          # from Table 7 (hx secondarySide)
+    hydraulic_diameter = 0.010566            # from Table 7
+    length = # MISSING: secondary tube1 length (m)
+    position = # MISSING: secondary tube1 position (x y z)
+    orientation = # MISSING: secondary tube1 orientation
+    n_elems = # MISSING: secondary tube1 n_elems
+    initial_temperature = 824.8167           # from doc (secondary tubes init)
+  [../]
+
+  [./hx_secondary_bend]
+    type = PBOneDFluidComponent
+    fluid_properties = coolant_salt
+    area = 0.027885
+    hydraulic_diameter = 0.010566
+    length = # MISSING: secondary bend length (m)
+    position = # MISSING: secondary bend position
+    orientation = # MISSING: secondary bend orientation
+    n_elems = # MISSING: secondary bend n_elems
+    initial_temperature = 824.8167
+  [../]
+
+  [./hx_secondary_tube2]
+    type = PBOneDFluidComponent
+    fluid_properties = coolant_salt
+    area = 0.027885
+    hydraulic_diameter = 0.010566
+    length = # MISSING: secondary tube2 length (m)
+    position = # MISSING: secondary tube2 position
+    orientation = # MISSING: secondary tube2 orientation
+    n_elems = # MISSING: secondary tube2 n_elems
+    initial_temperature = 824.8167
+  [../]
+
+  # Secondary inlet velocity boundary (hx_s_in)
+  [./hx_s_in]
+    type = PBVelocityBoundary
+    velocity = 1.6                           # from doc/Table 9
+    temperature = 824.8167                   # from doc
+    connection = 'hx_secondary_tube1:in'
+  [../]
+
+  # Secondary outlet pressure boundary (hx_s_out)
+  [./hx_s_out]
+    type = PBPressureBoundary
+    pressure = 1.0e5                         # from doc (described in IBC section)
+    temperature = 866.4833                   # from doc
+    connection = 'hx_secondary_tube2:out'
+  [../]
+
+  # Secondary internal branches connecting tube1 -> bend -> tube2
+  [./hx_s_j1]
+    type = PBBranch
+    area = 0.027885
+    K = '0.0 0.0'
+    connections = 'hx_secondary_tube1:out hx_secondary_bend:in'
+  [../]
+
+  [./hx_s_j2]
+    type = PBBranch
+    area = 0.027885
+    K = '0.0 0.0'
+    connections = 'hx_secondary_bend:out hx_secondary_tube2:in'
+  [../]
+
+  # =========================
+  # Heat Exchanger Heat Structures (tube walls)
+  # =========================
+
+  # Heat transfer surface area density from spreadsheet: 1000
+  # Tube wall thickness from doc: 1.07 mm => 0.00107 m
+  # Spreadsheet "Width of heat structure" = 0.0010668 (consistent)
+  # Spreadsheet "Radius" = 0.0052832
+  # Heat structures "hx wall1, hx wall2" mentioned in doc; two walls to couple two tube legs to shell.
+
+  [./hx_wall1]
+    type = HeatStructure
+    material = hastelloy_n
+    geometry = Cylinder                       # from spreadsheet (Type Cylinder)
+    thickness = 0.0010668                     # from spreadsheet
+    radius = 0.0052832                        # from spreadsheet
+    length = 2.5298                           # engineering assumption: same as hx_primarySide length (U-tube leg length ~ HX length)
+    n_axial_elems = 26                        # match primary discretization
+    n_radial_elems = # MISSING: heat structure radial discretization
+    initial_temperature = 824.8167            # from doc (tube walls init)
+    heat_transfer_surface_area_density = 1000 # from spreadsheet
+    # Coupling:
+    fluid_side_1 = 'hx_primarySide'           # shell side
+    fluid_side_2 = 'hx_secondary_tube1'       # tube side leg 1
+    # MISSING: SAM keywords for convective coupling coefficients / correlations
+  [../]
+
+  [./hx_wall2]
+    type = HeatStructure
+    material = hastelloy_n
+    geometry = Cylinder
+    thickness = 0.0010668
+    radius = 0.0052832
+    length = 2.5298
+    n_axial_elems = 26
+    n_radial_elems = # MISSING: heat structure radial discretization
+    initial_temperature = 824.8167
+    heat_transfer_surface_area_density = 1000
+    fluid_side_1 = 'hx_primarySide'
+    fluid_side_2 = 'hx_secondary_tube2'
+  [../]
+
+[]
+
+# =========================
+# Outputs
+# =========================
+[Outputs]
+  exodus = true
+  csv = true
+  # MISSING: additional output controls
+[]

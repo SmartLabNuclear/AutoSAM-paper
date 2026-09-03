@@ -1,0 +1,402 @@
+# ABTR case (December 2025) - SAM input deck
+# Source: ABTR_case.pdf + model_specifications.xlsx + test.png description
+#
+# Engineering assumptions (explicit):
+# 1) Sodium is modeled using SAM's built-in liquid sodium property set name "sodium".
+#    If your SAM build uses a different EOS/fluid name, update the EOS block accordingly.
+# 2) Flow is 1-D, incompressible/weakly compressible as handled by SAM single-phase fluid model.
+# 3) Core power is applied as volumetric heat generation in heat structures with specified power fractions.
+#    Absolute total power is not provided in the documentation; therefore heat generation magnitude is # MISSING.
+# 4) Branch components are modeled as junctions with form-loss coefficients (K) per leg.
+# 5) The outlet TDV sets pressure; inlet TDV sets velocity + temperature as specified.
+# 6) Heat transfer coefficients and area densities are applied per channel as provided.
+# 7) Heat structure radial mesh: fuel/gap/clad layers use element counts (5/1/1) for CH1-CH4; CH5 uses (5/1).
+#
+# MISSING items that may be required by your SAM version:
+# - Total reactor/core thermal power (W) or channel-wise power (W)
+# - Reference/initial mass flow rate (if required instead of velocity)
+# - Pipe elevation/gravitation direction specification if required
+# - Fluid model options (compressibility, turbulence) if required
+# - Junction/branch component exact SAM class names and parameter names
+# - Heat structure wetted perimeter vs area density usage details (we use provided area density)
+# - Solid emissivity/radiation terms (not mentioned)
+# - Any required solver tolerances not stated
+
+[GlobalParams]
+  # Fluid initial conditions (global)
+  initial_pressure = 1.0e5          # Pa
+  initial_temperature = 628.15      # K
+  initial_velocity = 2.0            # m/s
+
+  # Solid initial condition
+  initial_solid_temperature = 628.15  # K
+
+  # Gravity (not specified explicitly)
+  # MISSING: gravity_vector
+[]
+
+[Functions]
+  # Time-step control as piecewise linear schedule described
+  [./dt_fun]
+    type = PiecewiseLinear
+    x = '0     0.1   0.2   2.0   1.0e9'
+    y = '0.01  0.01  0.1   1.0   1.0'
+  [../]
+[]
+
+[EOS]
+  # Primary coolant: sodium
+  [./coolant]
+    type = SodiumEquationOfState
+    # MISSING: any required EOS options for your SAM build
+  [../]
+[]
+
+[MaterialProperties]
+  # Solid materials: fuel-mat, gap-mat, clad-mat, duct-mat
+  [./fuel-mat]
+    type = SolidMaterialProperties
+    thermal_conductivity = 16.0         # W/m-K
+    specific_heat = 191.67              # J/kg-K
+    density = 1.4583e4                  # kg/m3
+  [../]
+
+  [./gap-mat]
+    type = SolidMaterialProperties
+    thermal_conductivity = 64.0         # W/m-K
+    specific_heat = 1272.0              # J/kg-K
+    density = 865.0                     # kg/m3
+  [../]
+
+  [./clad-mat]
+    type = SolidMaterialProperties
+    thermal_conductivity = 26.0         # W/m-K
+    specific_heat = 638.0               # J/kg-K
+    density = 7.646e3                   # kg/m3
+  [../]
+
+  [./duct-mat]
+    type = SolidMaterialProperties
+    thermal_conductivity = 26.0         # W/m-K
+    specific_heat = 638.0               # J/kg-K
+    density = 7.646e3                   # kg/m3
+  [../]
+[]
+
+[Components]
+  # Boundary conditions via TDVs
+  [./inlet]
+    type = TDVInlet
+    eos = coolant
+    velocity = 3.25          # m/s
+    temperature = 628.15     # K
+    # Port connection
+    connect_to = pipe1:inlet
+  [../]
+
+  [./outlet]
+    type = TDVOutlet
+    eos = coolant
+    pressure = 1.0e5         # Pa
+    temperature = 628.15     # K
+    connect_to = pipe2:outlet
+  [../]
+
+  # Inlet plenum pipe1 (upstream of Branch 1)
+  [./pipe1]
+    type = Pipe1D
+    eos = coolant
+    A = 0.44934              # m2
+    Dh = 2.972e-3            # m
+    length = 0.6             # m
+    n_elems = 1              # MISSING: pipe axial elements (not specified) -> assumption: 1
+    connect_inlet = inlet
+    connect_outlet = branch1:main
+  [../]
+
+  # Core channels CH1-CH5 (20 axial elements, length 0.8 m)
+  [./CH1]
+    type = Channel1D
+    eos = coolant
+    A = 4.9237e-3
+    Dh = 2.972e-3
+    length = 0.8
+    n_elems = 20
+    friction_factor = 0.022
+    heat_transfer_coefficient = 1.6129e5     # W/m2-K
+    heat_transfer_area_density = 1107.8      # (1/m) as provided
+    connect_inlet = branch1:leg1
+    connect_outlet = branch2:leg1
+  [../]
+
+  [./CH2]
+    type = Channel1D
+    eos = coolant
+    A = 0.11323
+    Dh = 2.972e-3
+    length = 0.8
+    n_elems = 20
+    friction_factor = 0.022
+    heat_transfer_coefficient = 1.6129e5
+    heat_transfer_area_density = 1107.8
+    connect_inlet = branch1:leg2
+    connect_outlet = branch2:leg2
+  [../]
+
+  [./CH3]
+    type = Channel1D
+    eos = coolant
+    A = 0.029539
+    Dh = 2.972e-3
+    length = 0.8
+    n_elems = 20
+    friction_factor = 0.022
+    heat_transfer_coefficient = 1.6129e5
+    heat_transfer_area_density = 1107.8
+    connect_inlet = branch1:leg3
+    connect_outlet = branch2:leg3
+  [../]
+
+  [./CH4]
+    type = Channel1D
+    eos = coolant
+    A = 0.14769
+    Dh = 2.972e-3
+    length = 0.8
+    n_elems = 20
+    friction_factor = 0.022
+    heat_transfer_coefficient = 1.6129e5
+    heat_transfer_area_density = 1107.8
+    connect_inlet = branch1:leg4
+    connect_outlet = branch2:leg4
+  [../]
+
+  [./CH5]
+    type = Channel1D
+    eos = coolant
+    A = 0.153955129
+    Dh = 2.972e-3
+    length = 0.8
+    n_elems = 20
+    friction_factor = 0.04
+    heat_transfer_coefficient = 13619.0
+    heat_transfer_area_density = 2013.6     # spreadsheet value (note: Table 2 shows 2113.6)
+    # Assumption: use spreadsheet as latest; if using Table 2, change to 2113.6
+    connect_inlet = branch1:leg5
+    connect_outlet = branch2:leg5
+  [../]
+
+  # Branching junctions
+  [./branch1]
+    type = BranchJunction
+    eos = coolant
+    area = 0.44934
+    # Form-loss coefficients: main + five legs (CH1-CH5) + very large loss term given (3500)
+    # Documentation: K = 0.1, 0.5, 1.96, 2.16, 4.5, and 3500.0 corresponding to main and five channel inlets (CH1–CH5).
+    # Assumption: interpret as:
+    #   K_main = 0.1
+    #   K_leg1(CH1)=0.5, K_leg2(CH2)=1.96, K_leg3(CH3)=2.16, K_leg4(CH4)=4.5, K_leg5(CH5)=3500.0
+    # This matches "6 values" after the main; however text says main+five => 6 total; spreadsheet shows CH1=0.1 ... CH5=4.5 and an extra 3500.
+    # MISSING: definitive mapping of K list to legs. Adjust as needed.
+    K_main = 0.1
+    K_leg1 = 0.5
+    K_leg2 = 1.96
+    K_leg3 = 2.16
+    K_leg4 = 4.5
+    K_leg5 = 3500.0
+    connect_main = pipe1:outlet
+    connect_leg1 = CH1:inlet
+    connect_leg2 = CH2:inlet
+    connect_leg3 = CH3:inlet
+    connect_leg4 = CH4:inlet
+    connect_leg5 = CH5:inlet
+  [../]
+
+  [./branch2]
+    type = BranchJunction
+    eos = coolant
+    area = 0.44934
+    K_main = 0.0
+    K_leg1 = 0.0
+    K_leg2 = 0.0
+    K_leg3 = 0.0
+    K_leg4 = 0.0
+    K_leg5 = 0.0
+    connect_leg1 = CH1:outlet
+    connect_leg2 = CH2:outlet
+    connect_leg3 = CH3:outlet
+    connect_leg4 = CH4:outlet
+    connect_leg5 = CH5:outlet
+    connect_main = pipe2:inlet
+  [../]
+
+  # Outlet plenum pipe2 (downstream of Branch 2)
+  [./pipe2]
+    type = Pipe1D
+    eos = coolant
+    A = 0.44934
+    Dh = 2.972e-3
+    length = 1.5
+    n_elems = 1              # MISSING: pipe axial elements (not specified) -> assumption: 1
+    connect_inlet = branch2:main
+    connect_outlet = outlet
+  [../]
+
+  # Heat structures for channels
+  # NOTE: Total power is not provided; only power fractions. Need core total power.
+  # MISSING: core_total_power_W
+
+  [./HS_CH1]
+    type = HeatStructure
+    n_hs = 3
+    materials = 'fuel-mat gap-mat clad-mat'
+    widths = '0.003015 0.000465 0.00052'
+    n_radial_elems = '5 1 1'
+    n_axial_elems = 20
+    length = 0.8
+    initial_temperature = 628.15
+    # Power
+    power = '# MISSING: core_total_power_W * 0.02248'
+    # Coupling to fluid
+    connect_fluid = CH1
+    heat_transfer_coefficient = 1.6129e5
+    heat_transfer_area_density = 1107.8
+  [../]
+
+  [./HS_CH2]
+    type = HeatStructure
+    n_hs = 3
+    materials = 'fuel-mat gap-mat clad-mat'
+    widths = '0.003015 0.000465 0.00052'
+    n_radial_elems = '5 1 1'
+    n_axial_elems = 20
+    length = 0.8
+    initial_temperature = 628.15
+    power = '# MISSING: core_total_power_W * 0.41924'
+    connect_fluid = CH2
+    heat_transfer_coefficient = 1.6129e5
+    heat_transfer_area_density = 1107.8
+  [../]
+
+  [./HS_CH3]
+    type = HeatStructure
+    n_hs = 3
+    materials = 'fuel-mat gap-mat clad-mat'
+    widths = '0.003015 0.000465 0.00052'
+    n_radial_elems = '5 1 1'
+    n_axial_elems = 20
+    length = 0.8
+    initial_temperature = 628.15
+    power = '# MISSING: core_total_power_W * 0.09852'
+    connect_fluid = CH3
+    heat_transfer_coefficient = 1.6129e5
+    heat_transfer_area_density = 1107.8
+  [../]
+
+  [./HS_CH4]
+    type = HeatStructure
+    n_hs = 3
+    materials = 'fuel-mat gap-mat clad-mat'
+    widths = '0.003015 0.000465 0.00052'
+    n_radial_elems = '5 1 1'
+    n_axial_elems = 20
+    length = 0.8
+    initial_temperature = 628.15
+    power = '# MISSING: core_total_power_W * 0.43116'
+    connect_fluid = CH4
+    heat_transfer_coefficient = 1.6129e5
+    heat_transfer_area_density = 1107.8
+  [../]
+
+  [./HS_CH5]
+    type = HeatStructure
+    n_hs = 2
+    materials = 'fuel-mat clad-mat'
+    widths = '6.32340e-3 7.0260e-4'
+    n_radial_elems = '5 1'
+    n_axial_elems = 20
+    length = 0.8
+    initial_temperature = 628.15
+    power = '# MISSING: core_total_power_W * 0.02860'
+    connect_fluid = CH5
+    heat_transfer_coefficient = 13619.0
+    heat_transfer_area_density = 2013.6
+  [../]
+[]
+
+[Preconditioning]
+  # Scaling factors as documented
+  [./scaling]
+    type = VariableScaling
+    # MISSING: exact SAM variable names for scaling; apply generic placeholders
+    Tsolid_sf = 1.0e-3
+    scale_factors = '1 1e-3 1e-6'
+  [../]
+[]
+
+[Postprocessors]
+  # Basic monitoring
+  [./pipe1_inlet_T]
+    type = ComponentAverageTemperature
+    component = pipe1
+    location = inlet
+  [../]
+  [./pipe2_outlet_T]
+    type = ComponentAverageTemperature
+    component = pipe2
+    location = outlet
+  [../]
+  [./pipe2_outlet_P]
+    type = ComponentAveragePressure
+    component = pipe2
+    location = outlet
+  [../]
+  [./CH1_mdot]
+    type = ComponentMassFlowRate
+    component = CH1
+  [../]
+  [./CH2_mdot]
+    type = ComponentMassFlowRate
+    component = CH2
+  [../]
+  [./CH3_mdot]
+    type = ComponentMassFlowRate
+    component = CH3
+  [../]
+  [./CH4_mdot]
+    type = ComponentMassFlowRate
+    component = CH4
+  [../]
+  [./CH5_mdot]
+    type = ComponentMassFlowRate
+    component = CH5
+  [../]
+[]
+
+[Executioner]
+  type = Transient
+
+  # Time control
+  start_time = 0.0
+  end_time = 2.0              # Assumption: run long enough to reach dt=1s plateau; doc says only 5 steps executed
+  num_steps = 5               # per documentation
+
+  [./TimeStepper]
+    type = FunctionDT
+    function = dt_fun
+    dt = 0.1                  # nominal starting step per documentation
+    dtmin = 1.0e-5
+    dtmax = 1.0               # maximum allowable beyond 2s
+  [../]
+
+  # Nonlinear solver controls (not specified)
+  # MISSING: nl_rel_tol, nl_abs_tol, l_max_its, nl_max_its
+[]
+
+[Outputs]
+  file_base = ABTR_case
+  exodus = true
+  csv = true
+  print_linear_residuals = false
+  perf_graph = true
+[]

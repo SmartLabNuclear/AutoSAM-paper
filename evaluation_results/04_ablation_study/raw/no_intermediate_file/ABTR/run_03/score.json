@@ -1,0 +1,212 @@
+{
+  "condition": "no_intermediate_file",
+  "case": "ABTR",
+  "run": 3,
+  "resolved_model": "gpt-5.2-2025-12-11",
+  "latency_seconds": 50.66341469998588,
+  "required_block_fraction": 1.0,
+  "required_blocks_present": [
+    "components",
+    "eos",
+    "executioner",
+    "functions",
+    "globalparams",
+    "materialproperties",
+    "outputs",
+    "postprocessors",
+    "preconditioning"
+  ],
+  "required_blocks_missing": [],
+  "component_recall": 0.9166666666666666,
+  "missing_components": [
+    "reactor"
+  ],
+  "parameter_precision": 0.5111111111111111,
+  "parameter_recall": 0.19491525423728814,
+  "parameter_f1": 0.2822085889570552,
+  "parameter_tp": 23,
+  "parameter_fp": 22,
+  "parameter_fn": 95,
+  "parameter_mismatches": [
+    {
+      "path": "materialproperties/fuel-mat",
+      "key": "type",
+      "expected": "SolidMaterialProps",
+      "actual": "SolidMaterialProperties"
+    },
+    {
+      "path": "materialproperties/gap-mat",
+      "key": "type",
+      "expected": "SolidMaterialProps",
+      "actual": "SolidMaterialProperties"
+    },
+    {
+      "path": "materialproperties/clad-mat",
+      "key": "type",
+      "expected": "SolidMaterialProps",
+      "actual": "SolidMaterialProperties"
+    },
+    {
+      "path": "components/pipe2",
+      "key": "type",
+      "expected": "PBOneDFluidComponent",
+      "actual": "Pipe1D"
+    },
+    {
+      "path": "components/pipe2",
+      "key": "n_elems",
+      "expected": "4",
+      "actual": "1"
+    },
+    {
+      "path": "components/ch1",
+      "key": "type",
+      "expected": "PBCoreChannel",
+      "actual": "Channel1D"
+    },
+    {
+      "path": "components/ch1",
+      "key": "n_elems",
+      "expected": "4",
+      "actual": "20"
+    },
+    {
+      "path": "components/ch2",
+      "key": "type",
+      "expected": "PBCoreChannel",
+      "actual": "Channel1D"
+    },
+    {
+      "path": "components/ch2",
+      "key": "n_elems",
+      "expected": "4",
+      "actual": "20"
+    },
+    {
+      "path": "components/ch3",
+      "key": "type",
+      "expected": "PBCoreChannel",
+      "actual": "Channel1D"
+    },
+    {
+      "path": "components/ch3",
+      "key": "n_elems",
+      "expected": "4",
+      "actual": "20"
+    },
+    {
+      "path": "components/ch4",
+      "key": "type",
+      "expected": "PBCoreChannel",
+      "actual": "Channel1D"
+    },
+    {
+      "path": "components/ch4",
+      "key": "n_elems",
+      "expected": "4",
+      "actual": "20"
+    },
+    {
+      "path": "components/ch5",
+      "key": "type",
+      "expected": "PBCoreChannel",
+      "actual": "Channel1D"
+    },
+    {
+      "path": "components/ch5",
+      "key": "n_elems",
+      "expected": "4",
+      "actual": "20"
+    },
+    {
+      "path": "components/pipe1",
+      "key": "type",
+      "expected": "PBOneDFluidComponent",
+      "actual": "Pipe1D"
+    },
+    {
+      "path": "components/pipe1",
+      "key": "n_elems",
+      "expected": "2",
+      "actual": "1"
+    },
+    {
+      "path": "components/branch2",
+      "key": "type",
+      "expected": "PBBranch",
+      "actual": "BranchJunction"
+    },
+    {
+      "path": "components/branch1",
+      "key": "type",
+      "expected": "PBBranch",
+      "actual": "BranchJunction"
+    },
+    {
+      "path": "components/inlet",
+      "key": "type",
+      "expected": "PBTDJ",
+      "actual": "TDVInlet"
+    },
+    {
+      "path": "components/outlet",
+      "key": "type",
+      "expected": "PBTDV",
+      "actual": "TDVOutlet"
+    },
+    {
+      "path": "executioner",
+      "key": "type",
+      "expected": "Steady",
+      "actual": "Transient"
+    }
+  ],
+  "topology_recall": 0.0,
+  "topology_precision": 0.0,
+  "missing_topology_edges": [
+    [
+      "ch1(out)",
+      "pipe1(in)"
+    ],
+    [
+      "ch2(out)",
+      "pipe1(in)"
+    ],
+    [
+      "ch3(out)",
+      "pipe1(in)"
+    ],
+    [
+      "ch4(out)",
+      "pipe1(in)"
+    ],
+    [
+      "ch5(out)",
+      "pipe1(in)"
+    ],
+    [
+      "pipe2(out)",
+      "ch1(in)"
+    ],
+    [
+      "pipe2(out)",
+      "ch2(in)"
+    ],
+    [
+      "pipe2(out)",
+      "ch3(in)"
+    ],
+    [
+      "pipe2(out)",
+      "ch4(in)"
+    ],
+    [
+      "pipe2(out)",
+      "ch5(in)"
+    ]
+  ],
+  "extra_topology_edges": [],
+  "explicit_missing_markers": 13,
+  "assumption_markers": 5,
+  "characters": 9591
+}

@@ -1,0 +1,185 @@
+{
+  "condition": "llm_only",
+  "case": "ABTR",
+  "run": 3,
+  "resolved_model": "gpt-5.2-2025-12-11",
+  "latency_seconds": 46.85943369998131,
+  "required_block_fraction": 0.5555555555555556,
+  "required_blocks_present": [
+    "components",
+    "executioner",
+    "globalparams",
+    "outputs",
+    "preconditioning"
+  ],
+  "required_blocks_missing": [
+    "eos",
+    "functions",
+    "materialproperties",
+    "postprocessors"
+  ],
+  "component_recall": 0.75,
+  "missing_components": [
+    "inlet",
+    "outlet",
+    "reactor"
+  ],
+  "parameter_precision": 0.575,
+  "parameter_recall": 0.19491525423728814,
+  "parameter_f1": 0.2911392405063291,
+  "parameter_tp": 23,
+  "parameter_fp": 17,
+  "parameter_fn": 95,
+  "parameter_mismatches": [
+    {
+      "path": "components/pipe2",
+      "key": "type",
+      "expected": "PBOneDFluidComponent",
+      "actual": ""
+    },
+    {
+      "path": "components/pipe2",
+      "key": "n_elems",
+      "expected": "4",
+      "actual": ""
+    },
+    {
+      "path": "components/ch1",
+      "key": "type",
+      "expected": "PBCoreChannel",
+      "actual": ""
+    },
+    {
+      "path": "components/ch1",
+      "key": "n_elems",
+      "expected": "4",
+      "actual": "20"
+    },
+    {
+      "path": "components/ch2",
+      "key": "type",
+      "expected": "PBCoreChannel",
+      "actual": ""
+    },
+    {
+      "path": "components/ch2",
+      "key": "n_elems",
+      "expected": "4",
+      "actual": "20"
+    },
+    {
+      "path": "components/ch3",
+      "key": "type",
+      "expected": "PBCoreChannel",
+      "actual": ""
+    },
+    {
+      "path": "components/ch3",
+      "key": "n_elems",
+      "expected": "4",
+      "actual": "20"
+    },
+    {
+      "path": "components/ch4",
+      "key": "type",
+      "expected": "PBCoreChannel",
+      "actual": ""
+    },
+    {
+      "path": "components/ch4",
+      "key": "n_elems",
+      "expected": "4",
+      "actual": "20"
+    },
+    {
+      "path": "components/ch5",
+      "key": "type",
+      "expected": "PBCoreChannel",
+      "actual": ""
+    },
+    {
+      "path": "components/ch5",
+      "key": "n_elems",
+      "expected": "4",
+      "actual": "20"
+    },
+    {
+      "path": "components/pipe1",
+      "key": "type",
+      "expected": "PBOneDFluidComponent",
+      "actual": ""
+    },
+    {
+      "path": "components/pipe1",
+      "key": "n_elems",
+      "expected": "2",
+      "actual": ""
+    },
+    {
+      "path": "components/branch2",
+      "key": "type",
+      "expected": "PBBranch",
+      "actual": ""
+    },
+    {
+      "path": "components/branch1",
+      "key": "type",
+      "expected": "PBBranch",
+      "actual": ""
+    },
+    {
+      "path": "executioner",
+      "key": "type",
+      "expected": "Steady",
+      "actual": "Transient"
+    }
+  ],
+  "topology_recall": 0.0,
+  "topology_precision": 0.0,
+  "missing_topology_edges": [
+    [
+      "ch1(out)",
+      "pipe1(in)"
+    ],
+    [
+      "ch2(out)",
+      "pipe1(in)"
+    ],
+    [
+      "ch3(out)",
+      "pipe1(in)"
+    ],
+    [
+      "ch4(out)",
+      "pipe1(in)"
+    ],
+    [
+      "ch5(out)",
+      "pipe1(in)"
+    ],
+    [
+      "pipe2(out)",
+      "ch1(in)"
+    ],
+    [
+      "pipe2(out)",
+      "ch2(in)"
+    ],
+    [
+      "pipe2(out)",
+      "ch3(in)"
+    ],
+    [
+      "pipe2(out)",
+      "ch4(in)"
+    ],
+    [
+      "pipe2(out)",
+      "ch5(in)"
+    ]
+  ],
+  "extra_topology_edges": [],
+  "explicit_missing_markers": 32,
+  "assumption_markers": 7,
+  "characters": 10242
+}

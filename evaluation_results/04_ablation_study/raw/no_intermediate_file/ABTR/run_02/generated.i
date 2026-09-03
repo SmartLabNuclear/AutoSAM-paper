@@ -1,0 +1,301 @@
+[GlobalParams]
+  # Fluid and solid initial conditions (global)
+  initial_pressure = 1.0e5        # Pa
+  initial_temperature = 628.15    # K
+  initial_velocity = 2.0          # m/s
+
+  # Solid initial temperature
+  initial_Tsolid = 628.15         # K
+
+  # Gravity
+  gravity = '0 0 -9.81'           # m/s^2
+
+  # Scaling (documented)
+  Tsolid_sf = 1e-3                # temperature scaling factor for solids
+  # MISSING: variable scaling factors application details (which variables get 1, 1e-3, 1e-6)
+[]
+
+[Functions]
+  # Piecewise time step control (documented)
+  # dt = 0.01 s from t=0 to 0.1
+  # dt increases to 0.1 s by t=0.2
+  # dt reaches 1 s for times beyond 2 s
+  [dt_func]
+    type = PiecewiseLinear
+    x = '0.0   0.1   0.2   2.0   1.0e9'
+    y = '0.01  0.01  0.1   1.0   1.0'
+  []
+[]
+
+[EOS]
+  [sodium]
+    type = SodiumEOS
+    # MISSING: any EOS option selections (if required by this SAM build)
+  []
+[]
+
+[MaterialProperties]
+  # Fluid material
+  [coolant]
+    type = FluidPropertiesMaterial
+    eos = sodium
+  []
+
+  # Solid materials (documented)
+  [fuel-mat]
+    type = SolidPropertiesMaterial
+    k = 16.0               # W/m-K
+    cp = 191.67            # J/kg-K
+    rho = 1.4583e4         # kg/m3
+  []
+  [gap-mat]
+    type = SolidPropertiesMaterial
+    k = 64.0               # W/m-K
+    cp = 1272.0            # J/kg-K
+    rho = 865.0            # kg/m3
+  []
+  [clad-mat]
+    type = SolidPropertiesMaterial
+    k = 26.0               # W/m-K
+    cp = 638.0             # J/kg-K
+    rho = 7.646e3          # kg/m3
+  []
+  [duct-mat]
+    type = SolidPropertiesMaterial
+    k = 26.0               # W/m-K
+    cp = 638.0             # J/kg-K
+    rho = 7.646e3          # kg/m3
+  []
+[]
+
+[Components]
+  # --- Boundary conditions (TDV components) ---
+  [inlet]
+    type = InletVelocityTemperatureTDV
+    # Applied at entrance of pipe1
+    velocity = 3.25        # m/s (documented boundary)
+    temperature = 628.15   # K (documented boundary)
+    # MISSING: whether inlet also sets pressure (not documented)
+  []
+
+  [outlet]
+    type = OutletPressureTemperatureTDV
+    # Applied at exit of pipe2
+    pressure = 1.0e5       # Pa (documented boundary)
+    temperature = 628.15   # K (documented boundary)
+  []
+
+  # --- Inlet/Outlet plenums (1D pipes) ---
+  [pipe1]
+    type = Pipe1Phase
+    eos = sodium
+    A = 0.44934            # m^2 (Table 1)
+    Dh = 2.972e-3          # m (Table 1)
+    length = 0.6           # m (Table 1)
+    n_elems = # MISSING: pipe axial element count
+    # Connectivity
+    inlet = inlet
+    outlet = branch1:main
+  []
+
+  [pipe2]
+    type = Pipe1Phase
+    eos = sodium
+    A = 0.44934            # m^2 (Table 1)
+    Dh = 2.972e-3          # m (Table 1)
+    length = 1.5           # m (Table 1)
+    n_elems = # MISSING: pipe axial element count
+    # Connectivity
+    inlet = branch2:main
+    outlet = outlet
+  []
+
+  # --- Branching junctions ---
+  # branch1: distributes flow from pipe1 into CH1-CH5
+  [branch1]
+    type = Branch1toN
+    eos = sodium
+    A = 0.44934            # m^2 (documented branches area)
+    # Form-loss coefficients (documented)
+    K_main = 0.1
+    K_branches = '0.5 1.96 2.16 4.5 3500.0'   # CH1..CH5 inlets per doc order? (see assumption below)
+    # Engineering assumption:
+    # The document lists K = 0.1, 0.5, 1.96, 2.16, 4.5, 3500.0 corresponding to main + CH1..CH5.
+    # Spreadsheet lists CH1=0.1, CH2=0.5, CH3=1.96, CH4=2.16, CH5=4.5, extra row=3500.
+    # We interpret 3500.0 as an additional loss on one leg (likely CH5 or a throttling path) but mapping is ambiguous.
+    # MISSING: explicit mapping of K=3500.0 to a named leg.
+    #
+    # Connectivity
+    main = pipe1:outlet
+    outlets = 'CH1:inlet CH2:inlet CH3:inlet CH4:inlet CH5:inlet'
+  []
+
+  # branch2: recombines CH1-CH5 into pipe2
+  [branch2]
+    type = BranchNto1
+    eos = sodium
+    A = 0.44934            # m^2 (documented branches area)
+    # Form-loss coefficients (documented all zero)
+    K_inlets = '0.0 0.0 0.0 0.0 0.0'
+    K_main = 0.0
+    # Connectivity
+    inlets = 'CH1:outlet CH2:outlet CH3:outlet CH4:outlet CH5:outlet'
+    main = pipe2:inlet
+  []
+
+  # --- Core channels (5 parallel heated channels) ---
+  # Common axial discretization: 20 axial fluid elements over 0.8 m heated length
+  [CH1]
+    type = FlowChannel1Phase
+    eos = sodium
+    orientation = '0 0 1'
+    A = 4.9237e-3
+    Dh = 2.972e-3
+    length = 0.8
+    n_elems = 20
+    friction_factor = 0.022
+    heat_transfer_coefficient = 1.6129e5     # W/m2-K
+    ht_area_density = 1107.8                 # 1/m
+    # Power
+    power_fraction = 0.02248
+    total_power = # MISSING: total reactor (or total core) power for normalization (W)
+    # Connectivity
+    inlet = branch1:CH1
+    outlet = branch2:CH1
+
+    # Heat structure
+    n_heat_structures = 3
+    hs_widths = '0.003015 0.000465 0.00052'  # m (fuel/gap/clad)
+    hs_materials = 'fuel-mat gap-mat clad-mat'
+    hs_radial_elems = '5 1 1'                # (documented)
+    # MISSING: heat structure perimeter/geometry specification method if required beyond ht_area_density
+  []
+
+  [CH2]
+    type = FlowChannel1Phase
+    eos = sodium
+    orientation = '0 0 1'
+    A = 0.11323
+    Dh = 2.972e-3
+    length = 0.8
+    n_elems = 20
+    friction_factor = 0.022
+    heat_transfer_coefficient = 1.6129e5
+    ht_area_density = 1107.8
+    power_fraction = 0.41924
+    total_power = # MISSING: total reactor (or total core) power for normalization (W)
+    inlet = branch1:CH2
+    outlet = branch2:CH2
+
+    n_heat_structures = 3
+    hs_widths = '0.003015 0.000465 0.00052'
+    hs_materials = 'fuel-mat gap-mat clad-mat'
+    hs_radial_elems = '5 1 1'
+  []
+
+  [CH3]
+    type = FlowChannel1Phase
+    eos = sodium
+    orientation = '0 0 1'
+    A = 0.029539
+    Dh = 2.972e-3
+    length = 0.8
+    n_elems = 20
+    friction_factor = 0.022
+    heat_transfer_coefficient = 1.6129e5
+    ht_area_density = 1107.8
+    power_fraction = 0.09852
+    total_power = # MISSING: total reactor (or total core) power for normalization (W)
+    inlet = branch1:CH3
+    outlet = branch2:CH3
+
+    n_heat_structures = 3
+    hs_widths = '0.003015 0.000465 0.00052'
+    hs_materials = 'fuel-mat gap-mat clad-mat'
+    hs_radial_elems = '5 1 1'
+  []
+
+  [CH4]
+    type = FlowChannel1Phase
+    eos = sodium
+    orientation = '0 0 1'
+    A = 0.14769
+    Dh = 2.972e-3
+    length = 0.8
+    n_elems = 20
+    friction_factor = 0.022
+    heat_transfer_coefficient = 1.6129e5
+    ht_area_density = 1107.8
+    power_fraction = 0.43116
+    total_power = # MISSING: total reactor (or total core) power for normalization (W)
+    inlet = branch1:CH4
+    outlet = branch2:CH4
+
+    n_heat_structures = 3
+    hs_widths = '0.003015 0.000465 0.00052'
+    hs_materials = 'fuel-mat gap-mat clad-mat'
+    hs_radial_elems = '5 1 1'
+  []
+
+  [CH5]
+    type = FlowChannel1Phase
+    eos = sodium
+    orientation = '0 0 1'
+    A = 0.153955129
+    Dh = 2.972e-3
+    length = 0.8
+    n_elems = 20
+    friction_factor = 0.04
+    heat_transfer_coefficient = 13619.0
+    ht_area_density = 2013.6            # spreadsheet value (differs from Table 2: 2113.6)
+    # Engineering assumption: use spreadsheet "heat transfer area density" for CH5 since it is a machine table.
+    power_fraction = 0.02860
+    total_power = # MISSING: total reactor (or total core) power for normalization (W)
+    inlet = branch1:CH5
+    outlet = branch2:CH5
+
+    n_heat_structures = 2
+    hs_widths = '6.32340e-3 7.0260e-4'   # m (fuel/clad)
+    hs_materials = 'fuel-mat clad-mat'
+    hs_radial_elems = '5 1'              # (documented)
+  []
+[]
+
+[Preconditioning]
+  # MISSING: documented preconditioning strategy; none specified beyond scaling factors
+[]
+
+[Postprocessors]
+  # Basic monitoring (fields depend on SAM variable naming; may need adjustment)
+  # MISSING: exact SAM postprocessor types/variable names for mass flow, outlet temperature, pressure drop
+[]
+
+[Executioner]
+  type = Transient
+  scheme = bdf2
+
+  start_time = 0.0
+  # Only five time steps executed (documented)
+  num_steps = 5
+  dt = 0.1                 # nominal starting step (documented)
+  dtmin = 1e-5             # documented
+  dtmax = 1.0              # documented max allowable beyond 2 s
+
+  [TimeStepper]
+    type = FunctionDT
+    function = dt_func
+  []
+
+  # Nonlinear solve controls
+  nl_rel_tol = # MISSING: nonlinear relative tolerance
+  nl_abs_tol = # MISSING: nonlinear absolute tolerance
+  nl_max_its = # MISSING: nonlinear max iterations
+  l_max_its = # MISSING: linear max iterations
+[]
+
+[Outputs]
+  exodus = false
+  csv = true
+  print_linear_residuals = false
+  perf_graph = true
+[]

@@ -1,0 +1,242 @@
+{
+  "condition": "no_intermediate_file",
+  "case": "ABTR",
+  "run": 1,
+  "resolved_model": "gpt-5.2-2025-12-11",
+  "latency_seconds": 45.717912500025705,
+  "required_block_fraction": 1.0,
+  "required_blocks_present": [
+    "components",
+    "eos",
+    "executioner",
+    "functions",
+    "globalparams",
+    "materialproperties",
+    "outputs",
+    "postprocessors",
+    "preconditioning"
+  ],
+  "required_blocks_missing": [],
+  "component_recall": 0.9166666666666666,
+  "missing_components": [
+    "reactor"
+  ],
+  "parameter_precision": 0.5645161290322581,
+  "parameter_recall": 0.2966101694915254,
+  "parameter_f1": 0.3888888888888889,
+  "parameter_tp": 35,
+  "parameter_fp": 27,
+  "parameter_fn": 83,
+  "parameter_mismatches": [
+    {
+      "path": "materialproperties/fuel-mat",
+      "key": "type",
+      "expected": "SolidMaterialProps",
+      "actual": "SolidMaterialProperties"
+    },
+    {
+      "path": "materialproperties/gap-mat",
+      "key": "type",
+      "expected": "SolidMaterialProps",
+      "actual": "SolidMaterialProperties"
+    },
+    {
+      "path": "materialproperties/clad-mat",
+      "key": "type",
+      "expected": "SolidMaterialProps",
+      "actual": "SolidMaterialProperties"
+    },
+    {
+      "path": "components/pipe2",
+      "key": "type",
+      "expected": "PBOneDFluidComponent",
+      "actual": "Pipe"
+    },
+    {
+      "path": "components/pipe2",
+      "key": "n_elems",
+      "expected": "4",
+      "actual": "1"
+    },
+    {
+      "path": "components/ch1",
+      "key": "type",
+      "expected": "PBCoreChannel",
+      "actual": "CoreChannel"
+    },
+    {
+      "path": "components/ch1",
+      "key": "n_elems",
+      "expected": "4",
+      "actual": "20"
+    },
+    {
+      "path": "components/ch1",
+      "key": "power_fraction",
+      "expected": "0.02248 0.0 0.0",
+      "actual": "0.02248"
+    },
+    {
+      "path": "components/ch2",
+      "key": "type",
+      "expected": "PBCoreChannel",
+      "actual": "CoreChannel"
+    },
+    {
+      "path": "components/ch2",
+      "key": "n_elems",
+      "expected": "4",
+      "actual": "20"
+    },
+    {
+      "path": "components/ch2",
+      "key": "power_fraction",
+      "expected": "0.41924 0.0 0.0",
+      "actual": "0.41924"
+    },
+    {
+      "path": "components/ch3",
+      "key": "type",
+      "expected": "PBCoreChannel",
+      "actual": "CoreChannel"
+    },
+    {
+      "path": "components/ch3",
+      "key": "n_elems",
+      "expected": "4",
+      "actual": "20"
+    },
+    {
+      "path": "components/ch3",
+      "key": "power_fraction",
+      "expected": "0.09852 0.0 0.0",
+      "actual": "0.09852"
+    },
+    {
+      "path": "components/ch4",
+      "key": "type",
+      "expected": "PBCoreChannel",
+      "actual": "CoreChannel"
+    },
+    {
+      "path": "components/ch4",
+      "key": "n_elems",
+      "expected": "4",
+      "actual": "20"
+    },
+    {
+      "path": "components/ch4",
+      "key": "power_fraction",
+      "expected": "0.43116 0.0 0.0",
+      "actual": "0.43116"
+    },
+    {
+      "path": "components/ch5",
+      "key": "type",
+      "expected": "PBCoreChannel",
+      "actual": "CoreChannel"
+    },
+    {
+      "path": "components/ch5",
+      "key": "n_elems",
+      "expected": "4",
+      "actual": "20"
+    },
+    {
+      "path": "components/ch5",
+      "key": "power_fraction",
+      "expected": "0.0286 0.0",
+      "actual": "0.02860"
+    },
+    {
+      "path": "components/pipe1",
+      "key": "type",
+      "expected": "PBOneDFluidComponent",
+      "actual": "Pipe"
+    },
+    {
+      "path": "components/pipe1",
+      "key": "n_elems",
+      "expected": "2",
+      "actual": "1"
+    },
+    {
+      "path": "components/branch2",
+      "key": "type",
+      "expected": "PBBranch",
+      "actual": "Branch"
+    },
+    {
+      "path": "components/branch1",
+      "key": "type",
+      "expected": "PBBranch",
+      "actual": "Branch"
+    },
+    {
+      "path": "components/inlet",
+      "key": "type",
+      "expected": "PBTDJ",
+      "actual": "TDVBoundary"
+    },
+    {
+      "path": "components/outlet",
+      "key": "type",
+      "expected": "PBTDV",
+      "actual": "TDVBoundary"
+    },
+    {
+      "path": "executioner",
+      "key": "type",
+      "expected": "Steady",
+      "actual": "Transient"
+    }
+  ],
+  "topology_recall": 0.0,
+  "topology_precision": 0.0,
+  "missing_topology_edges": [
+    [
+      "ch1(out)",
+      "pipe1(in)"
+    ],
+    [
+      "ch2(out)",
+      "pipe1(in)"
+    ],
+    [
+      "ch3(out)",
+      "pipe1(in)"
+    ],
+    [
+      "ch4(out)",
+      "pipe1(in)"
+    ],
+    [
+      "ch5(out)",
+      "pipe1(in)"
+    ],
+    [
+      "pipe2(out)",
+      "ch1(in)"
+    ],
+    [
+      "pipe2(out)",
+      "ch2(in)"
+    ],
+    [
+      "pipe2(out)",
+      "ch3(in)"
+    ],
+    [
+      "pipe2(out)",
+      "ch4(in)"
+    ],
+    [
+      "pipe2(out)",
+      "ch5(in)"
+    ]
+  ],
+  "extra_topology_edges": [],
+  "explicit_missing_markers": 27,
+  "assumption_markers": 2,
+  "characters": 8319
+}

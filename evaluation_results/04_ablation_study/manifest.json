@@ -1,0 +1,43 @@
+{
+  "study_id": "autosam_component_ablation_gpt52",
+  "created_utc": "2026-09-03T18:51:35.850239+00:00",
+  "model_requested": "gpt-5.2",
+  "expected_resolved_model": "gpt-5.2-2025-12-11",
+  "runs": 3,
+  "conditions": [
+    "full_pipeline_existing",
+    "llm_only",
+    "no_intermediate_file",
+    "no_validator",
+    "validator_repair"
+  ],
+  "script": "evaluation\\autosam_ablation_gpt52.py",
+  "script_sha256": "7b03fbc9dfff9726edde1ab2fc63bd77f01d009440f069e5ed3e8d5853ad364b",
+  "config": "evaluation\\autosam_ablation_gpt52_config.json",
+  "config_sha256": "e6ccca284bcdb5ebe179d0084f2ac8d698a9b26b120b6fbd136b13b04d9d3646",
+  "api_endpoint": "chat.completions",
+  "temperature": 1,
+  "notes": [
+    "Existing full-pipeline artifacts are not regenerated.",
+    "The validator ablation uses a disclosed deterministic connectivity defect.",
+    "The case-neutral evaluation prompt excludes case examples embedded in the application system prompt to prevent benchmark leakage.",
+    "Every ablated configuration receives the same source documentation: case PDF, spreadsheet, and schematic description. No parameter is supplied pre-extracted, and nothing supplied to the model is derived from the reference deck or the intermediate representation.",
+    "The no_image_processing arm was executed but is withdrawn from this publication; its runs, scores, and aggregate rows are removed here. Token and API-call totals recorded elsewhere in this manifest cover the full six-arm run."
+  ],
+  "inputs": {
+    "ABTR": {
+      "ABTR_case_pdf\\intermediate_ABTR.yaml": "095c9701e8e99503eacb3ac9233e9145fbe4e4ee72ff5d3421b8c05474690247",
+      "ABTR_case_pdf\\model_specifications.xlsx": "f06e5ab147a52bed5a83fc15aac75d2d3e6f54a7bc0631ce95cf91c9dae09868",
+      "ABTR_case_pdf\\ABTR_5channel_min_working.i": "ff9e67b15d7ca5623111e9df897258c9f7b67cb3142993748933397d3de1a87e",
+      "ABTR_case_pdf\\ABTR_case.pdf": "cce875fe9be71d5491a41d4561a7e77d04327fb3740e944b5caef5a37db6f30e",
+      "ABTR_case_pdf\\image_descriptions.json": "23aa505704ba1c9236bae22e8fb0bb1b6259c245a088b08c906ca896055c2792"
+    },
+    "MSRE": {
+      "msre_pdf_noise\\msre_intermediate.yaml": "04287136cf0ee84376f52ad3a8c27f3fc6b1a227a6f858b9cb9d0de2c9cede87",
+      "msre_pdf_noise\\MSRE_specifications.xlsx": "259d5e30b7cf99616886142ad31112cc3fe7124f25b72c54b2853bf32c10eb7d",
+      "msre_pdf_noise\\sam_model_v1.i": "f4bba516e411fe1393098f8e08f19db0cc4d8a05acb8e654ba7d95b7b8822acd",
+      "msre_pdf_noise\\MSRE_case.pdf": "5ee5a20e1447ce06e32e92e1a49085935426bd256572facc1db3fd303f20bc1e",
+      "msre_pdf_noise\\image_descriptions.json": "0064f2fd369c02d19aa686093ceeb61b6cc5de70e8eec4a14d59112db350bf3a"
+    }
+  }
+}

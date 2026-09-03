@@ -1,0 +1,375 @@
+# ABTR case SAM input deck (generated llm_only from supplied documentation)
+# Any value not found in the documentation is marked as MISSING.
+# Engineering assumptions are explicitly commented.
+
+# ----------------------------
+# Global settings / scaling
+# ----------------------------
+[GlobalParams]
+  # Coolant: sodium (property package name not provided in documentation)
+  fluid = # MISSING: sodium_fluid_property_name
+[]
+
+[Problem]
+  type = FEProblem
+  solve = true
+[]
+
+[Executioner]
+  type = Transient
+
+  # Time stepping per documentation:
+  # dt = 0.01 from t=0 to 0.1
+  # dt = 0.1 by t=0.2
+  # dt max = 1 for t > 2
+  # Only five time steps executed.
+  # NOTE: Exact SAM syntax for piecewise linear timestepper not provided; using placeholders.
+  start_time = 0.0
+  end_time = # MISSING: end_time_for_5_steps
+  num_steps = 5
+
+  dt = 0.1                  # nominal starting step (documentation)
+  dtmin = 1e-5              # documentation
+  dtmax = 1.0               # documentation
+
+  # Piecewise linear dt control (placeholder fields)
+  [./TimeStepper]
+    type = # MISSING: piecewise_linear_timestepper_type
+    # (t, dt) points
+    # (0.0, 0.01), (0.1, 0.01), (0.2, 0.1), (2.0, 1.0)
+    times = '0.0 0.1 0.2 2.0'
+    dts   = '0.01 0.01 0.1 1.0'
+  [../]
+[]
+
+[Outputs]
+  exodus = true
+  csv = true
+[]
+
+# ----------------------------
+# Materials (solids)
+# ----------------------------
+[Materials]
+  # fuel-mat: k=16 W/m-K, Cp=191.67 J/kg-K, rho=1.4583e4 kg/m3
+  [./fuel_mat]
+    type = # MISSING: solid_material_type
+    thermal_conductivity = 16.0
+    specific_heat = 191.67
+    density = 1.4583e4
+  [../]
+
+  # gap-mat: k=64 W/m-K, Cp=1272 J/kg-K, rho=865 kg/m3
+  [./gap_mat]
+    type = # MISSING: solid_material_type
+    thermal_conductivity = 64.0
+    specific_heat = 1272.0
+    density = 865.0
+  [../]
+
+  # clad-mat: k=26 W/m-K, Cp=638 J/kg-K, rho=7.646e3 kg/m3
+  [./clad_mat]
+    type = # MISSING: solid_material_type
+    thermal_conductivity = 26.0
+    specific_heat = 638.0
+    density = 7.646e3
+  [../]
+
+  # duct-mat: same as cladding
+  [./duct_mat]
+    type = # MISSING: solid_material_type
+    thermal_conductivity = 26.0
+    specific_heat = 638.0
+    density = 7.646e3
+  [../]
+[]
+
+# ----------------------------
+# Initial conditions / scaling factors
+# ----------------------------
+# Documentation:
+# Coolant initial: P=1e5 Pa, v=2 m/s, T=628.15 K
+# Solid initial: T=628.15 K
+# Tsolid_sf = 1e-3; variable scaling factors of 1, 1e-3, 1e-6 (not mapped to exact SAM keywords)
+[ICs]
+  # Placeholders since exact SAM IC block syntax is not provided.
+  [./fluid_ic]
+    type = # MISSING: fluid_initial_condition_type
+    pressure = 1.0e5
+    velocity = 2.0
+    temperature = 628.15
+  [../]
+
+  [./solid_ic]
+    type = # MISSING: solid_initial_condition_type
+    temperature = 628.15
+    Tsolid_sf = 1.0e-3
+  [../]
+[]
+
+# ----------------------------
+# Components: boundaries (TDVs)
+# ----------------------------
+[Components]
+  # Inlet TDV: velocity BC 3.25 m/s and temperature 628.15 K at entrance of pipe1
+  [./inlet_tdv]
+    type = TDV
+    # Engineering assumption: TDV provides fixed boundary state; exact field names unknown.
+    bc_type = 'velocity_temperature'
+    velocity = 3.25
+    temperature = 628.15
+  [../]
+
+  # Outlet TDV: fixed pressure 1e5 Pa and temperature 628.15 K at exit of pipe2
+  [./outlet_tdv]
+    type = TDV
+    bc_type = 'pressure_temperature'
+    pressure = 1.0e5
+    temperature = 628.15
+  [../]
+
+  # ----------------------------
+  # Fluid components: inlet plenum pipe1, core channels, outlet plenum pipe2
+  # ----------------------------
+  # Geometry from Table 1:
+  # pipe1: A=0.44934 m2, Dh=2.972e-3 m, L=0.6 m
+  # pipe2: A=0.44934 m2, Dh=2.972e-3 m, L=1.5 m
+  # Channels CH1-CH5: given A, Dh=2.972e-3, L=0.8 m; 20 axial fluid elements each.
+  # Engineering assumption: use 1D pipe/channel component types with n_elems specified.
+
+  [./pipe1]
+    type = # MISSING: pipe_component_type
+    A = 0.44934
+    Dh = 2.972e-3
+    length = 0.6
+    n_elems = # MISSING: pipe1_axial_elems
+    # Connect inlet boundary
+    inlet = inlet_tdv
+    outlet = branch1:main
+  [../]
+
+  [./CH1]
+    type = # MISSING: core_channel_component_type
+    A = 4.9237e-3
+    Dh = 2.972e-3
+    length = 0.8
+    n_elems = 20
+    friction_factor = 0.022
+    heat_transfer_coefficient = 161290.0
+    ht_area_density = 1107.8
+    inlet = branch1:ch1
+    outlet = branch2:ch1
+  [../]
+
+  [./CH2]
+    type = # MISSING: core_channel_component_type
+    A = 0.11323
+    Dh = 2.972e-3
+    length = 0.8
+    n_elems = 20
+    friction_factor = 0.022
+    heat_transfer_coefficient = 161290.0
+    ht_area_density = 1107.8
+    inlet = branch1:ch2
+    outlet = branch2:ch2
+  [../]
+
+  [./CH3]
+    type = # MISSING: core_channel_component_type
+    A = 0.029539
+    Dh = 2.972e-3
+    length = 0.8
+    n_elems = 20
+    friction_factor = 0.022
+    heat_transfer_coefficient = 161290.0
+    ht_area_density = 1107.8
+    inlet = branch1:ch3
+    outlet = branch2:ch3
+  [../]
+
+  [./CH4]
+    type = # MISSING: core_channel_component_type
+    A = 0.14769
+    Dh = 2.972e-3
+    length = 0.8
+    n_elems = 20
+    friction_factor = 0.022
+    heat_transfer_coefficient = 161290.0
+    ht_area_density = 1107.8
+    inlet = branch1:ch4
+    outlet = branch2:ch4
+  [../]
+
+  [./CH5]
+    type = # MISSING: core_channel_component_type
+    A = 0.153955129
+    Dh = 2.972e-3
+    length = 0.8
+    n_elems = 20
+    friction_factor = 0.04
+    heat_transfer_coefficient = 13619.0
+    ht_area_density = 2013.6  # NOTE: spreadsheet differs from Table 2 (2113.6). Using spreadsheet value.
+    inlet = branch1:ch5
+    outlet = branch2:ch5
+  [../]
+
+  [./pipe2]
+    type = # MISSING: pipe_component_type
+    A = 0.44934
+    Dh = 2.972e-3
+    length = 1.5
+    n_elems = # MISSING: pipe2_axial_elems
+    inlet = branch2:main
+    outlet = outlet_tdv
+  [../]
+
+  # ----------------------------
+  # Junctions: branch1 (distribute), branch2 (collect)
+  # ----------------------------
+  # Documentation: branches area = 0.44934
+  # branch1 K values correspond to: main pipe passage and five channel inlets (CH1-CH5):
+  # K = 0.1, 0.5, 1.96, 2.16, 4.5, and 3500.0
+  # NOTE: documentation text says "0.1 ... main pipe passage and the five channel inlets"; spreadsheet maps CH1->0.1 etc,
+  # plus an extra 3500 row. Engineering assumption: apply K_main=3500 to represent strong loss in main bypass leg
+  # (or junction reference leg). Exact SAM junction K mapping is not provided; keep explicit fields as placeholders.
+  [./branch1]
+    type = # MISSING: branch_component_type
+    area = 0.44934
+
+    # Ports (ensure all connected)
+    main_in = pipe1:outlet
+    main_out = # MISSING: branch1_main_out_connection  # engineering assumption: branch main_out is not used; SAM may require it
+
+    ch1 = CH1:inlet
+    ch2 = CH2:inlet
+    ch3 = CH3:inlet
+    ch4 = CH4:inlet
+    ch5 = CH5:inlet
+
+    # Form losses (placeholders)
+    K_main = 3500.0
+    K_ch1  = 0.1
+    K_ch2  = 0.5
+    K_ch3  = 1.96
+    K_ch4  = 2.16
+    K_ch5  = 4.5
+  [../]
+
+  # branch2: K = 0.0 for each outlet leg; merge to pipe2
+  [./branch2]
+    type = # MISSING: branch_component_type
+    area = 0.44934
+
+    main_out = pipe2:inlet
+    ch1 = CH1:outlet
+    ch2 = CH2:outlet
+    ch3 = CH3:outlet
+    ch4 = CH4:outlet
+    ch5 = CH5:outlet
+
+    K_main = 0.0
+    K_ch1  = 0.0
+    K_ch2  = 0.0
+    K_ch3  = 0.0
+    K_ch4  = 0.0
+    K_ch5  = 0.0
+  [../]
+
+  # ----------------------------
+  # Heat structures for channels
+  # ----------------------------
+  # Table 2:
+  # CH1-CH4: nhs=3, widths = 0.003015 / 0.000465 / 0.00052, materials fuel/gap/clad
+  # CH5: nhs=2, widths = 6.32340e-3 / 7.0260e-4, materials fuel/clad (reflector/non-fuel)
+  # Axial discretization (documentation):
+  # fuel/gap/clad layers: (5,1,1) elements for reference fuel channels; (5,1) for reflector channel.
+  # Engineering assumption: heat structure length equals heated length 0.8 m and is coupled to each channel.
+
+  [./HS_CH1]
+    type = # MISSING: heat_structure_component_type
+    n_layers = 3
+    layer_widths = '0.003015 0.000465 0.00052'
+    layer_materials = 'fuel_mat gap_mat clad_mat'
+    layer_elems = '5 1 1'
+    axial_elems = 20
+    length = 0.8
+    coupled_flow_channel = CH1
+  [../]
+
+  [./HS_CH2]
+    type = # MISSING: heat_structure_component_type
+    n_layers = 3
+    layer_widths = '0.003015 0.000465 0.00052'
+    layer_materials = 'fuel_mat gap_mat clad_mat'
+    layer_elems = '5 1 1'
+    axial_elems = 20
+    length = 0.8
+    coupled_flow_channel = CH2
+  [../]
+
+  [./HS_CH3]
+    type = # MISSING: heat_structure_component_type
+    n_layers = 3
+    layer_widths = '0.003015 0.000465 0.00052'
+    layer_materials = 'fuel_mat gap_mat clad_mat'
+    layer_elems = '5 1 1'
+    axial_elems = 20
+    length = 0.8
+    coupled_flow_channel = CH3
+  [../]
+
+  [./HS_CH4]
+    type = # MISSING: heat_structure_component_type
+    n_layers = 3
+    layer_widths = '0.003015 0.000465 0.00052'
+    layer_materials = 'fuel_mat gap_mat clad_mat'
+    layer_elems = '5 1 1'
+    axial_elems = 20
+    length = 0.8
+    coupled_flow_channel = CH4
+  [../]
+
+  [./HS_CH5]
+    type = # MISSING: heat_structure_component_type
+    n_layers = 2
+    layer_widths = '6.32340e-3 7.0260e-4'
+    layer_materials = 'fuel_mat clad_mat'   # Documentation says fuel/clad; using fuel_mat and clad_mat
+    layer_elems = '5 1'
+    axial_elems = 20
+    length = 0.8
+    coupled_flow_channel = CH5
+  [../]
+
+  # ----------------------------
+  # Core power / heat sources
+  # ----------------------------
+  # Table 2 power fractions:
+  # CH1 0.02248; CH2 0.41924; CH3 0.09852; CH4 0.43116; CH5 0.02860
+  # Total reactor power not provided in documentation.
+  # Engineering assumption: apply volumetric heat generation normalized to total power parameter.
+  [./core_power]
+    type = # MISSING: power_source_component_type
+    total_power = # MISSING: total_reactor_power_W
+
+    # Map to heat structures (assume deposited in fuel layer)
+    targets = 'HS_CH1 HS_CH2 HS_CH3 HS_CH4 HS_CH5'
+    power_fractions = '0.02248 0.41924 0.09852 0.43116 0.02860'
+
+    # Axial power shape shown in Figure 1 but not numerically provided.
+    # Engineering assumption: uniform axial shape.
+    axial_shape = # MISSING: axial_power_shape_definition
+  [../]
+[]
+
+# ----------------------------
+# Solver / scaling (placeholders)
+# ----------------------------
+[Preconditioning]
+  active = true
+[]
+
+[NonlinearSolver]
+  type = # MISSING: nonlinear_solver_type
+  # Variable scaling factors: 1, 1e-3, 1e-6 (documentation; exact variable mapping unknown)
+  scaling_factors = '1 1e-3 1e-6'
+[]

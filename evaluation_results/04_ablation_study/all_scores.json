@@ -1,0 +1,3036 @@
+[
+  {
+    "condition": "full_pipeline_existing",
+    "case": "ABTR",
+    "run": 1,
+    "resolved_model": "gpt-5.2-2025-12-11",
+    "latency_seconds": 0.0,
+    "required_block_fraction": 0.8888888888888888,
+    "required_blocks_present": [
+      "components",
+      "eos",
+      "executioner",
+      "functions",
+      "globalparams",
+      "materialproperties",
+      "outputs",
+      "preconditioning"
+    ],
+    "required_blocks_missing": [
+      "postprocessors"
+    ],
+    "component_recall": 1.0,
+    "missing_components": [],
+    "parameter_precision": 1.0,
+    "parameter_recall": 1.0,
+    "parameter_f1": 1.0,
+    "parameter_tp": 118,
+    "parameter_fp": 0,
+    "parameter_fn": 0,
+    "parameter_mismatches": [],
+    "topology_recall": 1.0,
+    "topology_precision": 1.0,
+    "missing_topology_edges": [],
+    "extra_topology_edges": [],
+    "explicit_missing_markers": 0,
+    "assumption_markers": 11,
+    "characters": 7078
+  },
+  {
+    "condition": "full_pipeline_existing",
+    "case": "MSRE",
+    "run": 1,
+    "resolved_model": "gpt-5.2-2025-12-11",
+    "latency_seconds": 0.0,
+    "required_block_fraction": 1.0,
+    "required_blocks_present": [
+      "components",
+      "eos",
+      "executioner",
+      "functions",
+      "globalparams",
+      "materialproperties",
+      "outputs",
+      "postprocessors",
+      "preconditioning"
+    ],
+    "required_blocks_missing": [],
+    "component_recall": 1.0,
+    "missing_components": [],
+    "parameter_precision": 1.0,
+    "parameter_recall": 1.0,
+    "parameter_f1": 1.0,
+    "parameter_tp": 146,
+    "parameter_fp": 0,
+    "parameter_fn": 0,
+    "parameter_mismatches": [],
+    "topology_recall": 1.0,
+    "topology_precision": 1.0,
+    "missing_topology_edges": [],
+    "extra_topology_edges": [],
+    "explicit_missing_markers": 0,
+    "assumption_markers": 40,
+    "characters": 11370
+  },
+  {
+    "condition": "llm_only",
+    "case": "ABTR",
+    "run": 1,
+    "resolved_model": "gpt-5.2-2025-12-11",
+    "latency_seconds": 30.957919500011485,
+    "required_block_fraction": 0.5555555555555556,
+    "required_blocks_present": [
+      "components",
+      "executioner",
+      "functions",
+      "globalparams",
+      "outputs"
+    ],
+    "required_blocks_missing": [
+      "eos",
+      "materialproperties",
+      "postprocessors",
+      "preconditioning"
+    ],
+    "component_recall": 0.75,
+    "missing_components": [
+      "inlet",
+      "outlet",
+      "reactor"
+    ],
+    "parameter_precision": 0.4642857142857143,
+    "parameter_recall": 0.22033898305084745,
+    "parameter_f1": 0.2988505747126437,
+    "parameter_tp": 26,
+    "parameter_fp": 30,
+    "parameter_fn": 92,
+    "parameter_mismatches": [
+      {
+        "path": "globalparams",
+        "key": "gravity",
+        "expected": "0 0 -9.8",
+        "actual": "0 0 -9.80665"
+      },
+      {
+        "path": "components/pipe2",
+        "key": "type",
+        "expected": "PBOneDFluidComponent",
+        "actual": "Pipe1Phase"
+      },
+      {
+        "path": "components/pipe2",
+        "key": "orientation",
+        "expected": "0 0 -1",
+        "actual": "0 0 1"
+      },
+      {
+        "path": "components/pipe2",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": ""
+      },
+      {
+        "path": "components/ch1",
+        "key": "type",
+        "expected": "PBCoreChannel",
+        "actual": "Channel1Phase"
+      },
+      {
+        "path": "components/ch1",
+        "key": "orientation",
+        "expected": "0 0 -1",
+        "actual": "0 0 1"
+      },
+      {
+        "path": "components/ch1",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/ch1",
+        "key": "power_fraction",
+        "expected": "0.02248 0.0 0.0",
+        "actual": "0.02248"
+      },
+      {
+        "path": "components/ch2",
+        "key": "type",
+        "expected": "PBCoreChannel",
+        "actual": "Channel1Phase"
+      },
+      {
+        "path": "components/ch2",
+        "key": "orientation",
+        "expected": "0 0 -1",
+        "actual": "0 0 1"
+      },
+      {
+        "path": "components/ch2",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/ch2",
+        "key": "power_fraction",
+        "expected": "0.41924 0.0 0.0",
+        "actual": "0.41924"
+      },
+      {
+        "path": "components/ch3",
+        "key": "type",
+        "expected": "PBCoreChannel",
+        "actual": "Channel1Phase"
+      },
+      {
+        "path": "components/ch3",
+        "key": "orientation",
+        "expected": "0 0 -1",
+        "actual": "0 0 1"
+      },
+      {
+        "path": "components/ch3",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/ch3",
+        "key": "power_fraction",
+        "expected": "0.09852 0.0 0.0",
+        "actual": "0.09852"
+      },
+      {
+        "path": "components/ch4",
+        "key": "type",
+        "expected": "PBCoreChannel",
+        "actual": "Channel1Phase"
+      },
+      {
+        "path": "components/ch4",
+        "key": "orientation",
+        "expected": "0 0 -1",
+        "actual": "0 0 1"
+      },
+      {
+        "path": "components/ch4",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/ch4",
+        "key": "power_fraction",
+        "expected": "0.43116 0.0 0.0",
+        "actual": "0.43116"
+      },
+      {
+        "path": "components/ch5",
+        "key": "type",
+        "expected": "PBCoreChannel",
+        "actual": "Channel1Phase"
+      },
+      {
+        "path": "components/ch5",
+        "key": "orientation",
+        "expected": "0 0 -1",
+        "actual": "0 0 1"
+      },
+      {
+        "path": "components/ch5",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/ch5",
+        "key": "power_fraction",
+        "expected": "0.0286 0.0",
+        "actual": "0.02860"
+      },
+      {
+        "path": "components/pipe1",
+        "key": "type",
+        "expected": "PBOneDFluidComponent",
+        "actual": "Pipe1Phase"
+      },
+      {
+        "path": "components/pipe1",
+        "key": "orientation",
+        "expected": "0 0 -1",
+        "actual": "0 0 1"
+      },
+      {
+        "path": "components/pipe1",
+        "key": "n_elems",
+        "expected": "2",
+        "actual": ""
+      },
+      {
+        "path": "components/branch2",
+        "key": "type",
+        "expected": "PBBranch",
+        "actual": "Branch"
+      },
+      {
+        "path": "components/branch1",
+        "key": "type",
+        "expected": "PBBranch",
+        "actual": "Branch"
+      },
+      {
+        "path": "executioner",
+        "key": "type",
+        "expected": "Steady",
+        "actual": "Transient"
+      }
+    ],
+    "topology_recall": 0.0,
+    "topology_precision": 0.0,
+    "missing_topology_edges": [
+      [
+        "ch1(out)",
+        "pipe1(in)"
+      ],
+      [
+        "ch2(out)",
+        "pipe1(in)"
+      ],
+      [
+        "ch3(out)",
+        "pipe1(in)"
+      ],
+      [
+        "ch4(out)",
+        "pipe1(in)"
+      ],
+      [
+        "ch5(out)",
+        "pipe1(in)"
+      ],
+      [
+        "pipe2(out)",
+        "ch1(in)"
+      ],
+      [
+        "pipe2(out)",
+        "ch2(in)"
+      ],
+      [
+        "pipe2(out)",
+        "ch3(in)"
+      ],
+      [
+        "pipe2(out)",
+        "ch4(in)"
+      ],
+      [
+        "pipe2(out)",
+        "ch5(in)"
+      ]
+    ],
+    "extra_topology_edges": [],
+    "explicit_missing_markers": 7,
+    "assumption_markers": 5,
+    "characters": 6719
+  },
+  {
+    "condition": "llm_only",
+    "case": "ABTR",
+    "run": 2,
+    "resolved_model": "gpt-5.2-2025-12-11",
+    "latency_seconds": 42.53803799999878,
+    "required_block_fraction": 0.6666666666666666,
+    "required_blocks_present": [
+      "components",
+      "executioner",
+      "functions",
+      "globalparams",
+      "outputs",
+      "preconditioning"
+    ],
+    "required_blocks_missing": [
+      "eos",
+      "materialproperties",
+      "postprocessors"
+    ],
+    "component_recall": 0.75,
+    "missing_components": [
+      "inlet",
+      "outlet",
+      "reactor"
+    ],
+    "parameter_precision": 0.4423076923076923,
+    "parameter_recall": 0.19491525423728814,
+    "parameter_f1": 0.27058823529411763,
+    "parameter_tp": 23,
+    "parameter_fp": 29,
+    "parameter_fn": 95,
+    "parameter_mismatches": [
+      {
+        "path": "components/pipe2",
+        "key": "type",
+        "expected": "PBOneDFluidComponent",
+        "actual": "Pipe"
+      },
+      {
+        "path": "components/pipe2",
+        "key": "orientation",
+        "expected": "0 0 -1",
+        "actual": "0 0 1"
+      },
+      {
+        "path": "components/pipe2",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/ch1",
+        "key": "type",
+        "expected": "PBCoreChannel",
+        "actual": "Channel"
+      },
+      {
+        "path": "components/ch1",
+        "key": "orientation",
+        "expected": "0 0 -1",
+        "actual": "0 0 1"
+      },
+      {
+        "path": "components/ch1",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/ch1",
+        "key": "power_fraction",
+        "expected": "0.02248 0.0 0.0",
+        "actual": "0.02248"
+      },
+      {
+        "path": "components/ch2",
+        "key": "type",
+        "expected": "PBCoreChannel",
+        "actual": "Channel"
+      },
+      {
+        "path": "components/ch2",
+        "key": "orientation",
+        "expected": "0 0 -1",
+        "actual": "0 0 1"
+      },
+      {
+        "path": "components/ch2",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/ch2",
+        "key": "power_fraction",
+        "expected": "0.41924 0.0 0.0",
+        "actual": "0.41924"
+      },
+      {
+        "path": "components/ch3",
+        "key": "type",
+        "expected": "PBCoreChannel",
+        "actual": "Channel"
+      },
+      {
+        "path": "components/ch3",
+        "key": "orientation",
+        "expected": "0 0 -1",
+        "actual": "0 0 1"
+      },
+      {
+        "path": "components/ch3",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/ch3",
+        "key": "power_fraction",
+        "expected": "0.09852 0.0 0.0",
+        "actual": "0.09852"
+      },
+      {
+        "path": "components/ch4",
+        "key": "type",
+        "expected": "PBCoreChannel",
+        "actual": "Channel"
+      },
+      {
+        "path": "components/ch4",
+        "key": "orientation",
+        "expected": "0 0 -1",
+        "actual": "0 0 1"
+      },
+      {
+        "path": "components/ch4",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/ch4",
+        "key": "power_fraction",
+        "expected": "0.43116 0.0 0.0",
+        "actual": "0.43116"
+      },
+      {
+        "path": "components/ch5",
+        "key": "type",
+        "expected": "PBCoreChannel",
+        "actual": "Channel"
+      },
+      {
+        "path": "components/ch5",
+        "key": "orientation",
+        "expected": "0 0 -1",
+        "actual": "0 0 1"
+      },
+      {
+        "path": "components/ch5",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/ch5",
+        "key": "power_fraction",
+        "expected": "0.0286 0.0",
+        "actual": "0.02860"
+      },
+      {
+        "path": "components/pipe1",
+        "key": "type",
+        "expected": "PBOneDFluidComponent",
+        "actual": "Pipe"
+      },
+      {
+        "path": "components/pipe1",
+        "key": "orientation",
+        "expected": "0 0 -1",
+        "actual": "0 0 1"
+      },
+      {
+        "path": "components/pipe1",
+        "key": "n_elems",
+        "expected": "2",
+        "actual": "20"
+      },
+      {
+        "path": "components/branch2",
+        "key": "type",
+        "expected": "PBBranch",
+        "actual": "Branch"
+      },
+      {
+        "path": "components/branch1",
+        "key": "type",
+        "expected": "PBBranch",
+        "actual": "Branch"
+      },
+      {
+        "path": "executioner",
+        "key": "type",
+        "expected": "Steady",
+        "actual": "Transient"
+      }
+    ],
+    "topology_recall": 0.0,
+    "topology_precision": 0.0,
+    "missing_topology_edges": [
+      [
+        "ch1(out)",
+        "pipe1(in)"
+      ],
+      [
+        "ch2(out)",
+        "pipe1(in)"
+      ],
+      [
+        "ch3(out)",
+        "pipe1(in)"
+      ],
+      [
+        "ch4(out)",
+        "pipe1(in)"
+      ],
+      [
+        "ch5(out)",
+        "pipe1(in)"
+      ],
+      [
+        "pipe2(out)",
+        "ch1(in)"
+      ],
+      [
+        "pipe2(out)",
+        "ch2(in)"
+      ],
+      [
+        "pipe2(out)",
+        "ch3(in)"
+      ],
+      [
+        "pipe2(out)",
+        "ch4(in)"
+      ],
+      [
+        "pipe2(out)",
+        "ch5(in)"
+      ]
+    ],
+    "extra_topology_edges": [],
+    "explicit_missing_markers": 14,
+    "assumption_markers": 6,
+    "characters": 7747
+  },
+  {
+    "condition": "llm_only",
+    "case": "ABTR",
+    "run": 3,
+    "resolved_model": "gpt-5.2-2025-12-11",
+    "latency_seconds": 46.85943369998131,
+    "required_block_fraction": 0.5555555555555556,
+    "required_blocks_present": [
+      "components",
+      "executioner",
+      "globalparams",
+      "outputs",
+      "preconditioning"
+    ],
+    "required_blocks_missing": [
+      "eos",
+      "functions",
+      "materialproperties",
+      "postprocessors"
+    ],
+    "component_recall": 0.75,
+    "missing_components": [
+      "inlet",
+      "outlet",
+      "reactor"
+    ],
+    "parameter_precision": 0.575,
+    "parameter_recall": 0.19491525423728814,
+    "parameter_f1": 0.2911392405063291,
+    "parameter_tp": 23,
+    "parameter_fp": 17,
+    "parameter_fn": 95,
+    "parameter_mismatches": [
+      {
+        "path": "components/pipe2",
+        "key": "type",
+        "expected": "PBOneDFluidComponent",
+        "actual": ""
+      },
+      {
+        "path": "components/pipe2",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": ""
+      },
+      {
+        "path": "components/ch1",
+        "key": "type",
+        "expected": "PBCoreChannel",
+        "actual": ""
+      },
+      {
+        "path": "components/ch1",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/ch2",
+        "key": "type",
+        "expected": "PBCoreChannel",
+        "actual": ""
+      },
+      {
+        "path": "components/ch2",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/ch3",
+        "key": "type",
+        "expected": "PBCoreChannel",
+        "actual": ""
+      },
+      {
+        "path": "components/ch3",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/ch4",
+        "key": "type",
+        "expected": "PBCoreChannel",
+        "actual": ""
+      },
+      {
+        "path": "components/ch4",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/ch5",
+        "key": "type",
+        "expected": "PBCoreChannel",
+        "actual": ""
+      },
+      {
+        "path": "components/ch5",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/pipe1",
+        "key": "type",
+        "expected": "PBOneDFluidComponent",
+        "actual": ""
+      },
+      {
+        "path": "components/pipe1",
+        "key": "n_elems",
+        "expected": "2",
+        "actual": ""
+      },
+      {
+        "path": "components/branch2",
+        "key": "type",
+        "expected": "PBBranch",
+        "actual": ""
+      },
+      {
+        "path": "components/branch1",
+        "key": "type",
+        "expected": "PBBranch",
+        "actual": ""
+      },
+      {
+        "path": "executioner",
+        "key": "type",
+        "expected": "Steady",
+        "actual": "Transient"
+      }
+    ],
+    "topology_recall": 0.0,
+    "topology_precision": 0.0,
+    "missing_topology_edges": [
+      [
+        "ch1(out)",
+        "pipe1(in)"
+      ],
+      [
+        "ch2(out)",
+        "pipe1(in)"
+      ],
+      [
+        "ch3(out)",
+        "pipe1(in)"
+      ],
+      [
+        "ch4(out)",
+        "pipe1(in)"
+      ],
+      [
+        "ch5(out)",
+        "pipe1(in)"
+      ],
+      [
+        "pipe2(out)",
+        "ch1(in)"
+      ],
+      [
+        "pipe2(out)",
+        "ch2(in)"
+      ],
+      [
+        "pipe2(out)",
+        "ch3(in)"
+      ],
+      [
+        "pipe2(out)",
+        "ch4(in)"
+      ],
+      [
+        "pipe2(out)",
+        "ch5(in)"
+      ]
+    ],
+    "extra_topology_edges": [],
+    "explicit_missing_markers": 32,
+    "assumption_markers": 7,
+    "characters": 10242
+  },
+  {
+    "condition": "llm_only",
+    "case": "MSRE",
+    "run": 1,
+    "resolved_model": "gpt-5.2-2025-12-11",
+    "latency_seconds": 53.713371399993775,
+    "required_block_fraction": 0.5555555555555556,
+    "required_blocks_present": [
+      "components",
+      "executioner",
+      "functions",
+      "globalparams",
+      "outputs"
+    ],
+    "required_blocks_missing": [
+      "eos",
+      "materialproperties",
+      "postprocessors",
+      "preconditioning"
+    ],
+    "component_recall": 0.375,
+    "missing_components": [
+      "hx",
+      "hx_secondary_in",
+      "hx_secondary_out",
+      "inlet_plenum",
+      "j_core_to_upper_plenum",
+      "j_downcomer_to_inlet_plenum",
+      "j_inlet_plenum_to_core",
+      "j_pipe1_to_pipe2",
+      "j_pipe3_to_hx",
+      "j_pipe4_to_pipe5",
+      "j_pipe5_to_downcomer",
+      "j_upper_plenum_to_pipe1",
+      "ref_pressure",
+      "t_h",
+      "upper_plenum"
+    ],
+    "parameter_precision": 0.75,
+    "parameter_recall": 0.22602739726027396,
+    "parameter_f1": 0.34736842105263155,
+    "parameter_tp": 33,
+    "parameter_fp": 11,
+    "parameter_fn": 113,
+    "parameter_mismatches": [
+      {
+        "path": "components/core",
+        "key": "n_elems",
+        "expected": "10",
+        "actual": "20"
+      },
+      {
+        "path": "components/pipe1",
+        "key": "n_elems",
+        "expected": "10",
+        "actual": "19"
+      },
+      {
+        "path": "components/pipe2",
+        "key": "n_elems",
+        "expected": "6",
+        "actual": "9"
+      },
+      {
+        "path": "components/pipe3",
+        "key": "n_elems",
+        "expected": "6",
+        "actual": "11"
+      },
+      {
+        "path": "components/pipe4",
+        "key": "n_elems",
+        "expected": "8",
+        "actual": "13"
+      },
+      {
+        "path": "components/pipe5",
+        "key": "n_elems",
+        "expected": "6",
+        "actual": "11"
+      },
+      {
+        "path": "components/downcomer",
+        "key": "n_elems",
+        "expected": "10",
+        "actual": "18"
+      },
+      {
+        "path": "components/pipe_ref",
+        "key": "position",
+        "expected": "-1.7678 2.9746 0",
+        "actual": "-1.8678 2.9746 0"
+      },
+      {
+        "path": "components/pipe_ref",
+        "key": "orientation",
+        "expected": "-1 0 0",
+        "actual": "1 0 0"
+      },
+      {
+        "path": "components/pipe_ref",
+        "key": "length",
+        "expected": "0.5",
+        "actual": "0.1"
+      },
+      {
+        "path": "executioner",
+        "key": "type",
+        "expected": "Steady",
+        "actual": ""
+      }
+    ],
+    "topology_recall": 0.0,
+    "topology_precision": 0.0,
+    "missing_topology_edges": [
+      [
+        "core(out)",
+        "upper_plenum(in)"
+      ],
+      [
+        "downcomer(out)",
+        "inlet_plenum(in)"
+      ],
+      [
+        "hx(primary_out)",
+        "pipe4(in)"
+      ],
+      [
+        "hx(primary_out)",
+        "pipe_ref(in)"
+      ],
+      [
+        "inlet_plenum(out)",
+        "core(in)"
+      ],
+      [
+        "pipe1(out)",
+        "pipe2(in)"
+      ],
+      [
+        "pipe2(out)",
+        "pipe3(in)"
+      ],
+      [
+        "pipe3(out)",
+        "hx(primary_in)"
+      ],
+      [
+        "pipe4(out)",
+        "pipe5(in)"
+      ],
+      [
+        "pipe5(out)",
+        "downcomer(in)"
+      ],
+      [
+        "upper_plenum(out)",
+        "pipe1(in)"
+      ]
+    ],
+    "extra_topology_edges": [],
+    "explicit_missing_markers": 33,
+    "assumption_markers": 1,
+    "characters": 12976
+  },
+  {
+    "condition": "llm_only",
+    "case": "MSRE",
+    "run": 2,
+    "resolved_model": "gpt-5.2-2025-12-11",
+    "latency_seconds": 53.31047580001177,
+    "required_block_fraction": 0.5555555555555556,
+    "required_blocks_present": [
+      "components",
+      "executioner",
+      "functions",
+      "globalparams",
+      "outputs"
+    ],
+    "required_blocks_missing": [
+      "eos",
+      "materialproperties",
+      "postprocessors",
+      "preconditioning"
+    ],
+    "component_recall": 0.375,
+    "missing_components": [
+      "hx",
+      "hx_secondary_in",
+      "hx_secondary_out",
+      "inlet_plenum",
+      "j_core_to_upper_plenum",
+      "j_downcomer_to_inlet_plenum",
+      "j_inlet_plenum_to_core",
+      "j_pipe1_to_pipe2",
+      "j_pipe3_to_hx",
+      "j_pipe4_to_pipe5",
+      "j_pipe5_to_downcomer",
+      "j_upper_plenum_to_pipe1",
+      "ref_pressure",
+      "t_h",
+      "upper_plenum"
+    ],
+    "parameter_precision": 0.8,
+    "parameter_recall": 0.3287671232876712,
+    "parameter_f1": 0.4660194174757281,
+    "parameter_tp": 48,
+    "parameter_fp": 12,
+    "parameter_fn": 98,
+    "parameter_mismatches": [
+      {
+        "path": "components/core",
+        "key": "n_elems",
+        "expected": "10",
+        "actual": "20"
+      },
+      {
+        "path": "components/pipe1",
+        "key": "n_elems",
+        "expected": "10",
+        "actual": "19"
+      },
+      {
+        "path": "components/pipe2",
+        "key": "n_elems",
+        "expected": "6",
+        "actual": "9"
+      },
+      {
+        "path": "components/pipe3",
+        "key": "n_elems",
+        "expected": "6",
+        "actual": "11"
+      },
+      {
+        "path": "components/pipe4",
+        "key": "n_elems",
+        "expected": "8",
+        "actual": "13"
+      },
+      {
+        "path": "components/pipe5",
+        "key": "n_elems",
+        "expected": "6",
+        "actual": "11"
+      },
+      {
+        "path": "components/downcomer",
+        "key": "n_elems",
+        "expected": "10",
+        "actual": "18"
+      },
+      {
+        "path": "components/pipe_ref",
+        "key": "position",
+        "expected": "-1.7678 2.9746 0",
+        "actual": "-1.8678 2.9746 0"
+      },
+      {
+        "path": "components/pipe_ref",
+        "key": "orientation",
+        "expected": "-1 0 0",
+        "actual": "1 0 0"
+      },
+      {
+        "path": "components/pipe_ref",
+        "key": "length",
+        "expected": "0.5",
+        "actual": "0.1"
+      },
+      {
+        "path": "components/pump",
+        "key": "type",
+        "expected": "PBPump",
+        "actual": ""
+      },
+      {
+        "path": "executioner",
+        "key": "type",
+        "expected": "Steady",
+        "actual": ""
+      }
+    ],
+    "topology_recall": 0.0,
+    "topology_precision": 0.0,
+    "missing_topology_edges": [
+      [
+        "core(out)",
+        "upper_plenum(in)"
+      ],
+      [
+        "downcomer(out)",
+        "inlet_plenum(in)"
+      ],
+      [
+        "hx(primary_out)",
+        "pipe4(in)"
+      ],
+      [
+        "hx(primary_out)",
+        "pipe_ref(in)"
+      ],
+      [
+        "inlet_plenum(out)",
+        "core(in)"
+      ],
+      [
+        "pipe1(out)",
+        "pipe2(in)"
+      ],
+      [
+        "pipe2(out)",
+        "pipe3(in)"
+      ],
+      [
+        "pipe3(out)",
+        "hx(primary_in)"
+      ],
+      [
+        "pipe4(out)",
+        "pipe5(in)"
+      ],
+      [
+        "pipe5(out)",
+        "downcomer(in)"
+      ],
+      [
+        "upper_plenum(out)",
+        "pipe1(in)"
+      ]
+    ],
+    "extra_topology_edges": [],
+    "explicit_missing_markers": 36,
+    "assumption_markers": 8,
+    "characters": 13870
+  },
+  {
+    "condition": "llm_only",
+    "case": "MSRE",
+    "run": 3,
+    "resolved_model": "gpt-5.2-2025-12-11",
+    "latency_seconds": 48.68837409999105,
+    "required_block_fraction": 0.5555555555555556,
+    "required_blocks_present": [
+      "components",
+      "executioner",
+      "functions",
+      "globalparams",
+      "outputs"
+    ],
+    "required_blocks_missing": [
+      "eos",
+      "materialproperties",
+      "postprocessors",
+      "preconditioning"
+    ],
+    "component_recall": 0.375,
+    "missing_components": [
+      "hx",
+      "hx_secondary_in",
+      "hx_secondary_out",
+      "inlet_plenum",
+      "j_core_to_upper_plenum",
+      "j_downcomer_to_inlet_plenum",
+      "j_inlet_plenum_to_core",
+      "j_pipe1_to_pipe2",
+      "j_pipe3_to_hx",
+      "j_pipe4_to_pipe5",
+      "j_pipe5_to_downcomer",
+      "j_upper_plenum_to_pipe1",
+      "ref_pressure",
+      "t_h",
+      "upper_plenum"
+    ],
+    "parameter_precision": 0.8032786885245902,
+    "parameter_recall": 0.3356164383561644,
+    "parameter_f1": 0.4734299516908213,
+    "parameter_tp": 49,
+    "parameter_fp": 12,
+    "parameter_fn": 97,
+    "parameter_mismatches": [
+      {
+        "path": "components/core",
+        "key": "n_elems",
+        "expected": "10",
+        "actual": "20"
+      },
+      {
+        "path": "components/pipe1",
+        "key": "n_elems",
+        "expected": "10",
+        "actual": "19"
+      },
+      {
+        "path": "components/pipe2",
+        "key": "n_elems",
+        "expected": "6",
+        "actual": "9"
+      },
+      {
+        "path": "components/pipe3",
+        "key": "n_elems",
+        "expected": "6",
+        "actual": "11"
+      },
+      {
+        "path": "components/pipe4",
+        "key": "n_elems",
+        "expected": "8",
+        "actual": "13"
+      },
+      {
+        "path": "components/pipe5",
+        "key": "n_elems",
+        "expected": "6",
+        "actual": "11"
+      },
+      {
+        "path": "components/downcomer",
+        "key": "n_elems",
+        "expected": "10",
+        "actual": "18"
+      },
+      {
+        "path": "components/pipe_ref",
+        "key": "position",
+        "expected": "-1.7678 2.9746 0",
+        "actual": "-1.8678 2.9746 0"
+      },
+      {
+        "path": "components/pipe_ref",
+        "key": "orientation",
+        "expected": "-1 0 0",
+        "actual": "1 0 0"
+      },
+      {
+        "path": "components/pipe_ref",
+        "key": "length",
+        "expected": "0.5",
+        "actual": "0.1"
+      },
+      {
+        "path": "components/pump",
+        "key": "type",
+        "expected": "PBPump",
+        "actual": ""
+      },
+      {
+        "path": "executioner",
+        "key": "type",
+        "expected": "Steady",
+        "actual": ""
+      }
+    ],
+    "topology_recall": 0.2727272727272727,
+    "topology_precision": 0.17647058823529413,
+    "missing_topology_edges": [
+      [
+        "core(out)",
+        "upper_plenum(in)"
+      ],
+      [
+        "downcomer(out)",
+        "inlet_plenum(in)"
+      ],
+      [
+        "hx(primary_out)",
+        "pipe4(in)"
+      ],
+      [
+        "hx(primary_out)",
+        "pipe_ref(in)"
+      ],
+      [
+        "inlet_plenum(out)",
+        "core(in)"
+      ],
+      [
+        "pipe2(out)",
+        "pipe3(in)"
+      ],
+      [
+        "pipe3(out)",
+        "hx(primary_in)"
+      ],
+      [
+        "upper_plenum(out)",
+        "pipe1(in)"
+      ]
+    ],
+    "extra_topology_edges": [
+      [
+        "core(out)",
+        "uplnm(in)"
+      ],
+      [
+        "downcomer(out)",
+        "iplnm(in)"
+      ],
+      [
+        "hx_primary(out)",
+        "pipe4(in)"
+      ],
+      [
+        "hx_s_in(out)",
+        "hx_tube1(in)"
+      ],
+      [
+        "hx_tube1(out)",
+        "hx_tube2(in)"
+      ],
+      [
+        "hx_tube2(out)",
+        "hx_tube3(in)"
+      ],
+      [
+        "hx_tube3(out)",
+        "hx_s_out(in)"
+      ],
+      [
+        "iplnm(out)",
+        "core(in)"
+      ],
+      [
+        "pipe2(out)",
+        "pump(in)"
+      ],
+      [
+        "pipe3(out)",
+        "hx_primary(in)"
+      ],
+      [
+        "pipe_ref(out)",
+        "pipe4(in)"
+      ],
+      [
+        "pump(out)",
+        "pipe3(in)"
+      ],
+      [
+        "ref_p(out)",
+        "pipe_ref(in)"
+      ],
+      [
+        "uplnm(out)",
+        "pipe1(in)"
+      ]
+    ],
+    "explicit_missing_markers": 29,
+    "assumption_markers": 10,
+    "characters": 13052
+  },
+  {
+    "condition": "no_intermediate_file",
+    "case": "ABTR",
+    "run": 1,
+    "resolved_model": "gpt-5.2-2025-12-11",
+    "latency_seconds": 45.717912500025705,
+    "required_block_fraction": 1.0,
+    "required_blocks_present": [
+      "components",
+      "eos",
+      "executioner",
+      "functions",
+      "globalparams",
+      "materialproperties",
+      "outputs",
+      "postprocessors",
+      "preconditioning"
+    ],
+    "required_blocks_missing": [],
+    "component_recall": 0.9166666666666666,
+    "missing_components": [
+      "reactor"
+    ],
+    "parameter_precision": 0.5645161290322581,
+    "parameter_recall": 0.2966101694915254,
+    "parameter_f1": 0.3888888888888889,
+    "parameter_tp": 35,
+    "parameter_fp": 27,
+    "parameter_fn": 83,
+    "parameter_mismatches": [
+      {
+        "path": "materialproperties/fuel-mat",
+        "key": "type",
+        "expected": "SolidMaterialProps",
+        "actual": "SolidMaterialProperties"
+      },
+      {
+        "path": "materialproperties/gap-mat",
+        "key": "type",
+        "expected": "SolidMaterialProps",
+        "actual": "SolidMaterialProperties"
+      },
+      {
+        "path": "materialproperties/clad-mat",
+        "key": "type",
+        "expected": "SolidMaterialProps",
+        "actual": "SolidMaterialProperties"
+      },
+      {
+        "path": "components/pipe2",
+        "key": "type",
+        "expected": "PBOneDFluidComponent",
+        "actual": "Pipe"
+      },
+      {
+        "path": "components/pipe2",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "1"
+      },
+      {
+        "path": "components/ch1",
+        "key": "type",
+        "expected": "PBCoreChannel",
+        "actual": "CoreChannel"
+      },
+      {
+        "path": "components/ch1",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/ch1",
+        "key": "power_fraction",
+        "expected": "0.02248 0.0 0.0",
+        "actual": "0.02248"
+      },
+      {
+        "path": "components/ch2",
+        "key": "type",
+        "expected": "PBCoreChannel",
+        "actual": "CoreChannel"
+      },
+      {
+        "path": "components/ch2",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/ch2",
+        "key": "power_fraction",
+        "expected": "0.41924 0.0 0.0",
+        "actual": "0.41924"
+      },
+      {
+        "path": "components/ch3",
+        "key": "type",
+        "expected": "PBCoreChannel",
+        "actual": "CoreChannel"
+      },
+      {
+        "path": "components/ch3",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/ch3",
+        "key": "power_fraction",
+        "expected": "0.09852 0.0 0.0",
+        "actual": "0.09852"
+      },
+      {
+        "path": "components/ch4",
+        "key": "type",
+        "expected": "PBCoreChannel",
+        "actual": "CoreChannel"
+      },
+      {
+        "path": "components/ch4",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/ch4",
+        "key": "power_fraction",
+        "expected": "0.43116 0.0 0.0",
+        "actual": "0.43116"
+      },
+      {
+        "path": "components/ch5",
+        "key": "type",
+        "expected": "PBCoreChannel",
+        "actual": "CoreChannel"
+      },
+      {
+        "path": "components/ch5",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/ch5",
+        "key": "power_fraction",
+        "expected": "0.0286 0.0",
+        "actual": "0.02860"
+      },
+      {
+        "path": "components/pipe1",
+        "key": "type",
+        "expected": "PBOneDFluidComponent",
+        "actual": "Pipe"
+      },
+      {
+        "path": "components/pipe1",
+        "key": "n_elems",
+        "expected": "2",
+        "actual": "1"
+      },
+      {
+        "path": "components/branch2",
+        "key": "type",
+        "expected": "PBBranch",
+        "actual": "Branch"
+      },
+      {
+        "path": "components/branch1",
+        "key": "type",
+        "expected": "PBBranch",
+        "actual": "Branch"
+      },
+      {
+        "path": "components/inlet",
+        "key": "type",
+        "expected": "PBTDJ",
+        "actual": "TDVBoundary"
+      },
+      {
+        "path": "components/outlet",
+        "key": "type",
+        "expected": "PBTDV",
+        "actual": "TDVBoundary"
+      },
+      {
+        "path": "executioner",
+        "key": "type",
+        "expected": "Steady",
+        "actual": "Transient"
+      }
+    ],
+    "topology_recall": 0.0,
+    "topology_precision": 0.0,
+    "missing_topology_edges": [
+      [
+        "ch1(out)",
+        "pipe1(in)"
+      ],
+      [
+        "ch2(out)",
+        "pipe1(in)"
+      ],
+      [
+        "ch3(out)",
+        "pipe1(in)"
+      ],
+      [
+        "ch4(out)",
+        "pipe1(in)"
+      ],
+      [
+        "ch5(out)",
+        "pipe1(in)"
+      ],
+      [
+        "pipe2(out)",
+        "ch1(in)"
+      ],
+      [
+        "pipe2(out)",
+        "ch2(in)"
+      ],
+      [
+        "pipe2(out)",
+        "ch3(in)"
+      ],
+      [
+        "pipe2(out)",
+        "ch4(in)"
+      ],
+      [
+        "pipe2(out)",
+        "ch5(in)"
+      ]
+    ],
+    "extra_topology_edges": [],
+    "explicit_missing_markers": 27,
+    "assumption_markers": 2,
+    "characters": 8319
+  },
+  {
+    "condition": "no_intermediate_file",
+    "case": "ABTR",
+    "run": 2,
+    "resolved_model": "gpt-5.2-2025-12-11",
+    "latency_seconds": 45.548291899991455,
+    "required_block_fraction": 1.0,
+    "required_blocks_present": [
+      "components",
+      "eos",
+      "executioner",
+      "functions",
+      "globalparams",
+      "materialproperties",
+      "outputs",
+      "postprocessors",
+      "preconditioning"
+    ],
+    "required_blocks_missing": [],
+    "component_recall": 0.9166666666666666,
+    "missing_components": [
+      "reactor"
+    ],
+    "parameter_precision": 0.47619047619047616,
+    "parameter_recall": 0.2542372881355932,
+    "parameter_f1": 0.3314917127071823,
+    "parameter_tp": 30,
+    "parameter_fp": 33,
+    "parameter_fn": 88,
+    "parameter_mismatches": [
+      {
+        "path": "globalparams",
+        "key": "gravity",
+        "expected": "0 0 -9.8",
+        "actual": "0 0 -9.81"
+      },
+      {
+        "path": "materialproperties/fuel-mat",
+        "key": "type",
+        "expected": "SolidMaterialProps",
+        "actual": "SolidPropertiesMaterial"
+      },
+      {
+        "path": "materialproperties/gap-mat",
+        "key": "type",
+        "expected": "SolidMaterialProps",
+        "actual": "SolidPropertiesMaterial"
+      },
+      {
+        "path": "materialproperties/clad-mat",
+        "key": "type",
+        "expected": "SolidMaterialProps",
+        "actual": "SolidPropertiesMaterial"
+      },
+      {
+        "path": "components/pipe2",
+        "key": "type",
+        "expected": "PBOneDFluidComponent",
+        "actual": "Pipe1Phase"
+      },
+      {
+        "path": "components/pipe2",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": ""
+      },
+      {
+        "path": "components/ch1",
+        "key": "type",
+        "expected": "PBCoreChannel",
+        "actual": "FlowChannel1Phase"
+      },
+      {
+        "path": "components/ch1",
+        "key": "orientation",
+        "expected": "0 0 -1",
+        "actual": "0 0 1"
+      },
+      {
+        "path": "components/ch1",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/ch1",
+        "key": "power_fraction",
+        "expected": "0.02248 0.0 0.0",
+        "actual": "0.02248"
+      },
+      {
+        "path": "components/ch2",
+        "key": "type",
+        "expected": "PBCoreChannel",
+        "actual": "FlowChannel1Phase"
+      },
+      {
+        "path": "components/ch2",
+        "key": "orientation",
+        "expected": "0 0 -1",
+        "actual": "0 0 1"
+      },
+      {
+        "path": "components/ch2",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/ch2",
+        "key": "power_fraction",
+        "expected": "0.41924 0.0 0.0",
+        "actual": "0.41924"
+      },
+      {
+        "path": "components/ch3",
+        "key": "type",
+        "expected": "PBCoreChannel",
+        "actual": "FlowChannel1Phase"
+      },
+      {
+        "path": "components/ch3",
+        "key": "orientation",
+        "expected": "0 0 -1",
+        "actual": "0 0 1"
+      },
+      {
+        "path": "components/ch3",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/ch3",
+        "key": "power_fraction",
+        "expected": "0.09852 0.0 0.0",
+        "actual": "0.09852"
+      },
+      {
+        "path": "components/ch4",
+        "key": "type",
+        "expected": "PBCoreChannel",
+        "actual": "FlowChannel1Phase"
+      },
+      {
+        "path": "components/ch4",
+        "key": "orientation",
+        "expected": "0 0 -1",
+        "actual": "0 0 1"
+      },
+      {
+        "path": "components/ch4",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/ch4",
+        "key": "power_fraction",
+        "expected": "0.43116 0.0 0.0",
+        "actual": "0.43116"
+      },
+      {
+        "path": "components/ch5",
+        "key": "type",
+        "expected": "PBCoreChannel",
+        "actual": "FlowChannel1Phase"
+      },
+      {
+        "path": "components/ch5",
+        "key": "orientation",
+        "expected": "0 0 -1",
+        "actual": "0 0 1"
+      },
+      {
+        "path": "components/ch5",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/ch5",
+        "key": "power_fraction",
+        "expected": "0.0286 0.0",
+        "actual": "0.02860"
+      },
+      {
+        "path": "components/pipe1",
+        "key": "type",
+        "expected": "PBOneDFluidComponent",
+        "actual": "Pipe1Phase"
+      },
+      {
+        "path": "components/pipe1",
+        "key": "n_elems",
+        "expected": "2",
+        "actual": ""
+      },
+      {
+        "path": "components/branch2",
+        "key": "type",
+        "expected": "PBBranch",
+        "actual": "BranchNto1"
+      },
+      {
+        "path": "components/branch1",
+        "key": "type",
+        "expected": "PBBranch",
+        "actual": "Branch1toN"
+      },
+      {
+        "path": "components/inlet",
+        "key": "type",
+        "expected": "PBTDJ",
+        "actual": "InletVelocityTemperatureTDV"
+      },
+      {
+        "path": "components/outlet",
+        "key": "type",
+        "expected": "PBTDV",
+        "actual": "OutletPressureTemperatureTDV"
+      },
+      {
+        "path": "executioner",
+        "key": "type",
+        "expected": "Steady",
+        "actual": "Transient"
+      }
+    ],
+    "topology_recall": 0.0,
+    "topology_precision": 0.0,
+    "missing_topology_edges": [
+      [
+        "ch1(out)",
+        "pipe1(in)"
+      ],
+      [
+        "ch2(out)",
+        "pipe1(in)"
+      ],
+      [
+        "ch3(out)",
+        "pipe1(in)"
+      ],
+      [
+        "ch4(out)",
+        "pipe1(in)"
+      ],
+      [
+        "ch5(out)",
+        "pipe1(in)"
+      ],
+      [
+        "pipe2(out)",
+        "ch1(in)"
+      ],
+      [
+        "pipe2(out)",
+        "ch2(in)"
+      ],
+      [
+        "pipe2(out)",
+        "ch3(in)"
+      ],
+      [
+        "pipe2(out)",
+        "ch4(in)"
+      ],
+      [
+        "pipe2(out)",
+        "ch5(in)"
+      ]
+    ],
+    "extra_topology_edges": [],
+    "explicit_missing_markers": 18,
+    "assumption_markers": 3,
+    "characters": 8537
+  },
+  {
+    "condition": "no_intermediate_file",
+    "case": "ABTR",
+    "run": 3,
+    "resolved_model": "gpt-5.2-2025-12-11",
+    "latency_seconds": 50.66341469998588,
+    "required_block_fraction": 1.0,
+    "required_blocks_present": [
+      "components",
+      "eos",
+      "executioner",
+      "functions",
+      "globalparams",
+      "materialproperties",
+      "outputs",
+      "postprocessors",
+      "preconditioning"
+    ],
+    "required_blocks_missing": [],
+    "component_recall": 0.9166666666666666,
+    "missing_components": [
+      "reactor"
+    ],
+    "parameter_precision": 0.5111111111111111,
+    "parameter_recall": 0.19491525423728814,
+    "parameter_f1": 0.2822085889570552,
+    "parameter_tp": 23,
+    "parameter_fp": 22,
+    "parameter_fn": 95,
+    "parameter_mismatches": [
+      {
+        "path": "materialproperties/fuel-mat",
+        "key": "type",
+        "expected": "SolidMaterialProps",
+        "actual": "SolidMaterialProperties"
+      },
+      {
+        "path": "materialproperties/gap-mat",
+        "key": "type",
+        "expected": "SolidMaterialProps",
+        "actual": "SolidMaterialProperties"
+      },
+      {
+        "path": "materialproperties/clad-mat",
+        "key": "type",
+        "expected": "SolidMaterialProps",
+        "actual": "SolidMaterialProperties"
+      },
+      {
+        "path": "components/pipe2",
+        "key": "type",
+        "expected": "PBOneDFluidComponent",
+        "actual": "Pipe1D"
+      },
+      {
+        "path": "components/pipe2",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "1"
+      },
+      {
+        "path": "components/ch1",
+        "key": "type",
+        "expected": "PBCoreChannel",
+        "actual": "Channel1D"
+      },
+      {
+        "path": "components/ch1",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/ch2",
+        "key": "type",
+        "expected": "PBCoreChannel",
+        "actual": "Channel1D"
+      },
+      {
+        "path": "components/ch2",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/ch3",
+        "key": "type",
+        "expected": "PBCoreChannel",
+        "actual": "Channel1D"
+      },
+      {
+        "path": "components/ch3",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/ch4",
+        "key": "type",
+        "expected": "PBCoreChannel",
+        "actual": "Channel1D"
+      },
+      {
+        "path": "components/ch4",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/ch5",
+        "key": "type",
+        "expected": "PBCoreChannel",
+        "actual": "Channel1D"
+      },
+      {
+        "path": "components/ch5",
+        "key": "n_elems",
+        "expected": "4",
+        "actual": "20"
+      },
+      {
+        "path": "components/pipe1",
+        "key": "type",
+        "expected": "PBOneDFluidComponent",
+        "actual": "Pipe1D"
+      },
+      {
+        "path": "components/pipe1",
+        "key": "n_elems",
+        "expected": "2",
+        "actual": "1"
+      },
+      {
+        "path": "components/branch2",
+        "key": "type",
+        "expected": "PBBranch",
+        "actual": "BranchJunction"
+      },
+      {
+        "path": "components/branch1",
+        "key": "type",
+        "expected": "PBBranch",
+        "actual": "BranchJunction"
+      },
+      {
+        "path": "components/inlet",
+        "key": "type",
+        "expected": "PBTDJ",
+        "actual": "TDVInlet"
+      },
+      {
+        "path": "components/outlet",
+        "key": "type",
+        "expected": "PBTDV",
+        "actual": "TDVOutlet"
+      },
+      {
+        "path": "executioner",
+        "key": "type",
+        "expected": "Steady",
+        "actual": "Transient"
+      }
+    ],
+    "topology_recall": 0.0,
+    "topology_precision": 0.0,
+    "missing_topology_edges": [
+      [
+        "ch1(out)",
+        "pipe1(in)"
+      ],
+      [
+        "ch2(out)",
+        "pipe1(in)"
+      ],
+      [
+        "ch3(out)",
+        "pipe1(in)"
+      ],
+      [
+        "ch4(out)",
+        "pipe1(in)"
+      ],
+      [
+        "ch5(out)",
+        "pipe1(in)"
+      ],
+      [
+        "pipe2(out)",
+        "ch1(in)"
+      ],
+      [
+        "pipe2(out)",
+        "ch2(in)"
+      ],
+      [
+        "pipe2(out)",
+        "ch3(in)"
+      ],
+      [
+        "pipe2(out)",
+        "ch4(in)"
+      ],
+      [
+        "pipe2(out)",
+        "ch5(in)"
+      ]
+    ],
+    "extra_topology_edges": [],
+    "explicit_missing_markers": 13,
+    "assumption_markers": 5,
+    "characters": 9591
+  },
+  {
+    "condition": "no_intermediate_file",
+    "case": "MSRE",
+    "run": 1,
+    "resolved_model": "gpt-5.2-2025-12-11",
+    "latency_seconds": 60.15515490001417,
+    "required_block_fraction": 1.0,
+    "required_blocks_present": [
+      "components",
+      "eos",
+      "executioner",
+      "functions",
+      "globalparams",
+      "materialproperties",
+      "outputs",
+      "postprocessors",
+      "preconditioning"
+    ],
+    "required_blocks_missing": [],
+    "component_recall": 0.375,
+    "missing_components": [
+      "hx",
+      "hx_secondary_in",
+      "hx_secondary_out",
+      "inlet_plenum",
+      "j_core_to_upper_plenum",
+      "j_downcomer_to_inlet_plenum",
+      "j_inlet_plenum_to_core",
+      "j_pipe1_to_pipe2",
+      "j_pipe3_to_hx",
+      "j_pipe4_to_pipe5",
+      "j_pipe5_to_downcomer",
+      "j_upper_plenum_to_pipe1",
+      "ref_pressure",
+      "t_h",
+      "upper_plenum"
+    ],
+    "parameter_precision": 0.8,
+    "parameter_recall": 0.3287671232876712,
+    "parameter_f1": 0.4660194174757281,
+    "parameter_tp": 48,
+    "parameter_fp": 12,
+    "parameter_fn": 98,
+    "parameter_mismatches": [
+      {
+        "path": "components/core",
+        "key": "n_elems",
+        "expected": "10",
+        "actual": "20"
+      },
+      {
+        "path": "components/pipe1",
+        "key": "n_elems",
+        "expected": "10",
+        "actual": "19"
+      },
+      {
+        "path": "components/pipe2",
+        "key": "n_elems",
+        "expected": "6",
+        "actual": "9"
+      },
+      {
+        "path": "components/pipe3",
+        "key": "n_elems",
+        "expected": "6",
+        "actual": "11"
+      },
+      {
+        "path": "components/pipe4",
+        "key": "n_elems",
+        "expected": "8",
+        "actual": "13"
+      },
+      {
+        "path": "components/pipe5",
+        "key": "n_elems",
+        "expected": "6",
+        "actual": "11"
+      },
+      {
+        "path": "components/downcomer",
+        "key": "n_elems",
+        "expected": "10",
+        "actual": "18"
+      },
+      {
+        "path": "components/pipe_ref",
+        "key": "position",
+        "expected": "-1.7678 2.9746 0",
+        "actual": "-1.8678 2.9746 0"
+      },
+      {
+        "path": "components/pipe_ref",
+        "key": "orientation",
+        "expected": "-1 0 0",
+        "actual": "1 0 0"
+      },
+      {
+        "path": "components/pipe_ref",
+        "key": "length",
+        "expected": "0.5",
+        "actual": "0.1"
+      },
+      {
+        "path": "components/pump",
+        "key": "type",
+        "expected": "PBPump",
+        "actual": ""
+      },
+      {
+        "path": "executioner",
+        "key": "type",
+        "expected": "Steady",
+        "actual": "Transient"
+      }
+    ],
+    "topology_recall": 0.0,
+    "topology_precision": 0.0,
+    "missing_topology_edges": [
+      [
+        "core(out)",
+        "upper_plenum(in)"
+      ],
+      [
+        "downcomer(out)",
+        "inlet_plenum(in)"
+      ],
+      [
+        "hx(primary_out)",
+        "pipe4(in)"
+      ],
+      [
+        "hx(primary_out)",
+        "pipe_ref(in)"
+      ],
+      [
+        "inlet_plenum(out)",
+        "core(in)"
+      ],
+      [
+        "pipe1(out)",
+        "pipe2(in)"
+      ],
+      [
+        "pipe2(out)",
+        "pipe3(in)"
+      ],
+      [
+        "pipe3(out)",
+        "hx(primary_in)"
+      ],
+      [
+        "pipe4(out)",
+        "pipe5(in)"
+      ],
+      [
+        "pipe5(out)",
+        "downcomer(in)"
+      ],
+      [
+        "upper_plenum(out)",
+        "pipe1(in)"
+      ]
+    ],
+    "extra_topology_edges": [],
+    "explicit_missing_markers": 59,
+    "assumption_markers": 10,
+    "characters": 13367
+  },
+  {
+    "condition": "no_intermediate_file",
+    "case": "MSRE",
+    "run": 2,
+    "resolved_model": "gpt-5.2-2025-12-11",
+    "latency_seconds": 49.28223770001205,
+    "required_block_fraction": 1.0,
+    "required_blocks_present": [
+      "components",
+      "eos",
+      "executioner",
+      "functions",
+      "globalparams",
+      "materialproperties",
+      "outputs",
+      "postprocessors",
+      "preconditioning"
+    ],
+    "required_blocks_missing": [],
+    "component_recall": 0.375,
+    "missing_components": [
+      "hx",
+      "hx_secondary_in",
+      "hx_secondary_out",
+      "inlet_plenum",
+      "j_core_to_upper_plenum",
+      "j_downcomer_to_inlet_plenum",
+      "j_inlet_plenum_to_core",
+      "j_pipe1_to_pipe2",
+      "j_pipe3_to_hx",
+      "j_pipe4_to_pipe5",
+      "j_pipe5_to_downcomer",
+      "j_upper_plenum_to_pipe1",
+      "ref_pressure",
+      "t_h",
+      "upper_plenum"
+    ],
+    "parameter_precision": 0.819672131147541,
+    "parameter_recall": 0.3424657534246575,
+    "parameter_f1": 0.4830917874396135,
+    "parameter_tp": 50,
+    "parameter_fp": 11,
+    "parameter_fn": 96,
+    "parameter_mismatches": [
+      {
+        "path": "components/core",
+        "key": "n_elems",
+        "expected": "10",
+        "actual": "20"
+      },
+      {
+        "path": "components/pipe1",
+        "key": "n_elems",
+        "expected": "10",
+        "actual": "19"
+      },
+      {
+        "path": "components/pipe2",
+        "key": "n_elems",
+        "expected": "6",
+        "actual": "9"
+      },
+      {
+        "path": "components/pipe3",
+        "key": "n_elems",
+        "expected": "6",
+        "actual": "11"
+      },
+      {
+        "path": "components/pipe4",
+        "key": "n_elems",
+        "expected": "8",
+        "actual": "13"
+      },
+      {
+        "path": "components/pipe5",
+        "key": "n_elems",
+        "expected": "6",
+        "actual": "11"
+      },
+      {
+        "path": "components/downcomer",
+        "key": "n_elems",
+        "expected": "10",
+        "actual": "18"
+      },
+      {
+        "path": "components/pipe_ref",
+        "key": "position",
+        "expected": "-1.7678 2.9746 0",
+        "actual": "-1.8678 2.9746 0"
+      },
+      {
+        "path": "components/pipe_ref",
+        "key": "orientation",
+        "expected": "-1 0 0",
+        "actual": "1 0 0"
+      },
+      {
+        "path": "components/pipe_ref",
+        "key": "length",
+        "expected": "0.5",
+        "actual": "0.1"
+      },
+      {
+        "path": "executioner",
+        "key": "type",
+        "expected": "Steady",
+        "actual": "Transient"
+      }
+    ],
+    "topology_recall": 0.0,
+    "topology_precision": 0.0,
+    "missing_topology_edges": [
+      [
+        "core(out)",
+        "upper_plenum(in)"
+      ],
+      [
+        "downcomer(out)",
+        "inlet_plenum(in)"
+      ],
+      [
+        "hx(primary_out)",
+        "pipe4(in)"
+      ],
+      [
+        "hx(primary_out)",
+        "pipe_ref(in)"
+      ],
+      [
+        "inlet_plenum(out)",
+        "core(in)"
+      ],
+      [
+        "pipe1(out)",
+        "pipe2(in)"
+      ],
+      [
+        "pipe2(out)",
+        "pipe3(in)"
+      ],
+      [
+        "pipe3(out)",
+        "hx(primary_in)"
+      ],
+      [
+        "pipe4(out)",
+        "pipe5(in)"
+      ],
+      [
+        "pipe5(out)",
+        "downcomer(in)"
+      ],
+      [
+        "upper_plenum(out)",
+        "pipe1(in)"
+      ]
+    ],
+    "extra_topology_edges": [],
+    "explicit_missing_markers": 28,
+    "assumption_markers": 7,
+    "characters": 11334
+  },
+  {
+    "condition": "no_intermediate_file",
+    "case": "MSRE",
+    "run": 3,
+    "resolved_model": "gpt-5.2-2025-12-11",
+    "latency_seconds": 56.15500250001787,
+    "required_block_fraction": 1.0,
+    "required_blocks_present": [
+      "components",
+      "eos",
+      "executioner",
+      "functions",
+      "globalparams",
+      "materialproperties",
+      "outputs",
+      "postprocessors",
+      "preconditioning"
+    ],
+    "required_blocks_missing": [],
+    "component_recall": 0.375,
+    "missing_components": [
+      "hx",
+      "hx_secondary_in",
+      "hx_secondary_out",
+      "inlet_plenum",
+      "j_core_to_upper_plenum",
+      "j_downcomer_to_inlet_plenum",
+      "j_inlet_plenum_to_core",
+      "j_pipe1_to_pipe2",
+      "j_pipe3_to_hx",
+      "j_pipe4_to_pipe5",
+      "j_pipe5_to_downcomer",
+      "j_upper_plenum_to_pipe1",
+      "ref_pressure",
+      "t_h",
+      "upper_plenum"
+    ],
+    "parameter_precision": 0.819672131147541,
+    "parameter_recall": 0.3424657534246575,
+    "parameter_f1": 0.4830917874396135,
+    "parameter_tp": 50,
+    "parameter_fp": 11,
+    "parameter_fn": 96,
+    "parameter_mismatches": [
+      {
+        "path": "components/core",
+        "key": "n_elems",
+        "expected": "10",
+        "actual": "20"
+      },
+      {
+        "path": "components/pipe1",
+        "key": "n_elems",
+        "expected": "10",
+        "actual": "19"
+      },
+      {
+        "path": "components/pipe2",
+        "key": "n_elems",
+        "expected": "6",
+        "actual": "9"
+      },
+      {
+        "path": "components/pipe3",
+        "key": "n_elems",
+        "expected": "6",
+        "actual": "11"
+      },
+      {
+        "path": "components/pipe4",
+        "key": "n_elems",
+        "expected": "8",
+        "actual": "13"
+      },
+      {
+        "path": "components/pipe5",
+        "key": "n_elems",
+        "expected": "6",
+        "actual": "11"
+      },
+      {
+        "path": "components/downcomer",
+        "key": "n_elems",
+        "expected": "10",
+        "actual": "18"
+      },
+      {
+        "path": "components/pipe_ref",
+        "key": "position",
+        "expected": "-1.7678 2.9746 0",
+        "actual": "-1.8678 2.9746 0"
+      },
+      {
+        "path": "components/pipe_ref",
+        "key": "orientation",
+        "expected": "-1 0 0",
+        "actual": "1 0 0"
+      },
+      {
+        "path": "components/pipe_ref",
+        "key": "length",
+        "expected": "0.5",
+        "actual": "0.1"
+      },
+      {
+        "path": "executioner",
+        "key": "type",
+        "expected": "Steady",
+        "actual": "Transient"
+      }
+    ],
+    "topology_recall": 0.0,
+    "topology_precision": 0.0,
+    "missing_topology_edges": [
+      [
+        "core(out)",
+        "upper_plenum(in)"
+      ],
+      [
+        "downcomer(out)",
+        "inlet_plenum(in)"
+      ],
+      [
+        "hx(primary_out)",
+        "pipe4(in)"
+      ],
+      [
+        "hx(primary_out)",
+        "pipe_ref(in)"
+      ],
+      [
+        "inlet_plenum(out)",
+        "core(in)"
+      ],
+      [
+        "pipe1(out)",
+        "pipe2(in)"
+      ],
+      [
+        "pipe2(out)",
+        "pipe3(in)"
+      ],
+      [
+        "pipe3(out)",
+        "hx(primary_in)"
+      ],
+      [
+        "pipe4(out)",
+        "pipe5(in)"
+      ],
+      [
+        "pipe5(out)",
+        "downcomer(in)"
+      ],
+      [
+        "upper_plenum(out)",
+        "pipe1(in)"
+      ]
+    ],
+    "extra_topology_edges": [],
+    "explicit_missing_markers": 33,
+    "assumption_markers": 10,
+    "characters": 11682
+  },
+  {
+    "condition": "no_validator",
+    "case": "ABTR",
+    "run": 1,
+    "resolved_model": "gpt-5.2-2025-12-11",
+    "latency_seconds": 0.0,
+    "required_block_fraction": 0.8888888888888888,
+    "required_blocks_present": [
+      "components",
+      "eos",
+      "executioner",
+      "functions",
+      "globalparams",
+      "materialproperties",
+      "outputs",
+      "preconditioning"
+    ],
+    "required_blocks_missing": [
+      "postprocessors"
+    ],
+    "component_recall": 1.0,
+    "missing_components": [],
+    "parameter_precision": 1.0,
+    "parameter_recall": 1.0,
+    "parameter_f1": 1.0,
+    "parameter_tp": 118,
+    "parameter_fp": 0,
+    "parameter_fn": 0,
+    "parameter_mismatches": [],
+    "topology_recall": 0.9,
+    "topology_precision": 1.0,
+    "missing_topology_edges": [
+      [
+        "pipe2(out)",
+        "ch5(in)"
+      ]
+    ],
+    "extra_topology_edges": [],
+    "explicit_missing_markers": 0,
+    "assumption_markers": 11,
+    "characters": 7105
+  },
+  {
+    "condition": "no_validator",
+    "case": "ABTR",
+    "run": 2,
+    "resolved_model": "gpt-5.2-2025-12-11",
+    "latency_seconds": 0.0,
+    "required_block_fraction": 0.8888888888888888,
+    "required_blocks_present": [
+      "components",
+      "eos",
+      "executioner",
+      "functions",
+      "globalparams",
+      "materialproperties",
+      "outputs",
+      "preconditioning"
+    ],
+    "required_blocks_missing": [
+      "postprocessors"
+    ],
+    "component_recall": 1.0,
+    "missing_components": [],
+    "parameter_precision": 1.0,
+    "parameter_recall": 1.0,
+    "parameter_f1": 1.0,
+    "parameter_tp": 118,
+    "parameter_fp": 0,
+    "parameter_fn": 0,
+    "parameter_mismatches": [],
+    "topology_recall": 0.9,
+    "topology_precision": 1.0,
+    "missing_topology_edges": [
+      [
+        "pipe2(out)",
+        "ch5(in)"
+      ]
+    ],
+    "extra_topology_edges": [],
+    "explicit_missing_markers": 0,
+    "assumption_markers": 11,
+    "characters": 7105
+  },
+  {
+    "condition": "no_validator",
+    "case": "ABTR",
+    "run": 3,
+    "resolved_model": "gpt-5.2-2025-12-11",
+    "latency_seconds": 0.0,
+    "required_block_fraction": 0.8888888888888888,
+    "required_blocks_present": [
+      "components",
+      "eos",
+      "executioner",
+      "functions",
+      "globalparams",
+      "materialproperties",
+      "outputs",
+      "preconditioning"
+    ],
+    "required_blocks_missing": [
+      "postprocessors"
+    ],
+    "component_recall": 1.0,
+    "missing_components": [],
+    "parameter_precision": 1.0,
+    "parameter_recall": 1.0,
+    "parameter_f1": 1.0,
+    "parameter_tp": 118,
+    "parameter_fp": 0,
+    "parameter_fn": 0,
+    "parameter_mismatches": [],
+    "topology_recall": 0.9,
+    "topology_precision": 1.0,
+    "missing_topology_edges": [
+      [
+        "pipe2(out)",
+        "ch5(in)"
+      ]
+    ],
+    "extra_topology_edges": [],
+    "explicit_missing_markers": 0,
+    "assumption_markers": 11,
+    "characters": 7105
+  },
+  {
+    "condition": "no_validator",
+    "case": "MSRE",
+    "run": 1,
+    "resolved_model": "gpt-5.2-2025-12-11",
+    "latency_seconds": 0.0,
+    "required_block_fraction": 1.0,
+    "required_blocks_present": [
+      "components",
+      "eos",
+      "executioner",
+      "functions",
+      "globalparams",
+      "materialproperties",
+      "outputs",
+      "postprocessors",
+      "preconditioning"
+    ],
+    "required_blocks_missing": [],
+    "component_recall": 0.9583333333333334,
+    "missing_components": [
+      "j_pipe4_to_pipe5"
+    ],
+    "parameter_precision": 1.0,
+    "parameter_recall": 0.9794520547945206,
+    "parameter_f1": 0.9896193771626297,
+    "parameter_tp": 143,
+    "parameter_fp": 0,
+    "parameter_fn": 3,
+    "parameter_mismatches": [],
+    "topology_recall": 0.9090909090909091,
+    "topology_precision": 1.0,
+    "missing_topology_edges": [
+      [
+        "pipe4(out)",
+        "pipe5(in)"
+      ]
+    ],
+    "extra_topology_edges": [],
+    "explicit_missing_markers": 0,
+    "assumption_markers": 39,
+    "characters": 11212
+  },
+  {
+    "condition": "no_validator",
+    "case": "MSRE",
+    "run": 2,
+    "resolved_model": "gpt-5.2-2025-12-11",
+    "latency_seconds": 0.0,
+    "required_block_fraction": 1.0,
+    "required_blocks_present": [
+      "components",
+      "eos",
+      "executioner",
+      "functions",
+      "globalparams",
+      "materialproperties",
+      "outputs",
+      "postprocessors",
+      "preconditioning"
+    ],
+    "required_blocks_missing": [],
+    "component_recall": 0.9583333333333334,
+    "missing_components": [
+      "j_pipe4_to_pipe5"
+    ],
+    "parameter_precision": 1.0,
+    "parameter_recall": 0.9794520547945206,
+    "parameter_f1": 0.9896193771626297,
+    "parameter_tp": 143,
+    "parameter_fp": 0,
+    "parameter_fn": 3,
+    "parameter_mismatches": [],
+    "topology_recall": 0.9090909090909091,
+    "topology_precision": 1.0,
+    "missing_topology_edges": [
+      [
+        "pipe4(out)",
+        "pipe5(in)"
+      ]
+    ],
+    "extra_topology_edges": [],
+    "explicit_missing_markers": 0,
+    "assumption_markers": 39,
+    "characters": 11212
+  },
+  {
+    "condition": "no_validator",
+    "case": "MSRE",
+    "run": 3,
+    "resolved_model": "gpt-5.2-2025-12-11",
+    "latency_seconds": 0.0,
+    "required_block_fraction": 1.0,
+    "required_blocks_present": [
+      "components",
+      "eos",
+      "executioner",
+      "functions",
+      "globalparams",
+      "materialproperties",
+      "outputs",
+      "postprocessors",
+      "preconditioning"
+    ],
+    "required_blocks_missing": [],
+    "component_recall": 0.9583333333333334,
+    "missing_components": [
+      "j_pipe4_to_pipe5"
+    ],
+    "parameter_precision": 1.0,
+    "parameter_recall": 0.9794520547945206,
+    "parameter_f1": 0.9896193771626297,
+    "parameter_tp": 143,
+    "parameter_fp": 0,
+    "parameter_fn": 3,
+    "parameter_mismatches": [],
+    "topology_recall": 0.9090909090909091,
+    "topology_precision": 1.0,
+    "missing_topology_edges": [
+      [
+        "pipe4(out)",
+        "pipe5(in)"
+      ]
+    ],
+    "extra_topology_edges": [],
+    "explicit_missing_markers": 0,
+    "assumption_markers": 39,
+    "characters": 11212
+  },
+  {
+    "condition": "validator_repair",
+    "case": "ABTR",
+    "run": 1,
+    "resolved_model": "gpt-5.2-2025-12-11",
+    "latency_seconds": 28.21264469999005,
+    "required_block_fraction": 0.8888888888888888,
+    "required_blocks_present": [
+      "components",
+      "eos",
+      "executioner",
+      "functions",
+      "globalparams",
+      "materialproperties",
+      "outputs",
+      "preconditioning"
+    ],
+    "required_blocks_missing": [
+      "postprocessors"
+    ],
+    "component_recall": 1.0,
+    "missing_components": [],
+    "parameter_precision": 1.0,
+    "parameter_recall": 1.0,
+    "parameter_f1": 1.0,
+    "parameter_tp": 118,
+    "parameter_fp": 0,
+    "parameter_fn": 0,
+    "parameter_mismatches": [],
+    "topology_recall": 1.0,
+    "topology_precision": 1.0,
+    "missing_topology_edges": [],
+    "extra_topology_edges": [],
+    "explicit_missing_markers": 0,
+    "assumption_markers": 10,
+    "characters": 5982
+  },
+  {
+    "condition": "validator_repair",
+    "case": "ABTR",
+    "run": 2,
+    "resolved_model": "gpt-5.2-2025-12-11",
+    "latency_seconds": 30.844983199989656,
+    "required_block_fraction": 0.8888888888888888,
+    "required_blocks_present": [
+      "components",
+      "eos",
+      "executioner",
+      "functions",
+      "globalparams",
+      "materialproperties",
+      "outputs",
+      "preconditioning"
+    ],
+    "required_blocks_missing": [
+      "postprocessors"
+    ],
+    "component_recall": 1.0,
+    "missing_components": [],
+    "parameter_precision": 1.0,
+    "parameter_recall": 1.0,
+    "parameter_f1": 1.0,
+    "parameter_tp": 118,
+    "parameter_fp": 0,
+    "parameter_fn": 0,
+    "parameter_mismatches": [],
+    "topology_recall": 1.0,
+    "topology_precision": 1.0,
+    "missing_topology_edges": [],
+    "extra_topology_edges": [],
+    "explicit_missing_markers": 0,
+    "assumption_markers": 10,
+    "characters": 5982
+  },
+  {
+    "condition": "validator_repair",
+    "case": "ABTR",
+    "run": 3,
+    "resolved_model": "gpt-5.2-2025-12-11",
+    "latency_seconds": 32.648615600017365,
+    "required_block_fraction": 0.8888888888888888,
+    "required_blocks_present": [
+      "components",
+      "eos",
+      "executioner",
+      "functions",
+      "globalparams",
+      "materialproperties",
+      "outputs",
+      "preconditioning"
+    ],
+    "required_blocks_missing": [
+      "postprocessors"
+    ],
+    "component_recall": 1.0,
+    "missing_components": [],
+    "parameter_precision": 1.0,
+    "parameter_recall": 1.0,
+    "parameter_f1": 1.0,
+    "parameter_tp": 118,
+    "parameter_fp": 0,
+    "parameter_fn": 0,
+    "parameter_mismatches": [],
+    "topology_recall": 1.0,
+    "topology_precision": 1.0,
+    "missing_topology_edges": [],
+    "extra_topology_edges": [],
+    "explicit_missing_markers": 0,
+    "assumption_markers": 10,
+    "characters": 5982
+  },
+  {
+    "condition": "validator_repair",
+    "case": "MSRE",
+    "run": 1,
+    "resolved_model": "gpt-5.2-2025-12-11",
+    "latency_seconds": 34.17369470000267,
+    "required_block_fraction": 1.0,
+    "required_blocks_present": [
+      "components",
+      "eos",
+      "executioner",
+      "functions",
+      "globalparams",
+      "materialproperties",
+      "outputs",
+      "postprocessors",
+      "preconditioning"
+    ],
+    "required_blocks_missing": [],
+    "component_recall": 1.0,
+    "missing_components": [],
+    "parameter_precision": 1.0,
+    "parameter_recall": 1.0,
+    "parameter_f1": 1.0,
+    "parameter_tp": 146,
+    "parameter_fp": 0,
+    "parameter_fn": 0,
+    "parameter_mismatches": [],
+    "topology_recall": 1.0,
+    "topology_precision": 1.0,
+    "missing_topology_edges": [],
+    "extra_topology_edges": [],
+    "explicit_missing_markers": 0,
+    "assumption_markers": 39,
+    "characters": 11061
+  },
+  {
+    "condition": "validator_repair",
+    "case": "MSRE",
+    "run": 2,
+    "resolved_model": "gpt-5.2-2025-12-11",
+    "latency_seconds": 31.645096299995203,
+    "required_block_fraction": 1.0,
+    "required_blocks_present": [
+      "components",
+      "eos",
+      "executioner",
+      "functions",
+      "globalparams",
+      "materialproperties",
+      "outputs",
+      "postprocessors",
+      "preconditioning"
+    ],
+    "required_blocks_missing": [],
+    "component_recall": 1.0,
+    "missing_components": [],
+    "parameter_precision": 1.0,
+    "parameter_recall": 1.0,
+    "parameter_f1": 1.0,
+    "parameter_tp": 146,
+    "parameter_fp": 0,
+    "parameter_fn": 0,
+    "parameter_mismatches": [],
+    "topology_recall": 1.0,
+    "topology_precision": 1.0,
+    "missing_topology_edges": [],
+    "extra_topology_edges": [],
+    "explicit_missing_markers": 0,
+    "assumption_markers": 39,
+    "characters": 11061
+  },
+  {
+    "condition": "validator_repair",
+    "case": "MSRE",
+    "run": 3,
+    "resolved_model": "gpt-5.2-2025-12-11",
+    "latency_seconds": 33.33094820001861,
+    "required_block_fraction": 1.0,
+    "required_blocks_present": [
+      "components",
+      "eos",
+      "executioner",
+      "functions",
+      "globalparams",
+      "materialproperties",
+      "outputs",
+      "postprocessors",
+      "preconditioning"
+    ],
+    "required_blocks_missing": [],
+    "component_recall": 1.0,
+    "missing_components": [],
+    "parameter_precision": 1.0,
+    "parameter_recall": 1.0,
+    "parameter_f1": 1.0,
+    "parameter_tp": 146,
+    "parameter_fp": 0,
+    "parameter_fn": 0,
+    "parameter_mismatches": [],
+    "topology_recall": 1.0,
+    "topology_precision": 1.0,
+    "missing_topology_edges": [],
+    "extra_topology_edges": [],
+    "explicit_missing_markers": 0,
+    "assumption_markers": 39,
+    "characters": 11061
+  }
+]

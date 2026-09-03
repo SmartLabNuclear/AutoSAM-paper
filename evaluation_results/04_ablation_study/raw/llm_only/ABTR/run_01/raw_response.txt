@@ -1,0 +1,299 @@
+[GlobalParams]
+  gravity = '0 0 -9.80665'
+  initial_P = 1.0e5
+  initial_T = 628.15
+  initial_v = 2.0
+  fluid = sodium
+  Tsolid_sf = 1.0e-3
+[]
+
+[Materials]
+  [./fuel-mat]
+    type = SolidMaterial
+    k = 16.0
+    cp = 191.67
+    rho = 1.4583e4
+  [../]
+  [./gap-mat]
+    type = SolidMaterial
+    k = 64.0
+    cp = 1272.0
+    rho = 865.0
+  [../]
+  [./clad-mat]
+    type = SolidMaterial
+    k = 26.0
+    cp = 638.0
+    rho = 7.646e3
+  [../]
+  [./duct-mat]
+    type = SolidMaterial
+    k = 26.0
+    cp = 638.0
+    rho = 7.646e3
+  [../]
+[]
+
+[Functions]
+  [./dt_pwlin]
+    type = PiecewiseLinear
+    x = '0.0   0.1   0.2   2.0   1.0e12'
+    y = '0.01  0.01  0.1   1.0   1.0'
+  [../]
+[]
+
+[Components]
+
+  # -------------------------
+  # Boundary conditions (TDVs)
+  # -------------------------
+  [./inlet_tdv]
+    type = TDV
+    bc_type = velocity_temperature
+    v = 3.25
+    T = 628.15
+    # Engineering assumption: velocity boundary is applied at the inlet face of pipe1.
+  [../]
+
+  [./outlet_tdv]
+    type = TDV
+    bc_type = pressure_temperature
+    P = 1.0e5
+    T = 628.15
+  [../]
+
+  # -------------------------
+  # Inlet/Outlet plenums (pipes)
+  # -------------------------
+  [./pipe1]
+    type = Pipe1Phase
+    A = 0.44934
+    Dh = 2.972e-3
+    length = 0.6
+    n_elems = # MISSING: pipe1 axial elements
+    orientation = '0 0 1'
+    inlet = inlet_tdv
+    outlet = branch1:main
+  [../]
+
+  [./pipe2]
+    type = Pipe1Phase
+    A = 0.44934
+    Dh = 2.972e-3
+    length = 1.5
+    n_elems = # MISSING: pipe2 axial elements
+    orientation = '0 0 1'
+    inlet = branch2:main
+    outlet = outlet_tdv
+  [../]
+
+  # -------------------------
+  # Branching junctions
+  # -------------------------
+  [./branch1]
+    type = Branch
+    A = 0.44934
+    # Ports: main + 5 legs (CH1..CH5)
+    # Form-loss coefficients for branch1:
+    # main pipe passage + five channel inlets (CH1-CH5) + one extra loss term provided (3500.0)
+    # Engineering assumption: the provided 3500.0 corresponds to an additional junction loss on the main leg.
+    K_main = 0.1
+    K_leg1 = 0.5    # CH1 inlet
+    K_leg2 = 1.96   # CH2 inlet
+    K_leg3 = 2.16   # CH3 inlet
+    K_leg4 = 4.5    # CH4 inlet
+    K_leg5 = 3500.0 # CH5 inlet (as last provided); NOTE: mapping is ambiguous in source table
+    # MISSING: definitive mapping/order of K values to CH1-CH5 legs from documentation text vs spreadsheet row alignment
+    main = pipe1:outlet
+    leg1 = CH1:inlet
+    leg2 = CH2:inlet
+    leg3 = CH3:inlet
+    leg4 = CH4:inlet
+    leg5 = CH5:inlet
+  [../]
+
+  [./branch2]
+    type = Branch
+    A = 0.44934
+    # Form-loss coefficients for branch2 are all zero
+    K_main = 0.0
+    K_leg1 = 0.0
+    K_leg2 = 0.0
+    K_leg3 = 0.0
+    K_leg4 = 0.0
+    K_leg5 = 0.0
+    main = pipe2:inlet
+    leg1 = CH1:outlet
+    leg2 = CH2:outlet
+    leg3 = CH3:outlet
+    leg4 = CH4:outlet
+    leg5 = CH5:outlet
+  [../]
+
+  # -------------------------
+  # Core channels (5 parallel)
+  # -------------------------
+  [./CH1]
+    type = Channel1Phase
+    A = 4.9237e-3
+    Dh = 2.972e-3
+    length = 0.8
+    n_elems = 20
+    orientation = '0 0 1'
+    f = 0.022
+    Hw = 1.6129e5
+    ht_area_density = 1107.8
+    power_fraction = 0.02248
+    inlet = branch1:leg1
+    outlet = branch2:leg1
+    heat_structure = HS_CH1
+  [../]
+
+  [./CH2]
+    type = Channel1Phase
+    A = 0.11323
+    Dh = 2.972e-3
+    length = 0.8
+    n_elems = 20
+    orientation = '0 0 1'
+    f = 0.022
+    Hw = 1.6129e5
+    ht_area_density = 1107.8
+    power_fraction = 0.41924
+    inlet = branch1:leg2
+    outlet = branch2:leg2
+    heat_structure = HS_CH2
+  [../]
+
+  [./CH3]
+    type = Channel1Phase
+    A = 0.029539
+    Dh = 2.972e-3
+    length = 0.8
+    n_elems = 20
+    orientation = '0 0 1'
+    f = 0.022
+    Hw = 1.6129e5
+    ht_area_density = 1107.8
+    power_fraction = 0.09852
+    inlet = branch1:leg3
+    outlet = branch2:leg3
+    heat_structure = HS_CH3
+  [../]
+
+  [./CH4]
+    type = Channel1Phase
+    A = 0.14769
+    Dh = 2.972e-3
+    length = 0.8
+    n_elems = 20
+    orientation = '0 0 1'
+    f = 0.022
+    Hw = 1.6129e5
+    ht_area_density = 1107.8
+    power_fraction = 0.43116
+    inlet = branch1:leg4
+    outlet = branch2:leg4
+    heat_structure = HS_CH4
+  [../]
+
+  [./CH5]
+    type = Channel1Phase
+    A = 0.153955129
+    Dh = 2.972e-3
+    length = 0.8
+    n_elems = 20
+    orientation = '0 0 1'
+    f = 0.04
+    Hw = 13619.0
+    ht_area_density = 2113.6
+    power_fraction = 0.02860
+    inlet = branch1:leg5
+    outlet = branch2:leg5
+    heat_structure = HS_CH5
+  [../]
+
+  # -------------------------
+  # Heat Structures
+  # -------------------------
+  [./HS_CH1]
+    type = HeatStructure
+    n_axial_elems = 20
+    nhs = 3
+    widths = '0.003015 0.000465 0.00052'
+    materials = 'fuel-mat gap-mat clad-mat'
+    n_radial_elems = '5 1 1'
+    # Engineering assumption: layer element counts correspond to (fuel, gap, clad).
+    # MISSING: heat structure boundary condition on outer surface (coupling model details handled via channel ht_area_density)
+  [../]
+
+  [./HS_CH2]
+    type = HeatStructure
+    n_axial_elems = 20
+    nhs = 3
+    widths = '0.003015 0.000465 0.00052'
+    materials = 'fuel-mat gap-mat clad-mat'
+    n_radial_elems = '5 1 1'
+  [../]
+
+  [./HS_CH3]
+    type = HeatStructure
+    n_axial_elems = 20
+    nhs = 3
+    widths = '0.003015 0.000465 0.00052'
+    materials = 'fuel-mat gap-mat clad-mat'
+    n_radial_elems = '5 1 1'
+  [../]
+
+  [./HS_CH4]
+    type = HeatStructure
+    n_axial_elems = 20
+    nhs = 3
+    widths = '0.003015 0.000465 0.00052'
+    materials = 'fuel-mat gap-mat clad-mat'
+    n_radial_elems = '5 1 1'
+  [../]
+
+  [./HS_CH5]
+    type = HeatStructure
+    n_axial_elems = 20
+    nhs = 2
+    widths = '6.32340e-3 7.0260e-4'
+    materials = 'fuel-mat clad-mat'
+    n_radial_elems = '5 1'
+    # Engineering assumption: CH5 represents non-fuel subassemblies; documentation calls layers fuel/clad.
+  [../]
+
+  # -------------------------
+  # Power / Heat source
+  # -------------------------
+  [./core_power]
+    type = CorePower
+    # MISSING: total core thermal power (W)
+    # Engineering assumption: each channel receives (power_fraction * total_core_power).
+    channels = 'CH1 CH2 CH3 CH4 CH5'
+    power_fractions = '0.02248 0.41924 0.09852 0.43116 0.02860'
+    axial_shape = # MISSING: axial power shape definition (Figure 1 referenced but not provided numerically)
+  [../]
+
+[]
+
+[Executioner]
+  type = Transient
+  start_time = 0.0
+  end_time = # MISSING: end time for 5 time steps (not explicitly provided)
+  dt = 0.1
+  dtmin = 1.0e-5
+  dtmax = 1.0
+  timestep_function = dt_pwlin
+  num_steps = 5
+  solve_type = NEWTON
+  # Variable scaling factors per documentation
+  scaling = '1 1.0e-3 1.0e-6'
+[]
+
+[Outputs]
+  exodus = true
+  csv = true
+  perf_graph = true
+[]

@@ -1,0 +1,306 @@
+# ABTR case SAM input deck generated from supplied documentation only
+# Assumptions (explicit):
+# 1) Fluid = sodium, using SAM built-in sodium EOS (name depends on SAM build). If unavailable, replace EOS block accordingly.
+# 2) Core channels CH1-CH5 are modeled as 1D pipe-like components with heat transfer to heat structures; inlet/outlet are connected via two branch junctions and two plenums (pipe1/pipe2).
+# 3) Total core power is not provided; power fractions are provided. Therefore absolute power is # MISSING and must be supplied to compute heat input.
+# 4) Gravity and elevation effects are not specified; set gravity off (# MISSING if required).
+# 5) Pipe wall heat transfer is not described for pipe1/pipe2; modeled adiabatic (no heat structures attached).
+# 6) Branch junction flow area is given as 0.44934 m^2 and is applied as the junction flow area.
+# 7) Branch form-loss list per documentation: main pipe passage K=0.1 and five channel legs K=0.5, 1.96, 2.16, 4.5, plus an additional K=3500.0 entry noted in spreadsheet last row. Its physical association is unclear -> applied to the main pipe passage at branch1 as an extra loss is NOT assumed; instead left as # MISSING mapping.
+
+[GlobalParams]
+  # MISSING: app_name / required global flags for specific SAM build
+  # Initial conditions (global) from documentation
+  initial_P = 1.0e5            # Pa
+  initial_T = 628.15           # K
+  initial_u = 2.0              # m/s
+  # Solid initial temperature
+  initial_T_solid = 628.15     # K
+  # Scaling factors from documentation
+  Tsolid_sf = 1.0e-3
+  # MISSING: mapping of "variable scaling factors of 1, 1e-3, 1e-6" to SAM variables/blocks
+[]
+
+[Functions]
+  # Piecewise linear timestep control (documentation)
+  [./dt_fun]
+    type = PiecewiseLinear
+    x = '0    0.1   0.2   2.0   1e9'
+    y = '0.01 0.01  0.1   1.0   1.0'
+  [../]
+[]
+
+[EOS]
+  # Primary coolant is sodium
+  [./sodium]
+    # MISSING: exact EOS type/name for sodium in this SAM installation
+    type = SodiumEOS   # MISSING: if not recognized, replace with correct SAM sodium EOS
+  [../]
+[]
+
+[MaterialProperties]
+  # Solid materials from documentation
+  [./fuel-mat]
+    type = SolidMaterialProperties
+    k = 16.0                  # W/m-K
+    cp = 191.67               # J/kg-K
+    rho = 1.4583e4            # kg/m3
+  [../]
+  [./gap-mat]
+    type = SolidMaterialProperties
+    k = 64.0
+    cp = 1272.0
+    rho = 865.0
+  [../]
+  [./clad-mat]
+    type = SolidMaterialProperties
+    k = 26.0
+    cp = 638.0
+    rho = 7.646e3
+  [../]
+  [./duct-mat]
+    type = SolidMaterialProperties
+    k = 26.0
+    cp = 638.0
+    rho = 7.646e3
+  [../]
+[]
+
+[Components]
+  # Boundary conditions using TDV components (documentation)
+  [./inlet]
+    type = TDVBoundary
+    eos = sodium
+    boundary = inlet
+    velocity = 3.25         # m/s
+    temperature = 628.15    # K
+    # MISSING: boundary pressure specification (not provided for inlet)
+  [../]
+
+  [./outlet]
+    type = TDVBoundary
+    eos = sodium
+    boundary = outlet
+    pressure = 1.0e5        # Pa
+    temperature = 628.15    # K
+    # MISSING: outlet velocity specification (not required for pressure outlet in some SAM setups)
+  [../]
+
+  # Inlet plenum pipe1 (upstream of branch1)
+  [./pipe1]
+    type = Pipe
+    eos = sodium
+    A = 0.44934            # m^2 (Table 1)
+    Dh = 2.972e-3          # m (Table 1)
+    length = 0.6           # m (Table 1)
+    n_elems = 1            # MISSING: not specified; assumption: 1 element for plenum-like pipe
+    # Connections
+    inlet = inlet
+    outlet = branch1:inlet
+    # MISSING: friction model / roughness; not provided
+  [../]
+
+  # Outlet plenum pipe2 (downstream of branch2)
+  [./pipe2]
+    type = Pipe
+    eos = sodium
+    A = 0.44934
+    Dh = 2.972e-3
+    length = 1.5
+    n_elems = 1            # MISSING: not specified; assumption: 1 element
+    inlet = branch2:outlet
+    outlet = outlet
+    # MISSING: friction model / roughness
+  [../]
+
+  # Branch junctions connecting pipe1 to 5 channels and recombining to pipe2
+  [./branch1]
+    type = Branch
+    eos = sodium
+    A = 0.44934            # "The branches area is 0.44934."
+    # Ports: inlet from pipe1; outlets to CH1..CH5 plus main continuation if needed
+    inlet = pipe1:outlet
+    outlet_1 = CH1:inlet
+    outlet_2 = CH2:inlet
+    outlet_3 = CH3:inlet
+    outlet_4 = CH4:inlet
+    outlet_5 = CH5:inlet
+    # Form-loss coefficients per documentation for branch1:
+    # "K = 0.1, 0.5, 1.96, 2.16, 4.5, and 3500.0, corresponding respectively to the main pipe passage and the five channel inlets (CH1–CH5)."
+    # This list contains 6 values for 1 main + 5 legs, but includes 3500.0 which makes 6 after 0.1; mapping is ambiguous.
+    K_main = 0.1
+    K_outlet_1 = 0.5
+    K_outlet_2 = 1.96
+    K_outlet_3 = 2.16
+    K_outlet_4 = 4.5
+    K_outlet_5 = # MISSING: branch1 K for CH5 per documentation list ambiguity (3500.0 vs 4.5 already used)
+    # MISSING: where to apply K=3500.0 (spreadsheet extra row). Provide explicit mapping.
+  [../]
+
+  [./branch2]
+    type = Branch
+    eos = sodium
+    A = 0.44934
+    inlet_1 = CH1:outlet
+    inlet_2 = CH2:outlet
+    inlet_3 = CH3:outlet
+    inlet_4 = CH4:outlet
+    inlet_5 = CH5:outlet
+    outlet = pipe2:inlet
+    # Form-loss coefficients per documentation: all zero
+    K_inlet_1 = 0.0
+    K_inlet_2 = 0.0
+    K_inlet_3 = 0.0
+    K_inlet_4 = 0.0
+    K_inlet_5 = 0.0
+    K_main = 0.0
+  [../]
+
+  # Core channels CH1-CH5: geometry Table 1, axial discretization 20 elements, heated length 0.8 m
+  # Thermal parameters from Table 2 / spreadsheet: friction factor f, heat transfer coefficient Hw, HT area density, power fraction
+  # Heat input requires total core power -> # MISSING
+  [./CH1]
+    type = CoreChannel
+    eos = sodium
+    A = 4.9237e-3
+    Dh = 2.972e-3
+    length = 0.8
+    n_elems = 20
+    inlet = branch1:outlet_1
+    outlet = branch2:inlet_1
+    f = 0.022
+    Hw = 1.6129e5                 # W/m2-K
+    ht_area_density = 1107.8      # 1/m
+    power_fraction = 0.02248
+    # MISSING: total_power (W) to scale channel power
+    total_power = # MISSING: total core thermal power (W)
+    # Heat structures
+    nhs = 3
+    hs_widths = '0.003015 0.000465 0.00052'     # fuel/gap/clad (m)
+    hs_materials = 'fuel-mat gap-mat clad-mat'
+    hs_radial_elems = '5 1 1'                   # fuel/gap/clad
+    # MISSING: axial power shape (Figure 1) not provided numerically
+  [../]
+
+  [./CH2]
+    type = CoreChannel
+    eos = sodium
+    A = 0.11323
+    Dh = 2.972e-3
+    length = 0.8
+    n_elems = 20
+    inlet = branch1:outlet_2
+    outlet = branch2:inlet_2
+    f = 0.022
+    Hw = 1.6129e5
+    ht_area_density = 1107.8
+    power_fraction = 0.41924
+    total_power = # MISSING: total core thermal power (W)
+    nhs = 3
+    hs_widths = '0.003015 0.000465 0.00052'
+    hs_materials = 'fuel-mat gap-mat clad-mat'
+    hs_radial_elems = '5 1 1'
+  [../]
+
+  [./CH3]
+    type = CoreChannel
+    eos = sodium
+    A = 0.029539
+    Dh = 2.972e-3
+    length = 0.8
+    n_elems = 20
+    inlet = branch1:outlet_3
+    outlet = branch2:inlet_3
+    f = 0.022
+    Hw = 1.6129e5
+    ht_area_density = 1107.8
+    power_fraction = 0.09852
+    total_power = # MISSING: total core thermal power (W)
+    nhs = 3
+    hs_widths = '0.003015 0.000465 0.00052'
+    hs_materials = 'fuel-mat gap-mat clad-mat'
+    hs_radial_elems = '5 1 1'
+  [../]
+
+  [./CH4]
+    type = CoreChannel
+    eos = sodium
+    A = 0.14769
+    Dh = 2.972e-3
+    length = 0.8
+    n_elems = 20
+    inlet = branch1:outlet_4
+    outlet = branch2:inlet_4
+    f = 0.022
+    Hw = 1.6129e5
+    ht_area_density = 1107.8
+    power_fraction = 0.43116
+    total_power = # MISSING: total core thermal power (W)
+    nhs = 3
+    hs_widths = '0.003015 0.000465 0.00052'
+    hs_materials = 'fuel-mat gap-mat clad-mat'
+    hs_radial_elems = '5 1 1'
+  [../]
+
+  [./CH5]
+    type = CoreChannel
+    eos = sodium
+    A = 0.153955129
+    Dh = 2.972e-3
+    length = 0.8
+    n_elems = 20
+    inlet = branch1:outlet_5
+    outlet = branch2:inlet_5
+    f = 0.04
+    Hw = 13619.0
+    ht_area_density = 2013.6       # spreadsheet value; Table 2 shows 2113.6 (conflict)
+    # Engineering note: Table 2 HT area density for CH5 = 2113.6, spreadsheet = 2013.6
+    # MISSING: resolve discrepancy; using spreadsheet value as provided.
+    power_fraction = 0.02860
+    total_power = # MISSING: total core thermal power (W)
+    nhs = 2
+    hs_widths = '6.32340e-3 7.0260e-4'          # fuel/clad
+    hs_materials = 'fuel-mat clad-mat'
+    hs_radial_elems = '5 1'
+  [../]
+[]
+
+[Preconditioning]
+  # MISSING: specific preconditioner settings not provided
+  [./pc]
+    type = SMP
+  [../]
+[]
+
+[Postprocessors]
+  # Basic monitoring
+  [./t]
+    type = TimePostprocessor
+  [../]
+  # MISSING: component variable names for SAM (pressure drop, outlet temperatures, mass flows)
+[]
+
+[Executioner]
+  type = Transient
+  # Time control per documentation
+  start_time = 0.0
+  end_time = # MISSING: end time (only "five time steps are executed" stated; no final time)
+  dt = 0.1                      # nominal starting step (documentation)
+  dtmin = 1.0e-5
+  dtmax = 1.0                   # max allowable beyond 2 s (documentation)
+  # MISSING: how to hook dt_fun into SAM timestepper; placeholder below
+  [./TimeStepper]
+    type = FunctionDT
+    function = dt_fun
+  [../]
+  num_steps = 5                 # documentation
+  # Nonlinear/linear solver controls not provided
+  # MISSING: nl_rel_tol, nl_abs_tol, l_tol, max_its, etc.
+[]
+
+[Outputs]
+  console = true
+  file_base = abtr_case
+  # MISSING: desired output formats; provide CSV
+  csv = true
+[]
