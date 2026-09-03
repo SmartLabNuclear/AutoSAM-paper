@@ -17,6 +17,7 @@ Validation criteria: hottest temperatures near the core outlet, a measurable pri
 | `source_documents/MSRE_case.pdf` | The authoritative case document (6 pages) |
 | `source_documents/MSRE_system_layout.png` | The loop layout; the only source of connectivity and segment coordinates |
 | `source_documents/MSRE_specifications.xlsx` | Structured specifications, including the geometry that retrieval could not recover from the PDF |
+| `source_documents/distractor_corpus/` | The related-document noise used **only** in the retrieval evaluation — not supplied to the agent when building this model |
 | `simulation_results/core_temperature.png` | Temperature rise through the heated core |
 | `simulation_results/heat_exchanger_temperature.png` | Primary-side drop and secondary-side rise across the exchanger |
 | `simulation_results/pressure.png` | Loop pressure distribution |

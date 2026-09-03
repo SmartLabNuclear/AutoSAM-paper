@@ -18,7 +18,7 @@ Every case folder has the same five subfolders:
 | `prompts/` | The user prompts driving the two generation stages, verbatim |
 | `intermediate_file/` | The structured intermediate YAML representation — the human-in-the-loop checkpoint |
 | `input_file/` | `autosam_generated.i`, the generated SAM deck; for ABTR and MSRE also `manual_reference.i`, the independently developed manual deck |
-| `source_documents/` | The documents supplied to the agent, under the names the agent saw |
+| `source_documents/` | The documents supplied to the agent, under the names the agent saw. For ABTR and MSRE, a `distractor_corpus/` subfolder holds the related-document noise used only in the retrieval evaluation — those were never inputs to model generation |
 | `simulation_results/` | Plots and `simulation_output.csv` from running the generated deck |
 
 Two naming conventions are worth knowing before you browse:

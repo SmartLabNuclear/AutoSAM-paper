@@ -16,6 +16,7 @@ Three physics-based checks: uneven flow distribution among the five channels (br
 | `source_documents/ABTR_case.pdf` | The authoritative case document (3 pages) |
 | `source_documents/ABTR_schematic.png` | The system schematic; the only source of topology and geometry |
 | `source_documents/model_specifications.xlsx` | Supplementary structured specifications |
+| `source_documents/distractor_corpus/` | The related-document noise used **only** in the retrieval evaluation — not supplied to the agent when building this model |
 | `simulation_results/temperature.png` | Channel temperature rise |
 | `simulation_results/pressure.png` | Pressure decrease along the flow path |
 | `simulation_results/velocity.png` | Per-channel velocity — shows the uneven flow split |
