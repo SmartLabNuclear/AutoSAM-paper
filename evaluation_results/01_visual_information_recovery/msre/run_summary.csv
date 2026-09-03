@@ -1,0 +1,4 @@
+﻿run,case,required_facts,recovered_facts,ViR,vision_input_tokens,vision_output_tokens,vision_reasoning_tokens,structuring_input_tokens,structuring_output_tokens,latency_seconds,failed_items
+1,MSRE,22,17,0.7727272727272727,8509,1352,516,1048,1565,35.020602300000974,0
+2,MSRE,22,20,0.9090909090909091,8509,1293,503,1002,1621,35.75566179999987,0
+3,MSRE,22,17,0.7727272727272727,8509,1333,516,1029,1053,31.97933710000143,0

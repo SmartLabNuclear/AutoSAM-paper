@@ -1,0 +1,25 @@
+[
+  {
+    "case": "MSRE",
+    "runs": 3,
+    "ViR_mean": 0.8181818181818181,
+    "ViR_sd": 0.07872958216222169,
+    "run_values": [
+      0.7727272727272727,
+      0.9090909090909091,
+      0.7727272727272727
+    ],
+    "recovered_counts": [
+      17,
+      20,
+      17
+    ],
+    "required_per_run": 22,
+    "vision_input_tokens_total": 25527,
+    "vision_output_tokens_total": 3978,
+    "vision_reasoning_tokens_total": 1535,
+    "structuring_input_tokens_total": 3079,
+    "structuring_output_tokens_total": 4239,
+    "api_latency_seconds_total": 102.75560120000227
+  }
+]

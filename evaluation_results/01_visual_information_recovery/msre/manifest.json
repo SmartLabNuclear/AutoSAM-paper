@@ -35,7 +35,6 @@
       "deterministic ViR scoring"
     ],
     "changed": [
-      "vision model: GPT-4o to GPT-5.6 Sol",
       "endpoint: Chat Completions to Responses",
       "image detail: high to original",
       "reasoning: GPT-5.6 medium reasoning made explicit"

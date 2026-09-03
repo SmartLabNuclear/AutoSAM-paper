@@ -1,19 +1,4 @@
 ﻿modality,run,case,requested_vision_model,resolved_vision_model,structuring_model,vision_input_tokens,vision_output_tokens,vision_reasoning_tokens,structuring_input_tokens,structuring_output_tokens,latency_seconds,raw_log,error,item_id,fact_id,kind,provenance,expected,matched_value,recovered,vir_item
-visual,1,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,881,291,802,591,22.099869199999375,raw/run_01/ABTR.json,,abtr_v01,abtr_v01,coordinate,explicit,"[0.0, 2.3]","{""label"": ""Inlet"", ""value"": [0.0, 2.3]}",True,1.0
-visual,1,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,881,291,802,591,22.099869199999375,raw/run_01/ABTR.json,,abtr_v02,abtr_v02,coordinate,explicit,"[0.0, -0.6]","{""label"": ""Outlet"", ""value"": [0.0, -0.6]}",True,1.0
-visual,1,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,881,291,802,591,22.099869199999375,raw/run_01/ABTR.json,,abtr_v03,abtr_v03,coordinate,inferred,"[-1.0, 0.0]",,False,0.0
-visual,1,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,881,291,802,591,22.099869199999375,raw/run_01/ABTR.json,,abtr_v04,abtr_v04,coordinate,inferred,"[-0.5, 0.0]",,False,0.0
-visual,1,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,881,291,802,591,22.099869199999375,raw/run_01/ABTR.json,,abtr_v05,abtr_v05,coordinate,inferred,"[0.0, 0.0]",,False,0.0
-visual,1,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,881,291,802,591,22.099869199999375,raw/run_01/ABTR.json,,abtr_v06,abtr_v06,coordinate,inferred,"[0.5, 0.0]",,False,0.0
-visual,1,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,881,291,802,591,22.099869199999375,raw/run_01/ABTR.json,,abtr_v07,abtr_v07,coordinate,inferred,"[1.0, 0.0]",,False,0.0
-visual,1,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,881,291,802,591,22.099869199999375,raw/run_01/ABTR.json,,abtr_v08,abtr_v08,coordinate,inferred,"[0.0, 0.8]","{""label"": ""Pipe2 start"", ""value"": [0.0, 0.8]}",True,1.0
-visual,1,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,881,291,802,591,22.099869199999375,raw/run_01/ABTR.json,,abtr_v09,abtr_v09,length,deduced,0.6,0.6,True,1.0
-visual,1,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,881,291,802,591,22.099869199999375,raw/run_01/ABTR.json,,abtr_v10,abtr_v10,length,deduced,1.5,1.5,True,1.0
-visual,1,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,881,291,802,591,22.099869199999375,raw/run_01/ABTR.json,,abtr_v11,abtr_v11,length,deduced,0.8,,False,0.0
-visual,1,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,881,291,802,591,22.099869199999375,raw/run_01/ABTR.json,,abtr_v12,abtr_v12,length,deduced,0.8,,False,0.0
-visual,1,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,881,291,802,591,22.099869199999375,raw/run_01/ABTR.json,,abtr_v13,abtr_v13,length,deduced,0.8,,False,0.0
-visual,1,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,881,291,802,591,22.099869199999375,raw/run_01/ABTR.json,,abtr_v14,abtr_v14,length,deduced,0.8,,False,0.0
-visual,1,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,881,291,802,591,22.099869199999375,raw/run_01/ABTR.json,,abtr_v15,abtr_v15,length,deduced,0.8,,False,0.0
 visual,1,MSRE,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,8509,1352,516,1048,1565,35.020602300000974,raw/run_01/MSRE.json,,msre_v01,msre_v01,coordinate,explicit,"[-0.7366, 0.0]","{""label"": ""inlet_plenum start"", ""value"": [-0.7366, 0.0]}",True,1.0
 visual,1,MSRE,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,8509,1352,516,1048,1565,35.020602300000974,raw/run_01/MSRE.json,,msre_v02,msre_v02,coordinate,explicit,"[0.0, 1.7272]","{""label"": ""core end"", ""value"": [0.0, 1.7272]}",True,1.0
 visual,1,MSRE,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,8509,1352,516,1048,1565,35.020602300000974,raw/run_01/MSRE.json,,msre_v03,msre_v03,coordinate,explicit,"[0.0, 2.1618]","{""label"": ""upper_plenum end"", ""value"": [0.0, 2.1618]}",True,1.0
@@ -36,21 +21,6 @@ visual,1,MSRE,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,8509,1352,516,1048,
 visual,1,MSRE,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,8509,1352,516,1048,1565,35.020602300000974,raw/run_01/MSRE.json,,msre_v20,msre_v20,length,deduced,0.5,0.5,True,1.0
 visual,1,MSRE,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,8509,1352,516,1048,1565,35.020602300000974,raw/run_01/MSRE.json,,msre_v21,msre_v21,length,deduced,1.2474,1.2474,True,1.0
 visual,1,MSRE,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,8509,1352,516,1048,1565,35.020602300000974,raw/run_01/MSRE.json,,msre_v22,msre_v22,length,deduced,1.0312,1.0304,True,1.0
-visual,2,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,1027,356,883,911,28.214135899999746,raw/run_02/ABTR.json,,abtr_v01,abtr_v01,coordinate,explicit,"[0.0, 2.3]","{""label"": ""Inlet"", ""value"": [0.0, 2.3]}",True,1.0
-visual,2,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,1027,356,883,911,28.214135899999746,raw/run_02/ABTR.json,,abtr_v02,abtr_v02,coordinate,explicit,"[0.0, -0.6]","{""label"": ""Outlet"", ""value"": [0.0, -0.6]}",True,1.0
-visual,2,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,1027,356,883,911,28.214135899999746,raw/run_02/ABTR.json,,abtr_v03,abtr_v03,coordinate,inferred,"[-1.0, 0.0]",,False,0.0
-visual,2,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,1027,356,883,911,28.214135899999746,raw/run_02/ABTR.json,,abtr_v04,abtr_v04,coordinate,inferred,"[-0.5, 0.0]",,False,0.0
-visual,2,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,1027,356,883,911,28.214135899999746,raw/run_02/ABTR.json,,abtr_v05,abtr_v05,coordinate,inferred,"[0.0, 0.0]","{""label"": ""CH3"", ""value"": [0.0, 0.0]}",True,1.0
-visual,2,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,1027,356,883,911,28.214135899999746,raw/run_02/ABTR.json,,abtr_v06,abtr_v06,coordinate,inferred,"[0.5, 0.0]",,False,0.0
-visual,2,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,1027,356,883,911,28.214135899999746,raw/run_02/ABTR.json,,abtr_v07,abtr_v07,coordinate,inferred,"[1.0, 0.0]",,False,0.0
-visual,2,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,1027,356,883,911,28.214135899999746,raw/run_02/ABTR.json,,abtr_v08,abtr_v08,coordinate,inferred,"[0.0, 0.8]","{""label"": ""Pipe2 start"", ""value"": [0.0, 0.8]}",True,1.0
-visual,2,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,1027,356,883,911,28.214135899999746,raw/run_02/ABTR.json,,abtr_v09,abtr_v09,length,deduced,0.6,0.6,True,1.0
-visual,2,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,1027,356,883,911,28.214135899999746,raw/run_02/ABTR.json,,abtr_v10,abtr_v10,length,deduced,1.5,1.5,True,1.0
-visual,2,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,1027,356,883,911,28.214135899999746,raw/run_02/ABTR.json,,abtr_v11,abtr_v11,length,deduced,0.8,1.8,False,0.0
-visual,2,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,1027,356,883,911,28.214135899999746,raw/run_02/ABTR.json,,abtr_v12,abtr_v12,length,deduced,0.8,1.3,False,0.0
-visual,2,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,1027,356,883,911,28.214135899999746,raw/run_02/ABTR.json,,abtr_v13,abtr_v13,length,deduced,0.8,0.8,True,1.0
-visual,2,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,1027,356,883,911,28.214135899999746,raw/run_02/ABTR.json,,abtr_v14,abtr_v14,length,deduced,0.8,0.3,False,0.0
-visual,2,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,1027,356,883,911,28.214135899999746,raw/run_02/ABTR.json,,abtr_v15,abtr_v15,length,deduced,0.8,0.2,False,0.0
 visual,2,MSRE,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,8509,1293,503,1002,1621,35.75566179999987,raw/run_02/MSRE.json,,msre_v01,msre_v01,coordinate,explicit,"[-0.7366, 0.0]","{""label"": ""inlet_plenum start"", ""value"": [-0.7366, 0.0]}",True,1.0
 visual,2,MSRE,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,8509,1293,503,1002,1621,35.75566179999987,raw/run_02/MSRE.json,,msre_v02,msre_v02,coordinate,explicit,"[0.0, 1.7272]","{""label"": ""core end"", ""value"": [0.0, 1.7272]}",True,1.0
 visual,2,MSRE,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,8509,1293,503,1002,1621,35.75566179999987,raw/run_02/MSRE.json,,msre_v03,msre_v03,coordinate,explicit,"[0.0, 2.1618]","{""label"": ""upper_plenum end"", ""value"": [0.0, 2.1618]}",True,1.0
@@ -73,21 +43,6 @@ visual,2,MSRE,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,8509,1293,503,1002,
 visual,2,MSRE,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,8509,1293,503,1002,1621,35.75566179999987,raw/run_02/MSRE.json,,msre_v20,msre_v20,length,deduced,0.5,0.5,True,1.0
 visual,2,MSRE,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,8509,1293,503,1002,1621,35.75566179999987,raw/run_02/MSRE.json,,msre_v21,msre_v21,length,deduced,1.2474,1.2476,True,1.0
 visual,2,MSRE,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,8509,1293,503,1002,1621,35.75566179999987,raw/run_02/MSRE.json,,msre_v22,msre_v22,length,deduced,1.0312,1.767,False,0.0
-visual,3,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,930,326,816,951,27.114530099999683,raw/run_03/ABTR.json,,abtr_v01,abtr_v01,coordinate,explicit,"[0.0, 2.3]","{""label"": ""Inlet"", ""value"": [0.0, 2.3]}",True,1.0
-visual,3,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,930,326,816,951,27.114530099999683,raw/run_03/ABTR.json,,abtr_v02,abtr_v02,coordinate,explicit,"[0.0, -0.6]","{""label"": ""Outlet"", ""value"": [0.0, -0.6]}",True,1.0
-visual,3,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,930,326,816,951,27.114530099999683,raw/run_03/ABTR.json,,abtr_v03,abtr_v03,coordinate,inferred,"[-1.0, 0.0]","{""label"": ""CH1"", ""value"": [-1.0, 0.0]}",True,1.0
-visual,3,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,930,326,816,951,27.114530099999683,raw/run_03/ABTR.json,,abtr_v04,abtr_v04,coordinate,inferred,"[-0.5, 0.0]","{""label"": ""CH2"", ""value"": [-0.5, 0.0]}",True,1.0
-visual,3,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,930,326,816,951,27.114530099999683,raw/run_03/ABTR.json,,abtr_v05,abtr_v05,coordinate,inferred,"[0.0, 0.0]","{""label"": ""CH3"", ""value"": [0.0, 0.0]}",True,1.0
-visual,3,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,930,326,816,951,27.114530099999683,raw/run_03/ABTR.json,,abtr_v06,abtr_v06,coordinate,inferred,"[0.5, 0.0]","{""label"": ""CH4"", ""value"": [0.5, 0.0]}",True,1.0
-visual,3,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,930,326,816,951,27.114530099999683,raw/run_03/ABTR.json,,abtr_v07,abtr_v07,coordinate,inferred,"[1.0, 0.0]","{""label"": ""CH5"", ""value"": [1.0, 0.0]}",True,1.0
-visual,3,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,930,326,816,951,27.114530099999683,raw/run_03/ABTR.json,,abtr_v08,abtr_v08,coordinate,inferred,"[0.0, 0.8]","{""label"": ""Pipe2 start"", ""value"": [0.0, 0.8]}",True,1.0
-visual,3,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,930,326,816,951,27.114530099999683,raw/run_03/ABTR.json,,abtr_v09,abtr_v09,length,deduced,0.6,0.6,True,1.0
-visual,3,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,930,326,816,951,27.114530099999683,raw/run_03/ABTR.json,,abtr_v10,abtr_v10,length,deduced,1.5,1.5,True,1.0
-visual,3,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,930,326,816,951,27.114530099999683,raw/run_03/ABTR.json,,abtr_v11,abtr_v11,length,deduced,0.8,0.8,True,1.0
-visual,3,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,930,326,816,951,27.114530099999683,raw/run_03/ABTR.json,,abtr_v12,abtr_v12,length,deduced,0.8,0.5,False,0.0
-visual,3,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,930,326,816,951,27.114530099999683,raw/run_03/ABTR.json,,abtr_v13,abtr_v13,length,deduced,0.8,0.0,False,0.0
-visual,3,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,930,326,816,951,27.114530099999683,raw/run_03/ABTR.json,,abtr_v14,abtr_v14,length,deduced,0.8,0.5,False,0.0
-visual,3,ABTR,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,7853,930,326,816,951,27.114530099999683,raw/run_03/ABTR.json,,abtr_v15,abtr_v15,length,deduced,0.8,0.8,True,1.0
 visual,3,MSRE,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,8509,1333,516,1029,1053,31.97933710000143,raw/run_03/MSRE.json,,msre_v01,msre_v01,coordinate,explicit,"[-0.7366, 0.0]",,False,0.0
 visual,3,MSRE,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,8509,1333,516,1029,1053,31.97933710000143,raw/run_03/MSRE.json,,msre_v02,msre_v02,coordinate,explicit,"[0.0, 1.7272]",,False,0.0
 visual,3,MSRE,gpt-5.6-sol,gpt-5.6-sol,gpt-4o-mini-2024-07-18,8509,1333,516,1029,1053,31.97933710000143,raw/run_03/MSRE.json,,msre_v03,msre_v03,coordinate,explicit,"[0.0, 2.1618]",,False,0.0

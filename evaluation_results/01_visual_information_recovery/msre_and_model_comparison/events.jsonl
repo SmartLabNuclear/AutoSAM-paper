@@ -1,2 +1,0 @@
-{"timestamp": "2026-08-13T20:38:16.051814Z", "event": "strict_rescore_started", "source_sol": "<AUTOSAM_ROOT>\\evaluation_runs\\20260813T203159Z_vision_gpt56sol", "source_baseline": "<AUTOSAM_ROOT>\\evaluation_runs\\20260813T201032Z_rescore"}
-{"timestamp": "2026-08-13T20:38:16.076277Z", "event": "strict_rescore_completed", "rows": 111}

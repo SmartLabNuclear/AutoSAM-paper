@@ -13,10 +13,6 @@
     "ABTR_case_pdf/ABTR_5channel_min_working.i": "ff9e67b15d7ca5623111e9df897258c9f7b67cb3142993748933397d3de1a87e"
   },
   "source_runs": {
-    "gpt4o_baseline": {
-      "path": "<AUTOSAM_ROOT>\\evaluation_runs\\20260813T201032Z_rescore",
-      "manifest_sha256": "2c4a7335049f05d2f2cda24790f4a4fe81251b7a23afac03e63b643b0baa0313"
-    },
     "gpt56_generic": {
       "path": "<AUTOSAM_ROOT>\\evaluation_runs\\20260813T203816Z_vision_gpt56sol_strict",
       "manifest_sha256": "38f3ef1001011624dd21b59c24c402421531f01ba801b4e7a0545e73f42a799f"
@@ -27,9 +23,6 @@
     }
   },
   "copied_raw_hashes": {
-    "raw/gpt4o_baseline/run_01_ABTR.json": "f8ff5a930dbb7b8409655d4cb10942e130e908899778c819e9833c1590a5755d",
-    "raw/gpt4o_baseline/run_02_ABTR.json": "fbeb2dc1495cce73a1f82f82f7c01a90e644d6334fa92ee05f13244e5bcc452d",
-    "raw/gpt4o_baseline/run_03_ABTR.json": "0e19e68f03a1a82660c27efab20fd69bb7835be7a3c82e1c4e87ea99c606648e",
     "raw/gpt56_generic/run_01_ABTR.json": "e968e97545dc8a685eefd80917a24ce297baa7892c68d2c29c5ca6d582a904cf",
     "raw/gpt56_generic/run_02_ABTR.json": "b20c976acca2144e239ab3a6c2990737a597cdbee0c63e22497e358d7fd75683",
     "raw/gpt56_generic/run_03_ABTR.json": "a46482800bd21d91430c28457ec979c10431176d18d3c68e24e6f2bb6be106f4",
