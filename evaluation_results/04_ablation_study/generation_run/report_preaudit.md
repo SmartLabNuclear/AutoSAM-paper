@@ -10,8 +10,6 @@ Model requested: `gpt-5.2`
 | full_pipeline_existing | MSRE | 1 | 1.000 | 1.000 | 1.000 | 1.000 | 0.0 |
 | llm_only | ABTR | 3 | 0.556 | 1.000 | 1.000 | 1.000 | 0.7 |
 | llm_only | MSRE | 3 | 0.333 | 0.333 | 0.369 | 1.000 | 11.3 |
-| no_image_processing | ABTR | 3 | 1.000 | 0.694 | 0.380 | 0.000 | 56.0 |
-| no_image_processing | MSRE | 3 | 0.296 | 0.000 | 0.014 | 0.000 | 83.3 |
 | no_intermediate_file | ABTR | 3 | 0.259 | 0.000 | 0.000 | 0.000 | 28.3 |
 | no_intermediate_file | MSRE | 3 | 0.481 | 0.000 | 0.014 | 0.000 | 17.0 |
 | no_validator | ABTR | 3 | 0.889 | 1.000 | 1.000 | 0.900 | 0.0 |

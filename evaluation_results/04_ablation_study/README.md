@@ -7,7 +7,7 @@ Backs the [ablation table](../../README.md#ablation-study). Test cases 3 and 4 r
 | [`audited_scores/`](audited_scores/) | **The reported source.** The audited rescore of the generation run below |
 | [`generation_run/`](generation_run/) | The generation run itself: prompts, generated decks, benchmarks, seeded defects, and the superseded pre-audit scoring |
 
-**The two directories disagree, and the audited one is correct.** The original scorer did not understand legacy MOOSE `[./name]` and `[../]` block notation, so it scored several structurally valid decks as near-zero. The rescore fixed that without repeating any API call. 13 of 32 item scores changed. Compare `generation_run/report_preaudit.md` against `audited_scores/results_audited.md` to see the difference — for example, MSRE `llm_only` parameter F1 goes from 0.369 to 1.000.
+**The two directories disagree, and the audited one is correct.** The original scorer did not understand legacy MOOSE `[./name]` and `[../]` block notation, so it scored several structurally valid decks as near-zero. The rescore fixed that without repeating any API call. 7 of the 26 remaining item scores changed. Compare `generation_run/report_preaudit.md` against `audited_scores/results_audited.md` to see the difference — for example, MSRE `llm_only` parameter F1 goes from 0.369 to 1.000.
 
 ## Configurations
 
@@ -18,7 +18,6 @@ Backs the [ablation table](../../README.md#ablation-study). Test cases 3 and 4 r
 | `no_intermediate_file` | The intermediate representation; extracted text, spreadsheet data, and image facts go straight to input generation | yes |
 | `no_validator` | Connectivity and section-presence checks, with a connectivity defect seeded in each case | yes |
 | `validator_repair` | Nothing — the validator diagnosis is fed back to the agent, separating defect *detection* from *correction* | in prose |
-| `no_image_processing` | The image tool | **no** — present in the data, not in the paper's table |
 
 ## What the ablation shows
 
@@ -29,3 +28,10 @@ Backs the [ablation table](../../README.md#ablation-study). Test cases 3 and 4 r
 Section coverage measures presence only. The ABTR reference itself omits the optional `[Postprocessors]` section without becoming invalid, so coverage below 1.000 is not automatically a defect.
 
 The seeded defects are disclosed, deliberate, and single: they isolate validator effectiveness and say nothing about how often such defects arise naturally.
+
+## Withdrawn arm
+
+A sixth configuration, `no_image_processing`, was run but is not published. Its runs, per-item scores, and aggregate rows have been removed from this directory. Two consequences to be aware of when auditing:
+
+- `generation_run/manifest.json` still reports the token and API-call totals for the full six-arm run.
+- `audited_scores/rescore_manifest.json` records `source_all_scores_sha256` for `all_scores.json` as it stood before the arm was removed, so that hash no longer matches the file in this directory. Every other hash it records is unaffected.

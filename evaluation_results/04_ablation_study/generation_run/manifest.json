@@ -7,7 +7,6 @@
   "conditions": [
     "full_pipeline_existing",
     "llm_only",
-    "no_image_processing",
     "no_intermediate_file",
     "no_validator",
     "validator_repair"
@@ -21,7 +20,8 @@
   "notes": [
     "Existing full-pipeline artifacts are not regenerated.",
     "The validator ablation uses a disclosed deterministic connectivity defect.",
-    "The case-neutral evaluation prompt excludes case examples embedded in the application system prompt to prevent benchmark leakage."
+    "The case-neutral evaluation prompt excludes case examples embedded in the application system prompt to prevent benchmark leakage.",
+    "The no_image_processing arm was withdrawn from this publication; its runs, scores, and aggregate rows were removed."
   ],
   "inputs": {
     "ABTR": {
