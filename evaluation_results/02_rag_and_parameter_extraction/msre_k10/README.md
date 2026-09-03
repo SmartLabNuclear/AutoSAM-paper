@@ -25,7 +25,7 @@ No retrieval depth could have recovered these values. That is why precision and 
 | --- | --- |
 | `manifest.json` | Models, `top_k = 10`, corpus composition, vector-store build, benchmark and script SHA-256 |
 | `retrieval/rankings.json` | The top-10 ranking per question: chunk IDs, distance, target/noise role, evidence recall. No chunk text, no model answers |
-| `raw/run_NN/MSRE_INPUT_K10/msre_param_NN.json` | One API call in full: retrieved chunks with text, exact prompts, unmodified response, parsed claims, usage, latency, per-claim scoring |
+| `raw/run_NN/MSRE_INPUT_K10/msre_param_NN.json` | One API call: retrieved chunks with text, the `user_prompt` (question plus the rendered evidence blocks), unmodified response, parsed claims, usage, latency, per-claim scoring |
 | `events.jsonl` | Chronological event log |
 | `report.md` / `report_audited.md` | Automated summary, then **the audit narrative — read that one** |
 | `failure_audit.md` / `failure_audit_audited.md` | The flagged responses; the audited version shows the 9 flagged of 45, all from Q13–Q15 |

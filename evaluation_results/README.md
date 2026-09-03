@@ -30,7 +30,7 @@ Every audit was performed offline: **no API call was repeated and no raw model o
 | --- | --- |
 | `manifest.json` | Run configuration: model, settings, benchmark, corpus, retrieval depth, source hashes |
 | `retrieval/rankings.json` | Which chunks the vector search returned, with rank, distance, and target/noise role — no model answers |
-| `raw/` | One file per question per run: prompts, retrieved text, unmodified model output, token usage, latency, per-claim scoring |
+| `raw/` | One file per question per run: the question prompt with its retrieved evidence, retrieved text, unmodified model output, token usage, latency, per-claim scoring |
 | `item_scores.csv` | One row per scored item per run |
 | `run_summary.csv` | One row per run |
 | `aggregate_summary.json` | Mean and standard deviation across the three runs |

@@ -30,7 +30,7 @@ The automated scorer accepted the Q2 answer as unsupported-but-not-wrong. The au
 | --- | --- |
 | `manifest.json` | Models, `top_k = 2`, corpus composition, the immutable 44-chunk vector store reused, benchmark and script SHA-256, package versions |
 | `retrieval/rankings.json` | The top-2 ranking for each of the 15 questions: chunk IDs, cosine distance, target/noise role, required-evidence match, `EvidenceRecallAt2`. **No chunk text and no model answers** |
-| `raw/run_NN/ABTR_INPUT_K2/abtr_param_NN.json` | One API call in full: retrieved chunks *with text*, exact system and user prompts, unmodified response, parsed claims, token usage, latency, and per-claim scoring |
+| `raw/run_NN/ABTR_INPUT_K2/abtr_param_NN.json` | One API call: retrieved chunks *with text*, the `user_prompt` (question plus the rendered evidence blocks), unmodified response, parsed claims, token usage, latency, and per-claim scoring |
 | `events.jsonl` | 100-event timeline: retrieval once, then 3 runs × 15 questions |
 | `report.md` | Automated summary |
 | `report_audited.md` | **The audit narrative — read this first** |
