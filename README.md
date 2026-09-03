@@ -135,7 +135,7 @@ The retrieval depths differ deliberately. The ABTR source is compact, and prelim
 
 $$\mathrm{EvidenceRecall}@k = \frac{\sum_{q=1}^{Q}\left|\mathcal{E}_q \cap \mathcal{T}^{(k)}_q\right|}{\sum_{q=1}^{Q}\left|\mathcal{E}_q\right|}$$
 
-*Correctness of prediction* (CoP) is the fraction of atomic reference claims recovered with the correct meaning and numerical value, where $\mathcal{R}_q$ are the reference answers and $\mathcal{C}_q \subseteq \mathcal{R}_q$ those correctly recovered:
+*Context Precision* (CoP) is the fraction of atomic reference claims recovered with the correct meaning and numerical value, where $\mathcal{R}_q$ are the reference answers and $\mathcal{C}_q \subseteq \mathcal{R}_q$ those correctly recovered:
 
 $$\mathrm{CoP} = \frac{\sum_{q=1}^{Q}\left|\mathcal{C}_q\right|}{\sum_{q=1}^{Q}\left|\mathcal{R}_q\right|}$$
 
