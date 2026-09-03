@@ -11,13 +11,13 @@ Backs the [ablation table](../../README.md#ablation-study). Test cases 3 and 4 r
 
 ## Configurations
 
-| Configuration | What was removed | Reported? |
+| Configuration | What was removed |
 | --- | --- | :---: |
-| `full_pipeline_existing` | Nothing — the existing full-pipeline artifact, one run per case | yes |
-| `llm_only` | Retrieval, image processing, intermediate file, validator. A single prompt supplies **all** reference material properties, dimensions, boundary conditions, components, and connections | yes |
-| `no_intermediate_file` | The intermediate representation; extracted text, spreadsheet data, and image facts go straight to input generation | yes |
-| `no_validator` | Connectivity and section-presence checks, with a connectivity defect seeded in each case | yes |
-| `validator_repair` | Nothing — the validator diagnosis is fed back to the agent, separating defect *detection* from *correction* | in prose |
+| `full_pipeline_existing` | Nothing — the existing full-pipeline artifact, one run per case |
+| `llm_only` | Retrieval, image processing, intermediate file, validator. A single prompt supplies **all** reference material properties, dimensions, boundary conditions, components, and connections | 
+| `no_intermediate_file` | The intermediate representation; extracted text, spreadsheet data, and image facts go straight to input generation | 
+| `no_validator` | Connectivity and section-presence checks, with a connectivity defect seeded in each case | 
+| `validator_repair` | Nothing — the validator diagnosis is fed back to the agent, separating defect *detection* from *correction* | 
 
 ## What the ablation shows
 
