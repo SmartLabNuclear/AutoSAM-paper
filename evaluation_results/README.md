@@ -47,8 +47,6 @@ Both runs used `gpt-5.6-sol` at temperature 0 with `text-embedding-3-large`, thr
   - **Reported parameter row: `parameter_metrics_aggregate_audited.json`** — precision 1.000, recall 0.889, F1 0.941, unit accuracy 1.000, MRE 0.000, AHR 0.000.
   - `failure_audit_audited.md` documents the three ingestion-related false negatives — core flow area, downcomer hydraulic diameter, and core length absent from the vector store because a dense multi-column table was incompletely transcribed at ingestion.
 
-> **Which file is authoritative.** The `manuscript_results.tex` sitting in each directory is the *unaudited* table emitted automatically by the scoring script, and its numbers differ from the reported ones. The audited/strict JSON aggregates named above are what the manuscript reports.
-
 Each directory's `retrieval/rankings.json` holds the retrieved chunks and their rankings for every question, so evidence recall and citation scoring can be recomputed. The MSRE directory additionally carries finite-sample uncertainty intervals (`parameter_metrics_uncertainty_audited.json`, `rag_finite_sample_intervals_audited.json`, `rag_uncertainty_report_audited.md`).
 
 ## [`ablation_study/`](ablation_study/)
