@@ -52,13 +52,44 @@ Mean ± SD over three runs.
 
 - **Block names.** It emits `[Materials]`, a generic MOOSE block, where SAM expects `[EOS]` and `[MaterialProperties]`, and omits `Preconditioning` and `Postprocessors`. This is the whole of the 0.556-0.667 section coverage.
 - **Component type names.** It produces `Pipe1Phase`, `Channel1Phase`, `TDV`, `Branch`, `HeatStructure` — plausible MOOSE-family names, none of them SAM's `PBOneDFluidComponent`, `PBCoreChannel`, `PBTDJ`/`PBTDV`, `PBBranch`. Each wrong `type =` counts as both a false positive and a false negative, which is why ABTR shows 24 TP against 25.3 FP.
-- **Connectivity syntax.** SAM joins components with port strings, `inputs = 'Pipe2(out)'` and `outputs = 'CH1(in) CH2(in) ...'`. The baseline instead writes per-component references such as `inlet = branch2:main` with `K_main`/`K_leg1..K_leg5` on the branch, and emits **zero** `inputs=`/`outputs=` statements. No reference edge can match, which is the entire 0.000 topology recall — even though the flow path it describes is the intended one.
+- **Connectivity syntax.** SAM joins components with port strings, `inputs = 'Pipe2(out)'` and `outputs = 'CH1(in) CH2(in) ...'`. On ABTR the baseline instead writes per-component references such as `inlet = branch2:main` with `K_main`/`K_leg1..K_leg5` on the branch, and emits **zero** `inputs=`/`outputs=` statements in all three runs, so no reference edge can match. On MSRE it does emit port statements in two of three runs (26 and 32), which is why run 3 is the only baseline run to score any topology at all.
 
 Precision separates the two cases. ABTR sits at 0.44-0.58 because its ten densely typed components each contribute a wrong `type =`; MSRE holds 0.75-0.80 because its misses are absences rather than errors, with fifteen components never instantiated including the heat exchanger and every junction. ABTR's component recall is exactly 0.750 in all three runs — the same three components missing every time, `inlet`, `outlet`, and `reactor`, so the baseline builds the flow path but omits the power and boundary components.
 
 **Read the MSRE spread with care.** F1 moves 0.347, 0.466, 0.473 across runs, and run 3 is the only run in the entire baseline to score any topology at all. Three runs at temperature 1 do not pin that down: `0.429 ± 0.071` is indicative, and `0.091 ± 0.157` has a standard deviation larger than its mean.
 
-**No intermediate file.** Adding the SAM-specific system instructions restores the section structure completely, at 1.000 for both cases, but not the content. Parameter F1 stays at 0.334 and 0.477, and topology recall is 0.000 in every run. Component recall improves for ABTR, from 0.750 to 0.917, but not for MSRE. Extracting, reconciling, and transferring properties, geometry, units, names, boundary conditions, and connections from heterogeneous documentation while simultaneously emitting SAM syntax leaves the deck structurally complete and substantively incomplete.
+**No intermediate file.** This arm differs from `llm_only` only in that it keeps the
+SAM-specific system instruction. That restores the section structure completely, at 1.000 for
+both cases, but not the content.
+
+| Case | Run | Blocks | Comp. recall | Precision | Recall | F1 | Topology | TP | FP | FN |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| ABTR | 1 | 1.000 | 0.917 | 0.565 | 0.297 | 0.389 | 0.000 | 35 | 27 | 83 |
+| ABTR | 2 | 1.000 | 0.917 | 0.476 | 0.254 | 0.331 | 0.000 | 30 | 33 | 88 |
+| ABTR | 3 | 1.000 | 0.917 | 0.511 | 0.195 | 0.282 | 0.000 | 23 | 22 | 95 |
+| MSRE | 1 | 1.000 | 0.375 | 0.800 | 0.329 | 0.466 | 0.000 | 48 | 12 | 98 |
+| MSRE | 2 | 1.000 | 0.375 | 0.820 | 0.342 | 0.483 | 0.000 | 50 | 11 | 96 |
+| MSRE | 3 | 1.000 | 0.375 | 0.820 | 0.342 | 0.483 | 0.000 | 50 | 11 | 96 |
+
+Section coverage of 1.000 is close to tautological: the system instruction names all nine blocks
+explicitly, so their presence measures compliance rather than modelling skill. The substantive
+result is that parameter F1 sits at 0.282-0.483 and topology recall is 0.000 in every run.
+
+The two cases fail differently. ABTR misses only `reactor`, the power component, so it builds the
+flow path but not the heat source; the decks carry 27 `# MISSING:` markers and use no SAM `PB*`
+component type at all, substituting `Pipe`, `CoreChannel`, `SodiumEOS` and `TDVBoundary`. MSRE
+instantiates 27-35 `PB*`-typed components correctly but omits fifteen reference components,
+including the heat exchanger, both secondary boundaries, and all eight junctions, and carries 59
+`# MISSING:` markers. Its topology recall is zero for a different reason than ABTR's: run 1 emits
+26 correct `inputs=`/`outputs=` port statements, but names its junctions differently from the
+reference `j_*` components, so no reference edge matches.
+
+**A confound worth stating.** The MSRE arms score higher than the ABTR arms in both ablated
+configurations, and the reason is in the source documents rather than in case difficulty:
+`MSRE_case.pdf` names two SAM classes, `PBBranch` and `PBOneDFluidComponent`, while `ABTR_case.pdf`
+names none. Where the documentation supplies solver vocabulary the ablated model reuses it; where
+it does not, the model invents MOOSE-family names. The ABTR-versus-MSRE difference in these rows
+should therefore not be read as a property of the cases.
 
 Read together, these two rows separate the two contributions: **the solver-specific instructions supply the section scaffold, and the intermediate representation is what parameter transfer and topology depend on.**
 
