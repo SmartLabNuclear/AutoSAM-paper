@@ -187,9 +187,9 @@ $$\mathrm{MRE} = \frac{1}{N_{\mathrm{recovered,\ numeric}}}\sum_{i=1}^{N_{\mathr
 
 Parameters that were not recovered are penalized through recall and excluded from the MRE, which therefore characterizes only the accuracy of the extracted subset.
 
-*Assumption/hallucination rate* (AHR) is the fraction of generated parameter claims not supported by the designated sources. It counts both explicitly labeled assumptions and silently inferred values, since both are content unjustified by the source documents:
+*Parameter hallucination rate* (HR) is the fraction of generated parameter claims not supported by the designated sources. It counts both explicitly labeled assumptions and silently inferred values, since both are content unjustified by the source documents:
 
-$$\mathrm{AHR} = \frac{N_{\mathrm{unsupported\ parameter\ claims}}}{N_{\mathrm{generated\ parameter\ claims}}}$$
+$$\mathrm{HR} = \frac{N_{\mathrm{unsupported\ parameter\ claims}}}{N_{\mathrm{generated\ parameter\ claims}}}$$
 
 Pooled ABTR–MSRE values are computed from combined parameter-level counts rather than by averaging case scores, so each case is weighted by its parameter count.
 
