@@ -37,7 +37,26 @@ Mean ± SD over three runs.
 
 ## What the ablation shows
 
-**LLM only.** Recovered 0.287 (ABTR) and 0.429 (MSRE) of the reference parameters and generated 0.593 and 0.556 of the nine standard SAM sections. Its failures are concentrated in solver-specific knowledge rather than engineering content: it emits plausible but incorrect MOOSE class names for SAM component types — `Pipe1Phase` for `PBOneDFluidComponent`, `Channel1Phase` for `PBCoreChannel` in all ten ABTR components — and omits `EOS`, `MaterialProperties`, `Postprocessors`, and `Preconditioning` in every run. It never instantiates the ABTR reactor-power and boundary components, or fifteen MSRE components including the heat exchanger and every junction.
+**LLM only.** Recovered 0.287 (ABTR) and 0.429 (MSRE) of the reference parameters and generated 0.593 and 0.556 of the nine standard SAM sections.
+
+| Case | Run | Blocks | Comp. recall | Precision | Recall | F1 | Topology | TP | FP | FN |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| ABTR | 1 | 0.556 | 0.750 | 0.464 | 0.220 | 0.299 | 0.000 | 26 | 30 | 92 |
+| ABTR | 2 | 0.667 | 0.750 | 0.442 | 0.195 | 0.271 | 0.000 | 23 | 29 | 95 |
+| ABTR | 3 | 0.556 | 0.750 | 0.575 | 0.195 | 0.291 | 0.000 | 23 | 17 | 95 |
+| MSRE | 1 | 0.556 | 0.375 | 0.750 | 0.226 | 0.347 | 0.000 | 33 | 11 | 113 |
+| MSRE | 2 | 0.556 | 0.375 | 0.800 | 0.329 | 0.466 | 0.000 | 48 | 12 | 98 |
+| MSRE | 3 | 0.556 | 0.375 | 0.803 | 0.336 | 0.473 | 0.273 | 49 | 12 | 97 |
+
+**Extraction is not what fails.** The decks correctly carry the ABTR form losses `0.1, 0.5, 1.96, 2.16, 4.5, 3500.0` out of the spreadsheet, and even flag the ambiguous `3500.0` as an explicit assumption. Every failure mode is SAM's encoding conventions, and they separate cleanly:
+
+- **Block names.** It emits `[Materials]`, a generic MOOSE block, where SAM expects `[EOS]` and `[MaterialProperties]`, and omits `Preconditioning` and `Postprocessors`. This is the whole of the 0.556-0.667 section coverage.
+- **Component type names.** It produces `Pipe1Phase`, `Channel1Phase`, `TDV`, `Branch`, `HeatStructure` — plausible MOOSE-family names, none of them SAM's `PBOneDFluidComponent`, `PBCoreChannel`, `PBTDJ`/`PBTDV`, `PBBranch`. Each wrong `type =` counts as both a false positive and a false negative, which is why ABTR shows 24 TP against 25.3 FP.
+- **Connectivity syntax.** SAM joins components with port strings, `inputs = 'Pipe2(out)'` and `outputs = 'CH1(in) CH2(in) ...'`. The baseline instead writes per-component references such as `inlet = branch2:main` with `K_main`/`K_leg1..K_leg5` on the branch, and emits **zero** `inputs=`/`outputs=` statements. No reference edge can match, which is the entire 0.000 topology recall — even though the flow path it describes is the intended one.
+
+Precision separates the two cases. ABTR sits at 0.44-0.58 because its ten densely typed components each contribute a wrong `type =`; MSRE holds 0.75-0.80 because its misses are absences rather than errors, with fifteen components never instantiated including the heat exchanger and every junction. ABTR's component recall is exactly 0.750 in all three runs — the same three components missing every time, `inlet`, `outlet`, and `reactor`, so the baseline builds the flow path but omits the power and boundary components.
+
+**Read the MSRE spread with care.** F1 moves 0.347, 0.466, 0.473 across runs, and run 3 is the only run in the entire baseline to score any topology at all. Three runs at temperature 1 do not pin that down: `0.429 ± 0.071` is indicative, and `0.091 ± 0.157` has a standard deviation larger than its mean.
 
 **No intermediate file.** Adding the SAM-specific system instructions restores the section structure completely, at 1.000 for both cases, but not the content. Parameter F1 stays at 0.334 and 0.477, and topology recall is 0.000 in every run. Component recall improves for ABTR, from 0.750 to 0.917, but not for MSRE. Extracting, reconciling, and transferring properties, geometry, units, names, boundary conditions, and connections from heterogeneous documentation while simultaneously emitting SAM syntax leaves the deck structurally complete and substantively incomplete.
 
